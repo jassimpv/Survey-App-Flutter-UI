@@ -1,0 +1,67 @@
+name: collect
+description: "A new Flutter project."
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  get: ^4.7.2
+  shared_preferences: ^2.5.3
+  connectivity_plus: ^6.1.4
+  flutter_localizations:
+    sdk: flutter
+  upgrader: ^11.4.0
+  flutter_spinkit: ^5.2.1
+  pin_code_fields: ^8.0.1
+  flutter_svg: ^2.2.0
+  dropdown_button2: ^2.3.9
+  intl: ^0.20.2
+  url_launcher: ^6.3.1
+  package_info_plus: ^8.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/flags/
+    - assets/images/
+    - assets/dummy/
+
+fonts:
+  - family: Outfit
+    fonts:
+      - asset: assets/fonts/outfit/Outfit-Thin.ttf
+        weight: 100
+      - asset: assets/fonts/outfit/Outfit-ExtraLight.ttf
+        weight: 200
+      - asset: assets/fonts/outfit/Outfit-Light.ttf
+        weight: 300
+      - asset: assets/fonts/outfit/Outfit-Regular.ttf
+        weight: 400
+      - asset: assets/fonts/outfit/Outfit-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/outfit/Outfit-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/outfit/Outfit-Bold.ttf
+        weight: 700
+      - asset: assets/fonts/outfit/Outfit-ExtraBold.ttf
+        weight: 800
+      - asset: assets/fonts/outfit/Outfit-Black.ttf
+        weight: 900
