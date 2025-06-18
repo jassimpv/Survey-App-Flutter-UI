@@ -1,5 +1,5 @@
 import 'package:collect/controller/notifications_controller.dart';
-import 'package:collect/models/NotificationResponse.dart';
+import 'package:collect/models/notification_response.dart';
 import 'package:collect/utils/colors_utils.dart';
 import 'package:collect/utils/sized_box_extension.dart';
 import 'package:collect/utils/textstyle_input.dart';

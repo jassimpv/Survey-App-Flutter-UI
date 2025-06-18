@@ -139,12 +139,6 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onInit() {
-    super.onInit();
-    // Initialization code here
-  }
-
-  @override
   void onClose() {
     // Cleanup code here
     super.onClose();

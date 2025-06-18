@@ -68,7 +68,10 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                         tag: "register",
                         child: SvgPicture.asset(
                           AssetUtils.getSvg("logo"),
-                          color: ColorUtils.themeColor,
+                          colorFilter: ColorFilter.mode(
+                            ColorUtils.themeColor,
+                            BlendMode.srcIn,
+                          ),
                           height: 50,
                           width: 100,
                         ),

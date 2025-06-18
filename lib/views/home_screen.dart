@@ -9,19 +9,22 @@ import 'package:upgrader/upgrader.dart';
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
 
+  bool _onWillPop() {
+    if (controller.selectedMenuIndex.value == 0) {
+      return true;
+    }
+    final navigatorState = Get.nestedKey(1)?.currentState;
+    if (navigatorState != null && navigatorState.canPop()) {
+      navigatorState.pop();
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        if (controller.selectedMenuIndex.value == 0) {
-          return true;
-        }
-        if (Get.nestedKey(1)!.currentState!.canPop()) {
-          Get.nestedKey(1)!.currentState!.pop();
-          return false; // Prevent the app from closing
-        }
-        return true;
-      },
+    return PopScope(
+      canPop: _onWillPop(),
       child: UpgradeAlert(
         dialogStyle: UpgradeDialogStyle.cupertino,
         showIgnore: false,

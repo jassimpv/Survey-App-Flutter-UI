@@ -1,5 +1,4 @@
 import 'package:collect/utils/colors_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class StyleUtils {

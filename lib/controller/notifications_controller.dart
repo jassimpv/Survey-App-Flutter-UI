@@ -1,4 +1,4 @@
-import 'package:collect/models/NotificationResponse.dart';
+import 'package:collect/models/notification_response.dart';
 import 'package:get/get.dart';
 
 class NotificationsController extends GetxController {

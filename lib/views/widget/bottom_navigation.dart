@@ -2,7 +2,6 @@ import 'package:collect/utils/asset_utils.dart';
 import 'package:collect/utils/colors_utils.dart';
 import 'package:collect/utils/sized_box_extension.dart';
 import 'package:collect/utils/textstyle_input.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
