@@ -62,7 +62,17 @@ class TaskDialog extends StatelessWidget {
             color: Colors.black.withValues(alpha: 0.8),
           ),
         ),
-        PassengerCount(emirate: data.emirate),
+        Container(
+          padding: const EdgeInsets.all(4.0),
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.grey.shade200,
+          ),
+          child: ZoomTapAnimation(
+            child: Icon(Icons.close, color: Colors.black),
+            onTap: () => Get.back(),
+          ),
+        ),
       ],
     );
   }
@@ -145,6 +155,8 @@ class TaskDialog extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
+                PassengerCount(emirate: data.emirate),
+                5.heightBox,
                 Row(
                   children: [
                     Image.asset(
@@ -243,7 +255,7 @@ class TaskDialog extends StatelessWidget {
                 ),
               ),
               child: Text(
-                "Cancel",
+                "Delete",
                 style: StyleUtils.kTextStyleSize18Weight400(color: Colors.red),
               ),
             ),
