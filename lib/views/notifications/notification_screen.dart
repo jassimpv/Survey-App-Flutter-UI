@@ -23,7 +23,7 @@ class NotificationScreen extends GetView<NotificationsController> {
           CustomAppBar(
             title: "notifications".tr,
             onBackPressed: () => Get.back(),
-            isHome: false,
+
             isNotificationButton: false,
           ),
           Expanded(

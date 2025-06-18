@@ -4,6 +4,8 @@ import 'package:collect/views/home_screen.dart';
 import 'package:collect/views/login/login.dart';
 import 'package:collect/views/login/phone_verification/phone_verification_screen.dart';
 import 'package:collect/views/notifications/notification_screen.dart';
+import 'package:collect/views/profile/contact_us.dart';
+import 'package:collect/views/profile/terms_and_conidtion.dart';
 import 'package:collect/views/splashscreen/splash_screen.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +36,16 @@ class AppRouter {
       page: () => NotificationScreen(),
       bindings: [],
     ),
+    GetPage(
+      name: AppRouter.termsAndConditionScreen,
+      page: () => TermsAndConditionScreen(),
+      bindings: [],
+    ),
+    GetPage(
+      name: AppRouter.contactUsScreen,
+      page: () => ContactUsScreen(),
+      bindings: [],
+    ),
   ];
 
   static String initialRoute = "/";
@@ -41,4 +53,6 @@ class AppRouter {
   static String homeRoute = "/home";
   static String phoneVerificationRoute = "/phone-verification"; // Add this line
   static String notificationScreen = "/notification-screen";
+  static String termsAndConditionScreen = "/terms-and-condition";
+  static String contactUsScreen = "/contact-us";
 }

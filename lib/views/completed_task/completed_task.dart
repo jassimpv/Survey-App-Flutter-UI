@@ -24,7 +24,6 @@ class CompletedTask extends StatelessWidget {
         children: [
           CustomAppBar(
             title: "taskList".tr,
-            isHome: true,
             tabBar: Obx(
               () => CompletedListTabView(
                 selectedIndex: controller.selectedTab.value,

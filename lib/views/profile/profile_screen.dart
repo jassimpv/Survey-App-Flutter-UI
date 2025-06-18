@@ -1,4 +1,5 @@
 import 'package:collect/controller/profile_controller.dart';
+import 'package:collect/routes.dart';
 import 'package:collect/utils/asset_utils.dart';
 import 'package:collect/utils/colors_utils.dart';
 import 'package:collect/utils/sized_box_extension.dart';
@@ -18,7 +19,7 @@ class ProfileScreen extends GetView<ProfileController> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        CustomAppBar(title: "profile".tr, isHome: true),
+        CustomAppBar(title: "profile".tr),
         Expanded(child: _buildProfileContent(context)),
       ],
     );
@@ -153,10 +154,12 @@ class ProfileScreen extends GetView<ProfileController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ZoomTapAnimation(
+            onTap: () => Get.toNamed(AppRouter.contactUsScreen),
             child: _buildInfoRow(Icons.contact_emergency, "contact_us".tr),
           ),
           Divider(color: Colors.black.withValues(alpha: 0.1)),
           ZoomTapAnimation(
+            onTap: () => Get.toNamed(AppRouter.termsAndConditionScreen),
             child: _buildInfoRow(Icons.notes, "terms_and_condition".tr),
           ),
           Divider(color: Colors.black.withValues(alpha: 0.1)),

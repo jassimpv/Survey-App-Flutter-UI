@@ -57,4 +57,5 @@ Map<String, String> enUs = {
   "start_date": "Start Date",
   "end_date": "End Date",
   "search": "Search",
+  "termsandContitions": "Terms and Conditions",
 };
