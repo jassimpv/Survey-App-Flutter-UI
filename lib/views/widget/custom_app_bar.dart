@@ -28,61 +28,64 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
+    return Hero(
+      tag: "appBar",
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(30),
+            bottomRight: Radius.circular(30),
+          ),
+          color: ColorUtils.themeColor,
         ),
-        color: ColorUtils.themeColor,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            MediaQuery.viewPaddingOf(context).top.heightBox,
-            22.heightBox,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                if (onBackPressed != null)
-                  ZoomTapAnimation(
-                    onTap: onBackPressed,
-                    child: Container(
-                      width: 42,
-                      height: 42,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.20),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: Icon(CupertinoIcons.back, color: Colors.white),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              MediaQuery.viewPaddingOf(context).top.heightBox,
+              22.heightBox,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (onBackPressed != null)
+                    ZoomTapAnimation(
+                      onTap: onBackPressed,
+                      child: Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.20),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Icon(CupertinoIcons.back, color: Colors.white),
+                        ),
                       ),
                     ),
+                  Text(
+                    title,
+                    style: StyleUtils.kTextStyleSize18Weight400(
+                      color: Colors.white,
+                    ),
                   ),
-                Text(
-                  title,
-                  style: StyleUtils.kTextStyleSize18Weight400(
-                    color: Colors.white,
-                  ),
-                ),
-                Row(
-                  children: [
-                    if (isLanguageButton) ...[LanguageWidegt()],
-                    8.widthBox,
-                    if (isNotificationButton) ...[
-                      _buildNotificationBadge(),
-                    ] else ...[
-                      SizedBox.shrink(),
+                  Row(
+                    children: [
+                      if (isLanguageButton) ...[LanguageWidegt()],
+                      8.widthBox,
+                      if (isNotificationButton) ...[
+                        _buildNotificationBadge(),
+                      ] else ...[
+                        SizedBox.shrink(),
+                      ],
                     ],
-                  ],
-                ),
-              ],
-            ),
-            if (tabBar != null) ...[16.heightBox, tabBar!],
-          ],
+                  ),
+                ],
+              ),
+              if (tabBar != null) ...[16.heightBox, tabBar!],
+            ],
+          ),
         ),
       ),
     );

@@ -1,16 +1,10 @@
+import 'package:collect/controller/splash_controller.dart';
+import 'package:collect/utils/asset_utils.dart';
 import 'package:collect/utils/colors_utils.dart';
+import 'package:collect/utils/sized_box_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-class SplashController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-    Future.delayed(const Duration(seconds: 2), () {
-      Get.offNamed('/login');
-    });
-  }
-}
 
 class SplashScreen extends StatelessWidget {
   final SplashController controller = Get.put(SplashController());
@@ -25,14 +19,19 @@ class SplashScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Center(
-          //   child: Image.asset(
-          //     "assets/icons/logo.png",
-          //     color: ColorUtils.whiteColor,
-          //     height: 300,
-          //     width: 300,
-          //   ),
-          // ),
+          Hero(
+            tag: "register",
+            child: SvgPicture.asset(
+              AssetUtils.getSvg("logo"),
+              colorFilter: ColorFilter.mode(
+                ColorUtils.whiteColor,
+                BlendMode.srcIn,
+              ),
+              height: 50,
+              width: 100,
+            ),
+          ),
+          100.heightBox,
           Center(
             child: RepaintBoundary(
               child: CircularProgressIndicator(color: ColorUtils.whiteColor),

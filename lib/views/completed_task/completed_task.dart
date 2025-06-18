@@ -24,7 +24,6 @@ class CompletedTask extends StatelessWidget {
         children: [
           CustomAppBar(
             title: "taskList".tr,
-            onBackPressed: () => Get.nestedKey(1)?.currentState?.maybePop(),
             isHome: true,
             tabBar: Obx(
               () => CompletedListTabView(

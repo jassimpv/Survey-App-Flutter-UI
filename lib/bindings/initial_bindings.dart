@@ -1,4 +1,4 @@
-import 'package:collect/views/splashscreen/splash_screen.dart';
+import 'package:collect/controller/splash_controller.dart';
 import 'package:get/get.dart';
 
 class InitialBindings extends Bindings {

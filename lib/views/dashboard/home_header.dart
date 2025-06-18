@@ -16,21 +16,24 @@ class HomeHeader extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ColorUtils.themeColor,
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
+    return Hero(
+      tag: "appBar",
+      child: Container(
+        decoration: BoxDecoration(
+          color: ColorUtils.themeColor,
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          MediaQuery.viewPaddingOf(context).top.heightBox,
-          16.heightBox,
-          _buildHeaderRow(context),
-          10.heightBox,
-        ],
+        child: Column(
+          children: [
+            MediaQuery.viewPaddingOf(context).top.heightBox,
+            16.heightBox,
+            _buildHeaderRow(context),
+            10.heightBox,
+          ],
+        ),
       ),
     );
   }

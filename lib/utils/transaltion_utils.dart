@@ -17,11 +17,16 @@ class TranslationService extends Translations {
 
   static Future<void> updateLocale(Locale locale) async {
     Get.updateLocale(locale);
-    await PreferenceUtils.saveLanguage(locale.languageCode);
+    await PreferenceUtils.saveString(
+      PreferenceUtils.languageCode,
+      locale.languageCode,
+    );
   }
 
   static Future<void> init() async {
-    final languageCode = await PreferenceUtils.getLanguage();
+    final languageCode = await PreferenceUtils.getString(
+      PreferenceUtils.languageCode,
+    );
 
     if (languageCode != null) {
       if (languageCode == "ar") {

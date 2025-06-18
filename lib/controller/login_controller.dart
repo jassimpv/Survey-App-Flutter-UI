@@ -1,6 +1,7 @@
 // lib/controllers/login_controller.dart
 import 'package:collect/extension/country_list_pick/support/code_country.dart';
 import 'package:collect/routes.dart';
+import 'package:collect/utils/prefernce_utils.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,7 @@ class LoginController extends GetxController {
   }
 
   void verifyOTP() {
+    PreferenceUtils.saveString(PreferenceUtils.accessToken, "value");
     Get.offNamed(AppRouter.homeRoute);
   }
 

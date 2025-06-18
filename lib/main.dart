@@ -37,7 +37,6 @@ class MyApp extends StatelessWidget {
         child: CheckInternetConnection(child: child!),
       ),
       getPages: AppRouter.routes,
-
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
