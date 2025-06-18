@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
@@ -71,6 +72,17 @@ class Utils {
     final url = "sms:$mobile";
     if (!await launchUrl(Uri.parse(url))) {
       // handle error if needed
+    }
+  }
+
+  static String formatDate(DateTime? date, {String format = 'dd/MM/yyyy'}) {
+    if (date == null) return '';
+    // Using intl package for formatting
+    try {
+      // Import 'package:intl/intl.dart'; at the top of your file
+      return DateFormat(format).format(date);
+    } catch (e) {
+      return date.toIso8601String();
     }
   }
 }

@@ -93,7 +93,7 @@ class HomeController extends GetxController {
       emirate: "Dubai",
       delegationName: "VIP Delegation",
       status: "Scheduled",
-      stops: ["Stop 1", "Stop 2", "Stop 3"],
+
       lastVistedDate: LastVisitedDate(
         status: "Completed",
         createdAt: DateTime.now().subtract(Duration(days: 6)),
@@ -109,7 +109,7 @@ class HomeController extends GetxController {
       emirate: "Al Ain",
       delegationName: "Business Group",
       status: "In Progress",
-      stops: ["Airport", "Hotel"],
+
       lastVistedDate: LastVisitedDate(
         status: "Ongoing",
         createdAt: DateTime.now().add(const Duration(days: 15)),
@@ -125,10 +125,85 @@ class HomeController extends GetxController {
       emirate: "Abu Dhabi",
       delegationName: "Couple",
       status: "Pending",
-      stops: [],
+
       lastVistedDate: LastVisitedDate(
         status: "Pending",
         createdAt: DateTime.now().subtract(const Duration(days: 20)),
+      ),
+    ),
+    TransferCardData(
+      restaurantName: "Restaurant D",
+      restaurantAddress: "321 Maple Ave, City",
+      restaurantType: "Buffet",
+      bookingId: 1004,
+      bookingNumber: "BN-0004",
+      emirate: "Sharjah",
+      delegationName: "Family",
+      status: "Completed",
+
+      lastVistedDate: LastVisitedDate(
+        status: "Completed",
+        createdAt: DateTime.now().subtract(const Duration(days: 2)),
+      ),
+    ),
+    TransferCardData(
+      restaurantName: "Restaurant E",
+      restaurantAddress: "654 Pine St, City",
+      restaurantType: "Cafe",
+      bookingId: 1005,
+      bookingNumber: "BN-0005",
+      emirate: "Ajman",
+      delegationName: "Friends",
+      status: "Cancelled",
+
+      lastVistedDate: LastVisitedDate(
+        status: "Cancelled",
+        createdAt: DateTime.now().subtract(const Duration(days: 10)),
+      ),
+    ),
+    TransferCardData(
+      restaurantName: "Restaurant F",
+      restaurantAddress: "987 Cedar Rd, City",
+      restaurantType: "Fine Dining",
+      bookingId: 1006,
+      bookingNumber: "BN-0006",
+      emirate: "Fujairah",
+      delegationName: "Tourists",
+      status: "Scheduled",
+
+      lastVistedDate: LastVisitedDate(
+        status: "Scheduled",
+        createdAt: DateTime.now().add(const Duration(days: 5)),
+      ),
+    ),
+    TransferCardData(
+      restaurantName: "Restaurant G",
+      restaurantAddress: "159 Spruce Blvd, City",
+      restaurantType: "Casual Dining",
+      bookingId: 1007,
+      bookingNumber: "BN-0007",
+      emirate: "Ras Al Khaimah",
+      delegationName: "Business",
+      status: "In Progress",
+
+      lastVistedDate: LastVisitedDate(
+        status: "Ongoing",
+        createdAt: DateTime.now().subtract(const Duration(days: 1)),
+      ),
+    ),
+    TransferCardData(
+      restaurantName: "Restaurant H",
+      restaurantAddress: "753 Willow Ln, City",
+      restaurantType: "Buffet",
+      bookingId: 1008,
+      bookingNumber: "BN-0008",
+      emirate: "Umm Al Quwain",
+      delegationName: "Solo",
+      status: "Pending",
+
+      lastVistedDate: LastVisitedDate(
+        status: "Pending",
+        createdAt: DateTime.now().subtract(const Duration(days: 7)),
       ),
     ),
   ];

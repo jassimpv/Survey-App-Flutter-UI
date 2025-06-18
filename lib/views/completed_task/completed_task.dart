@@ -5,6 +5,7 @@ import 'package:collect/utils/textstyle_input.dart';
 import 'package:collect/views/completed_task/filter_bottom_sheet.dart';
 import 'package:collect/views/completed_task/tabview_widget.dart';
 import 'package:collect/views/widget/custom_app_bar.dart';
+import 'package:collect/views/widget/survey_card.dart';
 import 'package:collect/views/widget/zoom_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -85,6 +86,26 @@ class CompletedTask extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 16.0, right: 16, top: 8),
             child: _searchItem(),
+          ),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: controller.data.length,
+              padding: EdgeInsets.symmetric(vertical: 5),
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 6,
+                  ),
+                  child: SurveyCard(
+                    bookingData: controller.data[index],
+                    isFromList: true,
+                    currentStatus: "upcoming",
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),

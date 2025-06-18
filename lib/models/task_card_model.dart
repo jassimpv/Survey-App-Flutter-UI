@@ -5,12 +5,11 @@ class TransferCardData {
   String restaurantType;
   String distance;
   String bookingNumber;
-
+  String wasteKg;
   String emirate;
   String delegationName;
   String status;
 
-  List<dynamic> stops;
   LastVisitedDate lastVistedDate;
 
   TransferCardData({
@@ -19,17 +18,19 @@ class TransferCardData {
     required this.emirate,
     required this.delegationName,
     required this.status,
-    required this.stops,
+
     required this.lastVistedDate,
     required this.restaurantName,
     required this.restaurantAddress,
     required this.restaurantType,
-    this.distance = "0.0 km",
+    this.distance = "0.0 KM",
+    this.wasteKg = "0.0 KG",
   });
 
   factory TransferCardData.fromJson(Map<String, dynamic> json, dynamic bId) =>
       TransferCardData(
-        distance: json["distance"] ?? "0.0 km",
+        distance: json["distance"] ?? "0.0 KM",
+        wasteKg: json["waste_kg"] ?? "0.0 KG",
         restaurantName: json["restaurant_name"],
         restaurantAddress: json["restaurant_address"],
         restaurantType: json["restaurant_type"],
@@ -39,9 +40,7 @@ class TransferCardData {
         emirate: json["emirate"],
         delegationName: json["delegation_name"],
         status: json["status"],
-        stops: json["stops"] != null
-            ? List<dynamic>.from(json["stops"].map((x) => x))
-            : [],
+
         lastVistedDate: LastVisitedDate.fromJson(json["last_trip_status"]),
       );
 }

@@ -29,7 +29,11 @@ class DashboardScreen extends GetView<HomeController> {
               backgroundColor: ColorUtils.themeColor,
             ),
             controller: refreshController,
-            onRefresh: () {},
+            onRefresh: () {
+              Future.delayed(const Duration(seconds: 1), () {
+                refreshController.refreshCompleted();
+              });
+            },
             footer: WaterDropHeader(),
             onLoading: () {},
             child: SingleChildScrollView(

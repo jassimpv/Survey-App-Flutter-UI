@@ -13,7 +13,6 @@ class TermsAndConditionScreen extends StatelessWidget {
         children: [
           CustomAppBar(
             title: "termsandContitions".tr,
-
             onBackPressed: () => Get.back(),
             isNotificationButton: false,
           ),
