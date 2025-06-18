@@ -177,6 +177,15 @@ class StyleUtils {
     fontWeight: FontWeight.w500,
   );
 
+  static TextStyle kTextStyleSize10Weight400({
+    Color color = ColorUtils.themeTextColor,
+  }) => TextStyle(
+    color: color,
+    fontSize: 10,
+    fontFamily: "Outfit",
+    fontWeight: FontWeight.w400,
+  );
+
   static InputDecoration inputDecoration({
     String? hintText,
     String? labelText,
@@ -231,6 +240,15 @@ class StyleUtils {
         offset: Offset(0, 6),
       ),
     ],
+  );
+
+  static TextStyle kTextStyleSize10Weight500({
+    Color color = ColorUtils.themeTextColor,
+  }) => TextStyle(
+    color: color,
+    fontSize: 10,
+    fontFamily: "Outfit",
+    fontWeight: FontWeight.w500,
   );
 
   static BoxDecoration cardViewSmall({bool isSelected = false}) =>

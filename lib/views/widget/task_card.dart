@@ -1,4 +1,5 @@
 import 'package:collect/utils/utils_helper.dart';
+import 'package:collect/views/widget/task_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:collect/models/task_card_model.dart';
@@ -29,7 +30,14 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ZoomTapAnimation(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        Get.dialog(
+          TaskDialog(data: bookingData),
+          barrierDismissible: false,
+          useSafeArea: true,
+        );
+      },
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
