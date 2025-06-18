@@ -26,6 +26,7 @@ class ContactUsScreen extends StatelessWidget {
           CustomAppBar(
             title: "Contact Us",
             onBackPressed: () => Navigator.pop(context),
+            isNotificationButton: false,
           ),
           Expanded(child: content(context)),
         ],
