@@ -76,17 +76,15 @@ class _NotificationItem extends StatelessWidget {
           Container(
             width: 40,
             height: 40,
-            decoration: BoxDecoration(
-              color: ColorUtils.whiteColor,
-              shape: BoxShape.circle,
-            ),
+            decoration: BoxDecoration(shape: BoxShape.circle),
             child: Center(
               child: Container(
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: ColorUtils.black.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
+                  color: ColorUtils.themeColor.withValues(alpha: 0.1),
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: Icon(

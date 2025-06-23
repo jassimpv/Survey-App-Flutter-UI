@@ -21,6 +21,66 @@ class NotificationsController extends GetxController {
             type: "approved",
             message: "Your submission has been approved.",
           ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
+          Notifications(
+            type: "approved",
+            message: "Your submission has been approved.",
+          ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
+          Notifications(
+            type: "approved",
+            message: "Your submission has been approved.",
+          ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
+          Notifications(
+            type: "approved",
+            message: "Your submission has been approved.",
+          ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
+          Notifications(
+            type: "approved",
+            message: "Your submission has been approved.",
+          ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
+          Notifications(
+            type: "approved",
+            message: "Your submission has been approved.",
+          ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
+          Notifications(
+            type: "approved",
+            message: "Your submission has been approved.",
+          ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
+          Notifications(
+            type: "approved",
+            message: "Your submission has been approved.",
+          ),
+          Notifications(
+            type: "rejected",
+            message: "Your submission has been rejected.",
+          ),
         ],
       ),
     );
