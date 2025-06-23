@@ -46,13 +46,19 @@ class HomeController extends GetxController {
   var endDate = Rxn<DateTime>();
 
   Future<void> pickDate(BuildContext context, bool isStart) async {
+    DateTime initialDate = isStart
+        ? startDate.value ?? DateTime.now()
+        : endDate.value ?? (startDate.value ?? DateTime.now());
+    DateTime firstDate = isStart
+        ? DateTime(2019)
+        : (startDate.value ?? DateTime(2019));
+    DateTime lastDate = DateTime.now();
+
     DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: isStart
-          ? startDate.value ?? DateTime.now()
-          : endDate.value ?? DateTime.now(),
-      firstDate: startDate.value ?? DateTime(2019),
-      lastDate: DateTime.now(),
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -70,9 +76,6 @@ class HomeController extends GetxController {
     if (picked != null) {
       if (isStart) {
         startDate.value = picked;
-        if (endDate.value == null) {
-          endDate.value = DateTime.now();
-        }
         if (endDate.value != null && startDate.value!.isAfter(endDate.value!)) {
           endDate.value = null;
         }

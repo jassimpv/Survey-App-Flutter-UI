@@ -18,4 +18,10 @@ class PreferenceUtils {
     final prefs = await _getPrefs();
     return prefs.getString(key);
   }
+
+  // Common function to remove a key
+  static Future<void> deleteAll() async {
+    final prefs = await _getPrefs();
+    await prefs.clear();
+  }
 }

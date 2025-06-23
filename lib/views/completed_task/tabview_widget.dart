@@ -1,4 +1,5 @@
 import 'package:collect/controller/home_controller.dart';
+import 'package:collect/extension/auto_scroll/auto_scroll.dart';
 import 'package:collect/utils/colors_utils.dart';
 import 'package:collect/utils/textstyle_input.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,8 @@ class CompletedListTabView extends StatefulWidget {
 class _RideListTabViewState extends State<CompletedListTabView> {
   final HomeController controller = Get.find<HomeController>();
   RxInt selectedIndex = 0.obs;
+  // ScrollController scrollController = ScrollController();
+  final AutoScrollController scrollController = AutoScrollController();
 
   @override
   void didChangeDependencies() {
@@ -45,18 +48,28 @@ class _RideListTabViewState extends State<CompletedListTabView> {
         ),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
+          controller: scrollController,
           child: Row(
             spacing: 8.0,
             children: [
               for (int index = 0; index < controller.tabList.length; index++)
-                TabItem(
-                  title:
-                      "${controller.tabList[index].toString().tr} (${widget.todaysCount})",
-                  isSelected: selectedIndex.value == index,
-                  onTap: () {
-                    selectedIndex.value = index;
-                    widget.onTabSelect.call(selectedIndex.value);
-                  },
+                AutoScrollTag(
+                  key: ValueKey(index),
+                  controller: scrollController,
+                  index: index,
+                  child: TabItem(
+                    title:
+                        "${controller.tabList[index].toString().tr} (${widget.todaysCount})",
+                    isSelected: selectedIndex.value == index,
+                    onTap: () {
+                      scrollController.scrollToIndex(
+                        index,
+                        preferPosition: AutoScrollPosition.middle,
+                      );
+                      selectedIndex.value = index;
+                      widget.onTabSelect.call(selectedIndex.value);
+                    },
+                  ),
                 ),
             ],
           ),

@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import '../utils/prefernce_utils.dart';
+
 class ProfileController extends GetxController {
-  // Example observable user name
   var userName = ''.obs;
   RxString buildInfo = "".obs;
 
@@ -24,5 +25,10 @@ class ProfileController extends GetxController {
     String buildNumber = packageInfo.buildNumber;
 
     buildInfo.value = "V $version +$buildNumber";
+  }
+
+  Future<void> logout() async {
+    await PreferenceUtils.deleteAll();
+    Get.offAllNamed('/');
   }
 }

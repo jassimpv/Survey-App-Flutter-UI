@@ -351,8 +351,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 style: StyleUtils.kTextStyleSize18Weight500(),
               ),
               onPressed: () {
-                // controller.logout();
-                Navigator.of(context).pop();
+                controller.logout();
               },
             ),
           ],

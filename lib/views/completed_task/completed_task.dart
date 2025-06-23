@@ -114,7 +114,7 @@ class CompletedTask extends StatelessWidget {
 
   Widget _searchItem() {
     return Obx(() {
-      List<Widget> filterChips = [];
+      RxList<Widget> filterChips = <Widget>[].obs;
 
       if (controller.selectedFilter.value.isNotEmpty) {
         filterChips.add(
@@ -131,14 +131,43 @@ class CompletedTask extends StatelessWidget {
       }
 
       if (controller.startDate.value != null) {
+        if (controller.endDate.value != null) {
+          filterChips.add(
+            _buildFilterChip(
+              text:
+                  "${DateFormat('dd/MM/yyyy').format(controller.startDate.value!)} - ${DateFormat('dd/MM/yyyy').format(controller.endDate.value!)}",
+              onClose: () {
+                controller.startDate.value = null;
+                controller.endDate.value = null;
+                // controller.getTripsListData();
+              },
+            ),
+          );
+        } else {
+          filterChips.add(
+            _buildFilterChip(
+              text: DateFormat(
+                'dd/MM/yyyy',
+              ).format(controller.startDate.value!),
+              onClose: () {
+                controller.startDate.value = null;
+                // controller.getTripsListData();
+              },
+            ),
+          );
+        }
+      }
+
+      if (controller.searchController.text.isNotEmpty) {
+        controller.searchController.text = controller.searchController.text
+            .trim();
         filterChips.add(
           _buildFilterChip(
-            text:
-                "${DateFormat('dd/MM/yyyy').format(controller.startDate.value!)} - ${DateFormat('dd/MM/yyyy').format(controller.endDate.value!)}",
+            text: controller.searchController.text,
             onClose: () {
-              controller.startDate.value = null;
-              controller.endDate.value = null;
-              // controller.getTripsListData();
+              controller.searchController.clear();
+              //remove the search filter
+              filterChips.remove(filterChips.last);
             },
           ),
         );

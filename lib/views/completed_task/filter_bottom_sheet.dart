@@ -61,7 +61,9 @@ class FilterBottomSheet extends StatelessWidget {
             // }),
             20.heightBox,
             ZoomTapAnimation(
-              onTap: () {},
+              onTap: () {
+                Get.back();
+              },
               child: Container(
                 width: MediaQuery.of(context).size.width - 10,
                 height: 56,
