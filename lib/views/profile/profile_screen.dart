@@ -1,6 +1,5 @@
 import 'package:collect/controller/profile_controller.dart';
 import 'package:collect/routes.dart';
-import 'package:collect/utils/asset_utils.dart';
 import 'package:collect/utils/colors_utils.dart';
 import 'package:collect/utils/sized_box_extension.dart';
 import 'package:collect/utils/textstyle_input.dart';
@@ -82,14 +81,10 @@ class ProfileScreen extends GetView<ProfileController> {
                     ),
                   ),
                   child: ClipOval(
-                    child: Image.asset(
-                      AssetUtils.getDummyImage("pp.webp"),
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Image.asset(
-                        AssetUtils.getIcons("ic_profile"),
-                        width: 100,
-                        height: 100,
-                      ),
+                    child: Icon(
+                      CupertinoIcons.person, // Placeholder for profile image
+                      size: 40,
+                      color: ColorUtils.themeColor,
                     ),
                   ),
                 ),
@@ -98,7 +93,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Mohammed Jassim",
+                      "Jassim",
                       style: StyleUtils.kTextStyleSize24Weight500(
                         color: Colors.black,
                       ),
@@ -216,14 +211,10 @@ class ProfileScreen extends GetView<ProfileController> {
                     ),
                   ),
                   child: ClipOval(
-                    child: Image.asset(
-                      AssetUtils.getDummyImage("pp.webp"),
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Image.asset(
-                        AssetUtils.getIcons("ic_profile"),
-                        width: 100,
-                        height: 100,
-                      ),
+                    child: Icon(
+                      CupertinoIcons.person, // Placeholder for profile image
+                      size: 40,
+                      color: ColorUtils.themeColor,
                     ),
                   ),
                 ),
@@ -240,7 +231,7 @@ class ProfileScreen extends GetView<ProfileController> {
                       ),
                       2.heightBox,
                       Text(
-                        "User Name",
+                        "MOHAMMED",
                         style: StyleUtils.kTextStyleSize18Weight500(
                           color: Colors.black,
                         ),
