@@ -240,7 +240,7 @@ class ProfileScreen extends GetView<ProfileController> {
                       ),
                       2.heightBox,
                       Text(
-                        "Fayas Mohammed",
+                        "User Name",
                         style: StyleUtils.kTextStyleSize18Weight500(
                           color: Colors.black,
                         ),
