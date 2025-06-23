@@ -7,7 +7,7 @@ import 'package:collect/views/widget/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-enum NotificationTypes { confirmed, pending, cancelled }
+enum NotificationTypes { approved, rejected }
 
 class NotificationScreen extends GetView<NotificationsController> {
   const NotificationScreen({super.key});
@@ -23,7 +23,6 @@ class NotificationScreen extends GetView<NotificationsController> {
           CustomAppBar(
             title: "notifications".tr,
             onBackPressed: () => Get.back(),
-
             isNotificationButton: false,
           ),
           Expanded(
@@ -44,7 +43,9 @@ class NotificationScreen extends GetView<NotificationsController> {
                       .value
                       .response
                       ?.notifications![index],
-                  notificationTypes: NotificationTypes.pending,
+                  notificationTypes: index % 2 == 0
+                      ? NotificationTypes.approved
+                      : NotificationTypes.rejected,
                 ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -81,14 +82,20 @@ class _NotificationItem extends StatelessWidget {
             ),
             child: Center(
               child: Container(
-                width: 30,
-                height: 30,
-                decoration: const BoxDecoration(
-                  color: ColorUtils.whiteColor,
+                width: 50,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: ColorUtils.black.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
-                  child: Icon(Icons.done, size: 20, color: Colors.red),
+                  child: Icon(
+                    notificationTypes == NotificationTypes.rejected
+                        ? Icons.close
+                        : Icons.done,
+                    size: 20,
+                    color: ColorUtils.linkColor,
+                  ),
                 ),
               ),
             ),
@@ -99,7 +106,9 @@ class _NotificationItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Your survey has be Approved",
+                  notificationTypes == NotificationTypes.rejected
+                      ? "Rejected"
+                      : "Approved",
                   style: StyleUtils.kTextStyleSize14Weight500(
                     color: Colors.black,
                   ),

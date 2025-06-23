@@ -16,6 +16,7 @@ class TaskCard extends StatelessWidget {
   final bool ongoingTrip;
   final bool isFromList;
   final bool isCompleted;
+  final Function? scrollToMiddle;
 
   const TaskCard({
     super.key,
@@ -25,13 +26,18 @@ class TaskCard extends StatelessWidget {
     this.ongoingTrip = false,
     this.isFromList = false,
     this.isCompleted = false,
+    this.scrollToMiddle,
   });
 
   @override
   Widget build(BuildContext context) {
     return ZoomTapAnimation(
       onTap: () {
+        if (scrollToMiddle != null) {
+          scrollToMiddle!();
+        }
         FocusScope.of(context).unfocus();
+
         Get.dialog(
           TaskDialog(data: bookingData),
           barrierDismissible: false,

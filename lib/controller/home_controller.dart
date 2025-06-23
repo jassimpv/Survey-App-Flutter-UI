@@ -108,11 +108,9 @@ class HomeController extends GetxController {
       restaurantType: "Fine Dining",
       bookingId: 1002,
       bookingNumber: "BN-0002",
-
       emirate: "Al Ain",
       delegationName: "Business Group",
       status: "In Progress",
-
       lastVistedDate: LastVisitedDate(
         status: "Ongoing",
         createdAt: DateTime.now().add(const Duration(days: 15)),

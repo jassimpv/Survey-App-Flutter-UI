@@ -10,16 +10,16 @@ class NotificationsController extends GetxController {
       response: ResponseData(
         notifications: [
           Notifications(
-            type: "confirmed",
-            message: "Your appointment has been confirmed.",
+            type: "approved",
+            message: "Your submission has been rejected.",
           ),
           Notifications(
-            type: "pending",
-            message: "Your appointment is pending confirmation.",
+            type: "rejected",
+            message: "Your submission has been rejected.",
           ),
           Notifications(
-            type: "cancelled",
-            message: "Your appointment has been cancelled.",
+            type: "approved",
+            message: "Your submission has been approved.",
           ),
         ],
       ),

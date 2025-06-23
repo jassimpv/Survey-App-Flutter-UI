@@ -129,7 +129,7 @@ class SurveyCard extends StatelessWidget {
                 ),
                 8.widthBox,
                 Text(
-                  "Apple",
+                  "Fruits & Vegetables",
                   style: StyleUtils.kTextStyleSize14Weight500(
                     color: ColorUtils.black.withValues(alpha: 0.8),
                   ),
