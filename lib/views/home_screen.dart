@@ -30,7 +30,7 @@ class HomeScreen extends GetView<HomeController> {
         showIgnore: false,
         showLater: false,
         child: Scaffold(
-          backgroundColor: ColorUtils.appBgMain,
+          backgroundColor: ColorUtils.scaffoldColor,
           body: Column(
             children: [
               Expanded(

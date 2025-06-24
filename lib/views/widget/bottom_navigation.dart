@@ -29,11 +29,15 @@ class _BottomNavigationViewState extends State<BottomNavigationView> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorUtils.whiteColor,
+        color: ColorUtils.themeColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, -5),
-            color: ColorUtils.shadowHomeColor,
+            offset: Offset(1, -5),
+            color: ColorUtils.scaffoldColor,
             blurRadius: 5,
           ),
         ],
@@ -73,6 +77,7 @@ class _HomeItemView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -82,15 +87,15 @@ class _HomeItemView extends StatelessWidget {
             height: 24,
             width: 24,
             color: isSelected
-                ? ColorUtils.themeColor
-                : ColorUtils.greyMenuTextColor,
+                ? ColorUtils.whiteColor
+                : ColorUtils.greyLightTextColor,
           ),
           4.heightBox,
           Text(
             title,
             style: StyleUtils.kTextStyleSize12Weight400(
               color: isSelected
-                  ? ColorUtils.themeColor
+                  ? ColorUtils.whiteColor
                   : ColorUtils.greyMenuTextColor,
             ),
           ),

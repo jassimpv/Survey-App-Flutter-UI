@@ -141,7 +141,7 @@ class _StatusCount extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 4),
       height: 22,
       decoration: BoxDecoration(
-        color: ColorUtils.metallicColor.withValues(alpha: 0.80),
+        color: ColorUtils.secondaryColor,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Center(

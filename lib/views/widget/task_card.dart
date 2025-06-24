@@ -73,13 +73,13 @@ class TaskCard extends StatelessWidget {
             _buildActionIcon(
               onTap: () => Utils.openMap(["25.2048", "55.2708"]),
               assetName: "ic_location",
-              iconColor: _titleColor(),
+              iconColor: ColorUtils.backgroundDark,
             ),
             8.widthBox,
             _buildActionIcon(
               onTap: () => Utils.dail("1234567890"),
               assetName: "ic_call",
-              iconColor: _titleColor(),
+              iconColor: ColorUtils.backgroundDark,
             ),
           ],
         ),
@@ -89,16 +89,16 @@ class TaskCard extends StatelessWidget {
 
   Widget _buildIcon() {
     return Container(
-      height: 32,
-      width: 32,
+      height: 40,
+      width: 40,
       decoration: BoxDecoration(
-        color: _iconBgColor(),
+        color: ColorUtils.themeColor,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Icon(
         Icons.restaurant,
         color: ongoingTrip ? ColorUtils.darkGreen : ColorUtils.whiteColor,
-        size: 16,
+        size: 20,
       ),
     );
   }
@@ -109,7 +109,9 @@ class TaskCard extends StatelessWidget {
       children: [
         Text(
           bookingData.restaurantName,
-          style: StyleUtils.kTextStyleSize14Weight600(color: _titleColor()),
+          style: StyleUtils.kTextStyleSize17Weight400(
+            color: ColorUtils.backgroundDark,
+          ),
         ),
         Text(
           bookingData.restaurantType,
@@ -135,12 +137,12 @@ class TaskCard extends StatelessWidget {
                 Icon(
                   Icons.location_on,
                   color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
-                  size: 16,
+                  size: 18,
                 ),
                 8.widthBox,
                 Text(
                   bookingData.restaurantAddress,
-                  style: StyleUtils.kTextStyleSize12Weight500(
+                  style: StyleUtils.kTextStyleSize14Weight500(
                     color: ongoingTrip
                         ? ColorUtils.green.withValues(alpha: 0.8)
                         : ColorUtils.darkBlue.withValues(alpha: 0.8),
@@ -164,13 +166,13 @@ class TaskCard extends StatelessWidget {
               children: [
                 Image.asset(
                   AssetUtils.getIcons("ic_ride_list"),
-                  height: 24,
-                  color: _titleColor(),
+                  height: 26,
+                  color: ColorUtils.backgroundDark,
                 ),
                 10.widthBox,
                 Text(
                   bookingData.distance,
-                  style: StyleUtils.kTextStyleSize12Weight500(
+                  style: StyleUtils.kTextStyleSize14Weight500(
                     color: ongoingTrip
                         ? ColorUtils.green.withValues(alpha: 0.8)
                         : ColorUtils.darkBlue.withValues(alpha: 0.8),
@@ -247,20 +249,6 @@ class TaskCard extends StatelessWidget {
         return Colors.transparent;
     }
   }
-
-  Color _iconBgColor() {
-    if (isNext) return ColorUtils.indigoBlueColor;
-    if (ongoingTrip) return ColorUtils.whiteColor;
-    if (isCompleted) return const Color(0xff9F9F9F);
-    return ColorUtils.black;
-  }
-
-  Color _titleColor() {
-    if (isNext) return ColorUtils.indigoBlueColor;
-    if (ongoingTrip) return ColorUtils.green;
-    if (isCompleted) return const Color(0xff9F9F9F);
-    return ColorUtils.black;
-  }
 }
 
 class PassengerCount extends StatelessWidget {
@@ -273,7 +261,7 @@ class PassengerCount extends StatelessWidget {
     return InfoContainer(
       text: emirate,
       style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
-      backgroundColor: ColorUtils.orange,
+      backgroundColor: ColorUtils.secondaryColor,
     );
   }
 }

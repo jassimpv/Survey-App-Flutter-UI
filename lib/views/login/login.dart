@@ -49,7 +49,7 @@ class LoginScreen extends GetView<LoginController> {
                         ColorUtils.themeColor,
                         BlendMode.srcIn,
                       ),
-                      height: 50,
+                      height: 100,
                       width: 100,
                     ),
                   ),

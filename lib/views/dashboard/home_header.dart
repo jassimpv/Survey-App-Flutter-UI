@@ -106,7 +106,7 @@ class HomeHeader extends GetView<HomeController> {
       child: Badge.count(
         count: 0,
         isLabelVisible: true,
-        backgroundColor: ColorUtils.metallicColor.withValues(alpha: 0.80),
+        backgroundColor: ColorUtils.secondaryColor,
         child: CircleAvatar(
           radius: 22,
           backgroundColor: ColorUtils.whiteColor.withValues(alpha: 0.10),

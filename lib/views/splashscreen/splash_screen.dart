@@ -27,7 +27,7 @@ class SplashScreen extends StatelessWidget {
                 ColorUtils.whiteColor,
                 BlendMode.srcIn,
               ),
-              height: 50,
+              height: 100,
               width: 100,
             ),
           ),

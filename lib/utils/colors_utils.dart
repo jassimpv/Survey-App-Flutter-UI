@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class ColorUtils {
-  static const Color themeColor = Color(0xFF096B68);
+  static const Color themeColor = Color(0xFF186063);
   static const Color themeTextColor = Color(0xFF122044);
   static const Color greyTextColor = Color(0xFF5E637B);
   static const Color whiteColor = Color(0xFFFFFFFF);
@@ -10,6 +10,9 @@ class ColorUtils {
   static const Color black = Color(0xFF000000);
   static const Color hintTextColor = Color(0xFF949494);
   static const Color borderColor = Color(0xFFEFEFF4);
+  static Color scaffoldColor = const Color(0xFFe0f7f7);
+  static Color secondaryColor = const Color(0xffbaad8c);
+  static Color backgroundDark = const Color(0xFF25254B);
 
   static const Color headingColor = Color(0xFF0F3F41);
   static const Color linkColor = Color(0xFF237F82);

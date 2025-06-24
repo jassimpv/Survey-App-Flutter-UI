@@ -92,11 +92,9 @@ class HomeController extends GetxController {
       restaurantType: "Fast Food",
       bookingId: 1001,
       bookingNumber: "BN-0001",
-
       emirate: "Dubai",
       delegationName: "VIP Delegation",
       status: "Scheduled",
-
       lastVistedDate: LastVisitedDate(
         status: "Completed",
         createdAt: DateTime.now().subtract(Duration(days: 6)),
@@ -122,11 +120,9 @@ class HomeController extends GetxController {
       restaurantType: "Casual Dining",
       bookingId: 1003,
       bookingNumber: "BN-0003",
-
       emirate: "Abu Dhabi",
       delegationName: "Couple",
       status: "Pending",
-
       lastVistedDate: LastVisitedDate(
         status: "Pending",
         createdAt: DateTime.now().subtract(const Duration(days: 20)),
@@ -141,7 +137,6 @@ class HomeController extends GetxController {
       emirate: "Sharjah",
       delegationName: "Family",
       status: "Completed",
-
       lastVistedDate: LastVisitedDate(
         status: "Completed",
         createdAt: DateTime.now().subtract(const Duration(days: 2)),
@@ -156,7 +151,6 @@ class HomeController extends GetxController {
       emirate: "Ajman",
       delegationName: "Friends",
       status: "Cancelled",
-
       lastVistedDate: LastVisitedDate(
         status: "Cancelled",
         createdAt: DateTime.now().subtract(const Duration(days: 10)),
@@ -171,7 +165,6 @@ class HomeController extends GetxController {
       emirate: "Fujairah",
       delegationName: "Tourists",
       status: "Scheduled",
-
       lastVistedDate: LastVisitedDate(
         status: "Scheduled",
         createdAt: DateTime.now().add(const Duration(days: 5)),
@@ -186,7 +179,6 @@ class HomeController extends GetxController {
       emirate: "Ras Al Khaimah",
       delegationName: "Business",
       status: "In Progress",
-
       lastVistedDate: LastVisitedDate(
         status: "Ongoing",
         createdAt: DateTime.now().subtract(const Duration(days: 1)),
@@ -201,7 +193,6 @@ class HomeController extends GetxController {
       emirate: "Umm Al Quwain",
       delegationName: "Solo",
       status: "Pending",
-
       lastVistedDate: LastVisitedDate(
         status: "Pending",
         createdAt: DateTime.now().subtract(const Duration(days: 7)),

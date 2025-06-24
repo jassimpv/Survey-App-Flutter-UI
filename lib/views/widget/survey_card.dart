@@ -63,7 +63,7 @@ class SurveyCard extends StatelessWidget {
       height: 32,
       width: 32,
       decoration: BoxDecoration(
-        color: _iconBgColor(),
+        color: ColorUtils.backgroundDark,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Icon(
@@ -80,11 +80,13 @@ class SurveyCard extends StatelessWidget {
       children: [
         Text(
           bookingData.restaurantName,
-          style: StyleUtils.kTextStyleSize14Weight600(color: _titleColor()),
+          style: StyleUtils.kTextStyleSize17Weight600(
+            color: ColorUtils.backgroundDark,
+          ),
         ),
         Text(
           bookingData.restaurantType,
-          style: StyleUtils.kTextStyleSize14Weight500(
+          style: StyleUtils.kTextStyleSize16Weight400(
             color: ongoingTrip
                 ? ColorUtils.green.withValues(alpha: 0.7)
                 : ColorUtils.darkBlue,
@@ -106,12 +108,12 @@ class SurveyCard extends StatelessWidget {
                 Icon(
                   Icons.location_on,
                   color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
-                  size: 16,
+                  size: 18,
                 ),
                 8.widthBox,
                 Text(
                   bookingData.restaurantAddress,
-                  style: StyleUtils.kTextStyleSize12Weight500(
+                  style: StyleUtils.kTextStyleSize14Weight400(
                     color: ongoingTrip
                         ? ColorUtils.green.withValues(alpha: 0.8)
                         : ColorUtils.darkBlue.withValues(alpha: 0.8),
@@ -129,7 +131,7 @@ class SurveyCard extends StatelessWidget {
                 ),
                 8.widthBox,
                 Text(
-                  "Fruits & Vegetables",
+                  "Fruits",
                   style: StyleUtils.kTextStyleSize14Weight500(
                     color: ColorUtils.black.withValues(alpha: 0.8),
                   ),
@@ -152,7 +154,7 @@ class SurveyCard extends StatelessWidget {
                 bookingData.lastVistedDate.createdAt,
                 format: 'dd/MM/yyyy',
               ),
-              style: StyleUtils.kTextStyleSize12Weight500(
+              style: StyleUtils.kTextStyleSize14Weight500(
                 color: ColorUtils.darkGray,
               ),
             ),
@@ -178,20 +180,6 @@ class SurveyCard extends StatelessWidget {
         return Colors.transparent;
     }
   }
-
-  Color _iconBgColor() {
-    if (isNext) return ColorUtils.indigoBlueColor;
-    if (ongoingTrip) return ColorUtils.whiteColor;
-    if (isCompleted) return const Color(0xff9F9F9F);
-    return ColorUtils.black;
-  }
-
-  Color _titleColor() {
-    if (isNext) return ColorUtils.indigoBlueColor;
-    if (ongoingTrip) return ColorUtils.green;
-    if (isCompleted) return const Color(0xff9F9F9F);
-    return ColorUtils.black;
-  }
 }
 
 class PassengerCount extends StatelessWidget {
@@ -204,7 +192,7 @@ class PassengerCount extends StatelessWidget {
     return InfoContainer(
       text: weight,
       style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
-      backgroundColor: ColorUtils.red,
+      backgroundColor: ColorUtils.secondaryColor,
     );
   }
 }
