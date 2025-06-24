@@ -109,7 +109,7 @@ class TaskCard extends StatelessWidget {
       children: [
         Text(
           bookingData.restaurantName,
-          style: StyleUtils.kTextStyleSize17Weight400(
+          style: StyleUtils.kTextStyleSize17Weight600(
             color: ColorUtils.backgroundDark,
           ),
         ),

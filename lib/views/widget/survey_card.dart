@@ -63,7 +63,7 @@ class SurveyCard extends StatelessWidget {
       height: 32,
       width: 32,
       decoration: BoxDecoration(
-        color: ColorUtils.backgroundDark,
+        color: ColorUtils.themeColor,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Icon(
