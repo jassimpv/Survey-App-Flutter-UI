@@ -1,4 +1,4 @@
-import 'dart:ui';
+import "dart:ui";
 
 class ColorUtils {
   static const Color themeColor = Color(0xFF186063);

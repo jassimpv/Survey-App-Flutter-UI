@@ -1,4 +1,4 @@
-Map<String, String> enUs = {
+Map<String, String> enUs = <String, String>{
   "app_name": "Collect Data",
 
   "loginWithYourPhoneNumber": "Login with your phone number",
@@ -58,4 +58,5 @@ Map<String, String> enUs = {
   "end_date": "End Date",
   "search": "Search",
   "termsandContitions": "Terms and Conditions",
+  "selectCountryCode": "Select Country Code",
 };

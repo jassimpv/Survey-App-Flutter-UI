@@ -1,8 +1,8 @@
-import 'package:collect/views/completed_task/completed_task.dart';
-import 'package:collect/views/dashboard/dashboard_screen.dart';
-import 'package:collect/views/profile/profile_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import "package:collect/views/completed_task/completed_task.dart";
+import "package:collect/views/dashboard/dashboard_screen.dart";
+import "package:collect/views/profile/profile_screen.dart";
+import "package:flutter/material.dart";
+import "package:get/get.dart";
 
 enum Destination {
   dashboard,
@@ -18,25 +18,32 @@ enum Destination {
       case Destination.completedTasks:
         return CompletedTask();
       case Destination.profile:
-        return ProfileScreen();
+        return const ProfileScreen();
     }
   }
 
   static Route? getPage(RouteSettings settings) {
-    final destination = Destination.values.firstWhereOrNull(
-      (e) => e.route == settings.name,
+    final Destination? destination = Destination.values.firstWhereOrNull(
+      (Destination e) => e.route == settings.name,
     );
 
     if (destination == null) return null;
 
     return PageRouteBuilder(
       settings: settings,
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          destination.widget,
-      transitionDuration: const Duration(milliseconds: 300),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(opacity: animation, child: child);
-      },
+      pageBuilder:
+          (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) => destination.widget,
+      transitionsBuilder:
+          (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) => FadeTransition(opacity: animation, child: child),
     );
   }
 }

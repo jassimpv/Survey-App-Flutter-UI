@@ -1,12 +1,11 @@
-// ignore_for_file: provide_deprecation_message
-
 mixin ToAlias {}
 
-@deprecated
 class CElement = CountryCode with ToAlias;
 
 /// Country element. This is the element that contains all the information
 class CountryCode {
+  CountryCode({this.name, this.flagUri, this.code, this.dialCode});
+
   /// the name of the country
   String? name;
 
@@ -19,12 +18,10 @@ class CountryCode {
   /// the dial code (+39,+93..)
   String? dialCode;
 
-  CountryCode({this.name, this.flagUri, this.code, this.dialCode});
-
   @override
   String toString() => "$dialCode";
 
   String toLongString() => "$dialCode $name";
 
-  String toCountryStringOnly() => '$name';
+  String toCountryStringOnly() => "$name";
 }

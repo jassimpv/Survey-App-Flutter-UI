@@ -1,19 +1,22 @@
-import 'dart:ui';
-import 'package:collect/lang/ar_ae.dart';
-import 'package:collect/lang/en_us.dart';
-import 'package:collect/utils/prefernce_utils.dart';
-import 'package:get/get.dart';
+import "dart:ui";
+import "package:collect/lang/ar_ae.dart";
+import "package:collect/lang/en_us.dart";
+import "package:collect/utils/prefernce_utils.dart";
+import "package:get/get.dart";
 
 class TranslationService extends Translations {
-  static const locale = Locale('en', 'US');
-  static const fallbackLocale = Locale('en', 'US');
-  static final supportedLocale = [
-    const Locale('en', 'US'),
-    const Locale('ar', 'AE'),
+  static const Locale locale = Locale("en", "US");
+  static const Locale fallbackLocale = Locale("en", "US");
+  static final List<Locale> supportedLocale = <Locale>[
+    const Locale("en", "US"),
+    const Locale("ar", "AE"),
   ];
 
   @override
-  Map<String, Map<String, String>> get keys => {'en_US': enUs, 'ar_AE': arAe};
+  Map<String, Map<String, String>> get keys => <String, Map<String, String>>{
+    "en_US": enUs,
+    "ar_AE": arAe,
+  };
 
   static Future<void> updateLocale(Locale locale) async {
     Get.updateLocale(locale);
@@ -24,20 +27,18 @@ class TranslationService extends Translations {
   }
 
   static Future<void> init() async {
-    final languageCode = await PreferenceUtils.getString(
+    final String? languageCode = await PreferenceUtils.getString(
       PreferenceUtils.languageCode,
     );
 
     if (languageCode != null) {
       if (languageCode == "ar") {
-        Get.updateLocale(Locale(languageCode, 'AE'));
+        await Get.updateLocale(Locale(languageCode, "AE"));
       } else {
-        Get.updateLocale(Locale(languageCode, 'US'));
+        await Get.updateLocale(Locale(languageCode, "US"));
       }
     }
   }
 
-  static Locale? getLocale() {
-    return Get.locale!;
-  }
+  static Locale? getLocale() => Get.locale!;
 }

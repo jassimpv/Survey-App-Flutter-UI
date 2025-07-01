@@ -1,11 +1,12 @@
-import 'package:collect/controller/home_controller.dart';
-import 'package:collect/controller/profile_controller.dart';
-import 'package:get/get.dart';
+import "package:collect/controller/home_controller.dart";
+import "package:collect/controller/profile_controller.dart";
+import "package:get/get.dart";
 
 class HomeBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => HomeController());
-    Get.lazyPut(() => ProfileController());
+    Get
+      ..lazyPut(HomeController.new)
+      ..lazyPut(ProfileController.new);
   }
 }

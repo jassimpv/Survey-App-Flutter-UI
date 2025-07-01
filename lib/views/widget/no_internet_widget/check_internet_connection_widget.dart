@@ -1,11 +1,10 @@
-import 'package:collect/utils/internet_check.dart';
-import 'package:flutter/material.dart';
-import 'no_internet_widget.dart';
+import "package:collect/utils/internet_check.dart";
+import "package:collect/views/widget/no_internet_widget/no_internet_widget.dart";
+import "package:flutter/material.dart";
 
 class CheckInternetConnection extends StatefulWidget {
+  const CheckInternetConnection({required this.child, super.key});
   final Widget child;
-
-  const CheckInternetConnection({super.key, required this.child});
 
   @override
   State<CheckInternetConnection> createState() =>
@@ -28,18 +27,16 @@ class _CheckInternetConnectionState extends State<CheckInternetConnection> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: noInternetManager.internetState,
-      builder: (context, isConnected, child) {
-        if (isConnected) {
-          return widget.child;
-        } else {
-          return NoInternetConnection(
-            onRetry: noInternetManager.checkConnectivity,
-          );
-        }
-      },
-    );
-  }
+  Widget build(BuildContext context) => ValueListenableBuilder<bool>(
+    valueListenable: noInternetManager.internetState,
+    builder: (BuildContext context, bool isConnected, Widget? child) {
+      if (isConnected) {
+        return widget.child;
+      } else {
+        return NoInternetConnection(
+          onRetry: noInternetManager.checkConnectivity,
+        );
+      }
+    },
+  );
 }

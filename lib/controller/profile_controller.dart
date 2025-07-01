@@ -1,15 +1,14 @@
-import 'package:get/get.dart';
-import 'package:package_info_plus/package_info_plus.dart';
-
-import '../utils/prefernce_utils.dart';
+import "package:collect/utils/prefernce_utils.dart";
+import "package:get/get.dart";
+import "package:package_info_plus/package_info_plus.dart";
 
 class ProfileController extends GetxController {
-  var userName = ''.obs;
+  RxString userName = "".obs;
   RxString buildInfo = "".obs;
 
   @override
-  void onInit() {
-    getBuildInfo();
+  Future<void> onInit() async {
+    await getBuildInfo();
     super.onInit();
   }
 
@@ -18,17 +17,17 @@ class ProfileController extends GetxController {
     userName.value = name;
   }
 
-  getBuildInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  Future<void> getBuildInfo() async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    String version = packageInfo.version;
-    String buildNumber = packageInfo.buildNumber;
+    final String version = packageInfo.version;
+    final String buildNumber = packageInfo.buildNumber;
 
     buildInfo.value = "V $version +$buildNumber";
   }
 
   Future<void> logout() async {
     await PreferenceUtils.deleteAll();
-    Get.offAllNamed('/');
+    await Get.offAllNamed("/");
   }
 }

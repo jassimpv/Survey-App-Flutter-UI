@@ -1,35 +1,32 @@
-import 'package:collect/utils/colors_utils.dart';
-import 'package:collect/utils/transaltion_utils.dart';
-import 'package:collect/views/widget/zoom_tap.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/transaltion_utils.dart";
+import "package:collect/views/widget/zoom_tap.dart";
+import "package:flutter/material.dart";
+import "package:get/get.dart";
 
 class LanguageWidegt extends StatelessWidget {
-  final bool isHome;
   const LanguageWidegt({super.key, this.isHome = false});
+  final bool isHome;
 
   @override
-  Widget build(BuildContext context) {
-    return ZoomTapAnimation(
-      child: CustomSwitch(
-        value: Get.locale!.languageCode == "en",
-        onChanged: (value) async {
-          if (value) {
-            TranslationService.updateLocale(const Locale('en', 'US'));
-          } else {
-            TranslationService.updateLocale(const Locale('ar', 'AE'));
-          }
-        },
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ZoomTapAnimation(
+    child: CustomSwitch(
+      value: Get.locale!.languageCode == "en",
+      onChanged: (bool value) async {
+        if (value) {
+          await TranslationService.updateLocale(const Locale("en", "US"));
+        } else {
+          await TranslationService.updateLocale(const Locale("ar", "AE"));
+        }
+      },
+    ),
+  );
 }
 
 class CustomSwitch extends StatefulWidget {
+  const CustomSwitch({required this.value, required this.onChanged, super.key});
   final bool value;
   final ValueChanged<bool> onChanged;
-
-  const CustomSwitch({super.key, required this.value, required this.onChanged});
 
   @override
   CustomSwitchState createState() => CustomSwitchState();
@@ -45,7 +42,7 @@ class CustomSwitchState extends State<CustomSwitch>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 60),
+      duration: const Duration(milliseconds: 60),
     );
     circleAnimation =
         AlignmentTween(
@@ -57,51 +54,45 @@ class CustomSwitchState extends State<CustomSwitch>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _animationController!,
-      builder: (context, child) {
-        return GestureDetector(
-          onTap: () {
-            if (_animationController!.isCompleted) {
-              _animationController!.reverse();
-            } else {
-              _animationController!.forward();
-            }
-            widget.value == false
-                ? widget.onChanged(true)
-                : widget.onChanged(false);
-          },
-          child: Container(
-            width: 64,
-            height: 36,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(9999),
-              border: Border.all(
-                color: ColorUtils.themeColor.withValues(alpha: 0.10),
-              ),
-              color: Colors.white.withValues(alpha: 0.10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(2),
-              child: Column(
-                children: [
-                  Container(
-                    alignment: circleAnimation!.value == Alignment.centerRight
-                        ? Alignment.centerLeft
-                        : Alignment.centerRight,
-                    child: Image.asset(
-                      "assets/icons/${Get.locale!.languageCode == "en" ? "ic_lang_en" : "ic_lang_ar"}.png",
-                      width: 30,
-                      height: 30,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
+  Widget build(BuildContext context) => AnimatedBuilder(
+    animation: _animationController!,
+    builder: (BuildContext context, Widget? child) => GestureDetector(
+      onTap: () {
+        if (_animationController!.isCompleted) {
+          _animationController!.reverse();
+        } else {
+          _animationController!.forward();
+        }
+        !widget.value ? widget.onChanged(true) : widget.onChanged(false);
       },
-    );
-  }
+      child: Container(
+        width: 64,
+        height: 36,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(9999),
+          border: Border.all(
+            color: ColorUtils.themeColor.withValues(alpha: 0.10),
+          ),
+          color: Colors.white.withValues(alpha: 0.10),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(2),
+          child: Column(
+            children: <Widget>[
+              Container(
+                alignment: circleAnimation!.value == Alignment.centerRight
+                    ? Alignment.centerLeft
+                    : Alignment.centerRight,
+                child: Image.asset(
+                  "assets/icons/${Get.locale!.languageCode == "en" ? "ic_lang_en" : "ic_lang_ar"}.png",
+                  width: 30,
+                  height: 30,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
 }

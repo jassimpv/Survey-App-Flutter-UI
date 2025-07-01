@@ -1,8 +1,10 @@
-import 'package:collect/models/task_card_model.dart';
-import 'package:collect/models/user_data_model.dart';
-import 'package:collect/utils/colors_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import "package:collect/models/task_card_model.dart";
+import "package:collect/models/user_data_model.dart";
+import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/textstyle_input.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:get/get.dart";
 
 class HomeController extends GetxController {
   // Example observable variable
@@ -10,7 +12,7 @@ class HomeController extends GetxController {
   Rx<DriverData?> userData = DriverData().obs;
   TextEditingController searchController = TextEditingController();
   RxInt selectedTab = 0.obs;
-  RxList tabList = [
+  RxList tabList = <String>[
     "tab_all",
     "tab_pending",
     "tab_need_review",
@@ -19,57 +21,93 @@ class HomeController extends GetxController {
   ].obs;
   RxString selectedFilter = "".obs;
 
-  final List<Map<String, String>> filterItems = [
-    {
+  final List<Map<String, String>> filterItems = <Map<String, String>>[
+    <String, String>{
       "value": "other",
       "title": "general_transfer",
       "icon": "ic_filter_general_transfer",
     },
-    {
+    <String, String>{
       "value": "airport_transfer",
       "title": "airport_transfer",
       "icon": "ic_filter_airport_arrival",
     },
-    {
+    <String, String>{
       "value": "hourly_hires",
       "title": "hourly_hires",
       "icon": "ic_filter_hourly_hire",
     },
-    {
+    <String, String>{
       "value": "shuttle_service",
       "title": "shuttle_service",
       "icon": "ic_filter_shuttle_service",
     },
   ];
 
-  var startDate = Rxn<DateTime>();
-  var endDate = Rxn<DateTime>();
+  Rxn<DateTime> startDate = Rxn<DateTime>();
+  Rxn<DateTime> endDate = Rxn<DateTime>();
 
   Future<void> pickDate(BuildContext context, bool isStart) async {
-    DateTime initialDate = isStart
+    final DateTime initialDate = isStart
         ? startDate.value ?? DateTime.now()
         : endDate.value ?? (startDate.value ?? DateTime.now());
-    DateTime firstDate = isStart
+    final DateTime firstDate = isStart
         ? DateTime(2019)
         : (startDate.value ?? DateTime(2019));
-    DateTime lastDate = DateTime.now();
+    final DateTime lastDate = DateTime.now();
 
-    DateTime? picked = await showDatePicker(
+    final DateTime? picked = await showModalBottomSheet<DateTime>(
       context: context,
-      initialDate: initialDate,
-      firstDate: firstDate,
-      lastDate: lastDate,
-      builder: (context, child) {
-        return Theme(
-          data: ThemeData.light().copyWith(
-            colorScheme: const ColorScheme.light(
-              primary: ColorUtils.themeColor,
-              onPrimary: Colors.white,
-              surface: ColorUtils.whiteColor,
-              onSurface: Colors.black,
-            ),
+      builder: (BuildContext context) {
+        DateTime tempPicked = initialDate;
+        return Container(
+          height: 300,
+          color: ColorUtils.scaffoldColor,
+
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                height: 200,
+                width: Get.width,
+                child: CupertinoTheme(
+                  data: CupertinoThemeData(
+                    textTheme: CupertinoTextThemeData(
+                      dateTimePickerTextStyle:
+                          StyleUtils.kTextStyleSize17Weight400(),
+                      actionTextStyle: StyleUtils.kTextStyleSize18Weight400(
+                        color: ColorUtils.backgroundDark,
+                      ),
+                      pickerTextStyle: StyleUtils.kTextStyleSize17Weight400(),
+                    ),
+                  ),
+                  child: CupertinoDatePicker(
+                    backgroundColor: ColorUtils.scaffoldColor,
+                    mode: CupertinoDatePickerMode.date,
+                    showDayOfWeek: true,
+                    initialDateTime: initialDate,
+                    minimumDate: firstDate,
+                    maximumDate: lastDate,
+                    onDateTimeChanged: (DateTime date) {
+                      tempPicked = date;
+                    },
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  CupertinoButton(
+                    child: const Text("Cancel"),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  CupertinoButton(
+                    child: const Text("Done"),
+                    onPressed: () => Navigator.of(context).pop(tempPicked),
+                  ),
+                ],
+              ),
+            ],
           ),
-          child: child!,
         );
       },
     );
@@ -85,7 +123,7 @@ class HomeController extends GetxController {
     }
   }
 
-  List<TransferCardData> data = [
+  List<TransferCardData> data = <TransferCardData>[
     TransferCardData(
       restaurantName: "Restaurant A",
       restaurantAddress: "123 Main St, City",
@@ -97,7 +135,7 @@ class HomeController extends GetxController {
       status: "Scheduled",
       lastVistedDate: LastVisitedDate(
         status: "Completed",
-        createdAt: DateTime.now().subtract(Duration(days: 6)),
+        createdAt: DateTime.now().subtract(const Duration(days: 6)),
       ),
     ),
     TransferCardData(

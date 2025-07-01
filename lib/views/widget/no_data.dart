@@ -1,16 +1,16 @@
-import 'package:collect/utils/colors_utils.dart';
-import 'package:collect/utils/sized_box_extension.dart';
-import 'package:collect/utils/textstyle_input.dart';
-import 'package:collect/views/widget/zoom_tap.dart';
-import 'package:flutter/material.dart';
+import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/sized_box_extension.dart";
+import "package:collect/utils/textstyle_input.dart";
+import "package:collect/views/widget/zoom_tap.dart";
+import "package:flutter/material.dart";
 
 class NoData extends StatelessWidget {
   const NoData({
-    super.key,
     required this.text,
     required this.withImage,
     required this.subText,
     required this.buttonText,
+    super.key,
     this.onTap,
     this.isLoading = false,
   });
@@ -22,66 +22,64 @@ class NoData extends StatelessWidget {
   final bool isLoading;
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset("assets/icons/register_success.png"),
-          Text(
-            text,
-            style: StyleUtils.kTextStyleSize24Weight500(
-              color: const Color(0xff182E70),
-            ),
+  Widget build(BuildContext context) => Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Image.asset("assets/icons/register_success.png"),
+        Text(
+          text,
+          style: StyleUtils.kTextStyleSize24Weight500(
+            color: const Color(0xff182E70),
           ),
-          15.heightBox,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32.0),
-            child: Text(
-              subText,
-              style: StyleUtils.kTextStyleSize16Weight400(
-                color: const Color(0xff182E70).withValues(alpha: 0.5),
-              ),
-              textAlign: TextAlign.center,
+        ),
+        15.heightBox,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: Text(
+            subText,
+            style: StyleUtils.kTextStyleSize16Weight400(
+              color: const Color(0xff182E70).withValues(alpha: 0.5),
             ),
+            textAlign: TextAlign.center,
           ),
-          30.heightBox,
-          if (isLoading)
-            const CircularProgressIndicator(color: ColorUtils.themeColor)
-          else
-            SizedBox(
-              width: 277,
-              height: 50,
-              child: ZoomTapAnimation(
-                onTap: onTap,
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 12,
-                    horizontal: 24,
-                  ),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: ColorUtils.themeColor,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.bluetooth, color: ColorUtils.whiteColor),
-                      5.widthBox,
-                      Text(
-                        buttonText,
-                        style: StyleUtils.kTextStyleSize18Weight400(
-                          color: ColorUtils.whiteColor,
-                        ),
+        ),
+        30.heightBox,
+        if (isLoading)
+          const CircularProgressIndicator(color: ColorUtils.themeColor)
+        else
+          SizedBox(
+            width: 277,
+            height: 50,
+            child: ZoomTapAnimation(
+              onTap: onTap,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 24,
+                ),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: ColorUtils.themeColor,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Icon(Icons.bluetooth, color: ColorUtils.whiteColor),
+                    5.widthBox,
+                    Text(
+                      buttonText,
+                      style: StyleUtils.kTextStyleSize18Weight400(
+                        color: ColorUtils.whiteColor,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-        ],
-      ),
-    );
-  }
+          ),
+      ],
+    ),
+  );
 }

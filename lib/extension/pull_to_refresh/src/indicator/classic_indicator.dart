@@ -4,11 +4,11 @@
  *   createTime:2018-05-14 17:39
  */
 
-import 'package:flutter/material.dart'
+import "package:collect/extension/pull_to_refresh/pull_to_refresh_flutter.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart"
     hide RefreshIndicator, RefreshIndicatorState;
-import 'package:collect/extension/pull_to_refresh/pull_to_refresh_flutter.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 
 /// direction that icon should place to the text
 enum IconPosition { left, right, top, bottom }
@@ -17,33 +17,6 @@ enum IconPosition { left, right, top, bottom }
 typedef OuterBuilder = Widget Function(Widget child);
 
 class ClassicFooter extends LoadIndicator {
-  final String? idleText, loadingText, noDataText, failedText, canLoadingText;
-
-  /// a builder for re wrap child,If you need to change the boxExtent or background,padding etc.you need outerBuilder to reWrap child
-  /// example:
-  /// ```dart
-  /// outerBuilder:(child){
-  ///    return Container(
-  ///       color:Colors.red,
-  ///       child:child
-  ///    );
-  /// }
-  /// ````
-  /// In this example,it will help to add backgroundColor in indicator
-  final OuterBuilder? outerBuilder;
-
-  final Widget? idleIcon, loadingIcon, noMoreIcon, failedIcon, canLoadingIcon;
-
-  /// icon and text middle margin
-  final double spacing;
-
-  final IconPosition iconPos;
-
-  final TextStyle textStyle;
-
-  /// notice that ,this attrs only works for LoadStyle.ShowWhenLoading
-  final Duration completeDuration;
-
   const ClassicFooter({
     super.key,
     super.onClick,
@@ -65,16 +38,68 @@ class ClassicFooter extends LoadIndicator {
     this.canLoadingIcon = const Icon(Icons.autorenew, color: Colors.grey),
     this.idleIcon = const Icon(Icons.arrow_upward, color: Colors.grey),
   });
+  final String? idleText;
+  final String? loadingText;
+  final String? noDataText;
+  final String? failedText;
+  final String? canLoadingText;
+
+  /// a builder for re wrap child,If you need to change the boxExtent or
+  ///  background
+  /// ,padding etc.you need outerBuilder to reWrap child
+  /// example:
+  /// ```dart
+  /// outerBuilder:(child){
+  ///    return Container(
+  ///       color:Colors.red,
+  ///       child:child
+  ///    );
+  /// }
+  /// ````
+  /// In this example,it will help to add backgroundColor in indicator
+  final OuterBuilder? outerBuilder;
+
+  final Widget? idleIcon;
+  final Widget? loadingIcon;
+  final Widget? noMoreIcon;
+  final Widget? failedIcon;
+  final Widget? canLoadingIcon;
+
+  /// icon and text middle margin
+  final double spacing;
+
+  final IconPosition iconPos;
+
+  final TextStyle textStyle;
+
+  /// notice that ,this attrs only works for LoadStyle.ShowWhenLoading
+  final Duration completeDuration;
 
   @override
-  State<StatefulWidget> createState() {
-    return _ClassicFooterState();
+  State<StatefulWidget> createState() => _ClassicFooterState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(StringProperty("idleText", idleText))
+      ..add(StringProperty("loadingText", loadingText))
+      ..add(StringProperty("noDataText", noDataText))
+      ..add(StringProperty("failedText", failedText))
+      ..add(StringProperty("canLoadingText", canLoadingText))
+      ..add(ObjectFlagProperty<OuterBuilder?>.has("outerBuilder", outerBuilder))
+      ..add(DoubleProperty("spacing", spacing))
+      ..add(EnumProperty<IconPosition>("iconPos", iconPos))
+      ..add(DiagnosticsProperty<TextStyle>("textStyle", textStyle))
+      ..add(
+        DiagnosticsProperty<Duration>("completeDuration", completeDuration),
+      );
   }
 }
 
 class _ClassicFooterState extends LoadIndicatorState<ClassicFooter> {
   Widget _buildText(LoadStatus? mode) {
-    RefreshString strings =
+    final RefreshString strings =
         RefreshLocalizations.of(context)?.currentLocalization ??
         EnRefreshString();
     return Text(
@@ -92,14 +117,14 @@ class _ClassicFooterState extends LoadIndicatorState<ClassicFooter> {
   }
 
   Widget _buildIcon(LoadStatus? mode) {
-    Widget? icon = mode == LoadStatus.loading
+    final Widget? icon = mode == LoadStatus.loading
         ? widget.loadingIcon ??
               SizedBox(
-                width: 25.0,
-                height: 25.0,
+                width: 25,
+                height: 25,
                 child: defaultTargetPlatform == TargetPlatform.iOS
                     ? const CupertinoActivityIndicator()
-                    : const CircularProgressIndicator(strokeWidth: 2.0),
+                    : const CircularProgressIndicator(strokeWidth: 2),
               )
         : mode == LoadStatus.noMore
         ? widget.noMoreIcon
@@ -112,15 +137,13 @@ class _ClassicFooterState extends LoadIndicatorState<ClassicFooter> {
   }
 
   @override
-  Future endLoading() {
-    return Future.delayed(widget.completeDuration);
-  }
+  Future endLoading() => Future.delayed(widget.completeDuration);
 
   @override
   Widget buildContent(BuildContext context, LoadStatus? mode) {
-    Widget textWidget = _buildText(mode);
-    Widget iconWidget = _buildIcon(mode);
-    List<Widget> children = <Widget>[iconWidget, textWidget];
+    final Widget textWidget = _buildText(mode);
+    final Widget iconWidget = _buildIcon(mode);
+    final List<Widget> children = <Widget>[iconWidget, textWidget];
     final Widget container = Wrap(
       spacing: widget.spacing,
       textDirection: widget.iconPos == IconPosition.left

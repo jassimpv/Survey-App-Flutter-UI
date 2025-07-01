@@ -4,28 +4,28 @@
  * Time:  2019-09-06 23:18
  */
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter/material.dart";
 
 class RefreshLocalizations {
-  final Locale locale;
 
   RefreshLocalizations(this.locale);
+  final Locale locale;
 
-  Map<String, RefreshString> values = {
-    'en': EnRefreshString(),
-    'zh': ChRefreshString(),
-    'fr': FrRefreshString(),
-    'ru': RuRefreshString(),
-    'uk': UkRefreshString(),
-    'it': ItRefreshString(),
-    'ja': JpRefreshString(),
-    'de': DeRefreshString(),
-    'es': EsRefreshString(),
-    'nl': NlRefreshString(),
-    'sv': SvRefreshString(),
-    'pt': PtRefreshString(),
-    'ko': KrRefreshString(),
+  Map<String, RefreshString> values = <String, RefreshString>{
+    "en": EnRefreshString(),
+    "zh": ChRefreshString(),
+    "fr": FrRefreshString(),
+    "ru": RuRefreshString(),
+    "uk": UkRefreshString(),
+    "it": ItRefreshString(),
+    "ja": JpRefreshString(),
+    "de": DeRefreshString(),
+    "es": EsRefreshString(),
+    "nl": NlRefreshString(),
+    "sv": SvRefreshString(),
+    "pt": PtRefreshString(),
+    "ko": KrRefreshString(),
   };
 
   RefreshString? get currentLocalization {
@@ -38,9 +38,7 @@ class RefreshLocalizations {
   static const RefreshLocalizationsDelegate delegate =
       RefreshLocalizationsDelegate();
 
-  static RefreshLocalizations? of(BuildContext context) {
-    return Localizations.of(context, RefreshLocalizations);
-  }
+  static RefreshLocalizations? of(BuildContext context) => Localizations.of(context, RefreshLocalizations);
 }
 
 class RefreshLocalizationsDelegate
@@ -48,35 +46,29 @@ class RefreshLocalizationsDelegate
   const RefreshLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) {
-    return [
-      'en',
-      'zh',
-      'fr',
-      'ru',
-      'uk',
-      'ja',
-      'it',
-      'de',
-      'ko',
-      'pt',
-      'sv',
-      'nl',
-      'es',
+  bool isSupported(Locale locale) => <String>[
+      "en",
+      "zh",
+      "fr",
+      "ru",
+      "uk",
+      "ja",
+      "it",
+      "de",
+      "ko",
+      "pt",
+      "sv",
+      "nl",
+      "es",
     ].contains(locale.languageCode);
-  }
 
   @override
-  Future<RefreshLocalizations> load(Locale locale) {
-    return SynchronousFuture<RefreshLocalizations>(
+  Future<RefreshLocalizations> load(Locale locale) => SynchronousFuture<RefreshLocalizations>(
       RefreshLocalizations(locale),
     );
-  }
 
   @override
-  bool shouldReload(LocalizationsDelegate<RefreshLocalizations> old) {
-    return false;
-  }
+  bool shouldReload(LocalizationsDelegate<RefreshLocalizations> old) => false;
 }
 
 /// interface implements different language

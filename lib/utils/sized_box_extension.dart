@@ -1,6 +1,6 @@
 // lib/sized_box_extension.dart
 
-import 'package:flutter/widgets.dart';
+import "package:flutter/widgets.dart";
 
 extension SizedBoxExtension on num {
   Widget get widthBox => SizedBox(width: toDouble());

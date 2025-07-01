@@ -1,9 +1,22 @@
-library;
-
-import 'dart:async';
-import 'package:flutter/widgets.dart';
+import "dart:async";
+import "package:flutter/widgets.dart";
 
 class ZoomTapAnimation extends StatefulWidget {
+  const ZoomTapAnimation({
+    required this.child,
+    super.key,
+    this.onTap,
+    this.begin = 1.0,
+    this.end = 0.93,
+    this.beginDuration = const Duration(milliseconds: 20),
+    this.endDuration = const Duration(milliseconds: 120),
+    this.longTapRepeatDuration = const Duration(milliseconds: 100),
+    this.beginCurve = Curves.decelerate,
+    this.endCurve = Curves.fastOutSlowIn,
+    this.onLongTap,
+    this.enableLongTapRepeatEvent = false,
+    this.behavior = HitTestBehavior.deferToChild,
+  });
   // child: your widget that you want to put the zoom effect on.
   final Widget child;
 
@@ -29,22 +42,6 @@ class ZoomTapAnimation extends StatefulWidget {
 
   // behavior: the hit test behavior of the GestureDetector.
   final HitTestBehavior behavior;
-
-  const ZoomTapAnimation({
-    super.key,
-    required this.child,
-    this.onTap,
-    this.begin = 1.0,
-    this.end = 0.93,
-    this.beginDuration = const Duration(milliseconds: 20),
-    this.endDuration = const Duration(milliseconds: 120),
-    this.longTapRepeatDuration = const Duration(milliseconds: 100),
-    this.beginCurve = Curves.decelerate,
-    this.endCurve = Curves.fastOutSlowIn,
-    this.onLongTap,
-    this.enableLongTapRepeatEvent = false,
-    this.behavior = HitTestBehavior.deferToChild,
-  });
   @override
   State<StatefulWidget> createState() => _ZoomTapAnimationState();
 }
@@ -62,7 +59,7 @@ class _ZoomTapAnimationState extends State<ZoomTapAnimation>
     _controller = AnimationController(
       vsync: this,
       duration: widget.endDuration,
-      value: 1.0,
+      value: 1,
       reverseDuration: widget.beginDuration,
     );
     // initial tween animation
@@ -92,13 +89,12 @@ class _ZoomTapAnimationState extends State<ZoomTapAnimation>
       // call one tap event
       onTap: widget.onTap,
       // call long tap one event if the long tap repeat(loop) is false
-      onLongPress:
-          widget.onLongTap != null && !widget.enableLongTapRepeatEvent
-              ? onLongPress
-              : null,
+      onLongPress: widget.onLongTap != null && !widget.enableLongTapRepeatEvent
+          ? onLongPress
+          : null,
       child: Listener(
         behavior: widget.behavior,
-        onPointerDown: (c) async {
+        onPointerDown: (PointerDownEvent c) async {
           // prevent the onTap event from beign triggered
           _isOnTap = true;
           // animate the Tween animation from the end point to the start point
@@ -116,7 +112,7 @@ class _ZoomTapAnimationState extends State<ZoomTapAnimation>
             }
           }
         },
-        onPointerUp: (c) async {
+        onPointerUp: (PointerUpEvent c) async {
           // prevent the onTap event from beign triggered if the user has taped the widget for more than than 150 milliseconds
           _isOnTap = false;
           // animate the Tween animation from the begin point to the end point

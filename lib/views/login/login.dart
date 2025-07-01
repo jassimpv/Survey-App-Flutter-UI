@@ -1,23 +1,22 @@
-import 'package:collect/controller/login_controller.dart';
-import 'package:collect/utils/asset_utils.dart';
-import 'package:collect/utils/colors_utils.dart';
-import 'package:collect/utils/sized_box_extension.dart';
-import 'package:collect/views/widget/language_widget.dart';
-import 'package:collect/views/widget/mobile_number_view.dart';
-import 'package:collect/utils/textstyle_input.dart';
-import 'package:collect/views/widget/gradient_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
-
-import 'package:upgrader/upgrader.dart';
+import "package:collect/controller/login_controller.dart";
+import "package:collect/extension/country_list_pick/support/code_country.dart";
+import "package:collect/utils/asset_utils.dart";
+import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/sized_box_extension.dart";
+import "package:collect/utils/textstyle_input.dart";
+import "package:collect/views/widget/gradient_button.dart";
+import "package:collect/views/widget/language_widget.dart";
+import "package:collect/views/widget/mobile_number_view.dart";
+import "package:flutter/material.dart";
+import "package:flutter_svg/svg.dart";
+import "package:get/get.dart";
+import "package:upgrader/upgrader.dart";
 
 class LoginScreen extends GetView<LoginController> {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return UpgradeAlert(
+  Widget build(BuildContext context) => UpgradeAlert(
       dialogStyle: UpgradeDialogStyle.cupertino,
       showIgnore: false,
       showLater: false,
@@ -28,13 +27,13 @@ class LoginScreen extends GetView<LoginController> {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 MediaQuery.viewPaddingOf(context).top.heightBox,
                 16.heightBox,
-                Align(
+                const Align(
                   alignment: Alignment.topRight,
                   child: LanguageWidegt(isHome: true),
                 ),
@@ -45,7 +44,7 @@ class LoginScreen extends GetView<LoginController> {
                     tag: "register",
                     child: SvgPicture.asset(
                       AssetUtils.getSvg("logo"),
-                      colorFilter: ColorFilter.mode(
+                      colorFilter: const ColorFilter.mode(
                         ColorUtils.themeColor,
                         BlendMode.srcIn,
                       ),
@@ -72,7 +71,7 @@ class LoginScreen extends GetView<LoginController> {
                   dialname:
                       controller.selectedCountryCode.value?.dialCode ?? "",
                   image: controller.selectedCountryCode.value?.flagUri ?? "",
-                  onChanged: (countryCode) {
+                  onChanged: (CountryCode? countryCode) {
                     controller.selectedCountryCode.value = countryCode;
                   },
                 ),
@@ -91,5 +90,4 @@ class LoginScreen extends GetView<LoginController> {
         ),
       ),
     );
-  }
 }

@@ -1,5 +1,5 @@
-import 'package:collect/utils/colors_utils.dart';
-import 'package:flutter/material.dart';
+import "package:collect/utils/colors_utils.dart";
+import "package:flutter/material.dart";
 
 class StyleUtils {
   static TextStyle kTextStyleSize35Weight600({
@@ -41,7 +41,16 @@ class StyleUtils {
     fontWeight: FontWeight.w400,
     letterSpacing: letterSpacing,
   );
-
+  static TextStyle kTextStyleSize16Weight600({
+    Color color = ColorUtils.headingColor,
+    double? letterSpacing,
+  }) => TextStyle(
+    color: color,
+    fontSize: 16,
+    fontFamily: "Outfit",
+    fontWeight: FontWeight.w600,
+    letterSpacing: letterSpacing,
+  );
   static TextStyle kTextStyleSize12Weight400({
     Color color = ColorUtils.headingColor,
   }) => TextStyle(
@@ -190,8 +199,7 @@ class StyleUtils {
     String? hintText,
     String? labelText,
     IconData? prefixIcon,
-  }) {
-    return InputDecoration(
+  }) => InputDecoration(
       hintText: hintText,
       hintStyle: StyleUtils.kTextStyleSize14Weight400(
         color: ColorUtils.greyTextColor.withValues(alpha: 0.5),
@@ -201,7 +209,7 @@ class StyleUtils {
       prefixIcon: prefixIcon != null
           ? Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: 10.0,
+                horizontal: 10,
                 vertical: 13,
               ),
               child: Icon(
@@ -226,14 +234,13 @@ class StyleUtils {
         borderSide: const BorderSide(color: Colors.red),
         borderRadius: BorderRadius.circular(8),
       ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 12),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
     );
-  }
 
   static BoxDecoration cardView() => BoxDecoration(
     borderRadius: BorderRadius.circular(16),
     color: ColorUtils.whiteColor,
-    boxShadow: const [
+    boxShadow: const <BoxShadow>[
       BoxShadow(
         color: ColorUtils.shadowHomeColor,
         blurRadius: 6,
@@ -256,8 +263,8 @@ class StyleUtils {
         borderRadius: BorderRadius.circular(4),
         color: isSelected ? ColorUtils.themeColor : ColorUtils.whiteColor,
         boxShadow: !isSelected
-            ? []
-            : const [
+            ? <BoxShadow>[]
+            : const <BoxShadow>[
                 BoxShadow(
                   color: Color.fromRGBO(0, 0, 0, 0.10),
                   blurRadius: 2,

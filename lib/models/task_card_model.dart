@@ -1,16 +1,4 @@
 class TransferCardData {
-  int? bookingId;
-  String restaurantName;
-  String restaurantAddress;
-  String restaurantType;
-  String distance;
-  String bookingNumber;
-  String wasteKg;
-  String emirate;
-  String delegationName;
-  String status;
-
-  LastVisitedDate lastVistedDate;
 
   TransferCardData({
     required this.bookingId,
@@ -27,7 +15,7 @@ class TransferCardData {
     this.wasteKg = "0.0 KG",
   });
 
-  factory TransferCardData.fromJson(Map<String, dynamic> json, dynamic bId) =>
+  factory TransferCardData.fromJson(Map<String, dynamic> json, bId) =>
       TransferCardData(
         distance: json["distance"] ?? "0.0 KM",
         wasteKg: json["waste_kg"] ?? "0.0 KG",
@@ -43,11 +31,21 @@ class TransferCardData {
 
         lastVistedDate: LastVisitedDate.fromJson(json["last_trip_status"]),
       );
+  int? bookingId;
+  String restaurantName;
+  String restaurantAddress;
+  String restaurantType;
+  String distance;
+  String bookingNumber;
+  String wasteKg;
+  String emirate;
+  String delegationName;
+  String status;
+
+  LastVisitedDate lastVistedDate;
 }
 
 class LastVisitedDate {
-  String status;
-  DateTime createdAt;
 
   LastVisitedDate({required this.status, required this.createdAt});
 
@@ -56,8 +54,10 @@ class LastVisitedDate {
         status: json["status"],
         createdAt: DateTime.parse(json["createdAt"]),
       );
+  String status;
+  DateTime createdAt;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
     "status": status,
     "createdAt": createdAt.toIso8601String(),
   };

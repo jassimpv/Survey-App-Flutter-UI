@@ -1,22 +1,14 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'dart:math' as math;
+import "dart:math" as math;
 
-import 'package:collect/extension/pull_to_refresh/pull_to_refresh_flutter.dart';
-import 'package:collect/extension/pull_to_refresh/src/internals/slivers.dart';
+import "package:collect/extension/pull_to_refresh/pull_to_refresh_flutter.dart";
+import "package:collect/extension/pull_to_refresh/src/internals/slivers.dart";
+import "package:flutter/rendering.dart";
+import "package:flutter/widgets.dart";
 
 // ignore: must_be_immutable
 class RefreshPhysics extends ScrollPhysics {
-  final double? maxOverScrollExtent, maxUnderScrollExtent;
-  final double? topHitBoundary, bottomHitBoundary;
-  final SpringDescription? springDescription;
-  final double? dragSpeedRatio;
-  final bool? enableScrollWhenTwoLevel, enableScrollWhenRefreshCompleted;
-  final RefreshController? controller;
-  final int? updateFlag;
-  RenderViewport? viewportRender;
 
   RefreshPhysics({
     super.parent,
@@ -31,10 +23,20 @@ class RefreshPhysics extends ScrollPhysics {
     this.enableScrollWhenTwoLevel,
     this.maxOverScrollExtent,
   });
+  final double? maxOverScrollExtent;
+  final double? maxUnderScrollExtent;
+  final double? topHitBoundary;
+  final double? bottomHitBoundary;
+  final SpringDescription? springDescription;
+  final double? dragSpeedRatio;
+  final bool? enableScrollWhenTwoLevel;
+  final bool? enableScrollWhenRefreshCompleted;
+  final RefreshController? controller;
+  final int? updateFlag;
+  RenderViewport? viewportRender;
 
   @override
-  RefreshPhysics applyTo(ScrollPhysics? ancestor) {
-    return RefreshPhysics(
+  RefreshPhysics applyTo(ScrollPhysics? ancestor) => RefreshPhysics(
       parent: buildParent(ancestor),
       updateFlag: updateFlag,
       springDescription: springDescription,
@@ -47,7 +49,6 @@ class RefreshPhysics extends ScrollPhysics {
       maxUnderScrollExtent: maxUnderScrollExtent,
       maxOverScrollExtent: maxOverScrollExtent,
     );
-  }
 
   RenderViewport? findViewport(BuildContext? context) {
     if (context == null) {
@@ -103,14 +104,14 @@ class RefreshPhysics extends ScrollPhysics {
         controller!.headerMode!.value == RefreshStatus.twoLeveling) {
       final double overscrollPastStart = math.max(
         position.minScrollExtent - position.pixels,
-        0.0,
+        0,
       );
       final double overscrollPastEnd = math.max(
         position.pixels -
             (controller!.headerMode!.value == RefreshStatus.twoLeveling
                 ? 0.0
                 : position.maxScrollExtent),
-        0.0,
+        0,
       );
       final double overscrollPast = math.max(
         overscrollPastStart,
@@ -139,7 +140,7 @@ class RefreshPhysics extends ScrollPhysics {
     double gamma,
   ) {
     assert(absDelta > 0);
-    double total = 0.0;
+    double total = 0;
     if (extentOutside > 0) {
       final double deltaToLimit = extentOutside / gamma;
       if (absDelta < deltaToLimit) return absDelta * gamma;
@@ -158,7 +159,7 @@ class RefreshPhysics extends ScrollPhysics {
     viewportRender ??= findViewport(
       controller!.position?.context.storageContext,
     );
-    bool notFull = position.minScrollExtent == position.maxScrollExtent;
+    final bool notFull = position.minScrollExtent == position.maxScrollExtent;
     final bool enablePullDown = viewportRender == null
         ? false
         : viewportRender!.firstChild is RenderSliverRefresh;
@@ -175,11 +176,11 @@ class RefreshPhysics extends ScrollPhysics {
         return parent!.applyBoundaryConditions(position, value);
       }
     }
-    double topExtra = 0.0;
-    double? bottomExtra = 0.0;
+    double topExtra = 0;
+    double? bottomExtra = 0;
     if (enablePullDown) {
       final RenderSliverRefresh sliverHeader =
-          viewportRender!.firstChild as RenderSliverRefresh;
+          viewportRender!.firstChild! as RenderSliverRefresh;
       topExtra = sliverHeader.hasLayoutExtent
           ? 0.0
           : sliverHeader.refreshIndicatorLayoutExtent;
@@ -243,7 +244,7 @@ class RefreshPhysics extends ScrollPhysics {
         return value - position.pixels;
       }
     }
-    return 0.0;
+    return 0;
   }
 
   @override

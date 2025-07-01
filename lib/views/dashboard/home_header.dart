@@ -1,33 +1,32 @@
-import 'package:collect/controller/home_controller.dart';
-import 'package:collect/routes.dart';
-import 'package:collect/utils/asset_utils.dart';
-import 'package:collect/utils/colors_utils.dart';
-import 'package:collect/utils/sized_box_extension.dart';
-import 'package:collect/utils/utils_helper.dart';
-import 'package:collect/views/widget/language_widget.dart';
-import 'package:collect/utils/textstyle_input.dart';
-import 'package:collect/views/widget/zoom_tap.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import "package:collect/controller/home_controller.dart";
+import "package:collect/routes.dart";
+import "package:collect/utils/asset_utils.dart";
+import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/sized_box_extension.dart";
+import "package:collect/utils/textstyle_input.dart";
+import "package:collect/utils/utils_helper.dart";
+import "package:collect/views/widget/language_widget.dart";
+import "package:collect/views/widget/zoom_tap.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:get/get.dart";
 
 class HomeHeader extends GetView<HomeController> {
   const HomeHeader({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Hero(
+  Widget build(BuildContext context) => Hero(
       tag: "appBar",
-      child: Container(
-        decoration: BoxDecoration(
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
           color: ColorUtils.themeColor,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(20),
             bottomRight: Radius.circular(20),
           ),
         ),
         child: Column(
-          children: [
+          children: <Widget>[
             MediaQuery.viewPaddingOf(context).top.heightBox,
             16.heightBox,
             _buildHeaderRow(context),
@@ -36,33 +35,29 @@ class HomeHeader extends GetView<HomeController> {
         ),
       ),
     );
-  }
 
-  Widget _buildHeaderRow(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+  Widget _buildHeaderRow(BuildContext context) => Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
-        children: [
+        children: <Widget>[
           _buildProfileImage(),
           12.widthBox,
           _buildWelcomeText(),
           Row(
-            children: [LanguageWidegt(), 8.widthBox, _buildNotificationBadge()],
+            children: <Widget>[const LanguageWidegt(), 8.widthBox, _buildNotificationBadge()],
           ),
         ],
       ),
     );
-  }
 
-  Widget _buildProfileImage() {
-    return CircleAvatar(
+  Widget _buildProfileImage() => CircleAvatar(
       backgroundColor: ColorUtils.whiteColor,
       radius: 28,
       child: Image.asset(
         AssetUtils.getDummyImage("pp.webp"),
         width: 50,
         height: 50,
-        errorBuilder: (context, error, stackTrace) => Image.asset(
+        errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) => Image.asset(
           AssetUtils.getIcons("ic_profile"),
           fit: BoxFit.contain,
           width: 50,
@@ -70,13 +65,11 @@ class HomeHeader extends GetView<HomeController> {
         ),
       ),
     );
-  }
 
-  Widget _buildWelcomeText() {
-    return Expanded(
+  Widget _buildWelcomeText() => Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Text(
             Utils.getGreeting(),
             style: StyleUtils.kTextStyleSize18Weight500(
@@ -96,22 +89,19 @@ class HomeHeader extends GetView<HomeController> {
         ],
       ),
     );
-  }
 
-  Widget _buildNotificationBadge() {
-    return ZoomTapAnimation(
+  Widget _buildNotificationBadge() => ZoomTapAnimation(
       onTap: () {
         Get.toNamed(AppRouter.notificationScreen);
       },
       child: Badge.count(
         count: 0,
-        isLabelVisible: true,
         backgroundColor: ColorUtils.secondaryColor,
         child: CircleAvatar(
           radius: 22,
           backgroundColor: ColorUtils.whiteColor.withValues(alpha: 0.10),
           foregroundColor: ColorUtils.whiteColor.withValues(alpha: 0.10),
-          child: Icon(
+          child: const Icon(
             CupertinoIcons.bell,
             color: ColorUtils.whiteColor,
             size: 30,
@@ -119,5 +109,4 @@ class HomeHeader extends GetView<HomeController> {
         ),
       ),
     );
-  }
 }

@@ -1,14 +1,12 @@
-// ignore_for_file: no_logic_in_create_state, library_private_types_in_public_api
-
-import 'package:collect/utils/colors_utils.dart';
-import 'package:collect/utils/textstyle_input.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:collect/extension/country_list_pick/country_selection_theme.dart';
-import 'package:collect/extension/country_list_pick/selection_list.dart';
-import 'package:collect/extension/country_list_pick/support/code_countries_en.dart';
-import 'package:collect/extension/country_list_pick/support/code_country.dart';
-import 'package:collect/extension/country_list_pick/support/code_countrys.dart';
+import "package:collect/extension/country_list_pick/country_selection_theme.dart";
+import "package:collect/extension/country_list_pick/selection_list.dart";
+import "package:collect/extension/country_list_pick/support/code_countries_en.dart";
+import "package:collect/extension/country_list_pick/support/code_country.dart";
+import "package:collect/extension/country_list_pick/support/code_countrys.dart";
+import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/textstyle_input.dart";
+import "package:flutter/material.dart";
+import "package:get/get.dart";
 
 class CountryListPick extends StatefulWidget {
   const CountryListPick({
@@ -36,16 +34,16 @@ class CountryListPick extends StatefulWidget {
 
   @override
   _CountryListPickState createState() {
-    List<Map> jsonList = theme?.showEnglishName ?? true
+    final List<Map> jsonList = theme?.showEnglishName ?? true
         ? countriesEnglish
         : codes;
 
-    List elements = jsonList
+    final List<CountryCode> elements = jsonList
         .map(
-          (s) => CountryCode(
-            name: s['name'],
-            code: s['code'],
-            dialCode: s['dial_code'],
+          (Map s) => CountryCode(
+            name: s["name"],
+            code: s["code"],
+            dialCode: s["dial_code"],
             flagUri: 'flags/${s['code'].toLowerCase()}.png',
           ),
         )
@@ -55,10 +53,9 @@ class CountryListPick extends StatefulWidget {
 }
 
 class _CountryListPickState extends State<CountryListPick> {
-  CountryCode? selectedItem;
-  List elements = [];
-
   _CountryListPickState(this.elements);
+  CountryCode? selectedItem;
+  List elements = <dynamic>[];
 
   @override
   void initState() {
@@ -76,7 +73,7 @@ class _CountryListPickState extends State<CountryListPick> {
     super.initState();
   }
 
-  void _awaitFromSelectScreen(
+  Future<void> _awaitFromSelectScreen(
     BuildContext context,
     PreferredSizeWidget? appBar,
     CountryTheme? theme,
@@ -84,13 +81,13 @@ class _CountryListPickState extends State<CountryListPick> {
     final result = await Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => SelectionList(
+        builder: (BuildContext context) => SelectionList(
           elements,
           selectedItem,
           appBar: AppBar(
             backgroundColor: ColorUtils.themeColor,
             title: Text(
-              'selectCountryCode'.tr,
+              "selectCountryCode".tr,
               style: StyleUtils.titleText(color: ColorUtils.whiteColor),
             ),
             iconTheme: const IconThemeData(color: ColorUtils.whiteColor),
@@ -110,50 +107,48 @@ class _CountryListPickState extends State<CountryListPick> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        _awaitFromSelectScreen(context, widget.appBar, widget.theme);
-      },
-      child: widget.pickerBuilder != null
-          ? widget.pickerBuilder!(context, selectedItem)
-          : Flex(
-              direction: Axis.horizontal,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                if (widget.theme?.isShowFlag ?? true == true)
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Image.asset(
-                        'assets/${selectedItem!.flagUri!}',
-                        width: 32.0,
+  Widget build(BuildContext context) => TextButton(
+    onPressed: () {
+      _awaitFromSelectScreen(context, widget.appBar, widget.theme);
+    },
+    child: widget.pickerBuilder != null
+        ? widget.pickerBuilder!(context, selectedItem)
+        : Flex(
+            direction: Axis.horizontal,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              if (widget.theme?.isShowFlag ?? true)
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Image.asset(
+                      "assets/${selectedItem!.flagUri!}",
+                      width: 32,
+                    ),
+                  ),
+                ),
+              if (widget.theme?.isShowCode ?? true)
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Text(
+                      selectedItem.toString(),
+                      style: StyleUtils.kTextStyleSize17Weight400(
+                        color: Colors.black,
                       ),
                     ),
                   ),
-                if (widget.theme?.isShowCode ?? true == true)
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Text(
-                        selectedItem.toString(),
-                        style: StyleUtils.kTextStyleSize17Weight400(
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
+                ),
+              if (widget.theme?.isShowTitle ?? true)
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Text(selectedItem!.toCountryStringOnly()),
                   ),
-                if (widget.theme?.isShowTitle ?? true == true)
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                      child: Text(selectedItem!.toCountryStringOnly()),
-                    ),
-                  ),
-                if (widget.theme?.isDownIcon ?? true == true)
-                  Flexible(child: Icon(Icons.keyboard_arrow_down)),
-              ],
-            ),
-    );
-  }
+                ),
+              if (widget.theme?.isDownIcon ?? true)
+                const Flexible(child: Icon(Icons.keyboard_arrow_down)),
+            ],
+          ),
+  );
 }

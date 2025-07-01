@@ -4,10 +4,10 @@
  * Time: 2019/5/19 下午9:23
  */
 
-import 'package:flutter/material.dart'
+import "package:collect/extension/pull_to_refresh/src/internals/indicator_wrap.dart";
+import "package:collect/extension/pull_to_refresh/src/smart_refresher.dart";
+import "package:flutter/material.dart"
     hide RefreshIndicator, RefreshIndicatorState;
-import '../internals/indicator_wrap.dart';
-import '../smart_refresher.dart';
 
 // How much the scroll's drag gesture can overshoot the RefreshIndicator's
 // displacement; max displacement = _kDragSizeFactorLimit * displacement.
@@ -15,6 +15,17 @@ const double _kDragSizeFactorLimit = 1.5;
 
 /// mostly use flutter inner's RefreshIndicator
 class MaterialClassicHeader extends RefreshIndicator {
+  const MaterialClassicHeader({
+    super.key,
+    super.height = 80.0,
+    this.semanticsLabel,
+    this.semanticsValue,
+    this.color,
+    super.offset,
+    this.distance = 50.0,
+    this.backgroundColor,
+  }) : super(refreshStyle: RefreshStyle.Front);
+
   /// see flutter RefreshIndicator documents,the meaning same with that
   final String? semanticsLabel;
 
@@ -30,21 +41,8 @@ class MaterialClassicHeader extends RefreshIndicator {
   /// see flutter RefreshIndicator documents,the meaning same with that
   final Color? backgroundColor;
 
-  const MaterialClassicHeader({
-    super.key,
-    super.height = 80.0,
-    this.semanticsLabel,
-    this.semanticsValue,
-    this.color,
-    super.offset,
-    this.distance = 50.0,
-    this.backgroundColor,
-  }) : super(refreshStyle: RefreshStyle.Front);
-
   @override
-  State<StatefulWidget> createState() {
-    return _MaterialClassicHeaderState();
-  }
+  State<StatefulWidget> createState() => _MaterialClassicHeaderState();
 }
 
 class _MaterialClassicHeaderState
@@ -61,10 +59,8 @@ class _MaterialClassicHeaderState
   void initState() {
     _valueAni = AnimationController(
       vsync: this,
-      value: 0.0,
-      lowerBound: 0.0,
-      upperBound: 1.0,
-      duration: Duration(milliseconds: 500),
+      value: 0,
+      duration: const Duration(milliseconds: 500),
     );
     _valueAni.addListener(() {
       // frequently setState will decline the performance
@@ -72,19 +68,17 @@ class _MaterialClassicHeaderState
     });
     _positionController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
     );
     _scaleFactor = AnimationController(
       vsync: this,
-      value: 1.0,
-      lowerBound: 0.0,
-      upperBound: 1.0,
-      duration: Duration(milliseconds: 300),
+      value: 1,
+      duration: const Duration(milliseconds: 300),
     );
     _positionFactor = _positionController.drive(
       Tween<Offset>(
-        begin: Offset(0.0, -1.0),
-        end: Offset(0.0, widget.height / 44.0),
+        begin: const Offset(0, -1),
+        end: Offset(0, widget.height / 44.0),
       ),
     );
     super.initState();
@@ -97,30 +91,27 @@ class _MaterialClassicHeaderState
   }
 
   @override
-  Widget buildContent(BuildContext context, RefreshStatus? mode) {
-    return _buildIndicator(widget.backgroundColor ?? Colors.white);
-  }
+  Widget buildContent(BuildContext context, RefreshStatus? mode) =>
+      _buildIndicator(widget.backgroundColor ?? Colors.white);
 
-  Widget _buildIndicator(Color outerColor) {
-    return SlideTransition(
-      position: _positionFactor!,
-      child: ScaleTransition(
-        scale: _scaleFactor,
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: RefreshProgressIndicator(
-            semanticsLabel:
-                widget.semanticsLabel ??
-                MaterialLocalizations.of(context).refreshIndicatorSemanticLabel,
-            semanticsValue: widget.semanticsValue,
-            value: floating ? null : _valueAni.value,
-            valueColor: _valueColor,
-            backgroundColor: outerColor,
-          ),
+  Widget _buildIndicator(Color outerColor) => SlideTransition(
+    position: _positionFactor!,
+    child: ScaleTransition(
+      scale: _scaleFactor,
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: RefreshProgressIndicator(
+          semanticsLabel:
+              widget.semanticsLabel ??
+              MaterialLocalizations.of(context).refreshIndicatorSemanticLabel,
+          semanticsValue: widget.semanticsValue,
+          value: floating ? null : _valueAni.value,
+          valueColor: _valueColor,
+          backgroundColor: outerColor,
         ),
       ),
-    );
-  }
+    ),
+  );
 
   @override
   void onOffsetChange(double offset) {
@@ -153,24 +144,21 @@ class _MaterialClassicHeaderState
     _position = Scrollable.of(context).position;
     _valueColor = _positionController.drive(
       ColorTween(
-        begin: (widget.color ?? theme.primaryColor).withValues(alpha: 0.0),
-        end: (widget.color ?? theme.primaryColor).withValues(alpha: 1.0),
+        begin: (widget.color ?? theme.primaryColor).withValues(alpha: 0),
+        end: (widget.color ?? theme.primaryColor).withValues(alpha: 1),
       ).chain(
-        CurveTween(curve: const Interval(0.0, 1.0 / _kDragSizeFactorLimit)),
+        CurveTween(curve: const Interval(0, 1.0 / _kDragSizeFactorLimit)),
       ),
     );
     super.didChangeDependencies();
   }
 
   @override
-  Future<void> readyToRefresh() {
-    return _positionController.animateTo(widget.distance / widget.height);
-  }
+  Future<void> readyToRefresh() =>
+      _positionController.animateTo(widget.distance / widget.height);
 
   @override
-  Future<void> endRefresh() {
-    return _scaleFactor.animateTo(0.0);
-  }
+  Future<void> endRefresh() => _scaleFactor.animateTo(0);
 
   @override
   void dispose() {
@@ -191,12 +179,10 @@ class WaterDropMaterialHeader extends MaterialClassicHeader {
     super.semanticsValue,
     Color super.color = Colors.white,
     super.backgroundColor,
-  }) : super(height: 80.0);
+  }) : super(height: 80);
 
   @override
-  State<StatefulWidget> createState() {
-    return _WaterDropMaterialHeaderState();
-  }
+  State<StatefulWidget> createState() => _WaterDropMaterialHeaderState();
 }
 
 class _WaterDropMaterialHeaderState extends _MaterialClassicHeaderState {
@@ -208,20 +194,17 @@ class _WaterDropMaterialHeaderState extends _MaterialClassicHeaderState {
     super.initState();
     _bezierController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       upperBound: 1.5,
-      lowerBound: 0.0,
-      value: 0.0,
+      value: 0,
     );
     _positionController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300),
-      upperBound: 1.0,
-      lowerBound: 0.0,
-      value: 0.0,
+      duration: const Duration(milliseconds: 300),
+      value: 0,
     );
     _positionFactor = _positionController.drive(
-      Tween<Offset>(begin: Offset(0.0, -0.5), end: Offset(0.0, 1.5)),
+      Tween<Offset>(begin: const Offset(0, -0.5), end: const Offset(0, 1.5)),
     );
   }
 
@@ -231,10 +214,10 @@ class _WaterDropMaterialHeaderState extends _MaterialClassicHeaderState {
     final ThemeData theme = Theme.of(context);
     _valueColor = _positionController.drive(
       ColorTween(
-        begin: (widget.color ?? theme.primaryColor).withValues(alpha: 0.0),
-        end: (widget.color ?? theme.primaryColor).withValues(alpha: 1.0),
+        begin: (widget.color ?? theme.primaryColor).withValues(alpha: 0),
+        end: (widget.color ?? theme.primaryColor).withValues(alpha: 1),
       ).chain(
-        CurveTween(curve: const Interval(0.0, 1.0 / _kDragSizeFactorLimit)),
+        CurveTween(curve: const Interval(0, 1.0 / _kDragSizeFactorLimit)),
       ),
     );
   }
@@ -246,13 +229,13 @@ class _WaterDropMaterialHeaderState extends _MaterialClassicHeaderState {
     _bezierController!.animateTo(
       1.5,
       curve: Curves.bounceOut,
-      duration: Duration(milliseconds: 550),
+      duration: const Duration(milliseconds: 550),
     );
     return _positionController
         .animateTo(
           widget.distance / widget.height,
           curve: Curves.bounceOut,
-          duration: Duration(milliseconds: 550),
+          duration: const Duration(milliseconds: 550),
         )
         .then((_) {
           _showWater = false;
@@ -282,61 +265,57 @@ class _WaterDropMaterialHeaderState extends _MaterialClassicHeaderState {
     offset = offset > 80.0 ? 80.0 : offset;
 
     if (!floating) {
-      _bezierController!.value =
-          (offset / configuration!.headerTriggerDistance);
+      _bezierController!.value = offset / configuration!.headerTriggerDistance;
       _valueAni.value = _bezierController!.value;
       _positionController.value = _bezierController!.value * 0.3;
-      _scaleFactor.value =
-          offset < 40.0 ? 0.0 : (_bezierController!.value - 0.5) * 2 + 0.5;
+      _scaleFactor.value = offset < 40.0
+          ? 0.0
+          : (_bezierController!.value - 0.5) * 2 + 0.5;
     }
   }
 
   @override
-  Widget buildContent(BuildContext context, RefreshStatus? mode) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SizedBox(
-        height: 100.0,
-        child: Stack(
-          children: <Widget>[
-            CustomPaint(
-              painter: _BezierPainter(
-                listener: _bezierController,
-                color: widget.backgroundColor ?? Theme.of(context).primaryColor,
-              ),
-              child: Container(),
+  Widget buildContent(BuildContext context, RefreshStatus? mode) => Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: SizedBox(
+      height: 100,
+      child: Stack(
+        children: <Widget>[
+          CustomPaint(
+            painter: _BezierPainter(
+              listener: _bezierController,
+              color: widget.backgroundColor ?? Theme.of(context).primaryColor,
             ),
-            CustomPaint(
-              painter:
-                  _showWater
-                      ? _WaterPainter(
-                        ratio: widget.distance / widget.height,
-                        color:
-                            widget.backgroundColor ??
-                            Theme.of(context).primaryColor,
-                        listener: _positionFactor,
-                      )
-                      : null,
-              child: _buildIndicator(
-                widget.backgroundColor ?? Theme.of(context).primaryColor,
-              ),
+            child: Container(),
+          ),
+          CustomPaint(
+            painter: _showWater
+                ? _WaterPainter(
+                    ratio: widget.distance / widget.height,
+                    color:
+                        widget.backgroundColor ??
+                        Theme.of(context).primaryColor,
+                    listener: _positionFactor,
+                  )
+                : null,
+            child: _buildIndicator(
+              widget.backgroundColor ?? Theme.of(context).primaryColor,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }
 
 class _WaterPainter extends CustomPainter {
+  _WaterPainter({this.color, this.listener, this.ratio})
+    : super(repaint: listener);
   final Color? color;
   final Animation<Offset>? listener;
 
   Offset get offset => listener!.value;
   final double? ratio;
-
-  _WaterPainter({this.color, this.listener, this.ratio})
-    : super(repaint: listener);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -355,18 +334,16 @@ class _WaterPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_WaterPainter oldDelegate) {
-    return this != oldDelegate || offset != oldDelegate.offset;
-  }
+  bool shouldRepaint(_WaterPainter oldDelegate) =>
+      this != oldDelegate || offset != oldDelegate.offset;
 }
 
 class _BezierPainter extends CustomPainter {
+  _BezierPainter({this.listener, this.color}) : super(repaint: listener);
   final AnimationController? listener;
   final Color? color;
 
   double get value => listener!.value;
-
-  _BezierPainter({this.listener, this.color}) : super(repaint: listener);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -375,13 +352,13 @@ class _BezierPainter extends CustomPainter {
     paint.color = color!;
     if (value < 0.5) {
       final Path path = Path();
-      path.moveTo(0.0, 0.0);
-      path.quadraticBezierTo(middleX, 70.0 * value, size.width, 0.0);
+      path.moveTo(0, 0);
+      path.quadraticBezierTo(middleX, 70.0 * value, size.width, 0);
       canvas.drawPath(path, paint);
     } else if (value <= 1.0) {
       final Path path = Path();
       final double offsetY = 60.0 * (value - 0.5) + 20.0;
-      path.moveTo(0.0, 0.0);
+      path.moveTo(0, 0);
       path.quadraticBezierTo(
         middleX + 40.0 * (value - 0.5),
         40.0 - 40.0 * value,
@@ -393,21 +370,20 @@ class _BezierPainter extends CustomPainter {
         middleX - 40.0 * (value - 0.5),
         40.0 - 40.0 * value,
         size.width,
-        0.0,
+        0,
       );
-      path.moveTo(size.width, 0.0);
-      path.lineTo(0.0, 0.0);
+      path.moveTo(size.width, 0);
+      path.lineTo(0, 0);
       canvas.drawPath(path, paint);
     } else {
       final Path path = Path();
-      path.moveTo(0.0, 0.0);
-      path.conicTo(middleX, 60.0 * (1.5 - value), size.width, 0.0, 5.0);
+      path.moveTo(0, 0);
+      path.conicTo(middleX, 60.0 * (1.5 - value), size.width, 0, 5);
       canvas.drawPath(path, paint);
     }
   }
 
   @override
-  bool shouldRepaint(_BezierPainter oldDelegate) {
-    return this != oldDelegate || oldDelegate.value != value;
-  }
+  bool shouldRepaint(_BezierPainter oldDelegate) =>
+      this != oldDelegate || oldDelegate.value != value;
 }

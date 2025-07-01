@@ -1,4 +1,4 @@
-Map<String, String> arAe = {
+Map<String, String> arAe = <String, String>{
   "app_name": "جمع البيانات",
   "loginWithYourPhoneNumber": "تسجيل الدخول برقم هاتفك",
   "mobile_number": "رقم الجوال",
