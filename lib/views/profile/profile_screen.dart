@@ -48,7 +48,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 12.heightBox,
                 _buildProfileCard(),
                 12.heightBox,
-                // _buildSupervisorCard(),
+                _buildSupervisorCard(),
                 Divider(color: Colors.black.withValues(alpha: 0.1)),
                 12.heightBox,
                 _buildInfoContainer(context),
