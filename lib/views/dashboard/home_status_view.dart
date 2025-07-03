@@ -76,31 +76,34 @@ class _StatusCard extends StatelessWidget {
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Text(
           label,
           style: StyleUtils.kTextStyleSize18Weight500(color: Colors.white),
         ),
-        10.heightBox,
+        5.heightBox,
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Row(
+            10.heightBox,
+            Column(
               children: <Widget>[
                 _StatusText(label: "today".tr),
-                5.widthBox,
+                5.heightBox,
                 _StatusCount(count: todayCount, isTotal: true),
               ],
             ),
-
-            Row(
+            10.heightBox,
+            Column(
               children: <Widget>[
                 _StatusText(label: "total".tr),
-                5.widthBox,
+                5.heightBox,
                 _StatusCount(count: totalCount, isTotal: false),
               ],
             ),
+            10.heightBox,
           ],
         ),
       ],
@@ -116,7 +119,7 @@ class _StatusText extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Text(
     label,
-    style: StyleUtils.kTextStyleSize14Weight400(
+    style: StyleUtils.kTextStyleSize16Weight400(
       color: Colors.white.withValues(alpha: 0.5),
     ),
   );
@@ -131,7 +134,7 @@ class _StatusCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 4),
-    height: 22,
+
     decoration: BoxDecoration(
       color: ColorUtils.secondaryColor,
       borderRadius: BorderRadius.circular(4),
@@ -141,7 +144,7 @@ class _StatusCount extends StatelessWidget {
         padding: const EdgeInsets.all(2),
         child: Text(
           Utils.replaceFarsiNumber(count),
-          style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
+          style: StyleUtils.kTextStyleSize24Weight600(color: Colors.white),
         ),
       ),
     ),
