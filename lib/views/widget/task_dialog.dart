@@ -5,6 +5,7 @@ import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/utils/utils_helper.dart";
+import "package:collect/views/new_sample/new_sample.dart";
 import "package:collect/views/widget/task_card.dart";
 import "package:collect/views/widget/zoom_tap.dart";
 import "package:flutter/material.dart";
@@ -39,7 +40,7 @@ class TaskDialog extends StatelessWidget {
                   10.heightBox,
                   _content(),
                   10.heightBox,
-                  _buildActionButtons(),
+                  _buildActionButtons(data),
                 ],
               ),
             ),
@@ -197,13 +198,15 @@ class TaskDialog extends StatelessWidget {
     child: const Icon(Icons.restaurant, color: ColorUtils.whiteColor, size: 16),
   );
 
-  Widget _buildActionButtons() => Row(
+  Widget _buildActionButtons(TransferCardData data) => Row(
     children: <Widget>[
       Expanded(
         child: SizedBox(
           height: 56,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(FoodWasteQuestionnaire(data: data));
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorUtils.themeColor,
               shape: RoundedRectangleBorder(
