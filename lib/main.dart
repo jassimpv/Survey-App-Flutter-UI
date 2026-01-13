@@ -15,31 +15,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
-      title: "Data Agent App",
-      theme: ThemeData(
+    title: "Data Agent App",
+    theme: ThemeData(
+      fontFamily: "Outfit",
+      primaryColor: ColorUtils.themeColor,
+      scaffoldBackgroundColor: ColorUtils.appBgMain,
+      textTheme: Theme.of(context).textTheme.apply(
+        bodyColor: Colors.black,
+        displayColor: Colors.black,
         fontFamily: "Outfit",
-        primaryColor: ColorUtils.themeColor,
-        scaffoldBackgroundColor: ColorUtils.appBgMain,
-        textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: Colors.black,
-          displayColor: Colors.black,
-          fontFamily: "Outfit",
-        ),
       ),
-      debugShowCheckedModeBanner: false,
-      locale: TranslationService.locale,
-      fallbackLocale: TranslationService.fallbackLocale,
-      translations: TranslationService(),
-      supportedLocales: TranslationService.supportedLocale,
-      builder: (BuildContext context, Widget? child) => MediaQuery(
-        data: MediaQuery.of(context),
-        child: CheckInternetConnection(child: child!),
-      ),
-      getPages: AppRouter.routes,
-      localizationsDelegates: const <LocalizationsDelegate>[
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-    );
+    ),
+    debugShowCheckedModeBanner: false,
+    locale: TranslationService.locale,
+    fallbackLocale: TranslationService.fallbackLocale,
+    translations: TranslationService(),
+    supportedLocales: TranslationService.supportedLocale,
+    defaultTransition: Transition.noTransition,
+    builder: (BuildContext context, Widget? child) => MediaQuery(
+      data: MediaQuery.of(context),
+      child: CheckInternetConnection(child: child!),
+    ),
+    getPages: AppRouter.routes,
+    localizationsDelegates: const <LocalizationsDelegate>[
+      GlobalMaterialLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+    ],
+  );
 }

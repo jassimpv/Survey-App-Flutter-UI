@@ -189,7 +189,7 @@ class TaskCard extends StatelessWidget {
               ),
               10.widthBox,
               Text(
-                bookingData.distance,
+                Utils.replaceFarsiNumber(bookingData.distance),
                 style: StyleUtils.kTextStyleSize14Weight500(
                   color: ongoingTrip
                       ? ColorUtils.green.withValues(alpha: 0.8)
@@ -250,7 +250,7 @@ class TaskCard extends StatelessWidget {
         ),
       ),
       Text(
-        Utils.timeAgo(time),
+        Utils.replaceFarsiNumber(Utils.timeAgo(time)),
         style: StyleUtils.kTextStyleSize12Weight500(color: ColorUtils.darkGray),
       ),
     ],

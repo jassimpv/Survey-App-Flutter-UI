@@ -408,7 +408,7 @@ class ProfileScreen extends GetView<ProfileController> {
           ),
           6.heightBox,
           Text(
-            value,
+            Utils.replaceFarsiNumber(value),
             style: StyleUtils.kTextStyleSize24Weight600(
               color: ColorUtils.headingColor,
             ),

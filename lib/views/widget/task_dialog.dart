@@ -236,7 +236,7 @@ class TaskDialog extends StatelessWidget {
                           ),
                           8.widthBox,
                           Text(
-                            data.distance,
+                            Utils.replaceFarsiNumber(data.distance),
                             style: StyleUtils.kTextStyleSize14Weight500(
                               color: ColorUtils.darkBlue.withValues(
                                 alpha: 0.85,
@@ -266,7 +266,7 @@ class TaskDialog extends StatelessWidget {
         ),
       ),
       Text(
-        Utils.timeAgo(time),
+        Utils.replaceFarsiNumber(Utils.timeAgo(time)),
         style: StyleUtils.kTextStyleSize12Weight500(color: ColorUtils.darkGray),
       ),
     ],
