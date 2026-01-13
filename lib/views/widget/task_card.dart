@@ -42,19 +42,29 @@ class TaskCard extends StatelessWidget {
       );
     },
     child: Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: ongoingTrip ? ColorUtils.lightGreen : Colors.white,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: ongoingTrip
               ? _ongoingColor()
-              : const Color.fromRGBO(85, 109, 220, 0.10),
+              : ColorUtils.themeColor.withValues(alpha: 0.12),
+          width: 1.5,
         ),
+        boxShadow: [
+          BoxShadow(
+            color: ongoingTrip
+                ? ColorUtils.green.withValues(alpha: 0.1)
+                : ColorUtils.themeColor.withValues(alpha: 0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[_buildHeader(), 8.heightBox, _buildBody()],
+        children: <Widget>[_buildHeader(), 12.heightBox, _buildBody()],
       ),
     ),
   );
@@ -81,19 +91,38 @@ class TaskCard extends StatelessWidget {
     ],
   );
 
-  Widget _buildIcon() => Container(
-    height: 40,
-    width: 40,
-    decoration: BoxDecoration(
-      color: ColorUtils.themeColor,
-      borderRadius: BorderRadius.circular(4),
-    ),
-    child: Icon(
-      Icons.restaurant,
-      color: ongoingTrip ? ColorUtils.darkGreen : ColorUtils.whiteColor,
-      size: 20,
-    ),
-  );
+  Widget _buildIcon() {
+    final Color iconColor = ongoingTrip
+        ? ColorUtils.darkGreen
+        : ColorUtils.themeColor;
+
+    return Container(
+      height: 52,
+      width: 52,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: <Color>[
+            ColorUtils.themeColor.withValues(alpha: 0.18),
+            Colors.white,
+          ],
+        ),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: ColorUtils.themeColor.withValues(alpha: 0.12),
+        ),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: ColorUtils.themeColor.withValues(alpha: 0.15),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Icon(Icons.restaurant, color: iconColor, size: 24),
+    );
+  }
 
   Widget _buildTransferInfo() => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +170,7 @@ class TaskCard extends StatelessWidget {
           ),
           10.heightBox,
           _buildLocationText(
-            "lastVisited",
+            "last collected".tr,
             bookingData.lastVistedDate.createdAt,
           ),
         ],
@@ -181,18 +210,30 @@ class TaskCard extends StatelessWidget {
   }) => ZoomTapAnimation(
     onTap: onTap,
     child: Container(
-      height: 32,
-      width: 32,
-      padding: const EdgeInsets.all(5),
-      decoration: const BoxDecoration(
-        color: Color(0xffEDF1FB),
+      height: 42,
+      width: 42,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: <Color>[Colors.white, ColorUtils.scaffoldColor],
+        ),
         shape: BoxShape.circle,
+        border: Border.all(
+          color: ColorUtils.themeColor.withValues(alpha: 0.08),
+        ),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: ColorUtils.themeColor.withValues(alpha: 0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Image.asset(
         AssetUtils.getIcons(assetName),
         color: iconColor,
-        height: 22,
-        width: 22,
+        height: 24,
+        width: 24,
       ),
     ),
   );
@@ -238,10 +279,28 @@ class PassengerCount extends StatelessWidget {
   final String emirate;
 
   @override
-  Widget build(BuildContext context) => InfoContainer(
-    text: emirate,
-    style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
-    backgroundColor: ColorUtils.secondaryColor,
+  Widget build(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(12),
+      border: Border.all(
+        color: ColorUtils.secondaryColor.withValues(alpha: 0.35),
+      ),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: ColorUtils.secondaryColor.withValues(alpha: 0.18),
+          blurRadius: 10,
+          offset: const Offset(0, 4),
+        ),
+      ],
+    ),
+    child: Text(
+      emirate,
+      style: StyleUtils.kTextStyleSize14Weight600(
+        color: ColorUtils.secondaryColor,
+      ),
+    ),
   );
 }
 

@@ -1,5 +1,8 @@
 import "package:collect/bindings/home_bindings.dart";
 import "package:collect/bindings/login_bindings.dart";
+import "package:collect/models/task_card_model.dart";
+import "package:collect/views/collection_data/add_collection_data.dart";
+import "package:collect/views/collection_data/collection_data.dart";
 import "package:collect/views/home_screen.dart";
 import "package:collect/views/login/login.dart";
 import "package:collect/views/login/phone_verification/phone_verification_screen.dart";
@@ -32,6 +35,21 @@ class AppRouter {
       page: TermsAndConditionScreen.new,
     ),
     GetPage(name: AppRouter.contactUsScreen, page: ContactUsScreen.new),
+
+    GetPage(
+      name: AppRouter.collectionDataScreen,
+      page: () {
+        final TransferCardData data = Get.arguments as TransferCardData;
+        return CollectionData(data: data);
+      },
+    ),
+    GetPage(
+      name: AppRouter.addCollectionScreen,
+      page: () {
+        final TransferCardData data = Get.arguments as TransferCardData;
+        return AddCollectionData(data: data);
+      },
+    ),
   ];
 
   static String initialRoute = "/";
@@ -41,4 +59,6 @@ class AppRouter {
   static String notificationScreen = "/notification-screen";
   static String termsAndConditionScreen = "/terms-and-condition";
   static String contactUsScreen = "/contact-us";
+  static String collectionDataScreen = "/collection-data";
+  static String addCollectionScreen = "/add-collection";
 }

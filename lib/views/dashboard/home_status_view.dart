@@ -33,7 +33,7 @@ class HomeStatusView extends StatelessWidget {
         child: _StatusCard(
           todayCount: upcomingCount.todayCount.toString(),
           totalCount: upcomingCount.totalCount.toString(),
-          label: "upcoming".tr,
+          label: "Today".tr,
           icon: "img_upcoming",
         ),
       ),
@@ -42,7 +42,7 @@ class HomeStatusView extends StatelessWidget {
         child: _StatusCard(
           todayCount: completedCount.todayCount.toString(),
           totalCount: completedCount.totalCount.toString(),
-          label: "completed".tr,
+          label: "Total".tr,
           icon: "img_completed",
         ),
       ),
@@ -64,51 +64,74 @@ class _StatusCard extends StatelessWidget {
   final String icon;
 
   @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(8),
-    // height: 73,
-    decoration: BoxDecoration(
-      color: label == "Completed"
-          ? ColorUtils.themeColor.withValues(alpha: .8)
-          : ColorUtils.themeColor,
-      borderRadius: BorderRadius.circular(8),
-      border: Border.all(color: Colors.black.withValues(alpha: 0.10)),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+  Widget build(BuildContext context) {
+    final bool isCompletedCard = icon == "img_completed";
+    final Color accentColor = isCompletedCard
+        ? ColorUtils.secondaryColor
+        : ColorUtils.themeColor;
 
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Text(
-          label,
-          style: StyleUtils.kTextStyleSize18Weight500(color: Colors.white),
-        ),
-        5.heightBox,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            10.heightBox,
-            Column(
-              children: <Widget>[
-                _StatusText(label: "today".tr),
-                5.heightBox,
-                _StatusCount(count: todayCount, isTotal: true),
-              ],
+    return Container(
+      padding: const EdgeInsets.all(13),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: accentColor.withValues(alpha: 0.16)),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: accentColor.withValues(alpha: 0.18),
+            blurRadius: 18,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            width: 46,
+            height: 4,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              gradient: LinearGradient(
+                colors: <Color>[
+                  accentColor,
+                  accentColor.withValues(alpha: 0.4),
+                ],
+              ),
             ),
-            10.heightBox,
-            Column(
-              children: <Widget>[
-                _StatusText(label: "total".tr),
-                5.heightBox,
-                _StatusCount(count: totalCount, isTotal: false),
-              ],
+          ),
+          12.heightBox,
+          Text(
+            label,
+            style: StyleUtils.kTextStyleSize18Weight600(
+              color: ColorUtils.headingColor,
             ),
-            10.heightBox,
-          ],
-        ),
-      ],
-    ),
-  );
+          ),
+          16.heightBox,
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: _StatusCount(
+                  heading: "KG".tr,
+                  count: todayCount,
+                  isTotal: true,
+                  accentColor: accentColor,
+                ),
+              ),
+              8.widthBox,
+              _StatusCount(
+                heading: "Location".tr,
+                count: totalCount,
+                isTotal: false,
+                accentColor: accentColor,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _StatusText extends StatelessWidget {
@@ -120,33 +143,48 @@ class _StatusText extends StatelessWidget {
   Widget build(BuildContext context) => Text(
     label,
     style: StyleUtils.kTextStyleSize16Weight400(
-      color: Colors.white.withValues(alpha: 0.5),
+      color: ColorUtils.greyTextColor,
     ),
+    textAlign: TextAlign.center,
   );
 }
 
 class _StatusCount extends StatelessWidget {
-  const _StatusCount({required this.count, required this.isTotal});
+  const _StatusCount({
+    required this.count,
+    required this.isTotal,
+    required this.accentColor,
+    required this.heading,
+  });
   final bool isTotal;
-
+  final String heading;
   final String count;
+  final Color accentColor;
 
   @override
   Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 4),
-
+    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
     decoration: BoxDecoration(
-      color: ColorUtils.secondaryColor,
-      borderRadius: BorderRadius.circular(4),
-    ),
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(2),
-        child: Text(
-          Utils.replaceFarsiNumber(count),
-          style: StyleUtils.kTextStyleSize24Weight600(color: Colors.white),
-        ),
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: <Color>[
+          accentColor.withValues(alpha: isTotal ? 0.25 : 0.15),
+          Colors.white,
+        ],
       ),
+      borderRadius: BorderRadius.circular(14),
+      border: Border.all(color: accentColor.withValues(alpha: 0.2)),
+    ),
+    child: Column(
+      children: [
+        _StatusText(label: heading),
+        8.heightBox,
+        Text(
+          Utils.replaceFarsiNumber(count),
+          style: StyleUtils.kTextStyleSize24Weight600(color: accentColor),
+        ),
+      ],
     ),
   );
 }

@@ -41,129 +41,219 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: ColorUtils.whiteColor,
-    body: GestureDetector(
-      onTap: () {
-        FocusManager.instance.primaryFocus?.unfocus();
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  MediaQuery.viewPaddingOf(context).top.heightBox,
-                  16.heightBox,
-                  const Align(
-                    alignment: Alignment.topRight,
-                    child: LanguageWidegt(isHome: true),
-                  ),
-                  56.heightBox,
-                  Align(
-                    child: Hero(
-                      tag: "register",
-                      child: SvgPicture.asset(
-                        AssetUtils.getSvg("logo"),
-                        colorFilter: const ColorFilter.mode(
-                          ColorUtils.themeColor,
-                          BlendMode.srcIn,
-                        ),
-                        height: 70,
-                        width: 70,
-                      ),
-                    ),
-                  ),
-                  71.heightBox,
-                  Text(
-                    "verifyPhoneNumber".tr,
-                    style: StyleUtils.kTextStyleSize28Weight700(
-                      lettingSpace: -.4,
-                    ),
-                  ),
-                  24.heightBox,
-                  Text(
-                    "enterCodeToVerifyPhoneNumber".tr,
-                    textAlign: TextAlign.start,
-                    style: StyleUtils.kTextStyleSize16Weight400(
-                      color: ColorUtils.greyTextColor,
-                      letterSpacing: 0,
-                    ),
-                  ),
-                  24.heightBox,
-                  GestureDetector(
-                    onTap: Get.back,
-                    child: Text(
-                      "editPhoneNumber".tr,
-                      style: StyleUtils.kTextStyleSize18Weight500(
-                        color: Colors.black,
-                        isUnderline: true,
-                        letterSpacing: 0,
-                      ),
-                    ),
-                  ),
-                  24.heightBox,
-                  Align(child: OTPView(onSubmit: (String otp) {})),
-                  24.heightBox,
-                  GradientButton(
-                    text: "verifiedOTP".tr,
-                    onClick: () {
-                      controller.verifyOTP();
-                    },
-                  ),
-                  24.heightBox,
-                  Obx(
-                    () => Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "didNotReceiveCode".tr,
-                          style: StyleUtils.kTextStyleSize14Weight400(
-                            color: const Color(0xff6A707C),
+    backgroundColor: Colors.transparent,
+    body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomCenter,
+          colors: <Color>[
+            ColorUtils.themeColor,
+            const Color(0xFF1E8F87),
+            ColorUtils.scaffoldColor,
+          ],
+          stops: const <double>[0, 0.45, 1],
+        ),
+      ),
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            child: Column(
+              children: <Widget>[
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: LanguageWidegt(isHome: true),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Align(
+                        child: Hero(
+                          tag: "register",
+                          child: SvgPicture.asset(
+                            AssetUtils.getSvg("logo"),
+                            colorFilter: const ColorFilter.mode(
+                              Colors.white,
+                              BlendMode.srcIn,
+                            ),
+                            height: 80,
+                            width: 80,
                           ),
                         ),
-                        if (start.value != 0)
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Text(
-                              " ${"resendInXSec".trParams(<String, String>{'otp': start.value.toString()})}",
-                              style: StyleUtils.kTextStyleSize18Weight500(
-                                color: Colors.black,
+                      ),
+                      32.heightBox,
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 30,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(32),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.08),
+                              blurRadius: 40,
+                              offset: const Offset(0, 12),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              "verifyPhoneNumber".tr,
+                              style: StyleUtils.kTextStyleSize28Weight700(
+                                lettingSpace: -0.4,
+                                color: ColorUtils.headingColor,
                               ),
                             ),
-                          )
-                        else
-                          InkWell(
-                            onTap: () {
-                              start.value = 90;
-                              timer = Timer.periodic(
-                                const Duration(seconds: 1),
-                                (Timer timer) {
-                                  if (start.value == 0) {
-                                    timer.cancel();
-                                  } else {
-                                    start.value--;
-                                  }
-                                },
-                              );
-                            },
-                            child: Text(
-                              " ${"resendOTP".tr}",
-                              style: StyleUtils.kTextStyleSize18Weight500(
-                                color: Colors.black,
+                            12.heightBox,
+                            Text(
+                              "enterCodeToVerifyPhoneNumber".tr,
+                              style: StyleUtils.kTextStyleSize16Weight400(
+                                color: ColorUtils.greyTextColor,
+                                letterSpacing: 0,
                               ),
                             ),
-                          ),
-                      ],
-                    ),
+                            24.heightBox,
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 14,
+                              ),
+                              decoration: BoxDecoration(
+                                color: ColorUtils.scaffoldColor.withValues(
+                                  alpha: 0.6,
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    height: 36,
+                                    width: 36,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      gradient: LinearGradient(
+                                        colors: <Color>[
+                                          ColorUtils.themeColor,
+                                          const Color(0xFF1E8F87),
+                                        ],
+                                      ),
+                                    ),
+                                    child: const Icon(
+                                      Icons.lock_open_rounded,
+                                      size: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  12.widthBox,
+                                  Expanded(
+                                    child: Text(
+                                      "editPhoneNumber".tr,
+                                      style:
+                                          StyleUtils.kTextStyleSize16Weight500(
+                                            color: ColorUtils.headingColor,
+                                          ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: Get.back,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Icon(
+                                        Icons.edit_outlined,
+                                        size: 18,
+                                        color: ColorUtils.themeColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            32.heightBox,
+                            Align(child: OTPView(onSubmit: (String otp) {})),
+                            32.heightBox,
+                            GradientButton(
+                              text: "verifiedOTP".tr,
+                              onClick: controller.verifyOTP,
+                            ),
+                            24.heightBox,
+                            Obx(
+                              () => Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 14,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: ColorUtils.scaffoldColor,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                      "didNotReceiveCode".tr,
+                                      style:
+                                          StyleUtils.kTextStyleSize14Weight400(
+                                            color: ColorUtils.greyTextColor,
+                                          ),
+                                    ),
+                                    if (start.value != 0)
+                                      Text(
+                                        "${"resendInXSec".trParams(<String, String>{'otp': start.value.toString()})}",
+                                        style:
+                                            StyleUtils.kTextStyleSize16Weight600(
+                                              color: ColorUtils.headingColor,
+                                            ),
+                                      )
+                                    else
+                                      GestureDetector(
+                                        onTap: () {
+                                          start.value = 90;
+                                          timer = Timer.periodic(
+                                            const Duration(seconds: 1),
+                                            (Timer timer) {
+                                              if (start.value == 0) {
+                                                timer.cancel();
+                                              } else {
+                                                start.value--;
+                                              }
+                                            },
+                                          );
+                                        },
+                                        child: Text(
+                                          "${"resendOTP".tr}",
+                                          style:
+                                              StyleUtils.kTextStyleSize16Weight600(
+                                                color: ColorUtils.themeColor,
+                                              ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     ),
   );

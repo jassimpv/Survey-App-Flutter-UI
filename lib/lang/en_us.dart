@@ -59,4 +59,5 @@ Map<String, String> enUs = <String, String>{
   "search": "Search",
   "termsandContitions": "Terms and Conditions",
   "selectCountryCode": "Select Country Code",
+  "collectionReport": "Collection Report",
 };

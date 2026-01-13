@@ -1,3 +1,4 @@
+import "package:collect/utils/colors_utils.dart";
 import "package:collect/views/widget/custom_app_bar.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -7,7 +8,15 @@ class TermsAndConditionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      body: Column(
+    body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [ColorUtils.scaffoldColor, Colors.white],
+        ),
+      ),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           CustomAppBar(
@@ -18,11 +27,25 @@ class TermsAndConditionScreen extends StatelessWidget {
           Expanded(child: contentWidget()),
         ],
       ),
-    );
+    ),
+  );
 
-  Widget contentWidget() => const Padding(
-      padding: EdgeInsets.all(16),
-      child: SingleChildScrollView(
+  Widget contentWidget() => Padding(
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+    child: Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(28),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: ColorUtils.themeColor.withValues(alpha: 0.15),
+            blurRadius: 28,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: const SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -94,5 +117,6 @@ class TermsAndConditionScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ),
+  );
 }

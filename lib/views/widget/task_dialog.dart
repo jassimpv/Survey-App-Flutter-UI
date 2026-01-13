@@ -1,12 +1,10 @@
-import "package:collect/controller/home_controller.dart";
 import "package:collect/models/task_card_model.dart";
+import "package:collect/routes.dart";
 import "package:collect/utils/asset_utils.dart";
 import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/utils/utils_helper.dart";
-import "package:collect/views/new_sample/new_sample.dart";
-import "package:collect/views/widget/task_card.dart";
 import "package:collect/views/widget/zoom_tap.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -15,33 +13,41 @@ class TaskDialog extends StatelessWidget {
   TaskDialog({required this.data, super.key});
   final TransferCardData data;
 
-  final HomeController homeController = Get.find();
-
   @override
   Widget build(BuildContext context) => PopScope(
     canPop: false,
     child: Scaffold(
       backgroundColor: Colors.transparent,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  _buildHeader(),
-                  10.heightBox,
-                  _content(),
-                  10.heightBox,
-                  _buildActionButtons(data),
-                ],
+      body: Container(
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(32),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.15),
+                      blurRadius: 45,
+                      offset: const Offset(0, 20),
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    _buildHeader(),
+                    20.heightBox,
+                    _content(),
+                    24.heightBox,
+                    _buildActionButtons(data),
+                  ],
+                ),
               ),
             ),
           ),
@@ -51,23 +57,67 @@ class TaskDialog extends StatelessWidget {
   );
 
   Widget _buildHeader() => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      Text(
-        "Task Details",
-        style: StyleUtils.kTextStyleSize17Weight600(
-          color: Colors.black.withValues(alpha: 0.8),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              "Location Details",
+              style: StyleUtils.kTextStyleSize20Weight600(
+                color: ColorUtils.headingColor,
+              ),
+            ),
+            8.heightBox,
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: ColorUtils.scaffoldColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 16,
+                    color: ColorUtils.themeColor,
+                  ),
+                  6.widthBox,
+                  Text(
+                    data.emirate,
+                    style: StyleUtils.kTextStyleSize14Weight500(
+                      color: ColorUtils.darkBlue,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
-      Container(
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.grey.shade200,
-        ),
-        child: ZoomTapAnimation(
-          onTap: Get.back,
-          child: const Icon(Icons.close, color: Colors.black),
+      ZoomTapAnimation(
+        onTap: Get.back,
+        child: Container(
+          height: 40,
+          width: 40,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
+            ),
+            boxShadow: const <BoxShadow>[
+              BoxShadow(
+                color: Color.fromRGBO(17, 24, 39, 0.35),
+                blurRadius: 20,
+                offset: Offset(0, 10),
+              ),
+            ],
+          ),
+          child: const Icon(Icons.close, color: Colors.white),
         ),
       ),
     ],
@@ -78,11 +128,16 @@ class TaskDialog extends StatelessWidget {
     children: <Widget>[
       Text(
         data.restaurantName,
-        style: StyleUtils.kTextStyleSize14Weight600(color: _titleColor()),
+        style: StyleUtils.kTextStyleSize18Weight600(
+          color: ColorUtils.headingColor,
+        ),
       ),
+      4.heightBox,
       Text(
         data.restaurantType,
-        style: StyleUtils.kTextStyleSize14Weight500(color: ColorUtils.darkBlue),
+        style: StyleUtils.kTextStyleSize14Weight400(
+          color: ColorUtils.greyTextColor,
+        ),
       ),
     ],
   );
@@ -90,82 +145,113 @@ class TaskDialog extends StatelessWidget {
   Widget _content() => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      10.heightBox,
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Row(
-            children: <Widget>[_buildIcon(), 8.widthBox, _buildTransferInfo()],
-          ),
-
-          Row(
-            children: <Widget>[
-              _buildActionIcon(
-                onTap: () => Utils.openMap(<String?>["25.2048", "55.2708"]),
-                assetName: "ic_location",
-                iconColor: _titleColor(),
-              ),
-              8.widthBox,
-              _buildActionIcon(
-                onTap: () => Utils.dail("1234567890"),
-                assetName: "ic_call",
-                iconColor: _titleColor(),
-              ),
-            ],
-          ),
-        ],
-      ),
-      10.heightBox,
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  const Icon(
-                    Icons.location_on,
-                    color: ColorUtils.darkBlue,
-                    size: 16,
-                  ),
-                  8.widthBox,
-                  Text(
-                    data.restaurantAddress,
-                    style: StyleUtils.kTextStyleSize12Weight500(
-                      color: ColorUtils.darkBlue.withValues(alpha: 0.8),
+      Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: ColorUtils.scaffoldColor.withValues(alpha: 0.9),
+          borderRadius: BorderRadius.circular(28),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(child: _buildTransferInfo()),
+                Row(
+                  children: <Widget>[
+                    _buildActionIcon(
+                      onTap: () =>
+                          Utils.openMap(<String?>["25.2048", "55.2708"]),
+                      icon: Icons.location_on,
+                      iconColor: Colors.white,
                     ),
-                  ),
-                ],
-              ),
-              10.heightBox,
-              _buildLocationText("lastVisited", data.lastVistedDate.createdAt),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              PassengerCount(emirate: data.emirate),
-              5.heightBox,
-              Row(
-                children: <Widget>[
-                  Image.asset(
-                    AssetUtils.getIcons("ic_ride_list"),
-                    height: 24,
-                    color: _titleColor(),
-                  ),
-                  10.widthBox,
-                  Text(
-                    data.distance,
-                    style: StyleUtils.kTextStyleSize12Weight500(
-                      color: ColorUtils.darkBlue.withValues(alpha: 0.8),
+                    12.widthBox,
+                    _buildActionIcon(
+                      onTap: () => Utils.dail("1234567890"),
+                      icon: Icons.call,
+                      iconColor: Colors.white,
                     ),
+                  ],
+                ),
+              ],
+            ),
+            20.heightBox,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Icon(
+                            Icons.location_on,
+                            color: ColorUtils.darkBlue,
+                            size: 18,
+                          ),
+                          8.widthBox,
+                          Expanded(
+                            child: Text(
+                              data.restaurantAddress,
+                              style: StyleUtils.kTextStyleSize14Weight500(
+                                color: ColorUtils.darkBlue.withValues(
+                                  alpha: 0.85,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      12.heightBox,
+                      _buildLocationText(
+                        "lastVisited",
+                        data.lastVistedDate.createdAt,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                ),
+                16.widthBox,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.white,
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Image.asset(
+                            AssetUtils.getIcons("ic_ride_list"),
+                            height: 24,
+                            color: ColorUtils.themeColor,
+                          ),
+                          8.widthBox,
+                          Text(
+                            data.distance,
+                            style: StyleUtils.kTextStyleSize14Weight500(
+                              color: ColorUtils.darkBlue.withValues(
+                                alpha: 0.85,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     ],
   );
@@ -186,55 +272,68 @@ class TaskDialog extends StatelessWidget {
     ],
   );
 
-  Color _titleColor() => ColorUtils.black;
-
-  Widget _buildIcon() => Container(
-    height: 32,
-    width: 32,
-    decoration: BoxDecoration(
-      color: ColorUtils.black,
-      borderRadius: BorderRadius.circular(4),
-    ),
-    child: const Icon(Icons.restaurant, color: ColorUtils.whiteColor, size: 16),
-  );
-
   Widget _buildActionButtons(TransferCardData data) => Row(
     children: <Widget>[
       Expanded(
-        child: SizedBox(
-          height: 56,
-          child: ElevatedButton(
-            onPressed: () {
-              Get.to(FoodWasteQuestionnaire(data: data));
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorUtils.themeColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
+        child: ZoomTapAnimation(
+          onTap: () =>
+              Get.toNamed(AppRouter.collectionDataScreen, arguments: data),
+          child: Container(
+            height: 56,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+              border: Border.all(color: ColorUtils.themeColor, width: 1.5),
+              boxShadow: const <BoxShadow>[
+                BoxShadow(
+                  color: Color.fromRGBO(15, 23, 42, 0.08),
+                  blurRadius: 18,
+                  offset: Offset(0, 8),
+                ),
+              ],
             ),
-            child: Text(
-              "New Sample",
-              style: StyleUtils.kTextStyleSize18Weight400(color: Colors.white),
+            child: Center(
+              child: Text(
+                "View Collection History",
+                style: StyleUtils.kTextStyleSize16Weight600(
+                  color: ColorUtils.themeColor,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ),
       ),
-      6.widthBox,
+      12.widthBox,
       Expanded(
-        child: SizedBox(
-          height: 56,
-          child: OutlinedButton(
-            onPressed: Get.back,
-            style: OutlinedButton.styleFrom(
-              side: const BorderSide(color: Colors.red),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
+        child: ZoomTapAnimation(
+          onTap: () =>
+              Get.toNamed(AppRouter.addCollectionScreen, arguments: data),
+          child: Container(
+            height: 56,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              gradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
               ),
+              boxShadow: const <BoxShadow>[
+                BoxShadow(
+                  color: Color.fromRGBO(15, 23, 42, 0.25),
+                  blurRadius: 25,
+                  offset: Offset(0, 12),
+                ),
+              ],
             ),
-            child: Text(
-              "Delete",
-              style: StyleUtils.kTextStyleSize18Weight400(color: Colors.red),
+            child: Center(
+              child: Text(
+                "Record New Collection",
+                style: StyleUtils.kTextStyleSize16Weight600(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ),
@@ -244,24 +343,28 @@ class TaskDialog extends StatelessWidget {
 
   Widget _buildActionIcon({
     required VoidCallback? onTap,
-    required String assetName,
+    required IconData icon,
     Color iconColor = ColorUtils.themeColor,
   }) => ZoomTapAnimation(
     onTap: onTap,
     child: Container(
-      height: 32,
-      width: 32,
-      padding: const EdgeInsets.all(5),
-      decoration: const BoxDecoration(
-        color: Color(0xffEDF1FB),
+      height: 30,
+      width: 30,
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
         shape: BoxShape.circle,
+        gradient: const LinearGradient(
+          colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
+        ),
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
+            color: Color.fromRGBO(15, 23, 42, 0.15),
+            blurRadius: 18,
+            offset: Offset(0, 8),
+          ),
+        ],
       ),
-      child: Image.asset(
-        AssetUtils.getIcons(assetName),
-        color: iconColor,
-        height: 22,
-        width: 22,
-      ),
+      child: Icon(icon, color: iconColor, size: 15),
     ),
   );
 }

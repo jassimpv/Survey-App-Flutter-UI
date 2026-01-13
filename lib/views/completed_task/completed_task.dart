@@ -3,9 +3,8 @@ import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/views/completed_task/filter_bottom_sheet.dart";
-import "package:collect/views/completed_task/tabview_widget.dart";
 import "package:collect/views/widget/custom_app_bar.dart";
-import "package:collect/views/widget/survey_card.dart";
+import "package:collect/views/widget/task_card.dart";
 import "package:collect/views/widget/zoom_tap.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -19,89 +18,123 @@ class CompletedTask extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GestureDetector(
     onTap: () => FocusScope.of(context).unfocus(),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        CustomAppBar(
-          title: "taskList".tr,
-          tabBar: Obx(
-            () => CompletedListTabView(
-              selectedIndex: controller.selectedTab.value,
-              onTabSelect: (int tabIndex) {},
-            ),
-          ),
+    child: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [ColorUtils.scaffoldColor, Colors.white],
         ),
-        8.heightBox,
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            children: <Widget>[
-              SizedBox(
-                height: 44,
-                width: Get.width - 84,
-                child: TextFormField(
-                  controller: controller.searchController,
-                  decoration: StyleUtils.inputDecoration(
-                    hintText: "search".tr,
-                    labelText: "search".tr,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          CustomAppBar(
+            title: "Collection Report".tr,
+            // tabBar: Obx(
+            //   () => CompletedListTabView(
+            //     selectedIndex: controller.selectedTab.value,
+            //     onTabSelect: (int tabIndex) {},
+            //   ),
+            // ),
+          ),
+          16.heightBox,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: ColorUtils.themeColor.withValues(alpha: 0.08),
+                    blurRadius: 24,
+                    offset: const Offset(0, 4),
                   ),
-                  onChanged: (String value) {},
-                ),
+                ],
               ),
-              12.widthBox,
-              ZoomTapAnimation(
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                  Get.bottomSheet(
-                    FilterBottomSheet(),
-                    isDismissible: false,
-                    useRootNavigator: true,
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16),
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: TextFormField(
+                      controller: controller.searchController,
+                      decoration: StyleUtils.inputDecoration(
+                        hintText: "search".tr,
+                        labelText: "search".tr,
                       ),
-                    ),
-                  );
-                },
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: ColorUtils.whiteColor,
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(
-                      color: Colors.black.withValues(alpha: 0.1),
+                      onChanged: (String value) {},
                     ),
                   ),
-                  child: const Center(child: Icon(Icons.filter_list, size: 24)),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
-          child: _searchItem(),
-        ),
-        Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: controller.data.length,
-            padding: const EdgeInsets.symmetric(vertical: 5),
-            itemBuilder: (BuildContext context, int index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-              child: SurveyCard(
-                bookingData: controller.data[index],
-                isFromList: true,
-                currentStatus: "upcoming",
+                  12.widthBox,
+                  ZoomTapAnimation(
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      Get.bottomSheet(
+                        FilterBottomSheet(),
+                        isDismissible: false,
+                        useRootNavigator: true,
+                        backgroundColor: Colors.transparent,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(28),
+                            topRight: Radius.circular(28),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 44,
+                      height: 44,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: <Color>[
+                            ColorUtils.themeColor,
+                            ColorUtils.themeColor.withValues(alpha: 0.8),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: ColorUtils.themeColor.withValues(
+                              alpha: 0.25,
+                            ),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(Icons.filter_list, color: Colors.white),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
+            child: _searchItem(),
+          ),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: controller.data.length,
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              itemBuilder: (BuildContext context, int index) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 6,
+                ),
+                child: TaskCard(
+                  bookingData: controller.data[index],
+                  isFromList: true,
+                  currentStatus: "upcoming",
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     ),
   );
 
@@ -163,34 +196,43 @@ class CompletedTask extends StatelessWidget {
         ),
       );
     }
-
-    return Row(children: filterChips);
+    if (filterChips.isEmpty) {
+      return SizedBox.shrink();
+    }
+    return SizedBox(
+      height: 35,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(children: filterChips),
+      ),
+    );
   });
 
   Widget _buildFilterChip({
     required String text,
     required VoidCallback onClose,
   }) => Container(
-    height: 24,
-    padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-    margin: const EdgeInsets.only(right: 8),
+    height: 32,
+    padding: const EdgeInsets.symmetric(horizontal: 12),
+    margin: const EdgeInsets.only(right: 10),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8),
-      color: const Color(0xFF3C65F2).withValues(alpha: 0.1),
+      color: ColorUtils.themeColor.withValues(alpha: 0.08),
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: ColorUtils.themeColor.withValues(alpha: 0.2)),
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Text(
           text.tr,
-          style: StyleUtils.kTextStyleSize12Weight400(
-            color: const Color(0xFF3C65F2),
+          style: StyleUtils.kTextStyleSize12Weight500(
+            color: ColorUtils.themeColor,
           ),
         ),
-        7.widthBox,
+        8.widthBox,
         ZoomTapAnimation(
           onTap: onClose,
-          child: const Icon(Icons.close, size: 16, color: Color(0xFF3C65F2)),
+          child: Icon(Icons.close, size: 16, color: ColorUtils.themeColor),
         ),
       ],
     ),

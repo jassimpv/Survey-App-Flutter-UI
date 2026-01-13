@@ -39,17 +39,19 @@ class _RideListTabViewState extends State<CompletedListTabView> {
   @override
   Widget build(BuildContext context) => Obx(
     () => Container(
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(6),
-        border: Border.all(color: Colors.black.withValues(alpha: 0.05)),
-        color: ColorUtils.whiteColor,
+        color: ColorUtils.scaffoldColor,
+        borderRadius: BorderRadius.circular(24),
+        border: Border.all(
+          color: ColorUtils.themeColor.withValues(alpha: 0.12),
+        ),
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         controller: scrollController,
         child: Row(
-          spacing: 8,
+          spacing: 10,
           children: <Widget>[
             for (int index = 0; index < controller.tabList.length; index++)
               AutoScrollTag(
@@ -90,19 +92,36 @@ class TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GestureDetector(
-    onTap: () {
-      onTap?.call();
-    },
-    child: Container(
-      height: 32,
-      padding: const EdgeInsets.symmetric(horizontal: 5.8),
-      decoration: StyleUtils.cardViewSmall(isSelected: isSelected),
+    onTap: () => onTap?.call(),
+    child: AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+      height: 36,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: isSelected ? Colors.white : Colors.transparent,
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: isSelected
+              ? ColorUtils.themeColor.withValues(alpha: 0.4)
+              : ColorUtils.themeColor.withValues(alpha: 0.2),
+        ),
+        boxShadow: isSelected
+            ? <BoxShadow>[
+                BoxShadow(
+                  color: ColorUtils.themeColor.withValues(alpha: 0.18),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ]
+            : null,
+      ),
       child: Center(
         child: Text(
           title,
-          style: StyleUtils.kTextStyleSize14Weight500(
+          style: StyleUtils.kTextStyleSize14Weight600(
             color: isSelected
-                ? ColorUtils.whiteColor
+                ? ColorUtils.themeColor
                 : ColorUtils.themeTextColor,
           ),
         ),

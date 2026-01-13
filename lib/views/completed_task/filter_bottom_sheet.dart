@@ -15,73 +15,98 @@ class FilterBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) => PopScope(
     canPop: false,
-    child: Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "filter".tr,
-                style: StyleUtils.kTextStyleSize18Weight500(
-                  color: ColorUtils.black,
-                ),
-              ),
-              DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey.shade200,
-                ),
-                child: IconButton(
-                  icon: const Icon(Icons.close, color: Colors.black),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ),
-            ],
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(32),
+          topRight: Radius.circular(32),
+        ),
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.1),
+            blurRadius: 30,
+            offset: const Offset(0, -4),
           ),
-          16.heightBox,
-          Row(
-            children: <Widget>[
-              _buildDatePicker(context, true),
-              10.widthBox,
-              _buildDatePicker(context, false),
-            ],
-          ),
-          // 16.heightBox,
-          // ...controller.filterItems.map((item) {
-          //   return _buildCheckboxListTile(
-          //     item["value"]!,
-          //     item["title"]!,
-          //     item["icon"]!,
-          //   );
-          // }),
-          20.heightBox,
-          ZoomTapAnimation(
-            onTap: () {
-              Get.back();
-            },
-            child: Container(
-              width: MediaQuery.of(context).size.width - 10,
-              height: 56,
-              padding: const EdgeInsets.all(10),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Container(
+              height: 4,
+              width: 56,
               decoration: BoxDecoration(
-                color: ColorUtils.themeColor,
-                borderRadius: BorderRadius.circular(8),
+                color: ColorUtils.themeColor.withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(2),
               ),
-              child: Center(
-                child: Text(
-                  "applyFilter".tr,
-                  style: StyleUtils.kTextStyleSize18Weight400(
-                    color: ColorUtils.whiteColor,
+            ),
+            16.heightBox,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "filter".tr,
+                  style: StyleUtils.kTextStyleSize18Weight600(
+                    color: ColorUtils.headingColor,
+                  ),
+                ),
+                DecoratedBox(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: ColorUtils.scaffoldColor,
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.close, color: Colors.black),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                ),
+              ],
+            ),
+            20.heightBox,
+            Row(
+              children: <Widget>[
+                _buildDatePicker(context, true),
+                12.widthBox,
+                _buildDatePicker(context, false),
+              ],
+            ),
+            24.heightBox,
+            ZoomTapAnimation(
+              onTap: Get.back,
+              child: Container(
+                width: double.infinity,
+                height: 56,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      ColorUtils.themeColor,
+                      ColorUtils.themeColor.withValues(alpha: 0.85),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: ColorUtils.themeColor.withValues(alpha: 0.2),
+                      blurRadius: 20,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: Text(
+                    "applyFilter".tr,
+                    style: StyleUtils.kTextStyleSize18Weight500(
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          15.heightBox,
-        ],
+          ],
+        ),
       ),
     ),
   );
@@ -91,19 +116,36 @@ class FilterBottomSheet extends StatelessWidget {
       onTap: () => controller.pickDate(context, isStart),
       child: Obx(
         () => Container(
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: ColorUtils.themeColor.withValues(alpha: 0.2),
+            ),
+            color: ColorUtils.scaffoldColor,
           ),
           child: Row(
             children: <Widget>[
-              Image.asset(
-                AssetUtils.getIcons("ic_filter_calendar_blank"),
-                height: 18,
-                width: 18,
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.05),
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Image.asset(
+                  AssetUtils.getIcons("ic_filter_calendar_blank"),
+                  height: 18,
+                  width: 18,
+                ),
               ),
-              8.widthBox,
+              12.widthBox,
               Text(
                 isStart
                     ? (controller.startDate.value != null
@@ -116,8 +158,8 @@ class FilterBottomSheet extends StatelessWidget {
                               "dd/MM/yyyy",
                             ).format(controller.endDate.value!)
                           : "end_date".tr),
-                style: StyleUtils.kTextStyleSize14Weight400(
-                  color: ColorUtils.black,
+                style: StyleUtils.kTextStyleSize14Weight500(
+                  color: ColorUtils.headingColor,
                 ),
               ),
             ],

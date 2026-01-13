@@ -14,222 +14,253 @@ class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: <Widget>[
-      CustomAppBar(title: "profile".tr),
-      Expanded(child: _buildProfileContent(context)),
-    ],
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [ColorUtils.scaffoldColor, Colors.white],
+      ),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        CustomAppBar(title: "profile".tr),
+        Expanded(child: _buildProfileContent(context)),
+      ],
+    ),
   );
 
   Widget _buildProfileContent(BuildContext context) =>
       GetBuilder<ProfileController>(
         init: Get.put<ProfileController>(ProfileController()),
-        initState: (GetBuilderState<ProfileController> state) {
-          // controller.getProfile();
-        },
-        builder: (_) => Padding(
-          padding: const EdgeInsets.all(16),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.black.withValues(alpha: 0.1)),
-              color: Colors.white,
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
-                  blurRadius: 4,
-                  offset: const Offset(0, 4),
+        builder: (_) => SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[Colors.white, ColorUtils.scaffoldColor],
+                  ),
+                  borderRadius: BorderRadius.circular(32),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.3),
+                  ),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: ColorUtils.themeColor.withValues(alpha: 0.15),
+                      blurRadius: 30,
+                      offset: const Offset(0, 12),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            child: Column(
-              children: <Widget>[
-                12.heightBox,
-                _buildProfileCard(),
-                12.heightBox,
-                _buildSupervisorCard(),
-                Divider(color: Colors.black.withValues(alpha: 0.1)),
-                12.heightBox,
-                _buildInfoContainer(context),
-                const Spacer(),
-                _buildFooter(),
-              ],
-            ),
+                child: Column(
+                  children: <Widget>[
+                    _buildProfileCard(),
+                    16.heightBox,
+                    _buildStatsRow(),
+                  ],
+                ),
+              ),
+              20.heightBox,
+              _buildSupervisorCard(),
+              20.heightBox,
+              _buildInfoContainer(context),
+              20.heightBox,
+              _buildFooter(),
+            ],
           ),
         ),
       );
 
-  Widget _buildProfileCard() => Padding(
-    padding: const EdgeInsets.all(16),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Container(
-              width: 60,
-              height: 60,
-              decoration: const ShapeDecoration(
-                shape: CircleBorder(
-                  side: BorderSide(color: ColorUtils.themeColor),
-                ),
-              ),
-              child: const ClipOval(
-                child: Icon(
-                  CupertinoIcons.person, // Placeholder for profile image
-                  size: 40,
-                  color: ColorUtils.themeColor,
-                ),
-              ),
-            ),
-            12.widthBox,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  "Jassim",
-                  style: StyleUtils.kTextStyleSize24Weight500(
-                    color: Colors.black,
-                  ),
-                ),
-                4.heightBox,
-                Text(
-                  "123456789",
-                  style: StyleUtils.kTextStyleSize12Weight400(
-                    color: const Color(0xff667085),
-                  ),
-                ),
-                4.heightBox,
-                Text(
-                  "test@email.com",
-                  style: StyleUtils.kTextStyleSize12Weight400(
-                    color: const Color(0xff667085),
-                  ),
-                ),
-              ],
+  Widget _buildProfileCard() => Row(
+    children: <Widget>[
+      Container(
+        height: 72,
+        width: 72,
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: <Color>[
+              ColorUtils.themeColor,
+              ColorUtils.themeColor.withValues(alpha: 0.6),
+            ],
+          ),
+          shape: BoxShape.circle,
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: ColorUtils.themeColor.withValues(alpha: 0.35),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
             ),
           ],
         ),
-        16.heightBox,
-        Row(
+        child: const CircleAvatar(
+          backgroundColor: Colors.white,
+          child: Icon(CupertinoIcons.person, color: ColorUtils.themeColor),
+        ),
+      ),
+      16.widthBox,
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            infoCard(
-              "your_tasks".tr,
-              "0",
-              ColorUtils.secondaryColor.withValues(alpha: 0.8),
+            Text(
+              "Jassim",
+              style: StyleUtils.kTextStyleSize24Weight500(
+                color: ColorUtils.headingColor,
+              ),
             ),
-            8.widthBox,
-            infoCard(
-              "your_locations".tr,
-              "0",
-              ColorUtils.secondaryColor.withValues(alpha: 0.8),
+            4.heightBox,
+            Text(
+              "123456789",
+              style: StyleUtils.kTextStyleSize14Weight400(
+                color: ColorUtils.greyTextColor,
+              ),
+            ),
+            2.heightBox,
+            Text(
+              "test@email.com",
+              style: StyleUtils.kTextStyleSize14Weight400(
+                color: ColorUtils.greyTextColor,
+              ),
             ),
           ],
+        ),
+      ),
+      IconButton(
+        icon: const Icon(Icons.edit_outlined, color: ColorUtils.themeColor),
+        onPressed: () {},
+      ),
+    ],
+  );
+
+  Widget _buildStatsRow() => Row(
+    children: <Widget>[
+      infoCard("Total Weight".tr, "12 KG"),
+      12.widthBox,
+      infoCard("Total Locations".tr, "05"),
+    ],
+  );
+
+  Widget _buildInfoContainer(BuildContext context) => Container(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(24),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: ColorUtils.themeColor.withValues(alpha: 0.08),
+          blurRadius: 20,
+          offset: const Offset(0, 6),
+        ),
+      ],
+    ),
+    child: Column(
+      children: <Widget>[
+        ZoomTapAnimation(
+          onTap: () => Get.toNamed(AppRouter.contactUsScreen),
+          child: _buildInfoRow(Icons.contact_emergency, "contact_us".tr),
+        ),
+        _divider(),
+        ZoomTapAnimation(
+          onTap: () => Get.toNamed(AppRouter.termsAndConditionScreen),
+          child: _buildInfoRow(Icons.notes, "terms_and_condition".tr),
+        ),
+        _divider(),
+        ZoomTapAnimation(
+          onTap: () async {
+            await _showConfirmationDeleteDialog(context);
+          },
+          child: _buildInfoRow(
+            Icons.delete,
+            "deleteAccount".tr,
+            color: ColorUtils.red,
+          ),
+        ),
+        _divider(),
+        ZoomTapAnimation(
+          onTap: () async {
+            await _showConfirmationLogoutDialog(context);
+          },
+          child: _buildInfoRow(
+            Icons.logout,
+            "logout".tr,
+            color: ColorUtils.red,
+          ),
         ),
       ],
     ),
   );
 
-  Widget _buildInfoContainer(BuildContext context) => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      ZoomTapAnimation(
-        onTap: () => Get.toNamed(AppRouter.contactUsScreen),
-        child: _buildInfoRow(Icons.contact_emergency, "contact_us".tr),
+  Widget _buildSupervisorCard() => Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: <Color>[
+          ColorUtils.themeColor.withValues(alpha: 0.1),
+          Colors.white,
+        ],
       ),
-      Divider(color: Colors.black.withValues(alpha: 0.1)),
-      ZoomTapAnimation(
-        onTap: () => Get.toNamed(AppRouter.termsAndConditionScreen),
-        child: _buildInfoRow(Icons.notes, "terms_and_condition".tr),
-      ),
-      Divider(color: Colors.black.withValues(alpha: 0.1)),
-      ZoomTapAnimation(
-        onTap: () async {
-          await _showConfirmationDeleteDialog(context);
-        },
-        child: _buildInfoRow(
-          Icons.delete,
-          "deleteAccount".tr,
-          color: Colors.red,
+      borderRadius: BorderRadius.circular(28),
+      border: Border.all(color: ColorUtils.themeColor.withValues(alpha: 0.2)),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: ColorUtils.themeColor.withValues(alpha: 0.12),
+          blurRadius: 18,
+          offset: const Offset(0, 6),
         ),
-      ),
-      Divider(color: Colors.black.withValues(alpha: 0.1)),
-      ZoomTapAnimation(
-        onTap: () async {
-          await _showConfirmationLogoutDialog(context);
-        },
-        child: _buildInfoRow(Icons.logout, "logout".tr, color: Colors.red),
-      ),
-    ],
-  );
-
-  Widget _buildSupervisorCard() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              width: 60,
-              height: 60,
-              decoration: const ShapeDecoration(
-                shape: CircleBorder(
-                  side: BorderSide(color: ColorUtils.themeColor),
+      ],
+    ),
+    child: Row(
+      children: <Widget>[
+        Container(
+          width: 56,
+          height: 56,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: ColorUtils.themeColor,
+          ),
+          child: const Icon(
+            CupertinoIcons.person,
+            color: Colors.white,
+            size: 30,
+          ),
+        ),
+        12.widthBox,
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "yourSupervisor".tr,
+                style: StyleUtils.kTextStyleSize14Weight400(
+                  color: ColorUtils.greyTextColor,
                 ),
               ),
-              child: const ClipOval(
-                child: Icon(
-                  CupertinoIcons.person, // Placeholder for profile image
-                  size: 40,
-                  color: ColorUtils.themeColor,
+              4.heightBox,
+              Text(
+                "MOHAMMED",
+                style: StyleUtils.kTextStyleSize18Weight600(
+                  color: ColorUtils.headingColor,
                 ),
               ),
-            ),
-            8.widthBox,
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "yourSupervisor".tr,
-                    style: StyleUtils.kTextStyleSize14Weight400(
-                      color: const Color(0xff667085),
-                    ),
-                  ),
-                  2.heightBox,
-                  Text(
-                    "MOHAMMED",
-                    style: StyleUtils.kTextStyleSize18Weight500(
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.call, color: ColorUtils.themeColor),
-              onPressed: () async {
-                await Utils.dail(
-                  "123456789",
-                ); // Replace with actual phone number
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.message, color: ColorUtils.themeColor),
-              onPressed: () async {
-                // Implement call functionality her
-                await Utils.sendMessage(
-                  "123456789",
-                ); // Replace with actual phone number
-              },
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    ],
+        _contactIcon(icon: Icons.call, onTap: () => Utils.dail("123456789")),
+        8.widthBox,
+        _contactIcon(
+          icon: Icons.message,
+          onTap: () => Utils.sendMessage("123456789"),
+        ),
+      ],
+    ),
   );
 
   Widget _buildInfoRow(
@@ -237,36 +268,40 @@ class ProfileScreen extends GetView<ProfileController> {
     String text, {
     Color color = ColorUtils.themeColor,
   }) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
     child: Row(
       children: <Widget>[
         Container(
-          width: 32,
-          height: 32,
-          decoration: BoxDecoration(shape: BoxShape.circle, color: color),
-          child: Center(child: Icon(icon, size: 20, color: Colors.white)),
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: <Color>[color.withValues(alpha: 0.15), Colors.white],
+            ),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, size: 22, color: color),
         ),
-        8.widthBox,
-        Text(
-          text,
-          style: StyleUtils.kTextStyleSize18Weight500(color: Colors.black),
+        12.widthBox,
+        Expanded(
+          child: Text(
+            text,
+            style: StyleUtils.kTextStyleSize18Weight500(
+              color: ColorUtils.headingColor,
+            ),
+          ),
         ),
-        const Spacer(),
-        Icon(Icons.arrow_forward_ios, color: color, size: 20),
+        Icon(Icons.arrow_forward_ios, color: color, size: 18),
       ],
     ),
   );
 
   Widget _buildFooter() => Obx(
-    () => Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Text(
-          controller.buildInfo.value,
-          style: StyleUtils.kTextStyleSize12Weight400(
-            color: const Color(0xff667085),
-          ),
+    () => Center(
+      child: Text(
+        controller.buildInfo.value,
+        style: StyleUtils.kTextStyleSize12Weight400(
+          color: ColorUtils.greyTextColor,
         ),
       ),
     ),
@@ -347,27 +382,66 @@ class ProfileScreen extends GetView<ProfileController> {
     ),
   );
 
-  Widget infoCard(String title, String value, Color color) => Expanded(
+  Widget infoCard(String title, String value) => Expanded(
     child: Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
       decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(12),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: <Color>[
+            ColorUtils.themeColor.withValues(alpha: 0.15),
+            Colors.white,
+          ],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: ColorUtils.themeColor.withValues(alpha: 0.2)),
       ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             title,
-            style: StyleUtils.kTextStyleSize16Weight600(color: Colors.white),
+            style: StyleUtils.kTextStyleSize14Weight400(
+              color: ColorUtils.greyTextColor,
+            ),
           ),
-          const Spacer(),
-
+          6.heightBox,
           Text(
-            10.toString(),
-            style: StyleUtils.kTextStyleSize24Weight500(color: Colors.white),
+            value,
+            style: StyleUtils.kTextStyleSize24Weight600(
+              color: ColorUtils.headingColor,
+            ),
           ),
         ],
       ),
     ),
   );
+
+  Widget _divider() => Container(
+    height: 1,
+    margin: const EdgeInsets.symmetric(horizontal: 20),
+    color: ColorUtils.themeColor.withValues(alpha: 0.08),
+  );
+
+  Widget _contactIcon({required IconData icon, required VoidCallback onTap}) =>
+      ZoomTapAnimation(
+        onTap: onTap,
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: ColorUtils.themeColor.withValues(alpha: 0.12),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Icon(icon, color: ColorUtils.themeColor),
+        ),
+      );
 }

@@ -16,95 +16,106 @@ class DashboardScreen extends GetView<HomeController> {
   final RefreshController refreshController = RefreshController();
 
   @override
-  Widget build(BuildContext context) => Column(
-    children: <Widget>[
-      const HomeHeader(),
-      Expanded(
-        child: SmartRefresher(
-          header: const WaterDropMaterialHeader(
-            backgroundColor: ColorUtils.themeColor,
-          ),
-          controller: refreshController,
-          onRefresh: () {
-            Future.delayed(
-              const Duration(seconds: 1),
-              refreshController.refreshCompleted,
-            );
-          },
-          footer: const WaterDropHeader(),
-          onLoading: () {},
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  12.heightBox,
-                  HomeStatusView(
-                    upcomingCount: Complete(todayCount: 10, totalCount: 20),
-                    completedCount: Complete(todayCount: 10, totalCount: 20),
-                  ),
-                  12.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[_label("nextTask".tr)],
-                  ),
-                  TaskCard(
-                    bookingData: controller.data[1],
-                    isNext: true,
-                    currentStatus: "next",
-                  ),
-                  12.heightBox,
-                  _label("upcomingTasks".tr),
-                  if (controller.data.isNotEmpty) ...<Widget>[
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: Colors.black.withValues(alpha: 0.10),
-                        ),
-                        color: Colors.white,
-                      ),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller.data.length,
-                        padding: const EdgeInsets.symmetric(vertical: 5),
-                        itemBuilder: (BuildContext context, int index) =>
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 5,
+  Widget build(BuildContext context) => Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [ColorUtils.scaffoldColor, Colors.white],
+      ),
+    ),
+    child: Column(
+      children: <Widget>[
+        const HomeHeader(),
+        Expanded(
+          child: SmartRefresher(
+            header: WaterDropMaterialHeader(
+              backgroundColor: ColorUtils.themeColor,
+              color: Colors.white,
+            ),
+            controller: refreshController,
+            onRefresh: () {
+              Future.delayed(
+                const Duration(seconds: 1),
+                refreshController.refreshCompleted,
+              );
+            },
+            footer: const WaterDropHeader(),
+            onLoading: () {},
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    20.heightBox,
+                    HomeStatusView(
+                      upcomingCount: Complete(todayCount: 10, totalCount: 20),
+                      completedCount: Complete(todayCount: 10, totalCount: 20),
+                    ),
+                    24.heightBox,
+                    _label("Near By".tr),
+                    12.heightBox,
+                    TaskCard(
+                      bookingData: controller.data[1],
+                      isNext: true,
+                      currentStatus: "next",
+                    ),
+                    // 24.heightBox,
+                    // _label("upcomingTasks".tr),
+                    12.heightBox,
+                    if (controller.data.isNotEmpty) ...<Widget>[
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: ColorUtils.themeColor.withValues(
+                                alpha: 0.08,
                               ),
-                              child: TaskCard(
-                                bookingData: controller.data[index],
-                                isFromList: true,
-                                currentStatus: "upcoming",
-                              ),
+                              blurRadius: 20,
+                              offset: const Offset(0, 4),
+                              spreadRadius: 0,
                             ),
+                          ],
+                        ),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.data.length,
+                          padding: const EdgeInsets.all(12),
+                          itemBuilder: (BuildContext context, int index) =>
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 12),
+                                child: TaskCard(
+                                  bookingData: controller.data[index],
+                                  isFromList: true,
+                                  currentStatus: "upcoming",
+                                ),
+                              ),
+                        ),
                       ),
-                    ),
-                  ] else
-                    NoData(
-                      text: "noUpcomingTrip".tr,
-                      subText: "noUpcomingTripsPlannedYet".tr,
-                      withImage: true,
-                    ),
-                  12.heightBox,
-                ],
+                    ] else
+                      NoData(
+                        text: "noUpcomingTrip".tr,
+                        subText: "noUpcomingTripsPlannedYet".tr,
+                        withImage: true,
+                      ),
+                    24.heightBox,
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),
-    ],
+      ],
+    ),
   );
 
-  Widget _label(String text) => Column(
-    children: <Widget>[
-      Text(text, style: StyleUtils.kTextStyleSize20Weight500()),
-      8.heightBox,
-    ],
+  Widget _label(String text) => Text(
+    text,
+    style: StyleUtils.kTextStyleSize20Weight500(color: ColorUtils.headingColor),
   );
 }
 
@@ -169,16 +180,28 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
   }
 
   Widget _buildTimeBox(String time) => Container(
-    height: 24,
-    width: 24,
+    height: 32,
+    width: 32,
     decoration: BoxDecoration(
-      color: const Color(0xff3C65F2),
-      borderRadius: BorderRadius.circular(4),
+      gradient: LinearGradient(
+        colors: <Color>[
+          ColorUtils.themeColor.withValues(alpha: 0.7),
+          ColorUtils.scaffoldColor,
+        ],
+      ),
+      borderRadius: BorderRadius.circular(8),
+      boxShadow: [
+        BoxShadow(
+          color: ColorUtils.themeColor.withValues(alpha: 0.15),
+          blurRadius: 8,
+          offset: const Offset(0, 2),
+        ),
+      ],
     ),
     child: Center(
       child: Text(
         time,
-        style: StyleUtils.kTextStyleSize12Weight500(color: Colors.white),
+        style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
       ),
     ),
   );
@@ -197,35 +220,49 @@ class NoData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(12),
+    padding: const EdgeInsets.all(24),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: Colors.black.withValues(alpha: 0.10)),
+      borderRadius: BorderRadius.circular(20),
       color: Colors.white,
+      boxShadow: [
+        BoxShadow(
+          color: ColorUtils.themeColor.withValues(alpha: 0.08),
+          blurRadius: 20,
+          offset: const Offset(0, 4),
+        ),
+      ],
     ),
     child: withImage
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset(
-                "assets/images/ic_no_data.png",
-                height: 40,
-                width: 60,
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: ColorUtils.scaffoldColor,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Image.asset(
+                  "assets/images/ic_no_data.png",
+                  height: 48,
+                  width: 64,
+                ),
               ),
-              8.heightBox,
+              16.widthBox,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     text,
-                    style: StyleUtils.kTextStyleSize14Weight500(
-                      color: Colors.black,
+                    style: StyleUtils.kTextStyleSize16Weight600(
+                      color: ColorUtils.headingColor,
                     ),
                   ),
+                  4.heightBox,
                   Text(
                     subText,
                     style: StyleUtils.kTextStyleSize14Weight400(
-                      color: Colors.black.withValues(alpha: .5),
+                      color: ColorUtils.greyTextColor,
                     ),
                   ),
                 ],
@@ -235,8 +272,8 @@ class NoData extends StatelessWidget {
         : Center(
             child: Text(
               text,
-              style: StyleUtils.kTextStyleSize24Weight500(
-                color: const Color(0xff9E9E9E),
+              style: StyleUtils.kTextStyleSize18Weight500(
+                color: ColorUtils.greyTextColor,
               ),
             ),
           ),

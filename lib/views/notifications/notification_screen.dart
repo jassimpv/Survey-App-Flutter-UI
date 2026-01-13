@@ -18,47 +18,56 @@ class NotificationScreen extends GetView<NotificationsController> {
     Get.put<NotificationsController>(NotificationsController());
     return Scaffold(
       backgroundColor: ColorUtils.appBgMain,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          CustomAppBar(
-            title: "notifications".tr,
-            onBackPressed: Get.back,
-            isNotificationButton: false,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [ColorUtils.scaffoldColor, Colors.white],
           ),
-          Expanded(
-            child: Obx(
-              () => ListView.separated(
-                separatorBuilder: (BuildContext context, int index) =>
-                    10.heightBox,
-                itemCount:
-                    controller
-                        .notificationsResponse
-                        .value
-                        .response
-                        ?.notifications
-                        ?.length ??
-                    0,
-                itemBuilder: (BuildContext context, int index) =>
-                    _NotificationItem(
-                      notifications: controller
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            CustomAppBar(
+              title: "notifications".tr,
+              onBackPressed: Get.back,
+              isNotificationButton: false,
+            ),
+            Expanded(
+              child: Obx(
+                () => ListView.separated(
+                  separatorBuilder: (BuildContext context, int index) =>
+                      10.heightBox,
+                  itemCount:
+                      controller
                           .notificationsResponse
                           .value
                           .response
-                          ?.notifications![index],
-                      notificationTypes: index % 2 == 0
-                          ? NotificationTypes.approved
-                          : NotificationTypes.rejected,
-                    ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
+                          ?.notifications
+                          ?.length ??
+                      0,
+                  itemBuilder: (BuildContext context, int index) =>
+                      _NotificationItem(
+                        notifications: controller
+                            .notificationsResponse
+                            .value
+                            .response
+                            ?.notifications![index],
+                        notificationTypes: index % 2 == 0
+                            ? NotificationTypes.approved
+                            : NotificationTypes.rejected,
+                      ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  shrinkWrap: true,
                 ),
-                shrinkWrap: true,
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

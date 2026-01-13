@@ -14,7 +14,7 @@ class SplashController extends GetxController {
         String? value,
       ) async {
         if (value != null) {
-          await Get.offNamed(AppRouter.homeRoute);
+          await Get.offNamed(AppRouter.loginRoute);
         } else {
           await Get.offNamed(AppRouter.loginRoute);
         }

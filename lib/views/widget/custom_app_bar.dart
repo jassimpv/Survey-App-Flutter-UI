@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget {
     required this.title,
     super.key,
     this.onBackPressed,
-    this.isNotificationButton = true,
+    this.isNotificationButton = false,
     this.isLanguageButton = false,
     this.tabBar,
   });
@@ -26,12 +26,21 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.only(bottom: 16),
-    decoration: const BoxDecoration(
+    decoration: BoxDecoration(
       borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(30),
         bottomRight: Radius.circular(30),
       ),
-      color: ColorUtils.themeColor,
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: <Color>[
+          ColorUtils.themeColor,
+          const Color(0xFF1E8F87),
+          ColorUtils.scaffoldColor,
+        ],
+        stops: const <double>[0, 0.55, 1],
+      ),
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -60,7 +69,7 @@ class CustomAppBar extends StatelessWidget {
                 ),
               Text(
                 title,
-                style: StyleUtils.kTextStyleSize18Weight400(
+                style: StyleUtils.kTextStyleSize20Weight600(
                   color: Colors.white,
                 ),
               ),

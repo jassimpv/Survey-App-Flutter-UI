@@ -134,6 +134,15 @@ class StyleUtils {
     fontWeight: FontWeight.w600,
   );
 
+  static TextStyle kTextStyleSize20Weight600({
+    Color color = ColorUtils.headingColor,
+  }) => TextStyle(
+    color: color,
+    fontSize: 20,
+    fontFamily: "Outfit",
+    fontWeight: FontWeight.w600,
+  );
+
   static TextStyle kTextStyleSize17Weight400({
     Color color = ColorUtils.headingColor,
   }) => TextStyle(
@@ -194,48 +203,54 @@ class StyleUtils {
     fontFamily: "Outfit",
     fontWeight: FontWeight.w400,
   );
-
+  static TextStyle kTextStyleSize16Weight500({
+    Color color = ColorUtils.headingColor,
+    double? letterSpacing,
+  }) => TextStyle(
+    color: color,
+    fontSize: 16,
+    fontFamily: "Outfit",
+    fontWeight: FontWeight.w500,
+    letterSpacing: letterSpacing,
+  );
   static InputDecoration inputDecoration({
     String? hintText,
     String? labelText,
     IconData? prefixIcon,
   }) => InputDecoration(
-      hintText: hintText,
-      hintStyle: StyleUtils.kTextStyleSize14Weight400(
-        color: ColorUtils.greyTextColor.withValues(alpha: 0.5),
-      ),
-      fillColor: ColorUtils.whiteColor,
-      filled: true,
-      prefixIcon: prefixIcon != null
-          ? Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 13,
-              ),
-              child: Icon(
-                prefixIcon,
-                color: ColorUtils.greyTextColor.withValues(alpha: 0.5),
-              ),
-            )
-          : null,
-      border: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xffE4E4E7)),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Color(0xffE4E4E7)),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: ColorUtils.themeColor),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderSide: const BorderSide(color: Colors.red),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-    );
+    hintText: hintText,
+    hintStyle: StyleUtils.kTextStyleSize14Weight400(
+      color: ColorUtils.greyTextColor.withValues(alpha: 0.5),
+    ),
+    fillColor: ColorUtils.whiteColor,
+    filled: true,
+    prefixIcon: prefixIcon != null
+        ? Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
+            child: Icon(
+              prefixIcon,
+              color: ColorUtils.greyTextColor.withValues(alpha: 0.5),
+            ),
+          )
+        : null,
+    border: OutlineInputBorder(
+      borderSide: const BorderSide(color: Color(0xffE4E4E7)),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Color(0xffE4E4E7)),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: ColorUtils.themeColor),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    errorBorder: OutlineInputBorder(
+      borderSide: const BorderSide(color: Colors.red),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+  );
 
   static BoxDecoration cardView() => BoxDecoration(
     borderRadius: BorderRadius.circular(16),

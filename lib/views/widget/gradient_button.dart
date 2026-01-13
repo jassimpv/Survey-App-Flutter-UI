@@ -12,22 +12,28 @@ class GradientButton extends StatelessWidget {
   Widget build(BuildContext context) => ZoomTapAnimation(
     onTap: onClick,
     child: Container(
-      width: MediaQuery.of(context).size.width,
+      width: double.infinity,
       height: 56,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(18),
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          transform: GradientRotation(55 * 3.14159 / 180),
-          colors: <Color>[ColorUtils.themeColor, Color(0xFF1e7d7d)],
+          colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
         ),
+        boxShadow: const <BoxShadow>[
+          BoxShadow(
+            color: Color.fromRGBO(16, 24, 40, 0.20),
+            blurRadius: 25,
+            offset: Offset(0, 12),
+          ),
+        ],
       ),
       child: Center(
         child: Text(
           text,
-          style: StyleUtils.kTextStyleSize18Weight400(color: Colors.white),
+          style: StyleUtils.kTextStyleSize18Weight600(color: Colors.white),
         ),
       ),
     ),
