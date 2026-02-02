@@ -27,16 +27,24 @@ class _CheckInternetConnectionState extends State<CheckInternetConnection> {
   }
 
   @override
-  Widget build(BuildContext context) => ValueListenableBuilder<bool>(
-    valueListenable: noInternetManager.internetState,
-    builder: (BuildContext context, bool isConnected, Widget? child) {
-      if (isConnected) {
-        return widget.child;
-      } else {
-        return NoInternetConnection(
-          onRetry: noInternetManager.checkConnectivity,
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<bool>(
+      valueListenable: noInternetManager.internetState,
+      child: widget.child,
+      builder: (context, isConnected, child) {
+        final resolvedChild = child ?? const SizedBox.shrink();
+        return Stack(
+          children: [
+            Positioned.fill(child: resolvedChild),
+            if (!isConnected)
+              Positioned.fill(
+                child: NoInternetConnection(
+                  onRetry: noInternetManager.checkConnectivity,
+                ),
+              ),
+          ],
         );
-      }
-    },
-  );
+      },
+    );
+  }
 }

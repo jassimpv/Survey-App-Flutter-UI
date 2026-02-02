@@ -1,98 +1,179 @@
-import "package:collect/utils/colors_utils.dart";
-import "package:collect/utils/transaltion_utils.dart";
-import "package:collect/views/widget/zoom_tap.dart";
-import "package:flutter/material.dart";
-import "package:get/get.dart";
+import 'package:collect/utils/colors_utils.dart';
+import 'package:collect/utils/transaltion_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class LanguageWidegt extends StatelessWidget {
+class LanguageWidegt extends StatefulWidget {
   const LanguageWidegt({super.key, this.isHome = false});
   final bool isHome;
 
   @override
-  Widget build(BuildContext context) => ZoomTapAnimation(
-    child: CustomSwitch(
-      value: Get.locale!.languageCode == "en",
-      onChanged: (bool value) async {
-        if (value) {
-          await TranslationService.updateLocale(const Locale("en", "US"));
-        } else {
-          await TranslationService.updateLocale(const Locale("ar", "AE"));
-        }
-      },
-    ),
-  );
+  State<LanguageWidegt> createState() => _LanguageWidegtState();
 }
 
-class CustomSwitch extends StatefulWidget {
-  const CustomSwitch({required this.value, required this.onChanged, super.key});
-  final bool value;
-  final ValueChanged<bool> onChanged;
-
-  @override
-  CustomSwitchState createState() => CustomSwitchState();
-}
-
-class CustomSwitchState extends State<CustomSwitch>
+class _LanguageWidegtState extends State<LanguageWidegt>
     with SingleTickerProviderStateMixin {
-  Animation? circleAnimation;
-  AnimationController? _animationController;
+  late bool _isEnglish;
+  bool _inFlight = false;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 60),
-    );
-    circleAnimation =
-        AlignmentTween(
-          begin: widget.value ? Alignment.centerRight : Alignment.centerLeft,
-          end: widget.value ? Alignment.centerLeft : Alignment.centerRight,
-        ).animate(
-          CurvedAnimation(parent: _animationController!, curve: Curves.linear),
-        );
+    _isEnglish = Get.locale?.languageCode == 'en';
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedBuilder(
-    animation: _animationController!,
-    builder: (BuildContext context, Widget? child) => GestureDetector(
-      onTap: () {
-        if (_animationController!.isCompleted) {
-          _animationController!.reverse();
-        } else {
-          _animationController!.forward();
-        }
-        !widget.value ? widget.onChanged(true) : widget.onChanged(false);
-      },
-      child: Container(
-        width: 64,
-        height: 36,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(9999),
-          border: Border.all(
-            color: ColorUtils.themeColor.withValues(alpha: 0.10),
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // keep in sync if locale changed externally
+    _isEnglish = Get.locale?.languageCode == 'en';
+  }
+
+  Future<void> _toggle() async {
+    if (_inFlight) return;
+    setState(() {
+      _isEnglish = !_isEnglish;
+      _inFlight = true;
+    });
+
+    try {
+      if (_isEnglish) {
+        await TranslationService.updateLocale(const Locale('en', 'US'));
+      } else {
+        await TranslationService.updateLocale(const Locale('ar', 'AE'));
+      }
+    } catch (_) {
+      // revert on error
+      setState(() {
+        _isEnglish = !_isEnglish;
+      });
+    } finally {
+      setState(() {
+        _inFlight = false;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    const double width = 72;
+    const double height = 36;
+
+    return Semantics(
+      button: true,
+      label: _isEnglish ? 'Language: English' : 'Language: Arabic',
+      hint: 'Tap to switch language',
+      child: GestureDetector(
+        onTap: _toggle,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 280),
+          curve: Curves.easeInOut,
+          width: width,
+          height: height,
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.06),
+            borderRadius: BorderRadius.circular(999),
+            border: Border.all(color: ColorUtils.themeColor.withOpacity(0.10)),
+            boxShadow: const <BoxShadow>[
+              BoxShadow(
+                color: Color.fromRGBO(16, 24, 40, 0.04),
+                blurRadius: 8,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
-          color: Colors.white.withValues(alpha: 0.10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(2),
-          child: Column(
+          child: Stack(
+            alignment: Alignment.center,
             children: <Widget>[
-              Container(
-                alignment: circleAnimation!.value == Alignment.centerRight
-                    ? Alignment.centerLeft
-                    : Alignment.centerRight,
-                child: Image.asset(
-                  "assets/icons/${Get.locale!.languageCode == "en" ? "ic_lang_en" : "ic_lang_ar"}.png",
-                  width: 30,
-                  height: 30,
+              // subtle text indicator: selected label on its side, animated opacity
+              Positioned.fill(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    // // EN on the left
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 220),
+                        opacity: 1.0,
+                        curve: Curves.easeInOut,
+                        child: Text(
+                          _isEnglish ? 'EN' : 'AR',
+                          style: TextStyle(
+                            color: ColorUtils.whiteColor.withOpacity(0.9),
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
+
+              // Animated flag knob
+              AnimatedAlign(
+                duration: const Duration(milliseconds: 280),
+                curve: Curves.easeInOut,
+                alignment: _isEnglish
+                    ? Alignment.centerRight
+                    : Alignment.centerLeft,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 280),
+                  curve: Curves.easeInOut,
+                  width: height - 8,
+                  height: height - 8,
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: const <BoxShadow>[
+                      BoxShadow(
+                        color: Color.fromRGBO(16, 24, 40, 0.08),
+                        blurRadius: 8,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 220),
+                      transitionBuilder:
+                          (Widget child, Animation<double> animation) =>
+                              ScaleTransition(scale: animation, child: child),
+                      child: Image.asset(
+                        _isEnglish
+                            ? 'assets/icons/ic_lang_en.png'
+                            : 'assets/icons/ic_lang_ar.png',
+                        key: ValueKey<bool>(_isEnglish),
+                        width: (height - 12),
+                        height: (height - 12),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              if (_inFlight)
+                Positioned(
+                  right: 6,
+                  child: SizedBox(
+                    width: 14,
+                    height: 14,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        ColorUtils.themeColor,
+                      ),
+                    ),
+                  ),
+                ),
             ],
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
