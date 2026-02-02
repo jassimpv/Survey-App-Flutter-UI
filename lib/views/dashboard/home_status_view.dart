@@ -1,5 +1,4 @@
 import "package:collect/utils/colors_utils.dart";
-import "package:collect/utils/theme_service.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/utils/utils_helper.dart";
@@ -34,7 +33,7 @@ class HomeStatusView extends StatelessWidget {
         child: _StatusCard(
           todayCount: upcomingCount.todayCount.toString(),
           totalCount: upcomingCount.totalCount.toString(),
-          label: "Today".tr,
+          label: "KG".tr,
           icon: "img_upcoming",
         ),
       ),
@@ -43,7 +42,7 @@ class HomeStatusView extends StatelessWidget {
         child: _StatusCard(
           todayCount: completedCount.todayCount.toString(),
           totalCount: completedCount.totalCount.toString(),
-          label: "Total".tr,
+          label: "Location".tr,
           icon: "img_completed",
         ),
       ),
@@ -109,22 +108,13 @@ class _StatusCard extends StatelessWidget {
               color: ColorUtils.headingColor,
             ),
           ),
-          16.heightBox,
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Expanded(
-                child: _StatusCount(
-                  heading: "KG".tr,
-                  count: todayCount,
-                  isTotal: true,
-                  accentColor: accentColor,
-                ),
-              ),
-              8.widthBox,
               _StatusCount(
-                heading: "Location".tr,
-                count: totalCount,
-                isTotal: false,
+                heading: "KG".tr,
+                count: todayCount,
+                isTotal: true,
                 accentColor: accentColor,
               ),
             ],
@@ -133,23 +123,6 @@ class _StatusCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class _StatusText extends StatelessWidget {
-  const _StatusText({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) => Text(
-    label,
-    style: StyleUtils.kTextStyleSize16Weight400(
-      color: ThemeService.isDark()
-          ? const Color(0xFF9CA3AF)
-          : ColorUtils.greyTextColor,
-    ),
-    textAlign: TextAlign.center,
-  );
 }
 
 class _StatusCount extends StatelessWidget {
@@ -165,29 +138,12 @@ class _StatusCount extends StatelessWidget {
   final Color accentColor;
 
   @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: <Color>[
-          accentColor.withValues(alpha: isTotal ? 0.25 : 0.15),
-          Colors.white,
-        ],
+  Widget build(BuildContext context) => Column(
+    children: [
+      Text(
+        Utils.replaceFarsiNumber(count),
+        style: StyleUtils.kTextStyleSize54Weight600(color: accentColor),
       ),
-      borderRadius: BorderRadius.circular(14),
-      border: Border.all(color: accentColor.withValues(alpha: 0.2)),
-    ),
-    child: Column(
-      children: [
-        _StatusText(label: heading),
-        8.heightBox,
-        Text(
-          Utils.replaceFarsiNumber(count),
-          style: StyleUtils.kTextStyleSize24Weight600(color: accentColor),
-        ),
-      ],
-    ),
+    ],
   );
 }

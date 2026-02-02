@@ -1,12 +1,11 @@
 import "package:collect/controller/profile_controller.dart";
 import "package:collect/routes.dart";
 import "package:collect/utils/colors_utils.dart";
-import "package:collect/utils/theme_colors.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/views/widget/custom_app_bar.dart";
 import "package:collect/views/widget/language_widget.dart";
-import "package:collect/utils/theme_service.dart";
+import "package:collect/views/widget/modern_dialog.dart";
 import "package:collect/views/widget/zoom_tap.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
@@ -149,14 +148,17 @@ class ProfileScreen extends GetView<ProfileController> {
       children: <Widget>[
         ZoomTapAnimation(
           onTap: () => Get.toNamed(AppRouter.contactUsScreen),
-          child: _buildInfoRow(Icons.contact_emergency, "contact_us".tr),
+          child: _buildInfoRow(CupertinoIcons.phone, "contact_us".tr),
         ),
         _divider(),
 
         // Terms
         ZoomTapAnimation(
           onTap: () => Get.toNamed(AppRouter.termsAndConditionScreen),
-          child: _buildInfoRow(Icons.notes, "terms_and_condition".tr),
+          child: _buildInfoRow(
+            CupertinoIcons.doc_text,
+            "terms_and_condition".tr,
+          ),
         ),
         _divider(),
 
@@ -178,7 +180,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
-                  Icons.language,
+                  CupertinoIcons.globe,
                   size: 22,
                   color: ColorUtils.themeColor,
                 ),
@@ -201,22 +203,14 @@ class ProfileScreen extends GetView<ProfileController> {
           onTap: () async {
             await _showConfirmationDeleteDialog(context);
           },
-          child: _buildInfoRow(
-            Icons.delete,
-            "deleteAccount".tr,
-            color: ColorUtils.red,
-          ),
+          child: _buildInfoRow(CupertinoIcons.trash, "deleteAccount".tr),
         ),
         _divider(),
         ZoomTapAnimation(
           onTap: () async {
             await _showConfirmationLogoutDialog(context);
           },
-          child: _buildInfoRow(
-            Icons.logout,
-            "logout".tr,
-            color: ColorUtils.red,
-          ),
+          child: _buildInfoRow(CupertinoIcons.square_arrow_right, "logout".tr),
         ),
       ],
     ),
@@ -250,7 +244,7 @@ class ProfileScreen extends GetView<ProfileController> {
             ),
           ),
         ),
-        Icon(Icons.arrow_forward_ios, color: color, size: 18),
+        Icon(CupertinoIcons.chevron_forward, color: color, size: 18),
       ],
     ),
   );
@@ -266,80 +260,35 @@ class ProfileScreen extends GetView<ProfileController> {
     ),
   );
 
-  Future<void> _showConfirmationLogoutDialog(
-    BuildContext context,
-  ) => showDialog<void>(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) => CupertinoAlertDialog(
-      title: Text("logout".tr, style: StyleUtils.kTextStyleSize18Weight500()),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: <Widget>[
-            Text(
-              "are_you_sure_logout".tr,
-              style: StyleUtils.kTextStyleSize16Weight400(),
-            ),
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: Text(
-            "cancel".tr,
-            style: StyleUtils.kTextStyleSize18Weight500(),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: Text("ok".tr, style: StyleUtils.kTextStyleSize18Weight500()),
-          onPressed: () async {
-            await controller.logout();
-          },
-        ),
-      ],
-    ),
-  );
+  Future<void> _showConfirmationLogoutDialog(BuildContext context) =>
+      showModernDialog(
+        context: context,
+        title: "logout".tr,
+        message: "are_you_sure_logout".tr,
+        confirmText: "ok".tr,
+        cancelText: "cancel".tr,
+        isDangerous: true,
+        icon: CupertinoIcons.square_arrow_right,
+        onConfirm: () async {
+          Navigator.of(context).pop();
+          await controller.logout();
+        },
+      );
 
-  Future<void> _showConfirmationDeleteDialog(
-    BuildContext context,
-  ) => showDialog<void>(
-    context: context,
-    barrierDismissible: false,
-    builder: (BuildContext context) => CupertinoAlertDialog(
-      title: Text("delete".tr, style: StyleUtils.kTextStyleSize18Weight500()),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: <Widget>[
-            Text(
-              "are_you_sure_delete".tr,
-              style: StyleUtils.kTextStyleSize16Weight400(),
-            ),
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: Text(
-            "cancel".tr,
-            style: StyleUtils.kTextStyleSize18Weight500(),
-          ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: Text("ok".tr, style: StyleUtils.kTextStyleSize18Weight500()),
-          onPressed: () {
-            // controller.logout();
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    ),
-  );
+  Future<void> _showConfirmationDeleteDialog(BuildContext context) =>
+      showModernDialog(
+        context: context,
+        title: "delete".tr,
+        message: "are_you_sure_delete".tr,
+        confirmText: "ok".tr,
+        cancelText: "cancel".tr,
+        isDangerous: true,
+        icon: CupertinoIcons.trash,
+        onConfirm: () {
+          // controller.logout();
+          Navigator.of(context).pop();
+        },
+      );
 
   Widget _divider() => Container(
     height: 1,

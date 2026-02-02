@@ -125,6 +125,15 @@ class StyleUtils {
     letterSpacing: letterSpacing,
   );
 
+  static TextStyle kTextStyleSize54Weight600({
+    Color color = ColorUtils.headingColor,
+  }) => TextStyle(
+    color: color,
+    fontSize: 54,
+    fontFamily: "Outfit",
+    fontWeight: FontWeight.w600,
+  );
+
   static TextStyle kTextStyleSize18Weight600({
     Color color = ColorUtils.headingColor,
   }) => TextStyle(
