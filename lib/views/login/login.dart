@@ -2,7 +2,6 @@ import "package:collect/controller/login_controller.dart";
 import "package:collect/extension/country_list_pick/support/code_country.dart";
 import "package:collect/utils/asset_utils.dart";
 import "package:collect/utils/colors_utils.dart";
-import "package:collect/utils/theme_service.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/views/widget/gradient_button.dart";
@@ -28,15 +27,9 @@ class LoginScreen extends GetView<LoginController> {
             begin: Alignment.topLeft,
             end: Alignment.bottomCenter,
             colors: <Color>[
-              ThemeService.isDark()
-                  ? const Color(0xFF0FA394)
-                  : ColorUtils.themeColor,
-              ThemeService.isDark()
-                  ? const Color(0xFF0A7A6E)
-                  : const Color(0xFF1E8F87),
-              ThemeService.isDark()
-                  ? const Color(0xFF0F1720)
-                  : ColorUtils.scaffoldColor,
+              const Color(0xFF0FA394),
+              const Color(0xFF0A7A6E),
+              const Color(0xFF0F1720),
             ],
             stops: const <double>[0, 0.45, 1],
           ),

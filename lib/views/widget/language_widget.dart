@@ -72,9 +72,11 @@ class _LanguageWidegtState extends State<LanguageWidegt>
           height: height,
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.06),
+            color: Colors.white.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(999),
-            border: Border.all(color: ColorUtils.themeColor.withOpacity(0.10)),
+            border: Border.all(
+              color: ColorUtils.themeColor.withValues(alpha: 0.10),
+            ),
             boxShadow: const <BoxShadow>[
               BoxShadow(
                 color: Color.fromRGBO(16, 24, 40, 0.04),
@@ -101,7 +103,7 @@ class _LanguageWidegtState extends State<LanguageWidegt>
                         child: Text(
                           _isEnglish ? 'EN' : 'AR',
                           style: TextStyle(
-                            color: ColorUtils.whiteColor.withOpacity(0.9),
+                            color: ColorUtils.whiteColor.withValues(alpha: 0.9),
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
                           ),

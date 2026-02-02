@@ -23,12 +23,12 @@ class ThemeColors {
       ThemeService.isDark() ? const Color(0xFF1E2A3A) : Colors.white;
 
   static Color get cardBorder => ThemeService.isDark()
-      ? const Color(0xFF2D3E50).withOpacity(0.5)
-      : ColorUtils.themeColor.withOpacity(0.08);
+      ? const Color(0xFF2D3E50).withValues(alpha: 0.5)
+      : ColorUtils.themeColor.withValues(alpha: 0.08);
 
   static Color get divider => ThemeService.isDark()
       ? const Color(0xFF2D3E50)
-      : ColorUtils.themeColor.withOpacity(0.08);
+      : ColorUtils.themeColor.withValues(alpha: 0.08);
 
   static Color get scaffoldBackground =>
       ThemeService.isDark() ? const Color(0xFF0F1720) : const Color(0xFFe0f7f7);
@@ -41,8 +41,8 @@ class ThemeColors {
       : ColorUtils.metallicColor;
 
   static Color get shadow => ThemeService.isDark()
-      ? Colors.black.withOpacity(0.3)
-      : Colors.black.withOpacity(0.08);
+      ? Colors.black.withValues(alpha: 0.3)
+      : Colors.black.withValues(alpha: 0.08);
 
   static Color get inputBackground =>
       ThemeService.isDark() ? const Color(0xFF2D3E50) : const Color(0xFFF4F7FF);
@@ -58,7 +58,7 @@ class ThemeColors {
     end: Alignment.bottomRight,
     colors: <Color>[
       primary,
-      primary.withOpacity(ThemeService.isDark() ? 0.7 : 0.6),
+      primary.withValues(alpha: ThemeService.isDark() ? 0.7 : 0.6),
     ],
   );
 }

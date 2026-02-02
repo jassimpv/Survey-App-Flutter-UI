@@ -45,17 +45,17 @@ class ModernDialog extends StatelessWidget {
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: ThemeService.isDark()
-                  ? const Color(0xFF1A2332).withOpacity(0.95)
-                  : Colors.white.withOpacity(0.95),
+                  ? const Color(0xFF1A2332).withValues(alpha: 0.95)
+                  : Colors.white.withValues(alpha: 0.95),
               borderRadius: BorderRadius.circular(24),
               border: Border.all(
                 color: ThemeService.isDark()
-                    ? Colors.white.withOpacity(0.1)
-                    : Colors.black.withOpacity(0.05),
+                    ? Colors.white.withValues(alpha: 0.1)
+                    : Colors.black.withValues(alpha: 0.05),
               ),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.2),
+                  color: Colors.black.withValues(alpha: 0.2),
                   blurRadius: 30,
                   offset: const Offset(0, 15),
                 ),
@@ -71,8 +71,8 @@ class ModernDialog extends StatelessWidget {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: <Color>[
-                          actionColor.withOpacity(0.2),
-                          actionColor.withOpacity(0.05),
+                          actionColor.withValues(alpha: 0.2),
+                          actionColor.withValues(alpha: 0.05),
                         ],
                       ),
                       shape: BoxShape.circle,
@@ -161,7 +161,10 @@ class _ModernDialogButton extends StatelessWidget {
             gradient: isSecondary
                 ? null
                 : LinearGradient(
-                    colors: <Color>[buttonColor, buttonColor.withOpacity(0.8)],
+                    colors: <Color>[
+                      buttonColor,
+                      buttonColor.withValues(alpha: 0.8),
+                    ],
                   ),
             color: isSecondary
                 ? (ThemeService.isDark()
@@ -172,8 +175,8 @@ class _ModernDialogButton extends StatelessWidget {
             border: isSecondary
                 ? Border.all(
                     color: ThemeService.isDark()
-                        ? Colors.white.withOpacity(0.1)
-                        : buttonColor.withOpacity(0.2),
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : buttonColor.withValues(alpha: 0.2),
                   )
                 : null,
           ),

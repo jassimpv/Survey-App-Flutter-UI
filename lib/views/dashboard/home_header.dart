@@ -37,7 +37,7 @@ class HomeHeader extends GetView<HomeController> {
         boxShadow: [
           BoxShadow(
             color: ThemeService.isDark()
-                ? Colors.black.withOpacity(0.4)
+                ? Colors.black.withValues(alpha: 0.4)
                 : ColorUtils.themeColor.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),

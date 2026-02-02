@@ -1,7 +1,10 @@
+import "dart:ui";
+
 import "package:collect/models/task_card_model.dart";
 import "package:collect/models/user_data_model.dart";
 import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/textstyle_input.dart";
+import "package:collect/utils/theme_service.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -58,55 +61,145 @@ class HomeController extends GetxController {
 
     final DateTime? picked = await showModalBottomSheet<DateTime>(
       context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: false,
       builder: (BuildContext context) {
         DateTime tempPicked = initialDate;
-        return Container(
-          height: 300,
-          color: ColorUtils.scaffoldColor,
-
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 200,
-                width: Get.width,
-                child: CupertinoTheme(
-                  data: CupertinoThemeData(
-                    textTheme: CupertinoTextThemeData(
-                      dateTimePickerTextStyle:
-                          StyleUtils.kTextStyleSize17Weight400(),
-                      actionTextStyle: StyleUtils.kTextStyleSize18Weight400(
-                        color: ColorUtils.backgroundDark,
-                      ),
-                      pickerTextStyle: StyleUtils.kTextStyleSize17Weight400(),
-                    ),
-                  ),
-                  child: CupertinoDatePicker(
-                    backgroundColor: ColorUtils.scaffoldColor,
-                    mode: CupertinoDatePickerMode.date,
-                    showDayOfWeek: true,
-                    initialDateTime: initialDate,
-                    minimumDate: firstDate,
-                    maximumDate: lastDate,
-                    onDateTimeChanged: (DateTime date) {
-                      tempPicked = date;
-                    },
-                  ),
+        return ClipRRect(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(32),
+            topRight: Radius.circular(32),
+          ),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+            child: Container(
+              height: 320,
+              decoration: BoxDecoration(
+                color: ThemeService.isDark()
+                    ? const Color(0xFF1A2332).withValues(alpha: 0.9)
+                    : Colors.white.withValues(alpha: 0.95),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(32),
+                  topRight: Radius.circular(32),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  CupertinoButton(
-                    child: const Text("Cancel"),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  CupertinoButton(
-                    child: const Text("Done"),
-                    onPressed: () => Navigator.of(context).pop(tempPicked),
+                border: Border.all(
+                  color: ThemeService.isDark()
+                      ? Colors.white.withValues(alpha: 0.08)
+                      : ColorUtils.themeColor.withValues(alpha: 0.2),
+                  width: 1,
+                ),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.12),
+                    blurRadius: 30,
+                    offset: const Offset(0, -6),
                   ),
                 ],
               ),
-            ],
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 10),
+                  Container(
+                    height: 4,
+                    width: 56,
+                    decoration: BoxDecoration(
+                      color: ThemeService.isDark()
+                          ? Colors.white.withValues(alpha: 0.2)
+                          : ColorUtils.themeColor.withValues(alpha: 0.2),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          isStart ? "Start date" : "End date",
+                          style: StyleUtils.kTextStyleSize18Weight600(
+                            color: ThemeService.isDark()
+                                ? Colors.white
+                                : ColorUtils.headingColor,
+                          ),
+                        ),
+                        Row(
+                          children: <Widget>[
+                            CupertinoButton(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: Text(
+                                "Cancel",
+                                style: StyleUtils.kTextStyleSize14Weight500(
+                                  color: ThemeService.isDark()
+                                      ? Colors.white70
+                                      : ColorUtils.headingColor.withValues(
+                                          alpha: 0.7,
+                                        ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            CupertinoButton(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 6,
+                              ),
+                              onPressed: () =>
+                                  Navigator.of(context).pop(tempPicked),
+                              child: Text(
+                                "Done",
+                                style: StyleUtils.kTextStyleSize14Weight600(
+                                  color: ThemeService.isDark()
+                                      ? const Color(0xFF0FA394)
+                                      : ColorUtils.themeColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  SizedBox(
+                    height: 220,
+                    width: Get.width,
+                    child: CupertinoTheme(
+                      data: CupertinoThemeData(
+                        textTheme: CupertinoTextThemeData(
+                          dateTimePickerTextStyle:
+                              StyleUtils.kTextStyleSize17Weight400(
+                                color: ThemeService.isDark()
+                                    ? Colors.white
+                                    : ColorUtils.headingColor,
+                              ),
+                          pickerTextStyle: StyleUtils.kTextStyleSize17Weight400(
+                            color: ThemeService.isDark()
+                                ? Colors.white
+                                : ColorUtils.headingColor,
+                          ),
+                        ),
+                      ),
+                      child: CupertinoDatePicker(
+                        backgroundColor: Colors.transparent,
+                        mode: CupertinoDatePickerMode.date,
+                        showDayOfWeek: true,
+                        initialDateTime: initialDate,
+                        minimumDate: firstDate,
+                        maximumDate: lastDate,
+                        onDateTimeChanged: (DateTime date) {
+                          tempPicked = date;
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         );
       },
