@@ -54,29 +54,48 @@ class HomeHeader extends GetView<HomeController> {
 
   Widget _buildHeaderRow(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20),
-    child: DecoratedBox(
-      decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(28),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Row(
-          children: <Widget>[
-            _buildProfileImage(),
-            14.widthBox,
-            _buildWelcomeText(),
-            Row(
-              children: <Widget>[
-                const LanguageWidegt(),
-                8.widthBox,
-                _buildNotificationBadge(),
-              ],
-            ),
-          ],
+    child: Row(
+      children: <Widget>[
+        // Left: profile
+        _buildProfileImage(),
+        12.widthBox,
+
+        // Middle: greeting + name (compact)
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                Utils.getGreeting(),
+                style: StyleUtils.kTextStyleSize14Weight500(
+                  color: ColorUtils.whiteColor.withValues(alpha: 0.95),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              4.heightBox,
+              Text(
+                "Mohammed Jassim",
+                style: StyleUtils.kTextStyleSize16Weight600(
+                  color: ColorUtils.whiteColor,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
-      ),
+
+        // Right: actions (language + notifications) inside a subtle pill
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.06),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(children: <Widget>[const LanguageWidegt()]),
+        ),
+      ],
     ),
   );
 
@@ -107,30 +126,6 @@ class HomeHeader extends GetView<HomeController> {
                   height: 56,
                 ),
       ),
-    ),
-  );
-
-  Widget _buildWelcomeText() => Expanded(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          Utils.getGreeting(),
-          style: StyleUtils.kTextStyleSize18Weight500(
-            color: ColorUtils.whiteColor,
-          ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        Text(
-          "Mohammed Jassim",
-          style: StyleUtils.kTextStyleSize18Weight500(
-            color: ColorUtils.whiteColor,
-          ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
     ),
   );
 
