@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:collect/utils/prefernce_utils.dart';
-import 'package:collect/utils/colors_utils.dart';
 
 class ThemeService {
   static const String _key = 'themeMode';
@@ -32,25 +31,6 @@ class ThemeService {
 
     // Apply immediately
     Get.changeThemeMode(themeMode);
-
-    // Notify user with a subtle snackbar
-    final String message = themeMode == ThemeMode.dark
-        ? 'Dark mode enabled'
-        : 'Light mode enabled';
-    Get.snackbar(
-      '',
-      message,
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: themeMode == ThemeMode.dark
-          ? ColorUtils.darkGreen
-          : Colors.white,
-      colorText: themeMode == ThemeMode.dark
-          ? Colors.white
-          : ColorUtils.backgroundDark,
-      margin: const EdgeInsets.all(12),
-      borderRadius: 10,
-      duration: const Duration(seconds: 2),
-    );
 
     // Persist
     await PreferenceUtils.saveString(

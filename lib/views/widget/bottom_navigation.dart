@@ -1,4 +1,5 @@
 import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/theme_service.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:flutter/cupertino.dart";
@@ -83,15 +84,17 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: <Color>[
-                  ColorUtils.themeColor.withValues(alpha: 0.95),
-                  ColorUtils.themeColor,
+                  const Color(0xFF0FA394).withOpacity(0.9),
+                  const Color(0xFF0A7A6E),
                 ],
               ),
               borderRadius: BorderRadius.circular(28),
               boxShadow: <BoxShadow>[
                 BoxShadow(
                   offset: const Offset(0, 10),
-                  color: ColorUtils.themeColor.withValues(alpha: 0.25),
+                  color: ThemeService.isDark()
+                      ? Colors.black.withOpacity(0.4)
+                      : ColorUtils.themeColor.withValues(alpha: 0.25),
                   blurRadius: 30,
                 ),
               ],

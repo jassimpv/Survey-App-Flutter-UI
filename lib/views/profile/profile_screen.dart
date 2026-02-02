@@ -1,6 +1,7 @@
 import "package:collect/controller/profile_controller.dart";
 import "package:collect/routes.dart";
 import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/theme_colors.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/views/widget/custom_app_bar.dart";
@@ -185,7 +186,7 @@ class ProfileScreen extends GetView<ProfileController> {
               12.widthBox,
               Expanded(
                 child: Text(
-                  "language".tr,
+                  "Language".tr,
                   style: StyleUtils.kTextStyleSize18Weight500(
                     color: ColorUtils.headingColor,
                   ),
@@ -196,99 +197,6 @@ class ProfileScreen extends GetView<ProfileController> {
           ),
         ),
         _divider(),
-
-        // Appearance / Theme row
-        ZoomTapAnimation(
-          onTap: () => ThemeService.toggleTheme(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: <Color>[
-                        ColorUtils.themeColor.withValues(alpha: 0.15),
-                        Colors.white,
-                      ],
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.brightness_6,
-                    size: 22,
-                    color: ColorUtils.themeColor,
-                  ),
-                ),
-                12.widthBox,
-                Expanded(
-                  child: Text(
-                    "appearance".tr,
-                    style: StyleUtils.kTextStyleSize18Weight500(
-                      color: ColorUtils.headingColor,
-                    ),
-                  ),
-                ),
-                ValueListenableBuilder<ThemeMode>(
-                  valueListenable: ThemeService.themeModeNotifier,
-                  builder:
-                      (BuildContext context, ThemeMode mode, Widget? child) =>
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color: mode == ThemeMode.dark
-                                  ? ColorUtils.darkGreen
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(999),
-                              border: Border.all(
-                                color: ColorUtils.themeColor.withValues(
-                                  alpha: 0.06,
-                                ),
-                              ),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.04),
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                Icon(
-                                  mode == ThemeMode.dark
-                                      ? Icons.nightlight_round
-                                      : Icons.wb_sunny,
-                                  size: 18,
-                                  color: mode == ThemeMode.dark
-                                      ? Colors.white
-                                      : ColorUtils.themeColor,
-                                ),
-                                8.widthBox,
-                                Text(
-                                  mode == ThemeMode.dark ? 'Dark' : 'Light',
-                                  style: StyleUtils.kTextStyleSize14Weight600(
-                                    color: mode == ThemeMode.dark
-                                        ? Colors.white
-                                        : ColorUtils.themeColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        _divider(),
-
         ZoomTapAnimation(
           onTap: () async {
             await _showConfirmationDeleteDialog(context);

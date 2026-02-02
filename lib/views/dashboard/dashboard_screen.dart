@@ -30,7 +30,7 @@ class DashboardScreen extends GetView<HomeController> {
         Expanded(
           child: SmartRefresher(
             header: WaterDropMaterialHeader(
-              backgroundColor: ColorUtils.themeColor,
+              backgroundColor: const Color(0xFF0A7A6E),
               color: Colors.white,
             ),
             controller: refreshController,

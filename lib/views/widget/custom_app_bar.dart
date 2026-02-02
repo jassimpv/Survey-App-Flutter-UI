@@ -35,9 +35,9 @@ class CustomAppBar extends StatelessWidget {
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: <Color>[
-          ColorUtils.themeColor,
-          const Color(0xFF1E8F87),
-          ColorUtils.scaffoldColor,
+          const Color(0xFF0FA394),
+          const Color(0xFF0A7A6E),
+          const Color(0xFF0F1720),
         ],
         stops: const <double>[0, 0.55, 1],
       ),

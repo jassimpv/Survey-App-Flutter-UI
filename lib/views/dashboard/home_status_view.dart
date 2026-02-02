@@ -1,4 +1,5 @@
 import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/theme_service.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/utils/utils_helper.dart";
@@ -143,7 +144,9 @@ class _StatusText extends StatelessWidget {
   Widget build(BuildContext context) => Text(
     label,
     style: StyleUtils.kTextStyleSize16Weight400(
-      color: ColorUtils.greyTextColor,
+      color: ThemeService.isDark()
+          ? const Color(0xFF9CA3AF)
+          : ColorUtils.greyTextColor,
     ),
     textAlign: TextAlign.center,
   );

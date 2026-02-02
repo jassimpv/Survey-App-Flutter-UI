@@ -2,6 +2,7 @@ import "package:collect/controller/home_controller.dart";
 import "package:collect/routes.dart";
 import "package:collect/utils/asset_utils.dart";
 import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/theme_service.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
 import "package:collect/utils/utils_helper.dart";
@@ -23,9 +24,9 @@ class HomeHeader extends GetView<HomeController> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: <Color>[
-            ColorUtils.themeColor,
-            const Color(0xFF1E8F87),
-            ColorUtils.scaffoldColor,
+            const Color(0xFF0FA394),
+            const Color(0xFF0A7A6E),
+            const Color(0xFF0F1720),
           ],
           stops: const <double>[0, 0.55, 1],
         ),
@@ -35,7 +36,9 @@ class HomeHeader extends GetView<HomeController> {
         ),
         boxShadow: [
           BoxShadow(
-            color: ColorUtils.themeColor.withValues(alpha: 0.3),
+            color: ThemeService.isDark()
+                ? Colors.black.withOpacity(0.4)
+                : ColorUtils.themeColor.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),

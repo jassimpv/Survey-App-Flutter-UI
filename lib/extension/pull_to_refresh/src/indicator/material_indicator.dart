@@ -276,7 +276,7 @@ class _WaterDropMaterialHeaderState extends _MaterialClassicHeaderState {
 
   @override
   Widget buildContent(BuildContext context, RefreshStatus? mode) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 16),
+    padding: const EdgeInsets.symmetric(horizontal: 22),
     child: SizedBox(
       height: 100,
       child: Stack(
