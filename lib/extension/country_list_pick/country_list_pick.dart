@@ -1,5 +1,4 @@
 import "package:collect/extension/country_list_pick/country_selection_theme.dart";
-import "package:collect/extension/country_list_pick/selection_list.dart";
 import "package:collect/extension/country_list_pick/support/code_countries_en.dart";
 import "package:collect/extension/country_list_pick/support/code_country.dart";
 import "package:collect/extension/country_list_pick/support/code_countrys.dart";
@@ -78,77 +77,222 @@ class _CountryListPickState extends State<CountryListPick> {
     PreferredSizeWidget? appBar,
     CountryTheme? theme,
   ) async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (BuildContext context) => SelectionList(
-          elements,
-          selectedItem,
-          appBar: AppBar(
-            backgroundColor: ColorUtils.themeColor,
-            title: Text(
-              "selectCountryCode".tr,
-              style: StyleUtils.titleText(color: ColorUtils.whiteColor),
-            ),
-            iconTheme: const IconThemeData(color: ColorUtils.whiteColor),
-          ),
-          theme: theme,
-          countryBuilder: widget.countryBuilder,
-          useUiOverlay: widget.useUiOverlay,
-          useSafeArea: widget.useSafeArea,
-        ),
-      ),
+    final CountryCode? result = await showModalBottomSheet<CountryCode>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext ctx) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.75,
+          minChildSize: 0.45,
+          maxChildSize: 0.95,
+          expand: false,
+          builder: (BuildContext context, ScrollController scrollController) {
+            final TextEditingController searchController =
+                TextEditingController();
+
+            // cast once to typed list and keep mutable filtered outside the builder so it persists
+            final List<CountryCode> allCountries = elements.cast<CountryCode>();
+            List<CountryCode> filtered = List<CountryCode>.from(allCountries);
+
+            return StatefulBuilder(
+              builder: (BuildContext context, setState) {
+                // filtered is declared outside the builder so it survives rebuilds
+                // localFilter updates it and we call setState where needed
+                void localFilter(String s) {
+                  final String q = s.trim().toUpperCase();
+                  filtered = allCountries
+                      .where(
+                        (CountryCode e) =>
+                            e.name!.toUpperCase().contains(q) ||
+                            (e.dialCode ?? '').contains(q) ||
+                            (e.code ?? '').toUpperCase().contains(q),
+                      )
+                      .toList();
+                }
+
+                // After first build, scroll list to selected index once
+
+                return Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                    ),
+                  ),
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        width: 40,
+                        height: 4,
+                        margin: const EdgeInsets.only(bottom: 12),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(999),
+                        ),
+                      ),
+
+                      // show currently selected country at the top
+                      if (selectedItem != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Card(
+                            elevation: 0,
+                            color: Colors.grey.shade50,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: ListTile(
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.asset(
+                                  "assets/${selectedItem!.flagUri!}",
+                                  width: 36,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text(selectedItem!.name ?? ''),
+                              trailing: Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: ColorUtils.themeColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.check,
+                                  size: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              child: TextField(
+                                controller: searchController,
+                                onChanged: (String v) {
+                                  setState(() {
+                                    localFilter(v);
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  prefixIcon: const Icon(Icons.search),
+                                  hintText: "search".tr,
+                                  filled: true,
+                                  fillColor: Colors.grey.shade100,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 12,
+                                    horizontal: 12,
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                    borderSide: BorderSide.none,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Expanded(
+                        child: ListView.separated(
+                          controller: scrollController,
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          itemBuilder: (BuildContext context, int index) {
+                            final CountryCode c = filtered[index];
+                            final bool isSelected =
+                                c.code == selectedItem!.code;
+                            return ListTile(
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(6),
+                                child: Image.asset(
+                                  "assets/${c.flagUri!}",
+                                  width: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              title: Text(c.name ?? ''),
+                              subtitle: Text(c.dialCode ?? ''),
+                              trailing: isSelected
+                                  ? Container(
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        color: ColorUtils.themeColor,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: const Icon(
+                                        Icons.check,
+                                        size: 16,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                  : null,
+                              onTap: () => Navigator.pop(context, c),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(height: 1),
+                          itemCount: filtered.length,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
     );
 
-    setState(() {
-      selectedItem = result ?? selectedItem;
-      widget.onChanged!(result ?? selectedItem);
-    });
+    if (result != null) {
+      setState(() {
+        selectedItem = result;
+        widget.onChanged!(result);
+      });
+    }
   }
 
   @override
-  Widget build(BuildContext context) => TextButton(
-    onPressed: () {
+  Widget build(BuildContext context) => InkWell(
+    onTap: () {
       _awaitFromSelectScreen(context, widget.appBar, widget.theme);
     },
     child: widget.pickerBuilder != null
         ? widget.pickerBuilder!(context, selectedItem)
-        : Flex(
-            direction: Axis.horizontal,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              if (widget.theme?.isShowFlag ?? true)
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
+        : Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                if (widget.theme?.isShowFlag ?? true)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(3),
                     child: Image.asset(
                       "assets/${selectedItem!.flagUri!}",
-                      width: 32,
+                      width: 30,
+                      height: 20,
+                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
-              if (widget.theme?.isShowCode ?? true)
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(
-                      selectedItem.toString(),
-                      style: StyleUtils.kTextStyleSize17Weight400(
-                        color: Colors.black,
-                      ),
-                    ),
+                Text(
+                  widget.theme?.isShowCode ?? true
+                      ? ' ${selectedItem!.dialCode} '
+                      : '',
+                  style: StyleUtils.kTextStyleSize16Weight500(
+                    color: Colors.black,
                   ),
                 ),
-              if (widget.theme?.isShowTitle ?? true)
-                Flexible(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Text(selectedItem!.toCountryStringOnly()),
-                  ),
-                ),
-              if (widget.theme?.isDownIcon ?? true)
-                const Flexible(child: Icon(Icons.keyboard_arrow_down)),
-            ],
+              ],
+            ),
           ),
   );
 }
