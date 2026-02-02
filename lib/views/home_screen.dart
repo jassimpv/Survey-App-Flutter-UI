@@ -30,6 +30,31 @@ class HomeScreen extends GetView<HomeController> {
       showLater: false,
       child: Scaffold(
         backgroundColor: ColorUtils.scaffoldColor,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Obx(
+          () => BottomNavigationView(
+            selectedIndex: controller.selectedMenuIndex.value,
+            onItemClick: (int index) {
+              print("Tapped on index: $index");
+              final List<String> routes = <String>[
+                Destination.dashboard.route,
+                Destination.completedTasks.route,
+                Destination.profile.route,
+              ];
+
+              // Avoid pushing if already on the selected tab
+              if (controller.selectedMenuIndex.value == index) return;
+
+              // Replace current route in the nested navigator
+              Get.nestedKey(
+                1,
+              )!.currentState!.pushReplacementNamed(routes[index]);
+
+              // Update the selected tab index
+              controller.selectedMenuIndex.value = index;
+            },
+          ),
+        ),
         body: Column(
           children: <Widget>[
             Expanded(
@@ -42,29 +67,6 @@ class HomeScreen extends GetView<HomeController> {
                 // Generate a route based on Destination (see destination.dart above)
                 onGenerateRoute: Destination.getPage,
                 observers: <NavigatorObserver>[ViewNavigatorObserver()],
-              ),
-            ),
-            Obx(
-              () => BottomNavigationView(
-                selectedIndex: controller.selectedMenuIndex.value,
-                onItemClick: (int index) {
-                  final List<String> routes = <String>[
-                    Destination.dashboard.route,
-                    Destination.completedTasks.route,
-                    Destination.profile.route,
-                  ];
-
-                  // Avoid pushing if already on the selected tab
-                  if (controller.selectedMenuIndex.value == index) return;
-
-                  // Replace current route in the nested navigator
-                  Get.nestedKey(
-                    1,
-                  )!.currentState!.pushReplacementNamed(routes[index]);
-
-                  // Update the selected tab index
-                  controller.selectedMenuIndex.value = index;
-                },
               ),
             ),
           ],

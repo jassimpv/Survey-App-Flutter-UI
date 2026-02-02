@@ -3,6 +3,7 @@ import "package:shared_preferences/shared_preferences.dart";
 class PreferenceUtils {
   static const String languageCode = "languageCode";
   static const String accessToken = "accessToken";
+  static const String themeMode = "themeMode";
 
   static Future<SharedPreferences> _getPrefs() =>
       SharedPreferences.getInstance();

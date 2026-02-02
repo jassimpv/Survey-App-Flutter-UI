@@ -7,6 +7,7 @@ import "package:collect/utils/utils_helper.dart";
 import "package:collect/views/widget/task_dialog.dart";
 import "package:collect/views/widget/zoom_tap.dart";
 import "package:flutter/material.dart";
+import "dart:ui" as ui;
 import "package:get/get.dart";
 
 class TaskCard extends StatelessWidget {
@@ -41,30 +42,29 @@ class TaskCard extends StatelessWidget {
         barrierDismissible: false,
       );
     },
-    child: Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: ongoingTrip ? ColorUtils.lightGreen : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: ongoingTrip
-              ? _ongoingColor()
-              : ColorUtils.themeColor.withValues(alpha: 0.12),
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: ongoingTrip
-                ? ColorUtils.green.withValues(alpha: 0.1)
-                : ColorUtils.themeColor.withValues(alpha: 0.08),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.72),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.white.withOpacity(0.08)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 10,
+                offset: const Offset(0, 6),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[_buildHeader(), 12.heightBox, _buildBody()],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[_buildHeader(), 12.heightBox, _buildBody()],
+          ),
+        ),
       ),
     ),
   );
@@ -97,24 +97,23 @@ class TaskCard extends StatelessWidget {
         : ColorUtils.themeColor;
 
     return Container(
-      height: 52,
-      width: 52,
+      height: 56,
+      width: 56,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: <Color>[
-            ColorUtils.themeColor.withValues(alpha: 0.18),
-            Colors.white,
+            Colors.white.withOpacity(0.9),
+            (ongoingTrip ? ColorUtils.darkGreen : ColorUtils.themeColor)
+                .withOpacity(0.06),
           ],
         ),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: ColorUtils.themeColor.withValues(alpha: 0.12),
-        ),
+        border: Border.all(color: Colors.white.withOpacity(0.12)),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: ColorUtils.themeColor.withValues(alpha: 0.15),
+            color: Colors.black.withOpacity(0.06),
             blurRadius: 12,
             offset: const Offset(0, 6),
           ),
@@ -145,60 +144,72 @@ class TaskCard extends StatelessWidget {
   );
 
   Widget _buildBody() => Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              Icon(
-                Icons.location_on,
-                color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
-                size: 18,
-              ),
-              8.widthBox,
-              Text(
-                bookingData.restaurantAddress,
-                style: StyleUtils.kTextStyleSize14Weight500(
-                  color: ongoingTrip
-                      ? ColorUtils.green.withValues(alpha: 0.8)
-                      : ColorUtils.darkBlue.withValues(alpha: 0.8),
+      Expanded(
+        flex: 3,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Icon(
+                  Icons.location_on,
+                  color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
+                  size: 18,
                 ),
-              ),
-            ],
-          ),
-          10.heightBox,
-          _buildLocationText(
-            "last collected".tr,
-            bookingData.lastVistedDate.createdAt,
-          ),
-        ],
+                8.widthBox,
+                Expanded(
+                  child: Text(
+                    bookingData.restaurantAddress,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: StyleUtils.kTextStyleSize14Weight500(
+                      color: ongoingTrip
+                          ? ColorUtils.green.withValues(alpha: 0.8)
+                          : ColorUtils.darkBlue.withValues(alpha: 0.8),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            10.heightBox,
+            _buildLocationText(
+              "last collected".tr,
+              bookingData.lastVistedDate.createdAt,
+            ),
+          ],
+        ),
       ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          PassengerCount(emirate: bookingData.emirate),
-          10.heightBox,
-          Row(
-            children: <Widget>[
-              Image.asset(
-                AssetUtils.getIcons("ic_ride_list"),
-                height: 26,
-                color: ColorUtils.backgroundDark,
-              ),
-              10.widthBox,
-              Text(
-                Utils.replaceFarsiNumber(bookingData.distance),
-                style: StyleUtils.kTextStyleSize14Weight500(
-                  color: ongoingTrip
-                      ? ColorUtils.green.withValues(alpha: 0.8)
-                      : ColorUtils.darkBlue.withValues(alpha: 0.8),
+      8.widthBox,
+      Expanded(
+        flex: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            PassengerCount(emirate: bookingData.emirate),
+            10.heightBox,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Image.asset(
+                  AssetUtils.getIcons("ic_ride_list"),
+                  height: 26,
+                  color: ColorUtils.backgroundDark,
                 ),
-              ),
-            ],
-          ),
-        ],
+                10.widthBox,
+                Text(
+                  Utils.replaceFarsiNumber(bookingData.distance),
+                  style: StyleUtils.kTextStyleSize14Weight500(
+                    color: ongoingTrip
+                        ? ColorUtils.green.withValues(alpha: 0.8)
+                        : ColorUtils.darkBlue.withValues(alpha: 0.8),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     ],
   );
@@ -255,23 +266,6 @@ class TaskCard extends StatelessWidget {
       ),
     ],
   );
-
-  // Helpers
-  Color _ongoingColor() {
-    switch (currentStatus) {
-      case "dow":
-        return const Color(0xffA88FF3);
-      case "dpp":
-        return const Color(0xffECEC00);
-      case "Trip_started":
-      case "route_update":
-        return const Color(0xff12B76A);
-      case "complete_trip":
-        return const Color(0xff5B5B77);
-      default:
-        return Colors.transparent;
-    }
-  }
 }
 
 class PassengerCount extends StatelessWidget {
@@ -282,24 +276,20 @@ class PassengerCount extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: Colors.white.withOpacity(0.9),
       borderRadius: BorderRadius.circular(12),
-      border: Border.all(
-        color: ColorUtils.secondaryColor.withValues(alpha: 0.35),
-      ),
+      border: Border.all(color: ColorUtils.darkGreen.withValues(alpha: 0.12)),
       boxShadow: <BoxShadow>[
         BoxShadow(
-          color: ColorUtils.secondaryColor.withValues(alpha: 0.18),
-          blurRadius: 10,
+          color: Colors.black.withOpacity(0.04),
+          blurRadius: 8,
           offset: const Offset(0, 4),
         ),
       ],
     ),
     child: Text(
       emirate,
-      style: StyleUtils.kTextStyleSize14Weight600(
-        color: ColorUtils.secondaryColor,
-      ),
+      style: StyleUtils.kTextStyleSize14Weight600(color: ColorUtils.darkGreen),
     ),
   );
 }

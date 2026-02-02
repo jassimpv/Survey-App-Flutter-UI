@@ -3,8 +3,9 @@ import "package:collect/routes.dart";
 import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
-import "package:collect/utils/utils_helper.dart";
 import "package:collect/views/widget/custom_app_bar.dart";
+import "package:collect/views/widget/language_widget.dart";
+import "package:collect/utils/theme_service.dart";
 import "package:collect/views/widget/zoom_tap.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
@@ -60,15 +61,9 @@ class ProfileScreen extends GetView<ProfileController> {
                   ],
                 ),
                 child: Column(
-                  children: <Widget>[
-                    _buildProfileCard(),
-                    16.heightBox,
-                    _buildStatsRow(),
-                  ],
+                  children: <Widget>[_buildProfileCard(), 16.heightBox],
                 ),
               ),
-              20.heightBox,
-              _buildSupervisorCard(),
               20.heightBox,
               _buildInfoContainer(context),
               20.heightBox,
@@ -133,18 +128,6 @@ class ProfileScreen extends GetView<ProfileController> {
           ],
         ),
       ),
-      IconButton(
-        icon: const Icon(Icons.edit_outlined, color: ColorUtils.themeColor),
-        onPressed: () {},
-      ),
-    ],
-  );
-
-  Widget _buildStatsRow() => Row(
-    children: <Widget>[
-      infoCard("Total Weight".tr, "12 KG"),
-      12.widthBox,
-      infoCard("Total Locations".tr, "05"),
     ],
   );
 
@@ -168,11 +151,144 @@ class ProfileScreen extends GetView<ProfileController> {
           child: _buildInfoRow(Icons.contact_emergency, "contact_us".tr),
         ),
         _divider(),
+
+        // Terms
         ZoomTapAnimation(
           onTap: () => Get.toNamed(AppRouter.termsAndConditionScreen),
           child: _buildInfoRow(Icons.notes, "terms_and_condition".tr),
         ),
         _divider(),
+
+        // Language row (inline widget)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      ColorUtils.themeColor.withValues(alpha: 0.15),
+                      Colors.white,
+                    ],
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.language,
+                  size: 22,
+                  color: ColorUtils.themeColor,
+                ),
+              ),
+              12.widthBox,
+              Expanded(
+                child: Text(
+                  "language".tr,
+                  style: StyleUtils.kTextStyleSize18Weight500(
+                    color: ColorUtils.headingColor,
+                  ),
+                ),
+              ),
+              const LanguageWidegt(),
+            ],
+          ),
+        ),
+        _divider(),
+
+        // Appearance / Theme row
+        ZoomTapAnimation(
+          onTap: () => ThemeService.toggleTheme(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: <Color>[
+                        ColorUtils.themeColor.withValues(alpha: 0.15),
+                        Colors.white,
+                      ],
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.brightness_6,
+                    size: 22,
+                    color: ColorUtils.themeColor,
+                  ),
+                ),
+                12.widthBox,
+                Expanded(
+                  child: Text(
+                    "appearance".tr,
+                    style: StyleUtils.kTextStyleSize18Weight500(
+                      color: ColorUtils.headingColor,
+                    ),
+                  ),
+                ),
+                ValueListenableBuilder<ThemeMode>(
+                  valueListenable: ThemeService.themeModeNotifier,
+                  builder:
+                      (BuildContext context, ThemeMode mode, Widget? child) =>
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: mode == ThemeMode.dark
+                                  ? ColorUtils.darkGreen
+                                  : Colors.white,
+                              borderRadius: BorderRadius.circular(999),
+                              border: Border.all(
+                                color: ColorUtils.themeColor.withValues(
+                                  alpha: 0.06,
+                                ),
+                              ),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.04),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Icon(
+                                  mode == ThemeMode.dark
+                                      ? Icons.nightlight_round
+                                      : Icons.wb_sunny,
+                                  size: 18,
+                                  color: mode == ThemeMode.dark
+                                      ? Colors.white
+                                      : ColorUtils.themeColor,
+                                ),
+                                8.widthBox,
+                                Text(
+                                  mode == ThemeMode.dark ? 'Dark' : 'Light',
+                                  style: StyleUtils.kTextStyleSize14Weight600(
+                                    color: mode == ThemeMode.dark
+                                        ? Colors.white
+                                        : ColorUtils.themeColor,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        _divider(),
+
         ZoomTapAnimation(
           onTap: () async {
             await _showConfirmationDeleteDialog(context);
@@ -193,71 +309,6 @@ class ProfileScreen extends GetView<ProfileController> {
             "logout".tr,
             color: ColorUtils.red,
           ),
-        ),
-      ],
-    ),
-  );
-
-  Widget _buildSupervisorCard() => Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        colors: <Color>[
-          ColorUtils.themeColor.withValues(alpha: 0.1),
-          Colors.white,
-        ],
-      ),
-      borderRadius: BorderRadius.circular(28),
-      border: Border.all(color: ColorUtils.themeColor.withValues(alpha: 0.2)),
-      boxShadow: <BoxShadow>[
-        BoxShadow(
-          color: ColorUtils.themeColor.withValues(alpha: 0.12),
-          blurRadius: 18,
-          offset: const Offset(0, 6),
-        ),
-      ],
-    ),
-    child: Row(
-      children: <Widget>[
-        Container(
-          width: 56,
-          height: 56,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: ColorUtils.themeColor,
-          ),
-          child: const Icon(
-            CupertinoIcons.person,
-            color: Colors.white,
-            size: 30,
-          ),
-        ),
-        12.widthBox,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                "yourSupervisor".tr,
-                style: StyleUtils.kTextStyleSize14Weight400(
-                  color: ColorUtils.greyTextColor,
-                ),
-              ),
-              4.heightBox,
-              Text(
-                "MOHAMMED",
-                style: StyleUtils.kTextStyleSize18Weight600(
-                  color: ColorUtils.headingColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-        _contactIcon(icon: Icons.call, onTap: () => Utils.dail("123456789")),
-        8.widthBox,
-        _contactIcon(
-          icon: Icons.message,
-          onTap: () => Utils.sendMessage("123456789"),
         ),
       ],
     ),
@@ -382,66 +433,9 @@ class ProfileScreen extends GetView<ProfileController> {
     ),
   );
 
-  Widget infoCard(String title, String value) => Expanded(
-    child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: <Color>[
-            ColorUtils.themeColor.withValues(alpha: 0.15),
-            Colors.white,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: ColorUtils.themeColor.withValues(alpha: 0.2)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: StyleUtils.kTextStyleSize14Weight400(
-              color: ColorUtils.greyTextColor,
-            ),
-          ),
-          6.heightBox,
-          Text(
-            Utils.replaceFarsiNumber(value),
-            style: StyleUtils.kTextStyleSize24Weight600(
-              color: ColorUtils.headingColor,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-
   Widget _divider() => Container(
     height: 1,
     margin: const EdgeInsets.symmetric(horizontal: 20),
     color: ColorUtils.themeColor.withValues(alpha: 0.08),
   );
-
-  Widget _contactIcon({required IconData icon, required VoidCallback onTap}) =>
-      ZoomTapAnimation(
-        onTap: onTap,
-        child: Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: ColorUtils.themeColor.withValues(alpha: 0.12),
-                blurRadius: 10,
-                offset: const Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Icon(icon, color: ColorUtils.themeColor),
-        ),
-      );
 }

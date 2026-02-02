@@ -1,7 +1,7 @@
-import "package:collect/utils/asset_utils.dart";
 import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
@@ -18,57 +18,145 @@ class BottomNavigationView extends StatefulWidget {
   State<BottomNavigationView> createState() => _BottomNavigationViewState();
 }
 
-class _BottomNavigationViewState extends State<BottomNavigationView> {
-  final List<Map<String, String>> homeMenus = <Map<String, String>>[
-    <String, String>{"title": "home", "icon": "ic_home"},
-    <String, String>{"title": "collectionReport", "icon": "ic_ride_list"},
-    <String, String>{"title": "user", "icon": "ic_user"},
+class _BottomNavigationViewState extends State<BottomNavigationView>
+    with SingleTickerProviderStateMixin {
+  final List<Map<String, dynamic>> homeMenus = [
+    {"title": "Home", "icon": CupertinoIcons.home},
+    {"title": "Tasks", "icon": CupertinoIcons.list_bullet},
+    {"title": "Settings", "icon": CupertinoIcons.settings},
   ];
 
+  late final AnimationController _controller;
+  late final Animation<Offset> _offsetAnimation;
+  late final Animation<double> _opacityAnimation;
+  late final Animation<double> _scaleAnimation;
+
   @override
-  Widget build(BuildContext context) => Container(
-    padding: EdgeInsets.only(
-      left: 20,
-      right: 20,
-      top: 12,
-      bottom: MediaQuery.viewPaddingOf(context).bottom,
-    ),
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: <Color>[
-          ColorUtils.themeColor.withValues(alpha: 0.9),
-          ColorUtils.themeColor,
-        ],
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 640),
+    );
+
+    _offsetAnimation = Tween<Offset>(
+      begin: const Offset(0, 0.28),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutBack));
+
+    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
       ),
-      borderRadius: const BorderRadius.only(
-        topLeft: Radius.circular(32),
-        topRight: Radius.circular(32),
-      ),
-      boxShadow: <BoxShadow>[
-        BoxShadow(
-          offset: const Offset(0, -6),
-          color: ColorUtils.themeColor.withValues(alpha: 0.25),
-          blurRadius: 20,
-        ),
-      ],
-    ),
-    child: Row(
-      children: List.generate(
-        homeMenus.length,
-        (int index) => Expanded(
-          child: InkWell(
-            borderRadius: BorderRadius.circular(24),
-            onTap: () => widget.onItemClick?.call(index),
-            child: _HomeItemView(
-              title: homeMenus[index]["title"].toString().tr,
-              icon: homeMenus[index]["icon"]!,
-              isSelected: widget.selectedIndex == index,
+    );
+
+    _scaleAnimation = Tween<double>(
+      begin: 0.96,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.elasticOut));
+
+    // Slight delay so the nav animates after build
+    Future.microtask(() => _controller.forward());
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideTransition(
+      position: _offsetAnimation,
+      child: FadeTransition(
+        opacity: _opacityAnimation,
+        child: ScaleTransition(
+          scale: _scaleAnimation,
+          child: Container(
+            height: 64,
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[
+                  ColorUtils.themeColor.withValues(alpha: 0.95),
+                  ColorUtils.themeColor,
+                ],
+              ),
+              borderRadius: BorderRadius.circular(28),
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  offset: const Offset(0, 10),
+                  color: ColorUtils.themeColor.withValues(alpha: 0.25),
+                  blurRadius: 30,
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: List.generate(
+                homeMenus.length,
+                (int index) => Expanded(
+                  child: Center(
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(24),
+                      onTap: () => widget.onItemClick?.call(index),
+                      child: _Pressable(
+                        child: _HomeItemView(
+                          title: homeMenus[index]["title"].toString().tr,
+                          icon: homeMenus[index]["icon"]!,
+                          isSelected: widget.selectedIndex == index,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _Pressable extends StatefulWidget {
+  const _Pressable({required this.child});
+  final Widget child;
+
+  @override
+  State<_Pressable> createState() => _PressableState();
+}
+
+class _PressableState extends State<_Pressable> {
+  bool _pressed = false;
+
+  void _onPointerDown(PointerDownEvent e) => setState(() => _pressed = true);
+
+  void _onPointerUp(PointerUpEvent e) {
+    Future.delayed(const Duration(milliseconds: 80), () {
+      if (mounted) setState(() => _pressed = false);
+    });
+  }
+
+  void _onPointerCancel(PointerCancelEvent e) =>
+      setState(() => _pressed = false);
+
+  @override
+  Widget build(BuildContext context) => Listener(
+    behavior: HitTestBehavior.translucent,
+    onPointerDown: _onPointerDown,
+    onPointerUp: _onPointerUp,
+    onPointerCancel: _onPointerCancel,
+    child: AnimatedScale(
+      scale: _pressed ? 0.96 : 1.0,
+      duration: const Duration(milliseconds: 120),
+      curve: Curves.easeOut,
+      child: widget.child,
     ),
   );
 }
@@ -81,41 +169,66 @@ class _HomeItemView extends StatelessWidget {
   });
   final bool isSelected;
   final String title;
-  final String icon;
+  final IconData icon;
 
   @override
-  Widget build(BuildContext context) => AnimatedContainer(
-    duration: const Duration(milliseconds: 250),
-    curve: Curves.easeOut,
-    margin: const EdgeInsets.symmetric(horizontal: 6),
-    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-    decoration: BoxDecoration(
-      color: isSelected
-          ? Colors.white.withValues(alpha: 0.15)
-          : Colors.transparent,
-      borderRadius: BorderRadius.circular(24),
-      border: isSelected
-          ? Border.all(color: Colors.white.withValues(alpha: 0.3))
-          : null,
-    ),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Image.asset(
-          AssetUtils.getIcons(icon),
-          height: 24,
-          width: 24,
-          color: isSelected ? Colors.white : ColorUtils.greyLightTextColor,
+  Widget build(BuildContext context) {
+    return Center(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOutCubic,
+        margin: const EdgeInsets.symmetric(horizontal: 6),
+        padding: EdgeInsets.symmetric(
+          horizontal: isSelected ? 14 : 8,
+          vertical: isSelected ? 10 : 8,
         ),
-        6.heightBox,
-        Text(
-          title,
-          textAlign: TextAlign.center,
-          style: StyleUtils.kTextStyleSize12Weight600(
-            color: isSelected ? Colors.white : ColorUtils.greyMenuTextColor,
-          ),
+        constraints: BoxConstraints(
+          minWidth: isSelected ? 120 : 56,
+          maxWidth: isSelected ? 180 : 56,
+          minHeight: 48,
         ),
-      ],
-    ),
-  );
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.white : Colors.transparent,
+          borderRadius: BorderRadius.circular(999),
+          boxShadow: isSelected
+              ? <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.08),
+                    blurRadius: 12,
+                    offset: const Offset(0, 6),
+                  ),
+                ]
+              : null,
+          border: isSelected
+              ? Border.all(color: Colors.white.withOpacity(0.18))
+              : null,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              icon,
+              size: 20,
+              color: isSelected
+                  ? ColorUtils.themeColor
+                  : Colors.white.withOpacity(0.9),
+            ),
+            if (isSelected) ...[
+              10.widthBox,
+              Flexible(
+                child: Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  style: StyleUtils.kTextStyleSize14Weight600(
+                    color: ColorUtils.themeColor,
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
 }

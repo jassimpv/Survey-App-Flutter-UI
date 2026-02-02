@@ -93,7 +93,13 @@ class HomeHeader extends GetView<HomeController> {
             color: Colors.white.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Row(children: <Widget>[const LanguageWidegt()]),
+          child: Row(
+            children: <Widget>[
+              const LanguageWidegt(),
+              8.widthBox,
+              _buildNotificationBadge(),
+            ],
+          ),
         ),
       ],
     ),
