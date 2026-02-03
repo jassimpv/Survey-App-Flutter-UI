@@ -292,7 +292,7 @@ class _CountryListPickState extends State<CountryListPick> {
                       ? ' ${selectedItem!.dialCode} '
                       : '',
                   style: StyleUtils.kTextStyleSize16Weight500(
-                    color: ThemeColors.blackColor,
+                    color: ThemeColors.blackWhite,
                   ),
                 ),
               ],

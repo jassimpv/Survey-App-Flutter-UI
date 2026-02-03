@@ -5,6 +5,7 @@ import "package:collect/core/utils/textstyle_input.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:pin_code_fields/pin_code_fields.dart";
+import 'dart:ui';
 
 class OTPView extends StatefulWidget {
   const OTPView({required this.onSubmit, super.key, this.otp});
@@ -61,44 +62,52 @@ class _OTPViewState extends State<OTPView> {
       final double fieldHeight = (fieldWidth * 1.1).clamp(48.0, 80.0);
       final double fontSize = (fieldWidth * 0.36).clamp(18.0, 28.0);
 
-      final double totalWidgetWidth = fieldWidth * 4 + desiredSpacing * 3;
-
       return Center(
-        child: SizedBox(
-          width: totalWidgetWidth,
-          child: PinCodeTextField(
-            appContext: context,
-            pastedTextStyle: StyleUtils.kTextStyleOtpPasted(),
-            length: 4,
-            obscureText: false,
-            animationType: AnimationType.fade,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            pinTheme: PinTheme(
-              shape: PinCodeFieldShape.box,
-              borderRadius: BorderRadius.circular(16),
-              fieldHeight: fieldHeight,
-              fieldWidth: fieldWidth,
-              inactiveColor: Colors.transparent,
-              selectedColor: Colors.transparent,
-              activeColor: Colors.transparent,
-              errorBorderColor: ThemeColors.greyLightTextColor,
-              inactiveFillColor: ThemeColors.scaffoldColor,
-              selectedFillColor: ThemeColors.surface,
-              activeFillColor: ThemeColors.surface,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(24),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: PinCodeTextField(
+              appContext: context,
+              pastedTextStyle: StyleUtils.kTextStyleOtpPasted(),
+              length: 4,
+              obscureText: false,
+              animationType: AnimationType.fade,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              pinTheme: PinTheme(
+                shape: PinCodeFieldShape.box,
+                borderRadius: BorderRadius.circular(16),
+                fieldHeight: fieldHeight,
+                fieldWidth: fieldWidth,
+                inactiveColor: Colors.transparent,
+                selectedColor: Colors.transparent,
+                activeColor: Colors.transparent,
+                errorBorderColor: ThemeColors.primary,
+                inactiveFillColor: ThemeColors.blackWhite.withValues(
+                  alpha: 0.5,
+                ),
+                selectedFillColor: ThemeColors.blackWhite.withValues(
+                  alpha: 0.8,
+                ),
+                activeFillColor: ThemeColors.blackWhite.withValues(alpha: 0.8),
+              ),
+              enableActiveFill: true,
+              cursorColor: ThemeColors.primary,
+              animationDuration: const Duration(milliseconds: 300),
+              textStyle: StyleUtils.kTextStyleOtpInput(
+                fontSize: fontSize,
+                color: ThemeColors.primaryWhite,
+              ),
+              backgroundColor: Colors.transparent,
+              errorAnimationController: errorController,
+              controller: _textEditingController,
+              keyboardType: TextInputType.number,
+              onCompleted: (String v) {
+                widget.onSubmit.call(v);
+              },
+              onChanged: (String value) {},
+              beforeTextPaste: (String? text) => true,
             ),
-            enableActiveFill: true,
-            cursorColor: ThemeColors.themeColor,
-            animationDuration: const Duration(milliseconds: 300),
-            textStyle: StyleUtils.kTextStyleOtpInput(fontSize: fontSize),
-            backgroundColor: Colors.transparent,
-            errorAnimationController: errorController,
-            controller: _textEditingController,
-            keyboardType: TextInputType.number,
-            onCompleted: (String v) {
-              widget.onSubmit.call(v);
-            },
-            onChanged: (String value) {},
-            beforeTextPaste: (String? text) => true,
           ),
         ),
       );

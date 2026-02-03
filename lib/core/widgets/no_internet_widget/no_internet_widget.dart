@@ -43,7 +43,7 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.topRight,
-                  child: LanguageWidget(isHome: true),
+                  child: LanguageWidget(isHome: false),
                 ),
                 Expanded(
                   child: LayoutBuilder(

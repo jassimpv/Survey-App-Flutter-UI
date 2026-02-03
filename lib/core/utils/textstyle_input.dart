@@ -309,12 +309,14 @@ class StyleUtils {
     fontFamily: "Outfit",
   );
 
-  static TextStyle kTextStyleOtpInput({double fontSize = 16}) => TextStyle(
-    fontSize: fontSize,
-    height: 1.2,
-    fontWeight: FontWeight.w600,
-    fontFamily: "Outfit",
-  );
+  static TextStyle kTextStyleOtpInput({double fontSize = 16, Color? color}) =>
+      TextStyle(
+        fontSize: fontSize,
+        height: 1.2,
+        fontWeight: FontWeight.w600,
+        fontFamily: "Outfit",
+        color: color,
+      );
 
   // Theme Widget Style
   static TextStyle kTextStyleThemeMode({
@@ -327,8 +329,10 @@ class StyleUtils {
   );
 
   // Language Widget Style
-  static TextStyle kTextStyleLanguageBadge() => TextStyle(
-    color: ThemeColors.blackWhite.withValues(alpha: 0.9),
+  static TextStyle kTextStyleLanguageBadge({bool isHome = true}) => TextStyle(
+    color: isHome
+        ? ThemeColors.blackWhite.withValues(alpha: 0.9)
+        : ThemeColors.whiteColor,
     fontSize: 10,
     fontWeight: FontWeight.w700,
     fontFamily: "Outfit",

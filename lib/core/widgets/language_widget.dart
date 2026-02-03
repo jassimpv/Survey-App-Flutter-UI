@@ -37,7 +37,7 @@ class LanguageController extends GetxController {
 }
 
 class LanguageWidget extends StatelessWidget {
-  LanguageWidget({super.key, this.isHome = false});
+  LanguageWidget({super.key, this.isHome = true});
   final bool isHome;
   final LanguageController _controller = Get.put(LanguageController());
 
@@ -92,7 +92,9 @@ class LanguageWidget extends StatelessWidget {
                           curve: Curves.easeInOut,
                           child: Text(
                             _controller.isEnglish.value ? 'EN' : 'AR',
-                            style: StyleUtils.kTextStyleLanguageBadge(),
+                            style: StyleUtils.kTextStyleLanguageBadge(
+                              isHome: isHome,
+                            ),
                           ),
                         ),
                       ),
