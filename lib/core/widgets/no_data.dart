@@ -30,7 +30,7 @@ class NoData extends StatelessWidget {
         Text(
           text,
           style: StyleUtils.kTextStyleSize24Weight500(
-            color: const Color(0xff182E70),
+            color: ThemeColors.themeColor,
           ),
         ),
         15.heightBox,
@@ -39,7 +39,7 @@ class NoData extends StatelessWidget {
           child: Text(
             subText,
             style: StyleUtils.kTextStyleSize16Weight400(
-              color: const Color(0xff182E70).withValues(alpha: 0.5),
+              color: ThemeColors.themeColor.withValues(alpha: 0.5),
             ),
             textAlign: TextAlign.center,
           ),

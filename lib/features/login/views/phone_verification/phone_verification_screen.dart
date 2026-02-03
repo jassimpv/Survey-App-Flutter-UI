@@ -44,18 +44,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   Widget build(BuildContext context) => Scaffold(
     backgroundColor: Colors.transparent,
     body: Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomCenter,
-          colors: <Color>[
-            const Color(0xFF0FA394),
-            const Color(0xFF0A7A6E),
-            const Color(0xFF0F1720),
-          ],
-          stops: const <double>[0, 0.45, 1],
-        ),
-      ),
+      decoration: BoxDecoration(gradient: ThemeColors.appBarGradient),
       child: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: SafeArea(
@@ -150,12 +139,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                           width: 36,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            gradient: LinearGradient(
-                                              colors: <Color>[
-                                                ThemeColors.themeColor,
-                                                const Color(0xFF1E8F87),
-                                              ],
-                                            ),
+                                            gradient:
+                                                ThemeColors.primaryGradient,
                                           ),
                                           child: const Icon(
                                             Icons.lock_open_rounded,
@@ -306,14 +291,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                           vertical: 10,
                                                         ),
                                                     decoration: BoxDecoration(
-                                                      gradient:
-                                                          const LinearGradient(
-                                                            colors: <Color>[
-                                                              ThemeColors
-                                                                  .themeColor,
-                                                              Color(0xFF1E8F87),
-                                                            ],
-                                                          ),
+                                                      gradient: ThemeColors
+                                                          .primaryGradient,
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                             16,

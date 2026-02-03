@@ -75,6 +75,20 @@ class ThemeColors {
         : <Color>[const Color(0xFFe0f7f7), Colors.white],
   );
 
+  // APP BAR & HEADER GRADIENTS
+  static LinearGradient get appBarGradient => const LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: <Color>[Color(0xFF0FA394), Color(0xFF0A7A6E), Color(0xFF0F1720)],
+    stops: <double>[0, 0.55, 1],
+  );
+
+  static LinearGradient get bottomNavGradient => const LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: <Color>[Color(0xFF0FA394), Color(0xFF0A7A6E)],
+  );
+
   // ALIASES FOR COMMON USE CASES (forward compatibility)
   static Color get background => onSurface;
   static Color get cardBackground => surface;
@@ -121,6 +135,12 @@ class ThemeColors {
   // Status & semantic colors
   static const Color completedColor = Color(0xFF12B76A);
   static const Color red = Color(0xFFFF0000);
+
+  // Card Status Colors
+  static const Color statusPurple = Color(0xffA88FF3);
+  static const Color statusYellow = Color(0xffECEC00);
+  static const Color statusGreen = Color(0xff12B76A);
+  static const Color statusGray = Color(0xff5B5B77);
 
   // Custom colors
   static const Color darkGray = Color(0xff131A37);

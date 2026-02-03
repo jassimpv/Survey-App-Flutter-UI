@@ -80,14 +80,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
             height: 64,
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: <Color>[
-                  const Color(0xFF0FA394).withValues(alpha: 0.9),
-                  const Color(0xFF0A7A6E),
-                ],
-              ),
+              gradient: ThemeColors.bottomNavGradient,
               borderRadius: BorderRadius.circular(28),
               boxShadow: <BoxShadow>[
                 BoxShadow(

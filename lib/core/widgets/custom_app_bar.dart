@@ -32,16 +32,7 @@ class CustomAppBar extends StatelessWidget {
         bottomLeft: Radius.circular(30),
         bottomRight: Radius.circular(30),
       ),
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: <Color>[
-          const Color(0xFF0FA394),
-          const Color(0xFF0A7A6E),
-          const Color(0xFF0F1720),
-        ],
-        stops: const <double>[0, 0.55, 1],
-      ),
+      gradient: ThemeColors.appBarGradient,
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),

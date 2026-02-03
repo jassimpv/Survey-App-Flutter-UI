@@ -155,14 +155,14 @@ class SurveyCard extends StatelessWidget {
   Color _ongoingColor() {
     switch (currentStatus) {
       case "dow":
-        return const Color(0xffA88FF3);
+        return ThemeColors.statusPurple;
       case "dpp":
-        return const Color(0xffECEC00);
+        return ThemeColors.statusYellow;
       case "Trip_started":
       case "route_update":
-        return const Color(0xff12B76A);
+        return ThemeColors.statusGreen;
       case "complete_trip":
-        return const Color(0xff5B5B77);
+        return ThemeColors.statusGray;
       default:
         return Colors.transparent;
     }

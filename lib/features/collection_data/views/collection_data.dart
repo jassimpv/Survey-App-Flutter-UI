@@ -182,9 +182,7 @@ class _CollectionDataState extends State<CollectionData> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          gradient: const LinearGradient(
-            colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
-          ),
+          gradient: ThemeColors.primaryGradient,
           boxShadow: const <BoxShadow>[
             BoxShadow(
               color: Color.fromRGBO(17, 24, 39, 0.18),

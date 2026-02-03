@@ -18,18 +18,7 @@ class LoginScreen extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomCenter,
-          colors: <Color>[
-            const Color(0xFF0FA394),
-            const Color(0xFF0A7A6E),
-            const Color(0xFF0F1720),
-          ],
-          stops: const <double>[0, 0.45, 1],
-        ),
-      ),
+      decoration: BoxDecoration(gradient: ThemeColors.appBarGradient),
       child: GestureDetector(
         onTap: FocusManager.instance.primaryFocus?.unfocus,
         child: SafeArea(

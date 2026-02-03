@@ -25,7 +25,7 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
           begin: Alignment.topLeft,
           end: Alignment.bottomCenter,
           colors: <Color>[
-            ThemeColors.themeColor,
+            ThemeColors.primary,
             const Color(0xFF1E8F87),
             ThemeColors.scaffoldColor,
           ],

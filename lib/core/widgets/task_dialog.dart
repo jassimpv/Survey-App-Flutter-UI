@@ -105,11 +105,7 @@ class TaskDialog extends StatelessWidget {
           width: 40,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
-            ),
+            gradient: ThemeColors.primaryGradient,
             boxShadow: const <BoxShadow>[
               BoxShadow(
                 color: Color.fromRGBO(17, 24, 39, 0.35),
@@ -316,11 +312,7 @@ class TaskDialog extends StatelessWidget {
             height: 56,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              gradient: const LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
-              ),
+              gradient: ThemeColors.primaryGradient,
               boxShadow: const <BoxShadow>[
                 BoxShadow(
                   color: Color.fromRGBO(15, 23, 42, 0.25),
@@ -356,9 +348,7 @@ class TaskDialog extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        gradient: const LinearGradient(
-          colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
-        ),
+        gradient: ThemeColors.primaryGradient,
         boxShadow: const <BoxShadow>[
           BoxShadow(
             color: Color.fromRGBO(15, 23, 42, 0.15),
