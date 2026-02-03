@@ -11,7 +11,7 @@ class TranslationService extends Translations {
     const Locale("en", "US"),
     const Locale("ar", "AE"),
   ];
-  
+
   static Locale? _currentLocale;
 
   @override
