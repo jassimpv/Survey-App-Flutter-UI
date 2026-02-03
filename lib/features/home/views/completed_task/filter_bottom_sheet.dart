@@ -2,9 +2,10 @@ import "dart:ui";
 
 import "package:collect/features/home/controller/home_controller.dart";
 import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
-import "package:collect/core/utils/theme_service.dart";
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/widgets/zoom_tap.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
@@ -27,22 +28,15 @@ class FilterBottomSheet extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
         child: Container(
           decoration: BoxDecoration(
-            color: ThemeService.isDark()
-                ? const Color(0xFF1A2332).withValues(alpha: 0.85)
-                : Colors.white.withValues(alpha: 0.95),
+            color: ThemeColors.modalBackground,
             borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(32),
               topRight: Radius.circular(32),
             ),
-            border: Border.all(
-              color: ThemeService.isDark()
-                  ? Colors.white.withValues(alpha: 0.08)
-                  : ColorUtils.themeColor.withValues(alpha: 0.2),
-              width: 1,
-            ),
+            border: Border.all(color: ThemeColors.modalBorder, width: 1),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.12),
+                color: ThemeColors.shadow,
                 blurRadius: 30,
                 offset: const Offset(0, -6),
               ),
@@ -57,9 +51,9 @@ class FilterBottomSheet extends StatelessWidget {
                   height: 4,
                   width: 56,
                   decoration: BoxDecoration(
-                    color: ThemeService.isDark()
-                        ? Colors.white.withValues(alpha: 0.2)
-                        : ColorUtils.themeColor.withValues(alpha: 0.2),
+                    color: ThemeColors.onSurfaceSecondary.withValues(
+                      alpha: 0.3,
+                    ),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -70,24 +64,18 @@ class FilterBottomSheet extends StatelessWidget {
                     Text(
                       "filter".tr,
                       style: StyleUtils.kTextStyleSize18Weight600(
-                        color: ThemeService.isDark()
-                            ? Colors.white
-                            : ColorUtils.headingColor,
+                        color: ThemeColors.onSurface,
                       ),
                     ),
                     DecoratedBox(
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: ThemeService.isDark()
-                            ? Colors.white.withValues(alpha: 0.08)
-                            : ColorUtils.scaffoldColor,
+                        color: ThemeColors.surface,
                       ),
                       child: IconButton(
                         icon: Icon(
                           CupertinoIcons.xmark,
-                          color: ThemeService.isDark()
-                              ? Colors.white
-                              : Colors.black,
+                          color: ThemeColors.onSurface,
                           size: 18,
                         ),
                         onPressed: () => Navigator.of(context).pop(),
@@ -110,23 +98,11 @@ class FilterBottomSheet extends StatelessWidget {
                     width: double.infinity,
                     height: 56,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: ThemeService.isDark()
-                            ? <Color>[
-                                const Color(0xFF0FA394),
-                                const Color(0xFF0FA394).withValues(alpha: 0.85),
-                              ]
-                            : <Color>[
-                                ColorUtils.themeColor,
-                                ColorUtils.themeColor.withValues(alpha: 0.85),
-                              ],
-                      ),
+                      gradient: ThemeColors.primaryGradient,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: <BoxShadow>[
                         BoxShadow(
-                          color: ThemeService.isDark()
-                              ? const Color(0xFF0FA394).withValues(alpha: 0.35)
-                              : ColorUtils.themeColor.withValues(alpha: 0.2),
+                          color: ThemeColors.primary.withValues(alpha: 0.3),
                           blurRadius: 20,
                           offset: const Offset(0, 6),
                         ),

@@ -1,5 +1,5 @@
 import "package:collect/core/utils/colors_utils.dart";
-import "package:collect/core/utils/theme_service.dart";
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:flutter/cupertino.dart";

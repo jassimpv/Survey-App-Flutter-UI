@@ -2,9 +2,8 @@ import "dart:ui";
 
 import "package:collect/core/models/task_card_model.dart";
 import "package:collect/core/models/user_data_model.dart";
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
-import "package:collect/core/utils/theme_service.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -75,22 +74,15 @@ class HomeController extends GetxController {
             child: Container(
               height: 320,
               decoration: BoxDecoration(
-                color: ThemeService.isDark()
-                    ? const Color(0xFF1A2332).withValues(alpha: 0.9)
-                    : Colors.white.withValues(alpha: 0.95),
+                color: ThemeColors.modalBackground,
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(32),
                   topRight: Radius.circular(32),
                 ),
-                border: Border.all(
-                  color: ThemeService.isDark()
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : ColorUtils.themeColor.withValues(alpha: 0.2),
-                  width: 1,
-                ),
+                border: Border.all(color: ThemeColors.modalBorder, width: 1),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.12),
+                    color: ThemeColors.shadow,
                     blurRadius: 30,
                     offset: const Offset(0, -6),
                   ),
@@ -103,9 +95,9 @@ class HomeController extends GetxController {
                     height: 4,
                     width: 56,
                     decoration: BoxDecoration(
-                      color: ThemeService.isDark()
-                          ? Colors.white.withValues(alpha: 0.2)
-                          : ColorUtils.themeColor.withValues(alpha: 0.2),
+                      color: ThemeColors.onSurfaceSecondary.withValues(
+                        alpha: 0.3,
+                      ),
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -118,9 +110,7 @@ class HomeController extends GetxController {
                         Text(
                           isStart ? "Start date" : "End date",
                           style: StyleUtils.kTextStyleSize18Weight600(
-                            color: ThemeService.isDark()
-                                ? Colors.white
-                                : ColorUtils.headingColor,
+                            color: ThemeColors.onSurface,
                           ),
                         ),
                         Row(
@@ -134,11 +124,7 @@ class HomeController extends GetxController {
                               child: Text(
                                 "Cancel",
                                 style: StyleUtils.kTextStyleSize14Weight500(
-                                  color: ThemeService.isDark()
-                                      ? Colors.white70
-                                      : ColorUtils.headingColor.withValues(
-                                          alpha: 0.7,
-                                        ),
+                                  color: ThemeColors.onSurfaceSecondary,
                                 ),
                               ),
                             ),
@@ -153,9 +139,7 @@ class HomeController extends GetxController {
                               child: Text(
                                 "Done",
                                 style: StyleUtils.kTextStyleSize14Weight600(
-                                  color: ThemeService.isDark()
-                                      ? const Color(0xFF0FA394)
-                                      : ColorUtils.themeColor,
+                                  color: ThemeColors.primary,
                                 ),
                               ),
                             ),
@@ -173,14 +157,10 @@ class HomeController extends GetxController {
                         textTheme: CupertinoTextThemeData(
                           dateTimePickerTextStyle:
                               StyleUtils.kTextStyleSize17Weight400(
-                                color: ThemeService.isDark()
-                                    ? Colors.white
-                                    : ColorUtils.headingColor,
+                                color: ThemeColors.onSurface,
                               ),
                           pickerTextStyle: StyleUtils.kTextStyleSize17Weight400(
-                            color: ThemeService.isDark()
-                                ? Colors.white
-                                : ColorUtils.headingColor,
+                            color: ThemeColors.onSurface,
                           ),
                         ),
                       ),

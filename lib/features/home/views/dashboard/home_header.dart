@@ -2,7 +2,7 @@ import "package:collect/features/home/controller/home_controller.dart";
 import "package:collect/routes.dart";
 import "package:collect/core/utils/asset_utils.dart";
 import "package:collect/core/utils/colors_utils.dart";
-import "package:collect/core/utils/theme_service.dart";
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/utils/utils_helper.dart";

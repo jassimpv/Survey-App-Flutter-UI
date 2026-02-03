@@ -3,9 +3,10 @@ import "dart:async";
 import "package:collect/features/home/controller/home_controller.dart";
 import "package:collect/core/extensions/pull_to_refresh/pull_to_refresh_flutter.dart";
 import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
-import "package:collect/core/utils/theme_service.dart";
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/features/home/views/dashboard/home_header.dart";
 import "package:collect/features/home/views/dashboard/home_status_view.dart";
 import "package:collect/core/widgets/task_card.dart";
@@ -18,23 +19,15 @@ class DashboardScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: ThemeService.isDark()
-            ? [const Color(0xFF0F1720), const Color(0xFF1A2332)]
-            : [ColorUtils.scaffoldColor, Colors.white],
-      ),
-    ),
+    decoration: BoxDecoration(gradient: ThemeColors.scaffoldGradient),
     child: Column(
       children: <Widget>[
         const HomeHeader(),
         Expanded(
           child: SmartRefresher(
             header: WaterDropMaterialHeader(
-              backgroundColor: const Color(0xFF0A7A6E),
-              color: Colors.white,
+              backgroundColor: ThemeColors.success,
+              color: ThemeColors.onPrimary,
             ),
             controller: refreshController,
             onRefresh: () {
@@ -71,10 +64,10 @@ class DashboardScreen extends GetView<HomeController> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
+                          color: ThemeColors.cardBackground,
                           boxShadow: [
                             BoxShadow(
-                              color: ColorUtils.themeColor.withValues(
+                              color: ThemeColors.primary.withValues(
                                 alpha: 0.08,
                               ),
                               blurRadius: 20,
@@ -165,11 +158,25 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
       children: <Widget>[
         _buildTimeBox(hours),
         4.widthBox,
-        Text(":", style: StyleUtils.kTextStyleSize12Weight500()),
+        Text(
+          ":",
+          style: StyleUtils.kTextStyleSize12Weight500(
+            color: ThemeService.isDark()
+                ? ColorUtils.whiteColor
+                : ColorUtils.blackColor,
+          ),
+        ),
         4.widthBox,
         _buildTimeBox(minutes),
         4.widthBox,
-        Text(":", style: StyleUtils.kTextStyleSize12Weight500()),
+        Text(
+          ":",
+          style: StyleUtils.kTextStyleSize12Weight500(
+            color: ThemeService.isDark()
+                ? ColorUtils.whiteColor
+                : ColorUtils.blackColor,
+          ),
+        ),
         4.widthBox,
         _buildTimeBox(seconds),
       ],
@@ -187,10 +194,15 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
     width: 32,
     decoration: BoxDecoration(
       gradient: LinearGradient(
-        colors: <Color>[
-          ColorUtils.themeColor.withValues(alpha: 0.7),
-          ColorUtils.scaffoldColor,
-        ],
+        colors: ThemeService.isDark()
+            ? <Color>[
+                ColorUtils.darkGreen.withValues(alpha: 0.8),
+                ColorUtils.themeColor.withValues(alpha: 0.6),
+              ]
+            : <Color>[
+                ColorUtils.themeColor.withValues(alpha: 0.7),
+                ColorUtils.scaffoldColor,
+              ],
       ),
       borderRadius: BorderRadius.circular(8),
       boxShadow: [
@@ -204,7 +216,9 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
     child: Center(
       child: Text(
         time,
-        style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
+        style: StyleUtils.kTextStyleSize14Weight600(
+          color: ColorUtils.whiteColor,
+        ),
       ),
     ),
   );
@@ -226,7 +240,9 @@ class NoData extends StatelessWidget {
     padding: const EdgeInsets.all(24),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20),
-      color: Colors.white,
+      color: ThemeService.isDark()
+          ? ColorUtils.backgroundDark
+          : ColorUtils.whiteColor,
       boxShadow: [
         BoxShadow(
           color: ColorUtils.themeColor.withValues(alpha: 0.08),
@@ -242,7 +258,9 @@ class NoData extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: ColorUtils.scaffoldColor,
+                  color: ThemeService.isDark()
+                      ? ColorUtils.darkGray
+                      : ColorUtils.scaffoldColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Image.asset(
@@ -258,14 +276,18 @@ class NoData extends StatelessWidget {
                   Text(
                     text,
                     style: StyleUtils.kTextStyleSize16Weight600(
-                      color: ColorUtils.headingColor,
+                      color: ThemeService.isDark()
+                          ? ColorUtils.whiteColor
+                          : ColorUtils.headingColor,
                     ),
                   ),
                   4.heightBox,
                   Text(
                     subText,
                     style: StyleUtils.kTextStyleSize14Weight400(
-                      color: ColorUtils.greyTextColor,
+                      color: ThemeService.isDark()
+                          ? ColorUtils.greyLightTextColor
+                          : ColorUtils.greyTextColor,
                     ),
                   ),
                 ],
@@ -276,7 +298,7 @@ class NoData extends StatelessWidget {
             child: Text(
               text,
               style: StyleUtils.kTextStyleSize18Weight500(
-                color: ColorUtils.greyTextColor,
+                color: ThemeColors.onSurfaceSecondary,
               ),
             ),
           ),

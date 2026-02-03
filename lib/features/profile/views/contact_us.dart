@@ -1,9 +1,10 @@
 import "dart:ui";
 
 import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
-import "package:collect/core/utils/theme_service.dart";
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/utils/utils_helper.dart";
 import "package:collect/core/widgets/custom_app_bar.dart";
 import "package:collect/core/widgets/gradient_button.dart";
@@ -25,15 +26,7 @@ class ContactUsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: ThemeService.isDark()
-              ? [const Color(0xFF0F1720), const Color(0xFF1A2332)]
-              : [ColorUtils.scaffoldColor, Colors.white],
-        ),
-      ),
+      decoration: BoxDecoration(gradient: ThemeColors.scaffoldGradient),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -58,19 +51,12 @@ class ContactUsScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.fromLTRB(20, 24, 20, 32),
             decoration: BoxDecoration(
-              color: ThemeService.isDark()
-                  ? const Color(0xFF1A2332).withValues(alpha: 0.7)
-                  : Colors.white.withValues(alpha: 0.85),
+              color: ThemeColors.dialogBackground.withValues(alpha: 0.85),
               borderRadius: BorderRadius.circular(28),
-              border: Border.all(
-                color: ThemeService.isDark()
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : ColorUtils.themeColor.withValues(alpha: 0.2),
-                width: 1,
-              ),
+              border: Border.all(color: ThemeColors.dialogBorder, width: 1),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: ColorUtils.themeColor.withValues(alpha: 0.18),
+                  color: ThemeColors.primary.withValues(alpha: 0.18),
                   blurRadius: 32,
                   offset: const Offset(0, 12),
                 ),
@@ -82,9 +68,7 @@ class ContactUsScreen extends StatelessWidget {
                 Text(
                   "We would love to hear from you!",
                   style: StyleUtils.kTextStyleSize18Weight600(
-                    color: ThemeService.isDark()
-                        ? Colors.white
-                        : ColorUtils.headingColor,
+                    color: ThemeColors.onSurface,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -183,23 +167,11 @@ class ContactUsScreen extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: ThemeService.isDark()
-              ? <Color>[
-                  const Color(0xFF0FA394),
-                  const Color(0xFF0FA394).withValues(alpha: 0.75),
-                ]
-              : <Color>[
-                  ColorUtils.themeColor,
-                  ColorUtils.themeColor.withValues(alpha: 0.75),
-                ],
-        ),
+        gradient: ThemeColors.primaryGradient,
         borderRadius: BorderRadius.circular(16),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: ThemeService.isDark()
-                ? const Color(0xFF0FA394).withValues(alpha: 0.3)
-                : ColorUtils.themeColor.withValues(alpha: 0.2),
+            color: ThemeColors.primary.withValues(alpha: 0.3),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),

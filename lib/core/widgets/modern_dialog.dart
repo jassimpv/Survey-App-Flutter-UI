@@ -1,5 +1,4 @@
-import 'package:collect/core/utils/colors_utils.dart';
-import 'package:collect/core/utils/theme_service.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/utils/sized_box_extension.dart';
 import 'package:collect/core/utils/textstyle_input.dart';
 import 'package:flutter/material.dart';
@@ -31,8 +30,8 @@ class ModernDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color actionColor = isDangerous
-        ? ColorUtils.red
-        : ColorUtils.themeColor;
+        ? ThemeColors.error
+        : ThemeColors.primary;
 
     return Dialog(
       backgroundColor: Colors.transparent,
@@ -44,18 +43,12 @@ class ModernDialog extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: ThemeService.isDark()
-                  ? const Color(0xFF1A2332).withValues(alpha: 0.95)
-                  : Colors.white.withValues(alpha: 0.95),
+              color: ThemeColors.dialogBackground.withValues(alpha: 0.95),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                color: ThemeService.isDark()
-                    ? Colors.white.withValues(alpha: 0.1)
-                    : Colors.black.withValues(alpha: 0.05),
-              ),
+              border: Border.all(color: ThemeColors.dialogBorder),
               boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.2),
+                  color: ThemeColors.shadow,
                   blurRadius: 30,
                   offset: const Offset(0, 15),
                 ),
@@ -84,9 +77,7 @@ class ModernDialog extends StatelessWidget {
                 Text(
                   title,
                   style: StyleUtils.kTextStyleSize20Weight600(
-                    color: ThemeService.isDark()
-                        ? Colors.white
-                        : ColorUtils.headingColor,
+                    color: ThemeColors.onSurface,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -94,9 +85,7 @@ class ModernDialog extends StatelessWidget {
                 Text(
                   message,
                   style: StyleUtils.kTextStyleSize16Weight400(
-                    color: ThemeService.isDark()
-                        ? const Color(0xFF9CA3AF)
-                        : ColorUtils.greyTextColor,
+                    color: ThemeColors.onSurfaceSecondary,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -148,7 +137,7 @@ class _ModernDialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color buttonColor = color ?? ColorUtils.themeColor;
+    final Color buttonColor = color ?? ThemeColors.primary;
 
     return Material(
       color: Colors.transparent,
@@ -166,29 +155,17 @@ class _ModernDialogButton extends StatelessWidget {
                       buttonColor.withValues(alpha: 0.8),
                     ],
                   ),
-            color: isSecondary
-                ? (ThemeService.isDark()
-                      ? const Color(0xFF2D3E50)
-                      : const Color(0xFFF4F7FF))
-                : null,
+            color: isSecondary ? ThemeColors.inputBackground : null,
             borderRadius: BorderRadius.circular(16),
             border: isSecondary
-                ? Border.all(
-                    color: ThemeService.isDark()
-                        ? Colors.white.withValues(alpha: 0.1)
-                        : buttonColor.withValues(alpha: 0.2),
-                  )
+                ? Border.all(color: ThemeColors.inputBorder)
                 : null,
           ),
           child: Text(
             text,
             textAlign: TextAlign.center,
             style: StyleUtils.kTextStyleSize16Weight600(
-              color: isSecondary
-                  ? (ThemeService.isDark()
-                        ? Colors.white
-                        : ColorUtils.headingColor)
-                  : Colors.white,
+              color: isSecondary ? ThemeColors.onSurface : Colors.white,
             ),
           ),
         ),

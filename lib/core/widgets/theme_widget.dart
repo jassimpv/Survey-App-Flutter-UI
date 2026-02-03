@@ -1,5 +1,5 @@
 import 'package:collect/core/theme/theme_controller.dart';
-import 'package:collect/core/utils/colors_utils.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/utils/textstyle_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,7 @@ class ThemeWidget extends GetView<ThemeController> {
             color: Colors.white.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: ColorUtils.themeColor.withValues(alpha: 0.10),
+              color: ThemeColors.primary.withValues(alpha: 0.10),
             ),
           ),
           child: Row(
@@ -29,7 +29,7 @@ class ThemeWidget extends GetView<ThemeController> {
               Icon(
                 controller.getThemeIcon(controller.selectedMode.value),
                 size: 18,
-                color: ColorUtils.themeColor,
+                color: ThemeColors.primary,
               ),
               8.widthBox,
               Text(
@@ -40,7 +40,7 @@ class ThemeWidget extends GetView<ThemeController> {
               Icon(
                 CupertinoIcons.chevron_down,
                 size: 16,
-                color: ColorUtils.themeColor,
+                color: ThemeColors.primary,
               ),
             ],
           ),

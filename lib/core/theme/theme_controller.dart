@@ -1,4 +1,4 @@
-import 'package:collect/core/utils/theme_service.dart';
+import 'package:collect/core/theme/theme_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
