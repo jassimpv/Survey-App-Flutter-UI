@@ -374,16 +374,20 @@ class StyleUtils {
       const TextStyle(color: ThemeColors.greyTextColor, fontFamily: "Outfit");
 
   // Dialog & Menu Title Style
-  static TextStyle kTextStyleDialogTitle() => TextStyle(
-    color: ThemeColors.headingColor,
+  static TextStyle kTextStyleDialogTitle({
+    Color color = ThemeColors.headingColor,
+  }) => TextStyle(
+    color: color,
     fontSize: 18,
     fontWeight: FontWeight.w600,
     fontFamily: "Outfit",
   );
 
   // Menu Item Style
-  static TextStyle kTextStyleMenuItemLabel() => TextStyle(
-    color: ThemeColors.headingColor,
+  static TextStyle kTextStyleMenuItemLabel({
+    Color color = ThemeColors.headingColor,
+  }) => TextStyle(
+    color: color,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     fontFamily: "Outfit",
