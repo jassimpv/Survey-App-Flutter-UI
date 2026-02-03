@@ -92,7 +92,7 @@ class ProfileScreen extends GetView<ProfileController> {
         ),
         child: CircleAvatar(
           backgroundColor: ThemeColors.surface,
-          child: Icon(CupertinoIcons.person, color: ThemeColors.blackWhite),
+          child: Icon(CupertinoIcons.person, color: ThemeColors.whitePrimary),
         ),
       ),
       16.widthBox,
@@ -177,7 +177,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 child: Icon(
                   CupertinoIcons.globe,
                   size: 22,
-                  color: ThemeColors.blackWhite,
+                  color: ThemeColors.whitePrimary,
                 ),
               ),
               12.widthBox,
@@ -214,7 +214,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 child: Icon(
                   CupertinoIcons.brightness,
                   size: 22,
-                  color: ThemeColors.blackWhite,
+                  color: ThemeColors.whitePrimary,
                 ),
               ),
               12.widthBox,
@@ -264,7 +264,7 @@ class ProfileScreen extends GetView<ProfileController> {
             ),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, size: 22, color: ThemeColors.blackWhite),
+          child: Icon(icon, size: 22, color: ThemeColors.whitePrimary),
         ),
         12.widthBox,
         Expanded(
