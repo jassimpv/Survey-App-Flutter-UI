@@ -80,9 +80,9 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
             height: 64,
             margin: const EdgeInsets.symmetric(horizontal: 16),
             decoration: BoxDecoration(
-              color: ThemeService.isDark() ? ThemeColors.surface : null,
+              // color: ThemeService.isDark() ? ThemeColors.surface : null,
               gradient: ThemeService.isDark()
-                  ? null
+                  ? ThemeColors.surfaceGradient
                   : ThemeColors.bottomNavGradient,
               borderRadius: BorderRadius.circular(28),
               boxShadow: <BoxShadow>[
@@ -189,16 +189,13 @@ class _HomeItemView extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected ? ThemeColors.surface : Colors.transparent,
           borderRadius: BorderRadius.circular(999),
-          boxShadow: isSelected
-              ? <BoxShadow>[
-                  BoxShadow(
-                    color: ThemeColors.blackColor.withValues(alpha: 0.08),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
-                  ),
-                ]
+          border: isSelected
+              ? Border.all(
+                  color: ThemeService.isDark()
+                      ? ThemeColors.blackWhite.withValues(alpha: 0.3)
+                      : ThemeColors.border,
+                )
               : null,
-          border: isSelected ? Border.all(color: ThemeColors.border) : null,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -208,8 +205,8 @@ class _HomeItemView extends StatelessWidget {
               icon,
               size: 20,
               color: isSelected
-                  ? ThemeColors.themeColor
-                  : ThemeColors.whiteColor.withValues(alpha: 0.9),
+                  ? ThemeColors.blackWhite
+                  : ThemeColors.whiteColor.withValues(alpha: 0.85),
             ),
             if (isSelected) ...[
               10.widthBox,
@@ -218,7 +215,7 @@ class _HomeItemView extends StatelessWidget {
                   title,
                   overflow: TextOverflow.ellipsis,
                   style: StyleUtils.kTextStyleSize14Weight600(
-                    color: ThemeColors.themeColor,
+                    color: ThemeColors.blackWhite,
                   ),
                 ),
               ),

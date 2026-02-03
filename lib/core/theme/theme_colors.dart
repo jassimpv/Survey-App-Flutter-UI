@@ -22,6 +22,18 @@ class ThemeColors {
   static Color get surface =>
       ThemeService.isDark() ? const Color(0xFF1A2332) : const Color(0xFFFFFFFF);
 
+  static Gradient get surfaceGradient => ThemeService.isDark()
+      ? const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: <Color>[Color(0xFF1A2332), Color(0xFF131A37)],
+        )
+      : const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: <Color>[Color(0xFFFFFFFF), Color(0xFFF4F7FF)],
+        );
+
   static Color get onSurface =>
       ThemeService.isDark() ? const Color(0xFFE5E7EB) : const Color(0xFF0F3F41);
 

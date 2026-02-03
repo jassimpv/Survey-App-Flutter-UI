@@ -328,7 +328,7 @@ class StyleUtils {
 
   // Language Widget Style
   static TextStyle kTextStyleLanguageBadge() => TextStyle(
-    color: ThemeColors.whiteColor.withValues(alpha: 0.9),
+    color: ThemeColors.blackWhite.withValues(alpha: 0.9),
     fontSize: 10,
     fontWeight: FontWeight.w700,
     fontFamily: "Outfit",

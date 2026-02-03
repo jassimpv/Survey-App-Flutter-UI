@@ -14,35 +14,44 @@ class ThemeWidget extends GetView<ThemeController> {
     return GestureDetector(
       onTap: () => _showThemeMenu(context),
       child: Obx(
-        () => Container(
+        () => AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: ThemeColors.whiteColor.withValues(alpha: 0.06),
+            color: ThemeColors.primary.withValues(alpha: 0.08),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: ThemeColors.primary.withValues(alpha: 0.10),
+              color: ThemeColors.primary.withValues(alpha: 0.15),
             ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Icon(
-                controller.getThemeIcon(controller.selectedMode.value),
-                size: 18,
-                color: ThemeColors.blackWhite,
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder:
+                    (Widget child, Animation<double> animation) =>
+                        ScaleTransition(scale: animation, child: child),
+                child: Icon(
+                  controller.getThemeIcon(controller.selectedMode.value),
+                  key: ValueKey<ThemeMode>(controller.selectedMode.value),
+                  size: 18,
+                  color: ThemeColors.whiteColor,
+                ),
               ),
               8.widthBox,
               Text(
                 controller.getThemeName(controller.selectedMode.value),
                 style: StyleUtils.kTextStyleThemeMode(
-                  color: ThemeColors.blackWhite,
+                  color: ThemeColors.whiteColor,
                 ),
               ),
               8.widthBox,
               Icon(
                 CupertinoIcons.chevron_down,
                 size: 16,
-                color: ThemeColors.blackWhite,
+                color: ThemeColors.whiteColor.withValues(alpha: 0.6),
               ),
             ],
           ),
@@ -61,7 +70,7 @@ class ThemeWidget extends GetView<ThemeController> {
             isDefaultAction: controller.selectedMode.value == ThemeMode.light,
             child: Row(
               children: <Widget>[
-                Icon(Icons.light_mode_rounded),
+                Icon(Icons.light_mode_rounded, color: ThemeColors.whiteColor),
                 12.widthBox,
                 Expanded(
                   child: Text(

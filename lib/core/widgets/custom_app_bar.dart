@@ -1,3 +1,4 @@
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/routes.dart";
 
 import "package:collect/core/theme/theme_colors.dart";
@@ -32,7 +33,9 @@ class CustomAppBar extends StatelessWidget {
         bottomLeft: Radius.circular(30),
         bottomRight: Radius.circular(30),
       ),
-      gradient: ThemeColors.appBarGradient,
+      gradient: ThemeService.isDark()
+          ? ThemeColors.surfaceGradient
+          : ThemeColors.appBarGradient,
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
