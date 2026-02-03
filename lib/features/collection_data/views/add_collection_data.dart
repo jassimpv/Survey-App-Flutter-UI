@@ -8,6 +8,7 @@ import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/custom_app_bar.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:get/get.dart";
 import "package:intl/intl.dart";
 import "package:signature/signature.dart";
 
@@ -54,7 +55,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     body: Column(
       children: <Widget>[
         CustomAppBar(
-          title: 'Collection Data',
+          title: 'collectionData'.tr,
           onBackPressed: () => Navigator.of(context).maybePop(),
         ),
         Expanded(
@@ -207,7 +208,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
   Widget _buildCollectorField() => TextFormField(
     controller: _collectorController,
     decoration: StyleUtils.inputDecoration(
-      hintText: "Collected From (Name)",
+      hintText: "collectedFromName".tr,
       prefixIcon: CupertinoIcons.person_alt,
     ),
     validator: (String? value) => (value == null || value.trim().isEmpty)
@@ -219,13 +220,13 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     controller: _kgController,
     keyboardType: TextInputType.number,
     decoration: StyleUtils.inputDecoration(
-      hintText: "Collected weight (KG)",
+      hintText: "collectedWeight".tr,
       prefixIcon: CupertinoIcons.cube_box,
     ),
     validator: (String? value) {
       final double? parsed = double.tryParse(value ?? "");
       if (parsed == null || parsed <= 0) {
-        return "Enter valid weight";
+        return "enterValidWeight".tr;
       }
       return null;
     },
@@ -236,7 +237,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     minLines: 3,
     maxLines: 4,
     decoration: StyleUtils.inputDecoration(
-      hintText: "Notes (optional)",
+      hintText: "notesOptional".tr,
       prefixIcon: CupertinoIcons.text_alignleft,
     ),
   );
@@ -279,7 +280,10 @@ class _AddCollectionDataState extends State<AddCollectionData> {
           TextButton.icon(
             onPressed: _signatureController.clear,
             icon: const Icon(CupertinoIcons.refresh, size: 18),
-            label: Text("Reset", style: StyleUtils.kTextStyleSize14Weight600()),
+            label: Text(
+              "reset".tr,
+              style: StyleUtils.kTextStyleSize14Weight600(),
+            ),
           ),
           const Spacer(),
           Text(

@@ -7,13 +7,13 @@ class Utils {
     final int hour = DateTime.now().hour;
 
     if (hour >= 5 && hour <= 11) {
-      return "Good Morning";
+      return "goodMorning".tr;
     } else if (hour >= 12 && hour <= 16) {
-      return "Good Afternoon";
+      return "goodAfternoon".tr;
     } else if (hour >= 17 && hour <= 20) {
-      return "Good Evening";
+      return "goodEvening".tr;
     } else {
-      return "Good Night";
+      return "goodNight".tr;
     }
   }
 
@@ -56,20 +56,26 @@ class Utils {
     final Duration difference = now.difference(date);
 
     if (difference.inDays == 0) {
-      return "Today";
+      return "today".tr;
     } else if (difference.inDays == 1) {
-      return "Yesterday";
+      return "yesterday".tr;
     } else if (difference.inDays < 7) {
-      return "${difference.inDays.abs()} days ago";
+      return "daysAgo".trParams({"days": "${difference.inDays.abs()}"});
     } else if (difference.inDays < 30) {
       final int weeks = (difference.inDays / 7).floor();
-      return weeks == 1 ? "1 week ago" : "$weeks weeks ago";
+      return weeks == 1
+          ? "weekAgo".tr
+          : "weeksAgo".trParams({"weeks": "$weeks"});
     } else if (difference.inDays < 365) {
       final int months = (difference.inDays / 30).floor();
-      return months == 1 ? "1 month ago" : "$months months ago";
+      return months == 1
+          ? "monthAgo".tr
+          : "monthsAgo".trParams({"months": "$months"});
     } else {
       final int years = (difference.inDays / 365).floor();
-      return years == 1 ? "1 year ago" : "$years years ago";
+      return years == 1
+          ? "yearAgo".tr
+          : "yearsAgo".trParams({"years": "$years"});
     }
   }
 

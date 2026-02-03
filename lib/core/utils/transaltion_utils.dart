@@ -11,6 +11,8 @@ class TranslationService extends Translations {
     const Locale("en", "US"),
     const Locale("ar", "AE"),
   ];
+  
+  static Locale? _currentLocale;
 
   @override
   Map<String, Map<String, String>> get keys => <String, Map<String, String>>{
@@ -18,12 +20,13 @@ class TranslationService extends Translations {
     "ar_AE": arAe,
   };
 
-  static Future<void> updateLocale(Locale locale) async {
-    Get.updateLocale(locale);
+  static Future<void> updateLocale(Locale newLocale) async {
+    _currentLocale = newLocale;
     await PreferenceUtils.saveString(
       PreferenceUtils.languageCode,
-      locale.languageCode,
+      newLocale.languageCode,
     );
+    Get.updateLocale(newLocale);
   }
 
   static Future<void> init() async {
@@ -33,12 +36,22 @@ class TranslationService extends Translations {
 
     if (languageCode != null) {
       if (languageCode == "ar") {
-        await Get.updateLocale(Locale(languageCode, "AE"));
+        _currentLocale = const Locale("ar", "AE");
+        Get.updateLocale(_currentLocale!);
       } else {
-        await Get.updateLocale(Locale(languageCode, "US"));
+        _currentLocale = const Locale("en", "US");
+        Get.updateLocale(_currentLocale!);
       }
+    } else {
+      // Save default language on first launch
+      _currentLocale = locale;
+      await PreferenceUtils.saveString(
+        PreferenceUtils.languageCode,
+        locale.languageCode,
+      );
+      Get.updateLocale(locale);
     }
   }
 
-  static Locale? getLocale() => Get.locale!;
+  static Locale? getLocale() => _currentLocale;
 }

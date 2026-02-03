@@ -4,6 +4,7 @@ import 'package:collect/core/theme/theme_colors.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/multiple_choice_auto_complete_answer_format.dart';
 import 'package:collect/core/extensions/survet_kit/survey_kit.dart';
+import 'package:get/get.dart';
 
 class MultipleChoiceAutoCompleteAnswerView extends StatefulWidget {
   final QuestionStep questionStep;
@@ -110,7 +111,7 @@ class _MultipleChoiceAutoCompleteAnswerViewState
                           int? currentIndex;
                           final otherTextChoice = _selectedChoices
                               .firstWhereIndexedOrNull((index, element) {
-                                final isOtherField = element.text == 'Other';
+                                final isOtherField = element.text == 'other'.tr;
 
                                 if (isOtherField) {
                                   currentIndex = index;
@@ -124,7 +125,7 @@ class _MultipleChoiceAutoCompleteAnswerViewState
                               _selectedChoices.remove(otherTextChoice);
                             } else if (v.isNotEmpty) {
                               final updatedTextChoice = TextChoice(
-                                text: 'Other',
+                                text: 'other'.tr,
                                 value: v,
                               );
                               if (otherTextChoice == null) {
@@ -137,9 +138,9 @@ class _MultipleChoiceAutoCompleteAnswerViewState
                           });
                         },
                         decoration: InputDecoration(
-                          labelText: 'Other',
+                          labelText: 'other'.tr,
                           labelStyle: Theme.of(context).textTheme.headlineSmall,
-                          hintText: 'Write other information here',
+                          hintText: 'writeOtherInformationHere'.tr,
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                         ),
                       ),
@@ -188,8 +189,8 @@ class _AutoComplete extends StatelessWidget {
                 focusNode: focusNode,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(horizontal: 32),
-                  labelText: 'Search',
-                  hintText: 'Type here to search',
+                  labelText: 'search'.tr,
+                  hintText: 'typeHereToSearch'.tr,
                   suffixIcon: IconButton(
                     padding: EdgeInsets.zero,
                     icon: Icon(Icons.clear),

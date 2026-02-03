@@ -10,6 +10,7 @@ import "package:collect/core/widgets/gradient_button.dart";
 import "package:collect/core/widgets/zoom_tap.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
+import "package:get/get.dart";
 
 class ContactUsScreen extends StatelessWidget {
   ContactUsScreen({super.key});
@@ -30,7 +31,7 @@ class ContactUsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           CustomAppBar(
-            title: "Contact Us",
+            title: "contact_us".tr,
             onBackPressed: () => Navigator.pop(context),
             isNotificationButton: false,
           ),
@@ -65,7 +66,7 @@ class ContactUsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Text(
-                  "We would love to hear from you!",
+                  "weWouldLoveToHearFromYou".tr,
                   style: StyleUtils.kTextStyleSize18Weight600(
                     color: ThemeColors.onSurface,
                   ),
@@ -75,16 +76,16 @@ class ContactUsScreen extends StatelessWidget {
                 TextField(
                   controller: nameController,
                   decoration: StyleUtils.inputDecoration(
-                    hintText: "Enter your name",
-                    labelText: "Name",
+                    hintText: "enterYourName".tr,
+                    labelText: "name".tr,
                   ),
                 ),
                 const SizedBox(height: 16),
                 TextField(
                   controller: emailController,
                   decoration: StyleUtils.inputDecoration(
-                    hintText: "Enter your email",
-                    labelText: "Email",
+                    hintText: "enterYourEmail".tr,
+                    labelText: "email".tr,
                   ),
                   keyboardType: TextInputType.emailAddress,
                 ),
@@ -92,19 +93,19 @@ class ContactUsScreen extends StatelessWidget {
                 TextField(
                   controller: messageController,
                   decoration: StyleUtils.inputDecoration(
-                    hintText: "Enter your message",
-                    labelText: "Message",
+                    hintText: "enterYourMessage".tr,
+                    labelText: "message".tr,
                   ),
                   maxLines: 5,
                 ),
                 const SizedBox(height: 24),
                 GradientButton(
-                  text: "Send",
+                  text: "send".tr,
                   onClick: () {
                     FocusManager.instance.primaryFocus?.unfocus();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Message sent!")),
-                    );
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("messageSent".tr)));
                     nameController.clear();
                     emailController.clear();
                     messageController.clear();
@@ -112,7 +113,7 @@ class ContactUsScreen extends StatelessWidget {
                 ),
                 32.heightBox,
                 Text(
-                  "Address:",
+                  "address".tr,
                   style: StyleUtils.kTextStyleSize18Weight600(
                     color: ThemeService.isDark()
                         ? ThemeColors.textPrimary
@@ -134,18 +135,18 @@ class ContactUsScreen extends StatelessWidget {
                     commonButton(
                       onPressed: () => Utils.dail(phone),
                       icon: CupertinoIcons.phone_fill,
-                      label: "Call",
+                      label: "call".tr,
                     ),
                     commonButton(
                       onPressed: () => Utils.sendMessage(sms),
                       icon: CupertinoIcons.mail,
-                      label: "Email",
+                      label: "emailLabel".tr,
                     ),
                     commonButton(
                       onPressed: () =>
                           Utils.openMap(<String?>[" 37.7749", " -122.4194"]),
                       icon: CupertinoIcons.map_fill,
-                      label: "Map",
+                      label: "mapLabel".tr,
                     ),
                   ],
                 ),

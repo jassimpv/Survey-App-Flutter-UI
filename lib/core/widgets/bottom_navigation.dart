@@ -22,9 +22,9 @@ class BottomNavigationView extends StatefulWidget {
 class _BottomNavigationViewState extends State<BottomNavigationView>
     with SingleTickerProviderStateMixin {
   final List<Map<String, dynamic>> homeMenus = [
-    {"title": "Home", "icon": CupertinoIcons.home},
-    {"title": "Tasks", "icon": CupertinoIcons.list_bullet},
-    {"title": "Settings", "icon": CupertinoIcons.settings},
+    {"title": "home", "icon": CupertinoIcons.home},
+    {"title": "tasks", "icon": CupertinoIcons.list_bullet},
+    {"title": "settings", "icon": CupertinoIcons.settings},
   ];
 
   late final AnimationController _controller;

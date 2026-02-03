@@ -11,6 +11,7 @@ import 'package:collect/core/utils/utils_helper.dart';
 import 'package:collect/core/widgets/custom_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 part 'widgets/collection_day_group.dart';
@@ -64,7 +65,7 @@ class _CollectionDataState extends State<CollectionData> {
         child: Column(
           children: <Widget>[
             CustomAppBar(
-              title: 'Collection Data',
+              title: 'collectionData'.tr,
               onBackPressed: () => Navigator.of(context).maybePop(),
             ),
             Expanded(
@@ -264,7 +265,7 @@ class _CollectionDataState extends State<CollectionData> {
         ),
         const SizedBox(height: 8),
         Text(
-          "Pick another date range to view collected KG records grouped by day.",
+          "pickAnotherDateRange".tr,
           style: StyleUtils.kTextStyleSize14Weight400(
             color: ThemeColors.greyTextColor,
           ),

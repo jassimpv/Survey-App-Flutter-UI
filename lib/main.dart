@@ -19,12 +19,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
-    title: "Data Agent App",
+    title: "dataAgentApp".tr,
     theme: AppThemeData.lightTheme(context),
     darkTheme: AppThemeData.darkTheme(context),
     themeMode: ThemeService.themeMode,
     debugShowCheckedModeBanner: false,
-    locale: TranslationService.locale,
+    locale: TranslationService.getLocale() ?? TranslationService.locale,
     fallbackLocale: TranslationService.fallbackLocale,
     translations: TranslationService(),
     supportedLocales: TranslationService.supportedLocale,

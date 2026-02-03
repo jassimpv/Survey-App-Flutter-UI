@@ -176,7 +176,7 @@ class _CollectionEntryTile extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     _InfoTag(
-                      label: "Collected From",
+                      label: "collectedFrom".tr,
                       value: entry.collectedFrom,
                       icon: CupertinoIcons.person_badge_plus,
                     ),
