@@ -125,7 +125,7 @@ class _LanguageWidegtState extends State<LanguageWidegt>
                   height: height - 8,
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    color: ThemeColors.whiteColor,
+                    color: ThemeColors.surface,
                     shape: BoxShape.circle,
                     boxShadow: <BoxShadow>[
                       BoxShadow(

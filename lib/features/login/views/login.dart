@@ -74,7 +74,7 @@ class LoginScreen extends GetView<LoginController> {
                                     vertical: 30,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: ThemeColors.whiteColor,
+                                    color: ThemeColors.surface,
                                     borderRadius: BorderRadius.circular(32),
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(

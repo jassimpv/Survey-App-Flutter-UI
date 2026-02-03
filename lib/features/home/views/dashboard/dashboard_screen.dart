@@ -165,7 +165,7 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
           ":",
           style: StyleUtils.kTextStyleSize12Weight500(
             color: ThemeService.isDark()
-                ? ThemeColors.whiteColor
+                ? ThemeColors.textPrimary
                 : ThemeColors.blackColor,
           ),
         ),
@@ -176,7 +176,7 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
           ":",
           style: StyleUtils.kTextStyleSize12Weight500(
             color: ThemeService.isDark()
-                ? ThemeColors.whiteColor
+                ? ThemeColors.textPrimary
                 : ThemeColors.blackColor,
           ),
         ),
@@ -243,9 +243,7 @@ class NoData extends StatelessWidget {
     padding: const EdgeInsets.all(24),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20),
-      color: ThemeService.isDark()
-          ? ThemeColors.backgroundDark
-          : ThemeColors.whiteColor,
+      color: ThemeColors.surface,
       boxShadow: [
         BoxShadow(
           color: ThemeColors.themeColor.withValues(alpha: 0.08),
@@ -280,7 +278,7 @@ class NoData extends StatelessWidget {
                     text,
                     style: StyleUtils.kTextStyleSize16Weight600(
                       color: ThemeService.isDark()
-                          ? ThemeColors.whiteColor
+                          ? ThemeColors.textPrimary
                           : ThemeColors.headingColor,
                     ),
                   ),

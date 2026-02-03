@@ -112,7 +112,7 @@ class HomeHeader extends GetView<HomeController> {
       ],
     ),
     child: CircleAvatar(
-      backgroundColor: ThemeColors.whiteColor,
+      backgroundColor: ThemeColors.surface,
       radius: 30,
       child: Image.asset(
         AssetUtils.getDummyImage("pp.webp"),
@@ -150,7 +150,7 @@ class HomeHeader extends GetView<HomeController> {
         backgroundColor: ThemeColors.secondaryColor,
         child: CircleAvatar(
           radius: 22,
-          backgroundColor: ThemeColors.whiteColor.withValues(alpha: 0.15),
+          backgroundColor: ThemeColors.inputBackground,
           child: const Icon(
             CupertinoIcons.bell,
             color: ThemeColors.whiteColor,

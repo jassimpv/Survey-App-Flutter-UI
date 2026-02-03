@@ -88,7 +88,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: ThemeColors.whiteColor,
+      color: ThemeColors.surface,
       boxShadow: <BoxShadow>[
         BoxShadow(
           color: ThemeColors.shadow,
@@ -157,7 +157,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: ThemeColors.whiteColor,
+          color: ThemeColors.surface,
           border: Border.all(color: ThemeColors.borderColor),
         ),
         child: Row(
@@ -255,7 +255,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
         height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          color: ThemeColors.whiteColor,
+          color: ThemeColors.surface,
           border: Border.all(color: ThemeColors.borderColor),
           boxShadow: <BoxShadow>[
             BoxShadow(

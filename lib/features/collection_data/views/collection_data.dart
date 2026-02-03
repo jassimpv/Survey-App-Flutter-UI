@@ -58,7 +58,7 @@ class _CollectionDataState extends State<CollectionData> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [ThemeColors.scaffoldColor, ThemeColors.whiteColor],
+            colors: [ThemeColors.scaffoldColor, ThemeColors.surface],
           ),
         ),
         child: Column(
@@ -96,7 +96,7 @@ class _CollectionDataState extends State<CollectionData> {
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: ThemeColors.whiteColor,
+      color: ThemeColors.surface,
       boxShadow: <BoxShadow>[
         BoxShadow(
           color: ThemeColors.shadow,
@@ -246,7 +246,7 @@ class _CollectionDataState extends State<CollectionData> {
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: ThemeColors.whiteColor,
+      color: ThemeColors.surface,
       border: Border.all(color: ThemeColors.borderColor),
     ),
     child: Column(

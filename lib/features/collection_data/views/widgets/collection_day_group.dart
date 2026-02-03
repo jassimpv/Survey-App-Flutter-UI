@@ -24,7 +24,7 @@ class _DayGroup extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: ThemeColors.whiteColor,
+        color: ThemeColors.surface,
         boxShadow: <BoxShadow>[
           BoxShadow(
             color: ThemeColors.shadow,
@@ -121,7 +121,7 @@ class _CollectionEntryTile extends StatelessWidget {
             width: 48,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: ThemeColors.whiteColor,
+              color: ThemeColors.inputBackground,
             ),
             child: const Icon(
               CupertinoIcons.car,
@@ -150,7 +150,7 @@ class _CollectionEntryTile extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: ThemeColors.whiteColor,
+                        color: ThemeColors.inputBackground,
                       ),
                       child: Text(
                         Utils.replaceFarsiNumber(
@@ -210,7 +210,7 @@ class _InfoTag extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
-        color: ThemeColors.whiteColor,
+        color: ThemeColors.surface,
       ),
       child: Row(
         children: <Widget>[
@@ -258,7 +258,7 @@ class _SignaturePreview extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: ThemeColors.borderColor),
-        color: ThemeColors.whiteColor,
+        color: ThemeColors.surface,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

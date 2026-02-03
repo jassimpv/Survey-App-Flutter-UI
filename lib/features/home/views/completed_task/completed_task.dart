@@ -30,7 +30,7 @@ class CompletedTask extends StatelessWidget {
                   ThemeColors.surface,
                   ThemeColors.blackColor.withValues(alpha: 0.1),
                 ]
-              : [ThemeColors.scaffoldColor, ThemeColors.whiteColor],
+              : [ThemeColors.scaffoldColor, ThemeColors.surface],
         ),
       ),
       child: Column(
@@ -51,7 +51,7 @@ class CompletedTask extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: ThemeColors.whiteColor,
+                color: ThemeColors.surface,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: <BoxShadow>[
                   BoxShadow(

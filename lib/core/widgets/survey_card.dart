@@ -31,7 +31,7 @@ class SurveyCard extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: ongoingTrip ? ThemeColors.lightGreen : ThemeColors.whiteColor,
+        color: ongoingTrip ? ThemeColors.lightGreen : ThemeColors.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: ongoingTrip

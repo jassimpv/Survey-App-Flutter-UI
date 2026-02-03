@@ -115,8 +115,8 @@ class _CountryListPickState extends State<CountryListPick> {
                 // After first build, scroll list to selected index once
 
                 return Container(
-                  decoration: const BoxDecoration(
-                    color: ThemeColors.whiteColor,
+                  decoration: BoxDecoration(
+                    color: ThemeColors.surface,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),

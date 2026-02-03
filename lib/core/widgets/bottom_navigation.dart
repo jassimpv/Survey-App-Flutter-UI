@@ -184,7 +184,7 @@ class _HomeItemView extends StatelessWidget {
           minHeight: 48,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? ThemeColors.whiteColor : Colors.transparent,
+          color: isSelected ? ThemeColors.surface : Colors.transparent,
           borderRadius: BorderRadius.circular(999),
           boxShadow: isSelected
               ? <BoxShadow>[
@@ -195,11 +195,7 @@ class _HomeItemView extends StatelessWidget {
                   ),
                 ]
               : null,
-          border: isSelected
-              ? Border.all(
-                  color: ThemeColors.whiteColor.withValues(alpha: 0.18),
-                )
-              : null,
+          border: isSelected ? Border.all(color: ThemeColors.border) : null,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

@@ -92,7 +92,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                 vertical: 30,
                               ),
                               decoration: BoxDecoration(
-                                color: ThemeColors.whiteColor,
+                                color: ThemeColors.surface,
                                 borderRadius: BorderRadius.circular(32),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
@@ -166,7 +166,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                           child: Container(
                                             padding: const EdgeInsets.all(10),
                                             decoration: BoxDecoration(
-                                              color: ThemeColors.whiteColor,
+                                              color: ThemeColors.surface,
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                             ),
@@ -223,8 +223,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                         vertical: 8,
                                                       ),
                                                   decoration: BoxDecoration(
-                                                    color:
-                                                        ThemeColors.whiteColor,
+                                                    color: ThemeColors.surface,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                           16,

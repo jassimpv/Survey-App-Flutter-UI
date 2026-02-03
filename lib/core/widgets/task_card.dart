@@ -231,7 +231,7 @@ class TaskCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: <Color>[ThemeColors.whiteColor, ThemeColors.scaffoldColor],
+          colors: <Color>[ThemeColors.surface, ThemeColors.scaffoldColor],
         ),
         shape: BoxShape.circle,
         border: Border.all(
