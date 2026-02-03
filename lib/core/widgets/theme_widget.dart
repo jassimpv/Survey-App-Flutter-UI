@@ -29,18 +29,20 @@ class ThemeWidget extends GetView<ThemeController> {
               Icon(
                 controller.getThemeIcon(controller.selectedMode.value),
                 size: 18,
-                color: ThemeColors.primary,
+                color: ThemeColors.blackWhite,
               ),
               8.widthBox,
               Text(
                 controller.getThemeName(controller.selectedMode.value),
-                style: StyleUtils.kTextStyleThemeMode(),
+                style: StyleUtils.kTextStyleThemeMode(
+                  color: ThemeColors.blackWhite,
+                ),
               ),
               8.widthBox,
               Icon(
                 CupertinoIcons.chevron_down,
                 size: 16,
-                color: ThemeColors.primary,
+                color: ThemeColors.blackWhite,
               ),
             ],
           ),

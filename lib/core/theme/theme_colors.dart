@@ -15,6 +15,9 @@ class ThemeColors {
 
   static Color get onPrimary => const Color(0xFFFFFFFF);
 
+  static Color get blackWhite =>
+      ThemeService.isDark() ? const Color(0xFFFFFFFF) : const Color(0xFF000000);
+
   // SURFACE COLORS (used: 8+ times)
   static Color get surface =>
       ThemeService.isDark() ? const Color(0xFF1A2332) : const Color(0xFFFFFFFF);
@@ -24,6 +27,9 @@ class ThemeColors {
 
   static Color get onSurfaceSecondary =>
       ThemeService.isDark() ? const Color(0xFF9CA3AF) : const Color(0xFF5E637B);
+
+  static Color get scaffoldColor =>
+      ThemeService.isDark() ? const Color(0xFF131A37) : const Color(0xFFFFFFFF);
 
   // BORDERS & DIVIDERS (merged - same visual purpose)
   static Color get border => ThemeService.isDark()
@@ -122,7 +128,8 @@ class ThemeColors {
   static const Color blackColor = Color(0xFF000000);
   static const Color black = Color(0xFF000000);
   static const Color bgColor = Color(0xFFF4F7FF);
-  static const Color scaffoldColor = Color(0xFFe0f7f7);
+  // static const Color scaffoldColor = Color(0xFFe0f7f7);
+
   static const Color appBgMain = Color(0xFFFFFFFF);
   static const Color shadowHomeColor = Color(0xFFEBEFF6);
 

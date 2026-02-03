@@ -2,6 +2,7 @@ import "package:collect/features/profile/controller/profile_controller.dart";
 import "package:collect/routes.dart";
 
 import "package:collect/core/theme/theme_colors.dart";
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/custom_app_bar.dart";
@@ -17,21 +18,19 @@ class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => Container(
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        colors: [ThemeColors.scaffoldColor, ThemeColors.surface],
-      ),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        CustomAppBar(title: "profile".tr),
-        Expanded(child: _buildProfileContent(context)),
-      ],
-    ),
+  Widget build(BuildContext context) => ValueListenableBuilder<ThemeMode>(
+    valueListenable: ThemeService.themeModeNotifier,
+    builder: (BuildContext context, ThemeMode themeMode, Widget? child) =>
+        Container(
+          decoration: BoxDecoration(color: ThemeColors.scaffoldColor),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              CustomAppBar(title: "profile".tr),
+              Expanded(child: _buildProfileContent(context)),
+            ],
+          ),
+        ),
   );
 
   Widget _buildProfileContent(BuildContext context) =>
@@ -45,19 +44,12 @@ class ProfileScreen extends GetView<ProfileController> {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: <Color>[
-                      ThemeColors.surface,
-                      ThemeColors.scaffoldColor,
-                    ],
-                  ),
+                  color: ThemeColors.surface,
                   borderRadius: BorderRadius.circular(32),
                   border: Border.all(color: ThemeColors.border),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: ThemeColors.themeColor.withValues(alpha: 0.15),
+                      color: ThemeColors.blackWhite.withValues(alpha: 0.05),
                       blurRadius: 30,
                       offset: const Offset(0, 12),
                     ),
@@ -100,10 +92,7 @@ class ProfileScreen extends GetView<ProfileController> {
         ),
         child: CircleAvatar(
           backgroundColor: ThemeColors.surface,
-          child: const Icon(
-            CupertinoIcons.person,
-            color: ThemeColors.themeColor,
-          ),
+          child: Icon(CupertinoIcons.person, color: ThemeColors.blackWhite),
         ),
       ),
       16.widthBox,
@@ -114,21 +103,21 @@ class ProfileScreen extends GetView<ProfileController> {
             Text(
               "Jassim",
               style: StyleUtils.kTextStyleSize24Weight500(
-                color: ThemeColors.headingColor,
+                color: ThemeColors.blackWhite,
               ),
             ),
             4.heightBox,
             Text(
               "123456789",
               style: StyleUtils.kTextStyleSize14Weight400(
-                color: ThemeColors.greyTextColor,
+                color: ThemeColors.blackWhite,
               ),
             ),
             2.heightBox,
             Text(
               "test@email.com",
               style: StyleUtils.kTextStyleSize14Weight400(
-                color: ThemeColors.greyTextColor,
+                color: ThemeColors.blackWhite,
               ),
             ),
           ],
@@ -185,10 +174,10 @@ class ProfileScreen extends GetView<ProfileController> {
                   ),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   CupertinoIcons.globe,
                   size: 22,
-                  color: ThemeColors.themeColor,
+                  color: ThemeColors.blackWhite,
                 ),
               ),
               12.widthBox,
@@ -196,7 +185,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 child: Text(
                   "Language".tr,
                   style: StyleUtils.kTextStyleSize18Weight500(
-                    color: ThemeColors.headingColor,
+                    color: ThemeColors.blackWhite,
                   ),
                 ),
               ),
@@ -222,10 +211,10 @@ class ProfileScreen extends GetView<ProfileController> {
                   ),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
+                child: Icon(
                   CupertinoIcons.brightness,
                   size: 22,
-                  color: ThemeColors.themeColor,
+                  color: ThemeColors.blackWhite,
                 ),
               ),
               12.widthBox,
@@ -233,7 +222,7 @@ class ProfileScreen extends GetView<ProfileController> {
                 child: Text(
                   "theme".tr,
                   style: StyleUtils.kTextStyleSize18Weight500(
-                    color: ThemeColors.headingColor,
+                    color: ThemeColors.blackWhite,
                   ),
                 ),
               ),
@@ -259,11 +248,7 @@ class ProfileScreen extends GetView<ProfileController> {
     ),
   );
 
-  Widget _buildInfoRow(
-    IconData icon,
-    String text, {
-    Color color = ThemeColors.themeColor,
-  }) => Padding(
+  Widget _buildInfoRow(IconData icon, String text) => Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
     child: Row(
       children: <Widget>[
@@ -273,24 +258,28 @@ class ProfileScreen extends GetView<ProfileController> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: <Color>[
-                color.withValues(alpha: 0.15),
-                ThemeColors.whiteColor,
+                ThemeColors.themeColor.withValues(alpha: 0.15),
+                ThemeColors.surface,
               ],
             ),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, size: 22, color: color),
+          child: Icon(icon, size: 22, color: ThemeColors.blackWhite),
         ),
         12.widthBox,
         Expanded(
           child: Text(
             text,
             style: StyleUtils.kTextStyleSize18Weight500(
-              color: ThemeColors.headingColor,
+              color: ThemeColors.blackWhite,
             ),
           ),
         ),
-        Icon(CupertinoIcons.chevron_forward, color: color, size: 18),
+        Icon(
+          CupertinoIcons.chevron_forward,
+          color: ThemeColors.blackWhite,
+          size: 18,
+        ),
       ],
     ),
   );

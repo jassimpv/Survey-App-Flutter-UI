@@ -317,8 +317,10 @@ class StyleUtils {
   );
 
   // Theme Widget Style
-  static TextStyle kTextStyleThemeMode() => TextStyle(
-    color: ThemeColors.themeColor,
+  static TextStyle kTextStyleThemeMode({
+    Color color = ThemeColors.themeColor,
+  }) => TextStyle(
+    color: color,
     fontSize: 13,
     fontWeight: FontWeight.w500,
     fontFamily: "Outfit",
