@@ -1,9 +1,9 @@
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:flutter/material.dart";
 
 class StyleUtils {
   static TextStyle kTextStyleSize35Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
     double? letterSpacing,
   }) => TextStyle(
     color: color,
@@ -14,7 +14,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize24Weight500({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 24,
@@ -23,7 +23,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize14Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 14,
@@ -32,7 +32,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize16Weight400({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
     double? letterSpacing,
   }) => TextStyle(
     color: color,
@@ -42,7 +42,7 @@ class StyleUtils {
     letterSpacing: letterSpacing,
   );
   static TextStyle kTextStyleSize16Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
     double? letterSpacing,
   }) => TextStyle(
     color: color,
@@ -52,7 +52,7 @@ class StyleUtils {
     letterSpacing: letterSpacing,
   );
   static TextStyle kTextStyleSize12Weight400({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 12,
@@ -61,7 +61,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize18Weight400({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 18,
@@ -70,7 +70,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize12Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 12,
@@ -86,7 +86,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize14Weight400({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 14,
@@ -95,7 +95,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize24Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 24,
@@ -104,7 +104,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize24Weight700({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 24,
@@ -113,7 +113,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize18Weight500({
-    Color color = ColorUtils.themeTextColor,
+    Color color = ThemeColors.themeTextColor,
     bool isUnderline = false,
     double? letterSpacing,
   }) => TextStyle(
@@ -126,7 +126,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize54Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 54,
@@ -135,7 +135,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize18Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 18,
@@ -144,7 +144,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize20Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 20,
@@ -153,7 +153,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize17Weight400({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 17,
@@ -162,14 +162,14 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize17Weight600({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 17,
     fontFamily: "Outfit",
     fontWeight: FontWeight.w600,
   );
-  static TextStyle titleText({Color color = ColorUtils.themeTextColor}) =>
+  static TextStyle titleText({Color color = ThemeColors.themeTextColor}) =>
       TextStyle(
         color: color,
         fontSize: 18,
@@ -178,7 +178,7 @@ class StyleUtils {
       );
 
   static TextStyle kTextStyleSize28Weight700({
-    Color color = ColorUtils.themeTextColor,
+    Color color = ThemeColors.themeTextColor,
     double? lettingSpace,
   }) => TextStyle(
     color: color,
@@ -188,7 +188,7 @@ class StyleUtils {
     letterSpacing: lettingSpace,
   );
   static TextStyle kTextStyleSize14Weight500({
-    Color color = ColorUtils.themeTextColor,
+    Color color = ThemeColors.themeTextColor,
   }) => TextStyle(
     color: color,
     fontSize: 14,
@@ -196,7 +196,7 @@ class StyleUtils {
     fontWeight: FontWeight.w500,
   );
   static TextStyle kTextStyleSize12Weight500({
-    Color color = ColorUtils.themeTextColor,
+    Color color = ThemeColors.themeTextColor,
   }) => TextStyle(
     color: color,
     fontSize: 12,
@@ -205,7 +205,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize10Weight400({
-    Color color = ColorUtils.themeTextColor,
+    Color color = ThemeColors.themeTextColor,
   }) => TextStyle(
     color: color,
     fontSize: 10,
@@ -213,7 +213,7 @@ class StyleUtils {
     fontWeight: FontWeight.w400,
   );
   static TextStyle kTextStyleSize16Weight500({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
     double? letterSpacing,
   }) => TextStyle(
     color: color,
@@ -229,16 +229,16 @@ class StyleUtils {
   }) => InputDecoration(
     hintText: hintText,
     hintStyle: StyleUtils.kTextStyleSize14Weight400(
-      color: ColorUtils.greyTextColor.withValues(alpha: 0.5),
+      color: ThemeColors.greyTextColor.withValues(alpha: 0.5),
     ),
-    fillColor: ColorUtils.whiteColor,
+    fillColor: ThemeColors.whiteColor,
     filled: true,
     prefixIcon: prefixIcon != null
         ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 13),
             child: Icon(
               prefixIcon,
-              color: ColorUtils.greyTextColor.withValues(alpha: 0.5),
+              color: ThemeColors.greyTextColor.withValues(alpha: 0.5),
             ),
           )
         : null,
@@ -251,7 +251,7 @@ class StyleUtils {
       borderRadius: BorderRadius.circular(8),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: ColorUtils.themeColor),
+      borderSide: const BorderSide(color: ThemeColors.themeColor),
       borderRadius: BorderRadius.circular(8),
     ),
     errorBorder: OutlineInputBorder(
@@ -263,10 +263,10 @@ class StyleUtils {
 
   static BoxDecoration cardView() => BoxDecoration(
     borderRadius: BorderRadius.circular(16),
-    color: ColorUtils.whiteColor,
+    color: ThemeColors.whiteColor,
     boxShadow: const <BoxShadow>[
       BoxShadow(
-        color: ColorUtils.shadowHomeColor,
+        color: ThemeColors.shadowHomeColor,
         blurRadius: 6,
         offset: Offset(0, 6),
       ),
@@ -274,7 +274,7 @@ class StyleUtils {
   );
 
   static TextStyle kTextStyleSize10Weight500({
-    Color color = ColorUtils.themeTextColor,
+    Color color = ThemeColors.themeTextColor,
   }) => TextStyle(
     color: color,
     fontSize: 10,
@@ -285,7 +285,7 @@ class StyleUtils {
   static BoxDecoration cardViewSmall({bool isSelected = false}) =>
       BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: isSelected ? ColorUtils.themeColor : ColorUtils.whiteColor,
+        color: isSelected ? ThemeColors.themeColor : ThemeColors.whiteColor,
         boxShadow: !isSelected
             ? <BoxShadow>[]
             : const <BoxShadow>[
@@ -318,7 +318,7 @@ class StyleUtils {
 
   // Theme Widget Style
   static TextStyle kTextStyleThemeMode() => TextStyle(
-    color: ColorUtils.themeColor,
+    color: ThemeColors.themeColor,
     fontSize: 13,
     fontWeight: FontWeight.w500,
     fontFamily: "Outfit",
@@ -326,7 +326,7 @@ class StyleUtils {
 
   // Language Widget Style
   static TextStyle kTextStyleLanguageBadge() => TextStyle(
-    color: ColorUtils.whiteColor.withValues(alpha: 0.9),
+    color: ThemeColors.whiteColor.withValues(alpha: 0.9),
     fontSize: 10,
     fontWeight: FontWeight.w700,
     fontFamily: "Outfit",
@@ -337,7 +337,7 @@ class StyleUtils {
     fontSize: 24,
     fontWeight: FontWeight.bold,
     fontFamily: "Outfit",
-    color: ColorUtils.headingColor,
+    color: ThemeColors.headingColor,
   );
 
   // Date Answer View Style
@@ -346,11 +346,11 @@ class StyleUtils {
 
   // Survey App Bar Style
   static TextStyle kTextStyleSurveyAppBar() =>
-      TextStyle(color: ColorUtils.whiteColor, fontFamily: "Outfit");
+      TextStyle(color: ThemeColors.whiteColor, fontFamily: "Outfit");
 
   // Step View Style
   static TextStyle kTextStyleStepView({
-    Color color = ColorUtils.headingColor,
+    Color color = ThemeColors.headingColor,
   }) => TextStyle(
     color: color,
     fontSize: 14,
@@ -368,7 +368,7 @@ class StyleUtils {
 
   // Dialog & Menu Title Style
   static TextStyle kTextStyleDialogTitle() => TextStyle(
-    color: ColorUtils.headingColor,
+    color: ThemeColors.headingColor,
     fontSize: 18,
     fontWeight: FontWeight.w600,
     fontFamily: "Outfit",
@@ -376,7 +376,7 @@ class StyleUtils {
 
   // Menu Item Style
   static TextStyle kTextStyleMenuItemLabel() => TextStyle(
-    color: ColorUtils.headingColor,
+    color: ThemeColors.headingColor,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     fontFamily: "Outfit",
@@ -384,7 +384,7 @@ class StyleUtils {
 
   // Body Text Style for content/description
   static TextStyle kTextStyleBodyText() => TextStyle(
-    color: ColorUtils.themeTextColor,
+    color: ThemeColors.themeTextColor,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     fontFamily: "Outfit",

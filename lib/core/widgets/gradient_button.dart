@@ -1,4 +1,4 @@
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/zoom_tap.dart";
 import "package:flutter/material.dart";
@@ -20,7 +20,7 @@ class GradientButton extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
+          colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
         ),
         boxShadow: const <BoxShadow>[
           BoxShadow(

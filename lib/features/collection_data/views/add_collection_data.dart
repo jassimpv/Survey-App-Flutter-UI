@@ -2,7 +2,8 @@ import "dart:convert";
 import "dart:typed_data";
 
 import "package:collect/core/models/task_card_model.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/custom_app_bar.dart";
 import "package:flutter/cupertino.dart";
@@ -33,7 +34,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     _collectionDate = DateTime.now();
     _signatureController = SignatureController(
       penStrokeWidth: 4,
-      penColor: ColorUtils.themeColor,
+      penColor: ThemeColors.themeColor,
       exportBackgroundColor: Colors.white,
     );
   }
@@ -49,7 +50,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    backgroundColor: ColorUtils.bgColor,
+    backgroundColor: ThemeColors.bgColor,
     body: Column(
       children: <Widget>[
         CustomAppBar(
@@ -87,7 +88,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: ColorUtils.whiteColor,
+      color: ThemeColors.whiteColor,
       boxShadow: const <BoxShadow>[
         BoxShadow(
           color: Color.fromRGBO(15, 23, 42, 0.08),
@@ -102,14 +103,14 @@ class _AddCollectionDataState extends State<AddCollectionData> {
         Text(
           widget.data.restaurantName,
           style: StyleUtils.kTextStyleSize20Weight600(
-            color: ColorUtils.themeColor,
+            color: ThemeColors.themeColor,
           ),
         ),
         const SizedBox(height: 6),
         Text(
           widget.data.restaurantAddress,
           style: StyleUtils.kTextStyleSize14Weight400(
-            color: ColorUtils.greyTextColor,
+            color: ThemeColors.greyTextColor,
           ),
         ),
         const SizedBox(height: 16),
@@ -127,17 +128,17 @@ class _AddCollectionDataState extends State<AddCollectionData> {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: ColorUtils.bgColor,
+        color: ThemeColors.bgColor,
       ),
       child: Row(
         children: <Widget>[
-          Icon(icon, size: 18, color: ColorUtils.themeColor),
+          Icon(icon, size: 18, color: ThemeColors.themeColor),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
               label,
               style: StyleUtils.kTextStyleSize14Weight600(
-                color: ColorUtils.themeTextColor,
+                color: ThemeColors.themeTextColor,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -156,8 +157,8 @@ class _AddCollectionDataState extends State<AddCollectionData> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: ColorUtils.whiteColor,
-          border: Border.all(color: ColorUtils.borderColor),
+          color: ThemeColors.whiteColor,
+          border: Border.all(color: ThemeColors.borderColor),
         ),
         child: Row(
           children: <Widget>[
@@ -166,11 +167,11 @@ class _AddCollectionDataState extends State<AddCollectionData> {
               width: 44,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: ColorUtils.bgColor,
+                color: ThemeColors.bgColor,
               ),
               child: const Icon(
                 CupertinoIcons.calendar,
-                color: ColorUtils.themeColor,
+                color: ThemeColors.themeColor,
               ),
             ),
             const SizedBox(width: 14),
@@ -181,13 +182,13 @@ class _AddCollectionDataState extends State<AddCollectionData> {
                   Text(
                     "Collection date",
                     style: StyleUtils.kTextStyleSize12Weight500(
-                      color: ColorUtils.greyTextColor,
+                      color: ThemeColors.greyTextColor,
                     ),
                   ),
                   Text(
                     formatter.format(_collectionDate),
                     style: StyleUtils.kTextStyleSize16Weight600(
-                      color: ColorUtils.themeTextColor,
+                      color: ThemeColors.themeTextColor,
                     ),
                   ),
                 ],
@@ -195,7 +196,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
             ),
             const Icon(
               CupertinoIcons.chevron_down,
-              color: ColorUtils.greyTextColor,
+              color: ThemeColors.greyTextColor,
             ),
           ],
         ),
@@ -246,7 +247,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
       Text(
         "Collector signature",
         style: StyleUtils.kTextStyleSize16Weight600(
-          color: ColorUtils.themeTextColor,
+          color: ThemeColors.themeTextColor,
         ),
       ),
       const SizedBox(height: 12),
@@ -254,8 +255,8 @@ class _AddCollectionDataState extends State<AddCollectionData> {
         height: 180,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
-          color: ColorUtils.whiteColor,
-          border: Border.all(color: ColorUtils.borderColor),
+          color: ThemeColors.whiteColor,
+          border: Border.all(color: ThemeColors.borderColor),
           boxShadow: const <BoxShadow>[
             BoxShadow(
               color: Color.fromRGBO(15, 23, 42, 0.05),
@@ -287,8 +288,8 @@ class _AddCollectionDataState extends State<AddCollectionData> {
                 : "Awaiting signature",
             style: StyleUtils.kTextStyleSize12Weight500(
               color: _signatureController.isNotEmpty
-                  ? ColorUtils.completedColor
-                  : ColorUtils.greyTextColor,
+                  ? ThemeColors.completedColor
+                  : ThemeColors.greyTextColor,
             ),
           ),
         ],
@@ -298,7 +299,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
 
   Widget _buildActionButtons() => ElevatedButton(
     style: ElevatedButton.styleFrom(
-      backgroundColor: ColorUtils.themeColor,
+      backgroundColor: ThemeColors.themeColor,
       padding: const EdgeInsets.symmetric(vertical: 18),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
     ),

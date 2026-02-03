@@ -1,4 +1,4 @@
-import 'package:collect/core/utils/colors_utils.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/utils/textstyle_input.dart';
 import 'package:flutter/material.dart';
 import 'package:collect/core/extensions/survet_kit/src/configuration/app_bar_configuration.dart';
@@ -20,7 +20,7 @@ class SurveyAppBar extends StatelessWidget {
 
     final surveyController = controller ?? context.read<SurveyController>();
     return AppBar(
-      backgroundColor: ColorUtils.themeColor,
+      backgroundColor: ThemeColors.themeColor,
       elevation: 0,
 
       leading: _canGoBack

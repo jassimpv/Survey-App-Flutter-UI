@@ -1,5 +1,6 @@
 import "package:collect/core/models/task_card_model.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/utils/utils_helper.dart";
@@ -30,7 +31,7 @@ class SurveyCard extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: ongoingTrip ? ColorUtils.lightGreen : Colors.white,
+        color: ongoingTrip ? ThemeColors.lightGreen : Colors.white,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: ongoingTrip
@@ -57,12 +58,12 @@ class SurveyCard extends StatelessWidget {
     height: 40,
     width: 40,
     decoration: BoxDecoration(
-      color: ColorUtils.themeColor,
+      color: ThemeColors.themeColor,
       borderRadius: BorderRadius.circular(4),
     ),
     child: Icon(
       Icons.restaurant,
-      color: ongoingTrip ? ColorUtils.darkGreen : ColorUtils.whiteColor,
+      color: ongoingTrip ? ThemeColors.darkGreen : ThemeColors.whiteColor,
       size: 16,
     ),
   );
@@ -73,15 +74,15 @@ class SurveyCard extends StatelessWidget {
       Text(
         bookingData.restaurantName,
         style: StyleUtils.kTextStyleSize17Weight600(
-          color: ColorUtils.backgroundDark,
+          color: ThemeColors.backgroundDark,
         ),
       ),
       Text(
         bookingData.restaurantType,
         style: StyleUtils.kTextStyleSize16Weight400(
           color: ongoingTrip
-              ? ColorUtils.green.withValues(alpha: 0.7)
-              : ColorUtils.darkBlue,
+              ? ThemeColors.green.withValues(alpha: 0.7)
+              : ThemeColors.darkBlue,
         ),
       ),
     ],
@@ -97,7 +98,7 @@ class SurveyCard extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.location_on,
-                color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
+                color: ongoingTrip ? ThemeColors.green : ThemeColors.darkBlue,
                 size: 18,
               ),
               8.widthBox,
@@ -105,8 +106,8 @@ class SurveyCard extends StatelessWidget {
                 bookingData.restaurantAddress,
                 style: StyleUtils.kTextStyleSize14Weight400(
                   color: ongoingTrip
-                      ? ColorUtils.green.withValues(alpha: 0.8)
-                      : ColorUtils.darkBlue.withValues(alpha: 0.8),
+                      ? ThemeColors.green.withValues(alpha: 0.8)
+                      : ThemeColors.darkBlue.withValues(alpha: 0.8),
                 ),
               ),
             ],
@@ -116,14 +117,14 @@ class SurveyCard extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.shopping_bag_outlined,
-                color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
+                color: ongoingTrip ? ThemeColors.green : ThemeColors.darkBlue,
                 size: 20,
               ),
               8.widthBox,
               Text(
                 "Fruits",
                 style: StyleUtils.kTextStyleSize14Weight500(
-                  color: ColorUtils.black.withValues(alpha: 0.8),
+                  color: ThemeColors.black.withValues(alpha: 0.8),
                 ),
               ),
             ],
@@ -135,14 +136,14 @@ class SurveyCard extends StatelessWidget {
         children: <Widget>[
           Icon(
             CupertinoIcons.calendar,
-            color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
+            color: ongoingTrip ? ThemeColors.green : ThemeColors.darkBlue,
             size: 18,
           ),
           5.widthBox,
           Text(
             Utils.formatDate(bookingData.lastVistedDate.createdAt),
             style: StyleUtils.kTextStyleSize14Weight500(
-              color: ColorUtils.darkGray,
+              color: ThemeColors.darkGray,
             ),
           ),
         ],
@@ -176,7 +177,7 @@ class PassengerCount extends StatelessWidget {
   Widget build(BuildContext context) => InfoContainer(
     text: weight,
     style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
-    backgroundColor: ColorUtils.secondaryColor,
+    backgroundColor: ThemeColors.secondaryColor,
   );
 }
 

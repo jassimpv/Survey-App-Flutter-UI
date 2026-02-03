@@ -1,4 +1,4 @@
-import 'package:collect/core/utils/colors_utils.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:collect/core/extensions/survet_kit/src/presenter/survey_presenter.dart';
@@ -42,7 +42,7 @@ class _SurveyProgressState extends State<SurveyProgress> {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         height: progressbarConfiguration.height,
-                        color: ColorUtils.whiteColor,
+                        color: ThemeColors.whiteColor,
                       ),
                       LayoutBuilder(
                         builder: (context, constraints) {
@@ -57,7 +57,7 @@ class _SurveyProgressState extends State<SurveyProgress> {
                             color:
                                 progressbarConfiguration
                                     .valueProgressbarColor ??
-                                ColorUtils.secondaryColor,
+                                ThemeColors.secondaryColor,
                           );
                         },
                       ),

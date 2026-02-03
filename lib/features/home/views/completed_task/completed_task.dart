@@ -1,5 +1,6 @@
 import "package:collect/features/home/controller/home_controller.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/theme/theme_service.dart";
@@ -26,7 +27,7 @@ class CompletedTask extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: ThemeService.isDark()
               ? [const Color(0xFF0F1720), const Color(0xFF1A2332)]
-              : [ColorUtils.scaffoldColor, Colors.white],
+              : [ThemeColors.scaffoldColor, Colors.white],
         ),
       ),
       child: Column(
@@ -51,7 +52,7 @@ class CompletedTask extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: ColorUtils.themeColor.withValues(alpha: 0.08),
+                    color: ThemeColors.themeColor.withValues(alpha: 0.08),
                     blurRadius: 24,
                     offset: const Offset(0, 4),
                   ),
@@ -92,14 +93,14 @@ class CompletedTask extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: <Color>[
-                            ColorUtils.themeColor,
-                            ColorUtils.themeColor.withValues(alpha: 0.8),
+                            ThemeColors.themeColor,
+                            ThemeColors.themeColor.withValues(alpha: 0.8),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(14),
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                            color: ColorUtils.themeColor.withValues(
+                            color: ThemeColors.themeColor.withValues(
                               alpha: 0.25,
                             ),
                             blurRadius: 12,
@@ -219,9 +220,9 @@ class CompletedTask extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 12),
     margin: const EdgeInsets.only(right: 10),
     decoration: BoxDecoration(
-      color: ColorUtils.themeColor.withValues(alpha: 0.08),
+      color: ThemeColors.themeColor.withValues(alpha: 0.08),
       borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: ColorUtils.themeColor.withValues(alpha: 0.2)),
+      border: Border.all(color: ThemeColors.themeColor.withValues(alpha: 0.2)),
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -229,13 +230,13 @@ class CompletedTask extends StatelessWidget {
         Text(
           text.tr,
           style: StyleUtils.kTextStyleSize12Weight500(
-            color: ColorUtils.themeColor,
+            color: ThemeColors.themeColor,
           ),
         ),
         8.widthBox,
         ZoomTapAnimation(
           onTap: onClose,
-          child: Icon(Icons.close, size: 16, color: ColorUtils.themeColor),
+          child: Icon(Icons.close, size: 16, color: ThemeColors.themeColor),
         ),
       ],
     ),

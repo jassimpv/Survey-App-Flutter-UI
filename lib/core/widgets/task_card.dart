@@ -1,6 +1,7 @@
 import "package:collect/core/models/task_card_model.dart";
 import "package:collect/core/utils/asset_utils.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/utils/utils_helper.dart";
@@ -78,13 +79,13 @@ class TaskCard extends StatelessWidget {
           _buildActionIcon(
             onTap: () => Utils.openMap(<String?>["25.2048", "55.2708"]),
             assetName: "ic_location",
-            iconColor: ColorUtils.backgroundDark,
+            iconColor: ThemeColors.backgroundDark,
           ),
           8.widthBox,
           _buildActionIcon(
             onTap: () => Utils.dail("1234567890"),
             assetName: "ic_call",
-            iconColor: ColorUtils.backgroundDark,
+            iconColor: ThemeColors.backgroundDark,
           ),
         ],
       ),
@@ -93,8 +94,8 @@ class TaskCard extends StatelessWidget {
 
   Widget _buildIcon() {
     final Color iconColor = ongoingTrip
-        ? ColorUtils.darkGreen
-        : ColorUtils.themeColor;
+        ? ThemeColors.darkGreen
+        : ThemeColors.themeColor;
 
     return Container(
       height: 56,
@@ -105,7 +106,7 @@ class TaskCard extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: <Color>[
             Colors.white.withValues(alpha: 0.9),
-            (ongoingTrip ? ColorUtils.darkGreen : ColorUtils.themeColor)
+            (ongoingTrip ? ThemeColors.darkGreen : ThemeColors.themeColor)
                 .withValues(alpha: 0.06),
           ],
         ),
@@ -129,15 +130,15 @@ class TaskCard extends StatelessWidget {
       Text(
         bookingData.restaurantName,
         style: StyleUtils.kTextStyleSize17Weight600(
-          color: ColorUtils.backgroundDark,
+          color: ThemeColors.backgroundDark,
         ),
       ),
       Text(
         bookingData.restaurantType,
         style: StyleUtils.kTextStyleSize14Weight500(
           color: ongoingTrip
-              ? ColorUtils.green.withValues(alpha: 0.7)
-              : ColorUtils.darkBlue,
+              ? ThemeColors.green.withValues(alpha: 0.7)
+              : ThemeColors.darkBlue,
         ),
       ),
     ],
@@ -154,7 +155,7 @@ class TaskCard extends StatelessWidget {
               children: <Widget>[
                 Icon(
                   Icons.location_on,
-                  color: ongoingTrip ? ColorUtils.green : ColorUtils.darkBlue,
+                  color: ongoingTrip ? ThemeColors.green : ThemeColors.darkBlue,
                   size: 18,
                 ),
                 8.widthBox,
@@ -165,8 +166,8 @@ class TaskCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: StyleUtils.kTextStyleSize14Weight500(
                       color: ongoingTrip
-                          ? ColorUtils.green.withValues(alpha: 0.8)
-                          : ColorUtils.darkBlue.withValues(alpha: 0.8),
+                          ? ThemeColors.green.withValues(alpha: 0.8)
+                          : ThemeColors.darkBlue.withValues(alpha: 0.8),
                     ),
                   ),
                 ),
@@ -195,15 +196,15 @@ class TaskCard extends StatelessWidget {
                 Image.asset(
                   AssetUtils.getIcons("ic_ride_list"),
                   height: 26,
-                  color: ColorUtils.backgroundDark,
+                  color: ThemeColors.backgroundDark,
                 ),
                 10.widthBox,
                 Text(
                   Utils.replaceFarsiNumber(bookingData.distance),
                   style: StyleUtils.kTextStyleSize14Weight500(
                     color: ongoingTrip
-                        ? ColorUtils.green.withValues(alpha: 0.8)
-                        : ColorUtils.darkBlue.withValues(alpha: 0.8),
+                        ? ThemeColors.green.withValues(alpha: 0.8)
+                        : ThemeColors.darkBlue.withValues(alpha: 0.8),
                   ),
                 ),
               ],
@@ -217,7 +218,7 @@ class TaskCard extends StatelessWidget {
   Widget _buildActionIcon({
     required VoidCallback? onTap,
     required String assetName,
-    Color iconColor = ColorUtils.themeColor,
+    Color iconColor = ThemeColors.themeColor,
   }) => ZoomTapAnimation(
     onTap: onTap,
     child: Container(
@@ -226,15 +227,15 @@ class TaskCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: <Color>[Colors.white, ColorUtils.scaffoldColor],
+          colors: <Color>[Colors.white, ThemeColors.scaffoldColor],
         ),
         shape: BoxShape.circle,
         border: Border.all(
-          color: ColorUtils.themeColor.withValues(alpha: 0.08),
+          color: ThemeColors.themeColor.withValues(alpha: 0.08),
         ),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: ColorUtils.themeColor.withValues(alpha: 0.1),
+            color: ThemeColors.themeColor.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
@@ -256,13 +257,15 @@ class TaskCard extends StatelessWidget {
         label.tr,
         style: StyleUtils.kTextStyleSize12Weight500(
           color: ongoingTrip
-              ? ColorUtils.green.withValues(alpha: 0.8)
-              : ColorUtils.darkBlue.withValues(alpha: 0.8),
+              ? ThemeColors.green.withValues(alpha: 0.8)
+              : ThemeColors.darkBlue.withValues(alpha: 0.8),
         ),
       ),
       Text(
         Utils.replaceFarsiNumber(Utils.timeAgo(time)),
-        style: StyleUtils.kTextStyleSize12Weight500(color: ColorUtils.darkGray),
+        style: StyleUtils.kTextStyleSize12Weight500(
+          color: ThemeColors.darkGray,
+        ),
       ),
     ],
   );
@@ -278,7 +281,7 @@ class PassengerCount extends StatelessWidget {
     decoration: BoxDecoration(
       color: Colors.white.withValues(alpha: 0.9),
       borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: ColorUtils.darkGreen.withValues(alpha: 0.12)),
+      border: Border.all(color: ThemeColors.darkGreen.withValues(alpha: 0.12)),
       boxShadow: <BoxShadow>[
         BoxShadow(
           color: Colors.black.withValues(alpha: 0.04),
@@ -289,7 +292,7 @@ class PassengerCount extends StatelessWidget {
     ),
     child: Text(
       emirate,
-      style: StyleUtils.kTextStyleSize14Weight600(color: ColorUtils.darkGreen),
+      style: StyleUtils.kTextStyleSize14Weight600(color: ThemeColors.darkGreen),
     ),
   );
 }

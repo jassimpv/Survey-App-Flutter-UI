@@ -2,7 +2,8 @@ import "package:collect/core/extensions/country_list_pick/country_selection_them
 import "package:collect/core/extensions/country_list_pick/support/code_countries_en.dart";
 import "package:collect/core/extensions/country_list_pick/support/code_country.dart";
 import "package:collect/core/extensions/country_list_pick/support/code_countrys.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -157,7 +158,7 @@ class _CountryListPickState extends State<CountryListPick> {
                               trailing: Container(
                                 padding: const EdgeInsets.all(6),
                                 decoration: BoxDecoration(
-                                  color: ColorUtils.themeColor,
+                                  color: ThemeColors.themeColor,
                                   shape: BoxShape.circle,
                                 ),
                                 child: const Icon(
@@ -225,7 +226,7 @@ class _CountryListPickState extends State<CountryListPick> {
                                   ? Container(
                                       padding: const EdgeInsets.all(6),
                                       decoration: BoxDecoration(
-                                        color: ColorUtils.themeColor,
+                                        color: ThemeColors.themeColor,
                                         shape: BoxShape.circle,
                                       ),
                                       child: const Icon(

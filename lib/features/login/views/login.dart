@@ -1,7 +1,8 @@
 import "package:collect/features/login/controller/login_controller.dart";
 import "package:collect/core/extensions/country_list_pick/support/code_country.dart";
 import "package:collect/core/utils/asset_utils.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/gradient_button.dart";
@@ -105,7 +106,7 @@ class LoginScreen extends GetView<LoginController> {
                                         "welcome_back".tr,
                                         style:
                                             StyleUtils.kTextStyleSize28Weight700(
-                                              color: ColorUtils.headingColor,
+                                              color: ThemeColors.headingColor,
                                             ),
                                       ),
                                       8.heightBox,
@@ -113,7 +114,7 @@ class LoginScreen extends GetView<LoginController> {
                                         "loginWithYourPhoneNumber".tr,
                                         style:
                                             StyleUtils.kTextStyleSize16Weight400(
-                                              color: ColorUtils.greyTextColor,
+                                              color: ThemeColors.greyTextColor,
                                             ),
                                       ),
                                       28.heightBox,

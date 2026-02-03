@@ -1,6 +1,7 @@
 import "package:collect/features/splash/controller/splash_controller.dart";
 import "package:collect/core/utils/asset_utils.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:flutter/material.dart";
 import "package:flutter_svg/svg.dart";
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
           SvgPicture.asset(
             AssetUtils.getSvg("logo"),
             colorFilter: const ColorFilter.mode(
-              ColorUtils.whiteColor,
+              ThemeColors.whiteColor,
               BlendMode.srcIn,
             ),
             height: 100,

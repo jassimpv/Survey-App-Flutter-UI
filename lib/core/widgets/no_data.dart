@@ -1,4 +1,4 @@
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/zoom_tap.dart";
@@ -46,7 +46,7 @@ class NoData extends StatelessWidget {
         ),
         30.heightBox,
         if (isLoading)
-          const CircularProgressIndicator(color: ColorUtils.themeColor)
+          const CircularProgressIndicator(color: ThemeColors.themeColor)
         else
           SizedBox(
             width: 277,
@@ -61,17 +61,17 @@ class NoData extends StatelessWidget {
                 ),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(8)),
-                  color: ColorUtils.themeColor,
+                  color: ThemeColors.themeColor,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Icon(Icons.bluetooth, color: ColorUtils.whiteColor),
+                    const Icon(Icons.bluetooth, color: ThemeColors.whiteColor),
                     5.widthBox,
                     Text(
                       buttonText,
                       style: StyleUtils.kTextStyleSize18Weight400(
-                        color: ColorUtils.whiteColor,
+                        color: ThemeColors.whiteColor,
                       ),
                     ),
                   ],

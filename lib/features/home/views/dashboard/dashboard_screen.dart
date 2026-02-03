@@ -2,8 +2,9 @@ import "dart:async";
 
 import "package:collect/features/home/controller/home_controller.dart";
 import "package:collect/core/extensions/pull_to_refresh/pull_to_refresh_flutter.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
 import "package:collect/core/theme/theme_colors.dart";
+
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/theme/theme_service.dart";
@@ -111,7 +112,9 @@ class DashboardScreen extends GetView<HomeController> {
 
   Widget _label(String text) => Text(
     text,
-    style: StyleUtils.kTextStyleSize20Weight500(color: ColorUtils.headingColor),
+    style: StyleUtils.kTextStyleSize20Weight500(
+      color: ThemeColors.headingColor,
+    ),
   );
 }
 
@@ -162,8 +165,8 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
           ":",
           style: StyleUtils.kTextStyleSize12Weight500(
             color: ThemeService.isDark()
-                ? ColorUtils.whiteColor
-                : ColorUtils.blackColor,
+                ? ThemeColors.whiteColor
+                : ThemeColors.blackColor,
           ),
         ),
         4.widthBox,
@@ -173,8 +176,8 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
           ":",
           style: StyleUtils.kTextStyleSize12Weight500(
             color: ThemeService.isDark()
-                ? ColorUtils.whiteColor
-                : ColorUtils.blackColor,
+                ? ThemeColors.whiteColor
+                : ThemeColors.blackColor,
           ),
         ),
         4.widthBox,
@@ -196,18 +199,18 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
       gradient: LinearGradient(
         colors: ThemeService.isDark()
             ? <Color>[
-                ColorUtils.darkGreen.withValues(alpha: 0.8),
-                ColorUtils.themeColor.withValues(alpha: 0.6),
+                ThemeColors.darkGreen.withValues(alpha: 0.8),
+                ThemeColors.themeColor.withValues(alpha: 0.6),
               ]
             : <Color>[
-                ColorUtils.themeColor.withValues(alpha: 0.7),
-                ColorUtils.scaffoldColor,
+                ThemeColors.themeColor.withValues(alpha: 0.7),
+                ThemeColors.scaffoldColor,
               ],
       ),
       borderRadius: BorderRadius.circular(8),
       boxShadow: [
         BoxShadow(
-          color: ColorUtils.themeColor.withValues(alpha: 0.15),
+          color: ThemeColors.themeColor.withValues(alpha: 0.15),
           blurRadius: 8,
           offset: const Offset(0, 2),
         ),
@@ -217,7 +220,7 @@ class _TimerWidgetState extends State<NextTripTimerWidget> {
       child: Text(
         time,
         style: StyleUtils.kTextStyleSize14Weight600(
-          color: ColorUtils.whiteColor,
+          color: ThemeColors.whiteColor,
         ),
       ),
     ),
@@ -241,11 +244,11 @@ class NoData extends StatelessWidget {
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(20),
       color: ThemeService.isDark()
-          ? ColorUtils.backgroundDark
-          : ColorUtils.whiteColor,
+          ? ThemeColors.backgroundDark
+          : ThemeColors.whiteColor,
       boxShadow: [
         BoxShadow(
-          color: ColorUtils.themeColor.withValues(alpha: 0.08),
+          color: ThemeColors.themeColor.withValues(alpha: 0.08),
           blurRadius: 20,
           offset: const Offset(0, 4),
         ),
@@ -259,8 +262,8 @@ class NoData extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: ThemeService.isDark()
-                      ? ColorUtils.darkGray
-                      : ColorUtils.scaffoldColor,
+                      ? ThemeColors.darkGray
+                      : ThemeColors.scaffoldColor,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Image.asset(
@@ -277,8 +280,8 @@ class NoData extends StatelessWidget {
                     text,
                     style: StyleUtils.kTextStyleSize16Weight600(
                       color: ThemeService.isDark()
-                          ? ColorUtils.whiteColor
-                          : ColorUtils.headingColor,
+                          ? ThemeColors.whiteColor
+                          : ThemeColors.headingColor,
                     ),
                   ),
                   4.heightBox,
@@ -286,8 +289,8 @@ class NoData extends StatelessWidget {
                     subText,
                     style: StyleUtils.kTextStyleSize14Weight400(
                       color: ThemeService.isDark()
-                          ? ColorUtils.greyLightTextColor
-                          : ColorUtils.greyTextColor,
+                          ? ThemeColors.greyLightTextColor
+                          : ThemeColors.greyTextColor,
                     ),
                   ),
                 ],

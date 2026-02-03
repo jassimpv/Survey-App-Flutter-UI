@@ -24,7 +24,7 @@ class _DayGroup extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        color: ColorUtils.whiteColor,
+        color: ThemeColors.whiteColor,
         boxShadow: const <BoxShadow>[
           BoxShadow(
             color: Color.fromRGBO(0, 0, 0, 0.05),
@@ -45,7 +45,7 @@ class _DayGroup extends StatelessWidget {
                     Text(
                       Utils.replaceFarsiNumber(dateFormatter.format(_day.date)),
                       style: StyleUtils.kTextStyleSize18Weight600(
-                        color: ColorUtils.themeTextColor,
+                        color: ThemeColors.themeTextColor,
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -54,7 +54,7 @@ class _DayGroup extends StatelessWidget {
                         "${_day.entries.length} pickups",
                       ),
                       style: StyleUtils.kTextStyleSize14Weight400(
-                        color: ColorUtils.greyTextColor,
+                        color: ThemeColors.greyTextColor,
                       ),
                     ),
                   ],
@@ -67,7 +67,7 @@ class _DayGroup extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  color: ColorUtils.themeColor.withValues(alpha: 0.1),
+                  color: ThemeColors.themeColor.withValues(alpha: 0.1),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -75,7 +75,7 @@ class _DayGroup extends StatelessWidget {
                     Text(
                       "Collected",
                       style: StyleUtils.kTextStyleSize12Weight500(
-                        color: ColorUtils.greyTextColor,
+                        color: ThemeColors.greyTextColor,
                       ),
                     ),
                     Text(
@@ -83,7 +83,7 @@ class _DayGroup extends StatelessWidget {
                         "${_day.totalKg.toStringAsFixed(1)} KG",
                       ),
                       style: StyleUtils.kTextStyleSize16Weight600(
-                        color: ColorUtils.themeColor,
+                        color: ThemeColors.themeColor,
                       ),
                     ),
                   ],
@@ -111,7 +111,7 @@ class _CollectionEntryTile extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
-        color: ColorUtils.bgColor,
+        color: ThemeColors.bgColor,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,9 +121,12 @@ class _CollectionEntryTile extends StatelessWidget {
             width: 48,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
-              color: ColorUtils.whiteColor,
+              color: ThemeColors.whiteColor,
             ),
-            child: const Icon(CupertinoIcons.car, color: ColorUtils.themeColor),
+            child: const Icon(
+              CupertinoIcons.car,
+              color: ThemeColors.themeColor,
+            ),
           ),
           10.widthBox,
           Expanded(
@@ -136,7 +139,7 @@ class _CollectionEntryTile extends StatelessWidget {
                       child: Text(
                         entry.driverName,
                         style: StyleUtils.kTextStyleSize16Weight600(
-                          color: ColorUtils.themeTextColor,
+                          color: ThemeColors.themeTextColor,
                         ),
                       ),
                     ),
@@ -147,14 +150,14 @@ class _CollectionEntryTile extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: ColorUtils.whiteColor,
+                        color: ThemeColors.whiteColor,
                       ),
                       child: Text(
                         Utils.replaceFarsiNumber(
                           "${entry.collectedKg.toStringAsFixed(1)} KG",
                         ),
                         style: StyleUtils.kTextStyleSize12Weight600(
-                          color: ColorUtils.darkGreen,
+                          color: ThemeColors.darkGreen,
                         ),
                       ),
                     ),
@@ -166,7 +169,7 @@ class _CollectionEntryTile extends StatelessWidget {
                     timeFormatter.format(entry.timestamp),
                   ),
                   style: StyleUtils.kTextStyleSize14Weight400(
-                    color: ColorUtils.greyTextColor,
+                    color: ThemeColors.greyTextColor,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -207,11 +210,11 @@ class _InfoTag extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
-        color: ColorUtils.whiteColor,
+        color: ThemeColors.whiteColor,
       ),
       child: Row(
         children: <Widget>[
-          Icon(icon, size: 16, color: ColorUtils.themeColor),
+          Icon(icon, size: 16, color: ThemeColors.themeColor),
           const SizedBox(width: 8),
           Expanded(
             child: Column(
@@ -220,13 +223,13 @@ class _InfoTag extends StatelessWidget {
                 Text(
                   label,
                   style: StyleUtils.kTextStyleSize10Weight500(
-                    color: ColorUtils.greyTextColor,
+                    color: ThemeColors.greyTextColor,
                   ),
                 ),
                 Text(
                   value,
                   style: StyleUtils.kTextStyleSize12Weight600(
-                    color: ColorUtils.themeTextColor,
+                    color: ThemeColors.themeTextColor,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -254,8 +257,8 @@ class _SignaturePreview extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: ColorUtils.borderColor),
-        color: ColorUtils.whiteColor,
+        border: Border.all(color: ThemeColors.borderColor),
+        color: ThemeColors.whiteColor,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -264,14 +267,14 @@ class _SignaturePreview extends StatelessWidget {
             children: <Widget>[
               const Icon(
                 CupertinoIcons.pencil,
-                color: ColorUtils.themeColor,
+                color: ThemeColors.themeColor,
                 size: 18,
               ),
               const SizedBox(width: 10),
               Text(
                 "Signature",
                 style: StyleUtils.kTextStyleSize12Weight500(
-                  color: ColorUtils.greyTextColor,
+                  color: ThemeColors.greyTextColor,
                 ),
               ),
             ],
@@ -295,12 +298,12 @@ class _SignaturePreview extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: ColorUtils.bgColor,
+                color: ThemeColors.bgColor,
               ),
               child: Text(
                 "No signature preview available",
                 style: StyleUtils.kTextStyleSize12Weight500(
-                  color: ColorUtils.greyTextColor,
+                  color: ThemeColors.greyTextColor,
                 ),
               ),
             ),

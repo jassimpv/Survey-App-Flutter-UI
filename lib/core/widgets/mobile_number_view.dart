@@ -1,7 +1,8 @@
 import "package:collect/core/extensions/country_list_pick/country_list_pick.dart";
 import "package:collect/core/extensions/country_list_pick/country_selection_theme.dart";
 import "package:collect/core/extensions/country_list_pick/support/code_country.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -24,7 +25,7 @@ class MobileNumberView extends StatelessWidget {
   Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
-      border: Border.all(color: ColorUtils.borderColor),
+      border: Border.all(color: ThemeColors.borderColor),
     ),
     child: IntrinsicHeight(
       child: Row(
@@ -55,7 +56,7 @@ class MobileNumberView extends StatelessWidget {
               decoration: InputDecoration.collapsed(
                 hintText: "enterMobileNumber".tr,
                 hintStyle: StyleUtils.kTextStyleSize17Weight400(
-                  color: ColorUtils.hintTextColor,
+                  color: ThemeColors.hintTextColor,
                 ),
               ),
             ),

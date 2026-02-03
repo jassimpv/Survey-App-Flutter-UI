@@ -1,6 +1,7 @@
 import "package:collect/features/notifications/controller/notifications_controller.dart";
 import "package:collect/core/models/notification_response.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/custom_app_bar.dart";
@@ -17,13 +18,13 @@ class NotificationScreen extends GetView<NotificationsController> {
   Widget build(BuildContext context) {
     Get.put<NotificationsController>(NotificationsController());
     return Scaffold(
-      backgroundColor: ColorUtils.appBgMain,
+      backgroundColor: ThemeColors.appBgMain,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [ColorUtils.scaffoldColor, Colors.white],
+            colors: [ThemeColors.scaffoldColor, Colors.white],
           ),
         ),
         child: Column(
@@ -94,7 +95,7 @@ class _NotificationItem extends StatelessWidget {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: ColorUtils.themeColor.withValues(alpha: 0.1),
+                  color: ThemeColors.themeColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
@@ -103,7 +104,7 @@ class _NotificationItem extends StatelessWidget {
                         ? Icons.close
                         : Icons.done,
                     size: 20,
-                    color: ColorUtils.linkColor,
+                    color: ThemeColors.linkColor,
                   ),
                 ),
               ),

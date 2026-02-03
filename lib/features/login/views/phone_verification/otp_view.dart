@@ -1,5 +1,6 @@
 import "dart:async";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
@@ -80,13 +81,13 @@ class _OTPViewState extends State<OTPView> {
               inactiveColor: Colors.transparent,
               selectedColor: Colors.transparent,
               activeColor: Colors.transparent,
-              errorBorderColor: ColorUtils.greyLightTextColor,
-              inactiveFillColor: ColorUtils.scaffoldColor,
+              errorBorderColor: ThemeColors.greyLightTextColor,
+              inactiveFillColor: ThemeColors.scaffoldColor,
               selectedFillColor: Colors.white,
-              activeFillColor: ColorUtils.whiteColor,
+              activeFillColor: ThemeColors.whiteColor,
             ),
             enableActiveFill: true,
-            cursorColor: ColorUtils.themeColor,
+            cursorColor: ThemeColors.themeColor,
             animationDuration: const Duration(milliseconds: 300),
             textStyle: StyleUtils.kTextStyleOtpInput(fontSize: fontSize),
             backgroundColor: Colors.transparent,

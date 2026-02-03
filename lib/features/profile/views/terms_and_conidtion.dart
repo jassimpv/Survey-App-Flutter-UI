@@ -1,4 +1,4 @@
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/custom_app_bar.dart";
 import "package:flutter/material.dart";
@@ -14,7 +14,7 @@ class TermsAndConditionScreen extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [ColorUtils.scaffoldColor, Colors.white],
+          colors: [ThemeColors.scaffoldColor, Colors.white],
         ),
       ),
       child: Column(
@@ -40,7 +40,7 @@ class TermsAndConditionScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: ColorUtils.themeColor.withValues(alpha: 0.15),
+            color: ThemeColors.themeColor.withValues(alpha: 0.15),
             blurRadius: 28,
             offset: const Offset(0, 10),
           ),

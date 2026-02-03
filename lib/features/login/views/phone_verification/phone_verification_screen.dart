@@ -2,7 +2,8 @@ import "dart:async";
 
 import "package:collect/features/login/controller/login_controller.dart";
 import "package:collect/core/utils/asset_utils.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/features/login/views/phone_verification/otp_view.dart";
@@ -120,14 +121,14 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                     "verifyPhoneNumber".tr,
                                     style: StyleUtils.kTextStyleSize28Weight700(
                                       lettingSpace: -0.4,
-                                      color: ColorUtils.headingColor,
+                                      color: ThemeColors.headingColor,
                                     ),
                                   ),
                                   12.heightBox,
                                   Text(
                                     "enterCodeToVerifyPhoneNumber".tr,
                                     style: StyleUtils.kTextStyleSize16Weight400(
-                                      color: ColorUtils.greyTextColor,
+                                      color: ThemeColors.greyTextColor,
                                       letterSpacing: 0,
                                     ),
                                   ),
@@ -138,7 +139,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                       vertical: 14,
                                     ),
                                     decoration: BoxDecoration(
-                                      color: ColorUtils.scaffoldColor
+                                      color: ThemeColors.scaffoldColor
                                           .withValues(alpha: 0.6),
                                       borderRadius: BorderRadius.circular(16),
                                     ),
@@ -151,7 +152,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                             shape: BoxShape.circle,
                                             gradient: LinearGradient(
                                               colors: <Color>[
-                                                ColorUtils.themeColor,
+                                                ThemeColors.themeColor,
                                                 const Color(0xFF1E8F87),
                                               ],
                                             ),
@@ -169,7 +170,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                             style:
                                                 StyleUtils.kTextStyleSize16Weight500(
                                                   color:
-                                                      ColorUtils.headingColor,
+                                                      ThemeColors.headingColor,
                                                 ),
                                           ),
                                         ),
@@ -185,7 +186,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                             child: Icon(
                                               Icons.edit_outlined,
                                               size: 18,
-                                              color: ColorUtils.themeColor,
+                                              color: ThemeColors.themeColor,
                                             ),
                                           ),
                                         ),
@@ -210,7 +211,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                         vertical: 12,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: ColorUtils.scaffoldColor,
+                                        color: ThemeColors.scaffoldColor,
                                         borderRadius: BorderRadius.circular(20),
                                       ),
                                       child: Row(
@@ -220,7 +221,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                               "didNotReceiveCode".tr,
                                               style:
                                                   StyleUtils.kTextStyleSize14Weight400(
-                                                    color: ColorUtils
+                                                    color: ThemeColors
                                                         .greyTextColor,
                                                   ),
                                             ),
@@ -241,7 +242,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                           16,
                                                         ),
                                                     border: Border.all(
-                                                      color: ColorUtils
+                                                      color: ThemeColors
                                                           .themeColor
                                                           .withValues(
                                                             alpha: 0.12,
@@ -261,7 +262,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                               AlwaysStoppedAnimation<
                                                                 Color
                                                               >(
-                                                                ColorUtils
+                                                                ThemeColors
                                                                     .themeColor,
                                                               ),
                                                         ),
@@ -273,7 +274,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                             TextAlign.right,
                                                         style:
                                                             StyleUtils.kTextStyleSize14Weight600(
-                                                              color: ColorUtils
+                                                              color: ThemeColors
                                                                   .headingColor,
                                                             ),
                                                       ),
@@ -308,7 +309,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                       gradient:
                                                           const LinearGradient(
                                                             colors: <Color>[
-                                                              ColorUtils
+                                                              ThemeColors
                                                                   .themeColor,
                                                               Color(0xFF1E8F87),
                                                             ],

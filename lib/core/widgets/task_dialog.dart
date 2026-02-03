@@ -1,7 +1,8 @@
 import "package:collect/core/models/task_card_model.dart";
 import "package:collect/routes.dart";
 import "package:collect/core/utils/asset_utils.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/utils/utils_helper.dart";
@@ -66,14 +67,14 @@ class TaskDialog extends StatelessWidget {
             Text(
               "Location Details",
               style: StyleUtils.kTextStyleSize20Weight600(
-                color: ColorUtils.headingColor,
+                color: ThemeColors.headingColor,
               ),
             ),
             8.heightBox,
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: ColorUtils.scaffoldColor,
+                color: ThemeColors.scaffoldColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
@@ -82,13 +83,13 @@ class TaskDialog extends StatelessWidget {
                   Icon(
                     Icons.location_on_outlined,
                     size: 16,
-                    color: ColorUtils.themeColor,
+                    color: ThemeColors.themeColor,
                   ),
                   6.widthBox,
                   Text(
                     data.emirate,
                     style: StyleUtils.kTextStyleSize14Weight500(
-                      color: ColorUtils.darkBlue,
+                      color: ThemeColors.darkBlue,
                     ),
                   ),
                 ],
@@ -107,7 +108,7 @@ class TaskDialog extends StatelessWidget {
             gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
+              colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
             ),
             boxShadow: const <BoxShadow>[
               BoxShadow(
@@ -129,14 +130,14 @@ class TaskDialog extends StatelessWidget {
       Text(
         data.restaurantName,
         style: StyleUtils.kTextStyleSize18Weight600(
-          color: ColorUtils.headingColor,
+          color: ThemeColors.headingColor,
         ),
       ),
       4.heightBox,
       Text(
         data.restaurantType,
         style: StyleUtils.kTextStyleSize14Weight400(
-          color: ColorUtils.greyTextColor,
+          color: ThemeColors.greyTextColor,
         ),
       ),
     ],
@@ -149,7 +150,7 @@ class TaskDialog extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: ColorUtils.scaffoldColor.withValues(alpha: 0.9),
+          color: ThemeColors.scaffoldColor.withValues(alpha: 0.9),
           borderRadius: BorderRadius.circular(28),
         ),
         child: Column(
@@ -190,7 +191,7 @@ class TaskDialog extends StatelessWidget {
                         children: <Widget>[
                           const Icon(
                             Icons.location_on,
-                            color: ColorUtils.darkBlue,
+                            color: ThemeColors.darkBlue,
                             size: 18,
                           ),
                           8.widthBox,
@@ -198,7 +199,7 @@ class TaskDialog extends StatelessWidget {
                             child: Text(
                               data.restaurantAddress,
                               style: StyleUtils.kTextStyleSize14Weight500(
-                                color: ColorUtils.darkBlue.withValues(
+                                color: ThemeColors.darkBlue.withValues(
                                   alpha: 0.85,
                                 ),
                               ),
@@ -232,13 +233,13 @@ class TaskDialog extends StatelessWidget {
                           Image.asset(
                             AssetUtils.getIcons("ic_ride_list"),
                             height: 24,
-                            color: ColorUtils.themeColor,
+                            color: ThemeColors.themeColor,
                           ),
                           8.widthBox,
                           Text(
                             Utils.replaceFarsiNumber(data.distance),
                             style: StyleUtils.kTextStyleSize14Weight500(
-                              color: ColorUtils.darkBlue.withValues(
+                              color: ThemeColors.darkBlue.withValues(
                                 alpha: 0.85,
                               ),
                             ),
@@ -262,12 +263,14 @@ class TaskDialog extends StatelessWidget {
       Text(
         label.tr,
         style: StyleUtils.kTextStyleSize12Weight500(
-          color: ColorUtils.darkBlue.withValues(alpha: 0.8),
+          color: ThemeColors.darkBlue.withValues(alpha: 0.8),
         ),
       ),
       Text(
         Utils.replaceFarsiNumber(Utils.timeAgo(time)),
-        style: StyleUtils.kTextStyleSize12Weight500(color: ColorUtils.darkGray),
+        style: StyleUtils.kTextStyleSize12Weight500(
+          color: ThemeColors.darkGray,
+        ),
       ),
     ],
   );
@@ -283,7 +286,7 @@ class TaskDialog extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white,
-              border: Border.all(color: ColorUtils.themeColor, width: 1.5),
+              border: Border.all(color: ThemeColors.themeColor, width: 1.5),
               boxShadow: const <BoxShadow>[
                 BoxShadow(
                   color: Color.fromRGBO(15, 23, 42, 0.08),
@@ -296,7 +299,7 @@ class TaskDialog extends StatelessWidget {
               child: Text(
                 "View Collection History",
                 style: StyleUtils.kTextStyleSize16Weight600(
-                  color: ColorUtils.themeColor,
+                  color: ThemeColors.themeColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -316,7 +319,7 @@ class TaskDialog extends StatelessWidget {
               gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
+                colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
               ),
               boxShadow: const <BoxShadow>[
                 BoxShadow(
@@ -344,7 +347,7 @@ class TaskDialog extends StatelessWidget {
   Widget _buildActionIcon({
     required VoidCallback? onTap,
     required IconData icon,
-    Color iconColor = ColorUtils.themeColor,
+    Color iconColor = ThemeColors.themeColor,
   }) => ZoomTapAnimation(
     onTap: onTap,
     child: Container(
@@ -354,7 +357,7 @@ class TaskDialog extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: const LinearGradient(
-          colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
+          colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
         ),
         boxShadow: const <BoxShadow>[
           BoxShadow(

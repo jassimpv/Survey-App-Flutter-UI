@@ -1,6 +1,5 @@
 import "dart:ui";
 
-import "package:collect/core/utils/colors_utils.dart";
 import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
@@ -117,7 +116,7 @@ class ContactUsScreen extends StatelessWidget {
                   style: StyleUtils.kTextStyleSize18Weight600(
                     color: ThemeService.isDark()
                         ? Colors.white
-                        : ColorUtils.headingColor,
+                        : ThemeColors.headingColor,
                   ),
                 ),
                 Text(
@@ -125,7 +124,7 @@ class ContactUsScreen extends StatelessWidget {
                   style: StyleUtils.kTextStyleSize16Weight400(
                     color: ThemeService.isDark()
                         ? Colors.white70
-                        : ColorUtils.headingColor.withValues(alpha: 0.7),
+                        : ThemeColors.headingColor.withValues(alpha: 0.7),
                   ),
                 ),
                 16.heightBox,

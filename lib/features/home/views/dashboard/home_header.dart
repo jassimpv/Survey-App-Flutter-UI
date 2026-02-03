@@ -1,7 +1,8 @@
 import "package:collect/features/home/controller/home_controller.dart";
 import "package:collect/routes.dart";
 import "package:collect/core/utils/asset_utils.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
@@ -38,7 +39,7 @@ class HomeHeader extends GetView<HomeController> {
           BoxShadow(
             color: ThemeService.isDark()
                 ? Colors.black.withValues(alpha: 0.4)
-                : ColorUtils.themeColor.withValues(alpha: 0.3),
+                : ThemeColors.themeColor.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
           ),
@@ -71,7 +72,7 @@ class HomeHeader extends GetView<HomeController> {
               Text(
                 Utils.getGreeting(),
                 style: StyleUtils.kTextStyleSize14Weight500(
-                  color: ColorUtils.whiteColor.withValues(alpha: 0.95),
+                  color: ThemeColors.whiteColor.withValues(alpha: 0.95),
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -80,7 +81,7 @@ class HomeHeader extends GetView<HomeController> {
               Text(
                 "Mohammed Jassim",
                 style: StyleUtils.kTextStyleSize16Weight600(
-                  color: ColorUtils.whiteColor,
+                  color: ThemeColors.whiteColor,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -120,7 +121,7 @@ class HomeHeader extends GetView<HomeController> {
       ],
     ),
     child: CircleAvatar(
-      backgroundColor: ColorUtils.whiteColor,
+      backgroundColor: ThemeColors.whiteColor,
       radius: 30,
       child: Image.asset(
         AssetUtils.getDummyImage("pp.webp"),
@@ -155,13 +156,13 @@ class HomeHeader extends GetView<HomeController> {
       ),
       child: Badge.count(
         count: 0,
-        backgroundColor: ColorUtils.secondaryColor,
+        backgroundColor: ThemeColors.secondaryColor,
         child: CircleAvatar(
           radius: 22,
-          backgroundColor: ColorUtils.whiteColor.withValues(alpha: 0.15),
+          backgroundColor: ThemeColors.whiteColor.withValues(alpha: 0.15),
           child: const Icon(
             CupertinoIcons.bell,
-            color: ColorUtils.whiteColor,
+            color: ThemeColors.whiteColor,
             size: 26,
           ),
         ),

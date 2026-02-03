@@ -1,8 +1,9 @@
 import "dart:ui";
 
 import "package:collect/features/home/controller/home_controller.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
 import "package:collect/core/theme/theme_colors.dart";
+
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/theme/theme_service.dart";
@@ -137,11 +138,11 @@ class FilterBottomSheet extends StatelessWidget {
             border: Border.all(
               color: ThemeService.isDark()
                   ? Colors.white.withValues(alpha: 0.08)
-                  : ColorUtils.themeColor.withValues(alpha: 0.2),
+                  : ThemeColors.themeColor.withValues(alpha: 0.2),
             ),
             color: ThemeService.isDark()
                 ? const Color(0xFF0F1720).withValues(alpha: 0.6)
-                : ColorUtils.scaffoldColor,
+                : ThemeColors.scaffoldColor,
           ),
           child: Row(
             children: <Widget>[
@@ -150,7 +151,7 @@ class FilterBottomSheet extends StatelessWidget {
                 size: 18,
                 color: ThemeService.isDark()
                     ? Colors.white.withValues(alpha: 0.8)
-                    : ColorUtils.headingColor.withValues(alpha: 0.7),
+                    : ThemeColors.headingColor.withValues(alpha: 0.7),
               ),
               10.widthBox,
               Text(
@@ -168,7 +169,7 @@ class FilterBottomSheet extends StatelessWidget {
                 style: StyleUtils.kTextStyleSize14Weight500(
                   color: ThemeService.isDark()
                       ? Colors.white
-                      : ColorUtils.headingColor,
+                      : ThemeColors.headingColor,
                 ),
               ),
             ],
@@ -198,7 +199,7 @@ class FilterBottomSheet extends StatelessWidget {
   //           Text(
   //             title.tr,
   //             style: StyleUtils.kTextStyleSize14Weight400(
-  //               color: ColorUtils.black,
+  //               color: ThemeColors.black,
   //             ),
   //           ),
   //           const Spacer(),
@@ -208,10 +209,10 @@ class FilterBottomSheet extends StatelessWidget {
   //               height: 20,
   //               decoration: BoxDecoration(
   //                 borderRadius: BorderRadius.circular(4),
-  //                 border: Border.all(color: ColorUtils.themeColor),
+  //                 border: Border.all(color: ThemeColors.themeColor),
   //                 color: controller.selectedFilter.value == value
-  //                     ? ColorUtils.themeColor
-  //                     : ColorUtils.whiteColor,
+  //                     ? ThemeColors.themeColor
+  //                     : ThemeColors.whiteColor,
   //               ),
   //               child: controller.selectedFilter.value == value
   //                   ? const Icon(Icons.check, size: 16, color: Colors.white)

@@ -1,4 +1,4 @@
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
@@ -94,7 +94,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
                   offset: const Offset(0, 10),
                   color: ThemeService.isDark()
                       ? Colors.black.withValues(alpha: 0.4)
-                      : ColorUtils.themeColor.withValues(alpha: 0.25),
+                      : ThemeColors.themeColor.withValues(alpha: 0.25),
                   blurRadius: 30,
                 ),
               ],
@@ -214,7 +214,7 @@ class _HomeItemView extends StatelessWidget {
               icon,
               size: 20,
               color: isSelected
-                  ? ColorUtils.themeColor
+                  ? ThemeColors.themeColor
                   : Colors.white.withValues(alpha: 0.9),
             ),
             if (isSelected) ...[
@@ -224,7 +224,7 @@ class _HomeItemView extends StatelessWidget {
                   title,
                   overflow: TextOverflow.ellipsis,
                   style: StyleUtils.kTextStyleSize14Weight600(
-                    color: ColorUtils.themeColor,
+                    color: ThemeColors.themeColor,
                   ),
                 ),
               ),

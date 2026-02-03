@@ -1,4 +1,4 @@
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/gradient_button.dart";
@@ -25,9 +25,9 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
           begin: Alignment.topLeft,
           end: Alignment.bottomCenter,
           colors: <Color>[
-            ColorUtils.themeColor,
+            ThemeColors.themeColor,
             const Color(0xFF1E8F87),
-            ColorUtils.scaffoldColor,
+            ThemeColors.scaffoldColor,
           ],
           stops: const <double>[0, 0.45, 1],
         ),
@@ -113,7 +113,7 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
                                         "oops".tr,
                                         style:
                                             StyleUtils.kTextStyleSize24Weight600(
-                                              color: ColorUtils.themeColor,
+                                              color: ThemeColors.themeColor,
                                             ),
                                       ),
                                       10.heightBox,
@@ -126,7 +126,7 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
                                           textAlign: TextAlign.center,
                                           style:
                                               StyleUtils.kTextStyleSize14Weight400(
-                                                color: ColorUtils.black
+                                                color: ThemeColors.black
                                                     .withValues(alpha: 0.5),
                                               ),
                                         ),

@@ -1,5 +1,6 @@
 import "package:collect/features/home/controller/home_controller.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/local_navigation.dart";
 import "package:collect/core/widgets/bottom_navigation.dart";
 import "package:flutter/material.dart";
@@ -24,7 +25,7 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) => PopScope(
     canPop: _onWillPop(),
     child: Scaffold(
-      backgroundColor: ColorUtils.scaffoldColor,
+      backgroundColor: ThemeColors.scaffoldColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Obx(
         () => BottomNavigationView(

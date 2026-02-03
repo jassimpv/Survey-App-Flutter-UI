@@ -1,4 +1,4 @@
-import 'package:collect/core/utils/colors_utils.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/utils/textstyle_input.dart';
 import 'package:collect/core/utils/transaltion_utils.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _LanguageWidegtState extends State<LanguageWidegt>
             color: Colors.white.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(999),
             border: Border.all(
-              color: ColorUtils.themeColor.withValues(alpha: 0.10),
+              color: ThemeColors.themeColor.withValues(alpha: 0.10),
             ),
             boxShadow: const <BoxShadow>[
               BoxShadow(
@@ -164,7 +164,7 @@ class _LanguageWidegtState extends State<LanguageWidegt>
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        ColorUtils.themeColor,
+                        ThemeColors.themeColor,
                       ),
                     ),
                   ),

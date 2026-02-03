@@ -1,5 +1,6 @@
 import "package:collect/routes.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/widgets/language_widget.dart";
@@ -96,14 +97,14 @@ class CustomAppBar extends StatelessWidget {
     },
     child: Badge.count(
       count: 0,
-      backgroundColor: ColorUtils.metallicColor.withValues(alpha: 0.80),
+      backgroundColor: ThemeColors.metallicColor.withValues(alpha: 0.80),
       child: CircleAvatar(
         radius: 22,
-        backgroundColor: ColorUtils.whiteColor.withValues(alpha: 0.10),
-        foregroundColor: ColorUtils.whiteColor.withValues(alpha: 0.10),
+        backgroundColor: ThemeColors.whiteColor.withValues(alpha: 0.10),
+        foregroundColor: ThemeColors.whiteColor.withValues(alpha: 0.10),
         child: const Icon(
           CupertinoIcons.bell,
-          color: ColorUtils.whiteColor,
+          color: ThemeColors.whiteColor,
           size: 30,
         ),
       ),

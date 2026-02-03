@@ -2,7 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:collect/core/models/task_card_model.dart';
-import 'package:collect/core/utils/colors_utils.dart';
+import 'package:collect/core/theme/theme_colors.dart';
+
 import 'package:collect/core/utils/sized_box_extension.dart';
 import 'package:collect/core/utils/textstyle_input.dart';
 import 'package:collect/core/utils/transaltion_utils.dart';
@@ -51,13 +52,13 @@ class _CollectionDataState extends State<CollectionData> {
     );
 
     return Scaffold(
-      backgroundColor: ColorUtils.bgColor,
+      backgroundColor: ThemeColors.bgColor,
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [ColorUtils.scaffoldColor, Colors.white],
+            colors: [ThemeColors.scaffoldColor, Colors.white],
           ),
         ),
         child: Column(
@@ -95,7 +96,7 @@ class _CollectionDataState extends State<CollectionData> {
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: ColorUtils.whiteColor,
+      color: ThemeColors.whiteColor,
       boxShadow: const <BoxShadow>[
         BoxShadow(
           color: Color.fromRGBO(15, 23, 42, 0.08),
@@ -110,14 +111,14 @@ class _CollectionDataState extends State<CollectionData> {
         Text(
           widget.data.restaurantName,
           style: StyleUtils.kTextStyleSize20Weight600(
-            color: ColorUtils.themeColor,
+            color: ThemeColors.themeColor,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           widget.data.restaurantAddress,
           style: StyleUtils.kTextStyleSize14Weight400(
-            color: ColorUtils.greyTextColor,
+            color: ThemeColors.greyTextColor,
           ),
         ),
         const SizedBox(height: 20),
@@ -125,7 +126,7 @@ class _CollectionDataState extends State<CollectionData> {
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: ColorUtils.lightGreen,
+            color: ThemeColors.lightGreen,
           ),
           child: Row(
             children: <Widget>[
@@ -134,11 +135,11 @@ class _CollectionDataState extends State<CollectionData> {
                 width: 48,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: ColorUtils.themeColor.withValues(alpha: 0.1),
+                  color: ThemeColors.themeColor.withValues(alpha: 0.1),
                 ),
                 child: const Icon(
                   CupertinoIcons.cube_box_fill,
-                  color: ColorUtils.themeColor,
+                  color: ThemeColors.themeColor,
                 ),
               ),
               const SizedBox(width: 16),
@@ -148,7 +149,7 @@ class _CollectionDataState extends State<CollectionData> {
                   Text(
                     "Total Collected",
                     style: StyleUtils.kTextStyleSize14Weight500(
-                      color: ColorUtils.greyTextColor,
+                      color: ThemeColors.greyTextColor,
                     ),
                   ),
                   Text(
@@ -156,7 +157,7 @@ class _CollectionDataState extends State<CollectionData> {
                       "${totalKg.toStringAsFixed(1)} KG",
                     ),
                     style: StyleUtils.kTextStyleSize24Weight700(
-                      color: ColorUtils.darkGreen,
+                      color: ThemeColors.darkGreen,
                     ),
                   ),
                 ],
@@ -182,7 +183,7 @@ class _CollectionDataState extends State<CollectionData> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           gradient: const LinearGradient(
-            colors: <Color>[ColorUtils.themeColor, Color(0xFF1E8F87)],
+            colors: <Color>[ThemeColors.themeColor, Color(0xFF1E8F87)],
           ),
           boxShadow: const <BoxShadow>[
             BoxShadow(
@@ -229,7 +230,7 @@ class _CollectionDataState extends State<CollectionData> {
             Text(
               Utils.replaceFarsiNumber("${totalKg.toStringAsFixed(1)} KG"),
               style: StyleUtils.kTextStyleSize24Weight700(
-                color: ColorUtils.whiteColor,
+                color: ThemeColors.whiteColor,
               ),
             ),
             10.widthBox,
@@ -244,15 +245,15 @@ class _CollectionDataState extends State<CollectionData> {
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 36),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
-      color: ColorUtils.whiteColor,
-      border: Border.all(color: ColorUtils.borderColor),
+      color: ThemeColors.whiteColor,
+      border: Border.all(color: ThemeColors.borderColor),
     ),
     child: Column(
       children: <Widget>[
         Icon(
           CupertinoIcons.calendar_badge_plus,
           size: 48,
-          color: ColorUtils.themeColor,
+          color: ThemeColors.themeColor,
         ),
         const SizedBox(height: 18),
         Text(
@@ -264,7 +265,7 @@ class _CollectionDataState extends State<CollectionData> {
         Text(
           "Pick another date range to view collected KG records grouped by day.",
           style: StyleUtils.kTextStyleSize14Weight400(
-            color: ColorUtils.greyTextColor,
+            color: ThemeColors.greyTextColor,
           ),
           textAlign: TextAlign.center,
         ),
@@ -300,7 +301,7 @@ class _CollectionDataState extends State<CollectionData> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: ColorUtils.themeColor,
+              primary: ThemeColors.themeColor,
             ),
           ),
           child: child ?? const SizedBox.shrink(),

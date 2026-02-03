@@ -1,4 +1,4 @@
-import "package:collect/core/utils/colors_utils.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/utils/utils_helper.dart";
@@ -67,8 +67,8 @@ class _StatusCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isCompletedCard = icon == "img_completed";
     final Color accentColor = isCompletedCard
-        ? ColorUtils.secondaryColor
-        : ColorUtils.themeColor;
+        ? ThemeColors.secondaryColor
+        : ThemeColors.themeColor;
 
     return Container(
       padding: const EdgeInsets.all(13),
@@ -105,7 +105,7 @@ class _StatusCard extends StatelessWidget {
           Text(
             label,
             style: StyleUtils.kTextStyleSize18Weight600(
-              color: ColorUtils.headingColor,
+              color: ThemeColors.headingColor,
             ),
           ),
           Row(

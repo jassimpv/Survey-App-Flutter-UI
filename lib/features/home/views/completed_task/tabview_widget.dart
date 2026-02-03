@@ -1,6 +1,7 @@
 import "package:collect/features/home/controller/home_controller.dart";
 import "package:collect/core/extensions/auto_scroll/auto_scroll.dart";
-import "package:collect/core/utils/colors_utils.dart";
+
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
@@ -41,10 +42,10 @@ class _RideListTabViewState extends State<CompletedListTabView> {
     () => Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
-        color: ColorUtils.scaffoldColor,
+        color: ThemeColors.scaffoldColor,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: ColorUtils.themeColor.withValues(alpha: 0.12),
+          color: ThemeColors.themeColor.withValues(alpha: 0.12),
         ),
       ),
       child: SingleChildScrollView(
@@ -103,13 +104,13 @@ class TabItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
           color: isSelected
-              ? ColorUtils.themeColor.withValues(alpha: 0.4)
-              : ColorUtils.themeColor.withValues(alpha: 0.2),
+              ? ThemeColors.themeColor.withValues(alpha: 0.4)
+              : ThemeColors.themeColor.withValues(alpha: 0.2),
         ),
         boxShadow: isSelected
             ? <BoxShadow>[
                 BoxShadow(
-                  color: ColorUtils.themeColor.withValues(alpha: 0.18),
+                  color: ThemeColors.themeColor.withValues(alpha: 0.18),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -121,8 +122,8 @@ class TabItem extends StatelessWidget {
           title,
           style: StyleUtils.kTextStyleSize14Weight600(
             color: isSelected
-                ? ColorUtils.themeColor
-                : ColorUtils.themeTextColor,
+                ? ThemeColors.themeColor
+                : ThemeColors.themeTextColor,
           ),
         ),
       ),
