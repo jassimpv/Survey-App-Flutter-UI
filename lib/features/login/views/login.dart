@@ -28,7 +28,7 @@ class LoginScreen extends GetView<LoginController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                const Align(
+                Align(
                   alignment: Alignment.topRight,
                   child: LanguageWidegt(isHome: true),
                 ),

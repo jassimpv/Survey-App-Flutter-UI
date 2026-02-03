@@ -52,7 +52,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
             child: Column(
               children: <Widget>[
-                const Align(
+                Align(
                   alignment: Alignment.topRight,
                   child: LanguageWidegt(isHome: true),
                 ),

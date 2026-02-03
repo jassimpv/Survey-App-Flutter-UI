@@ -41,7 +41,7 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                const Align(
+                Align(
                   alignment: Alignment.topRight,
                   child: LanguageWidegt(isHome: true),
                 ),

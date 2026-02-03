@@ -335,11 +335,13 @@ class StyleUtils {
   );
 
   // Terms and Conditions Title
-  static TextStyle kTextStyleTermsTitle() => TextStyle(
+  static TextStyle kTextStyleTermsTitle({
+    Color color = ThemeColors.headingColor,
+  }) => TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
     fontFamily: "Outfit",
-    color: ThemeColors.headingColor,
+    color: color,
   );
 
   // Date Answer View Style
@@ -388,8 +390,10 @@ class StyleUtils {
   );
 
   // Body Text Style for content/description
-  static TextStyle kTextStyleBodyText() => TextStyle(
-    color: ThemeColors.themeTextColor,
+  static TextStyle kTextStyleBodyText({
+    Color color = ThemeColors.themeTextColor,
+  }) => TextStyle(
+    color: color,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     fontFamily: "Outfit",

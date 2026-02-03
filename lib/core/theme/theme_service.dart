@@ -58,5 +58,13 @@ class ThemeService {
     );
   }
 
-  static bool isDark() => themeMode == ThemeMode.dark;
+  static bool isDark() {
+    if (themeMode == ThemeMode.dark) {
+      return true;
+    } else if (themeMode == ThemeMode.system) {
+      // Check the actual device brightness
+      return MediaQuery.of(Get.context!).platformBrightness == Brightness.dark;
+    }
+    return false;
+  }
 }

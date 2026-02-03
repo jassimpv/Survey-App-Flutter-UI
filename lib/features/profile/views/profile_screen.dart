@@ -189,7 +189,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   ),
                 ),
               ),
-              const LanguageWidegt(),
+              LanguageWidegt(),
             ],
           ),
         ),
