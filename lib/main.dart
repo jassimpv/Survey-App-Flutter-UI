@@ -1,8 +1,8 @@
 import "package:collect/routes.dart";
-import "package:collect/utils/app_theme_data.dart";
-import "package:collect/utils/transaltion_utils.dart";
-import "package:collect/utils/theme_service.dart";
-import "package:collect/views/widget/no_internet_widget/check_internet_connection_widget.dart";
+import "package:collect/core/utils/app_theme_data.dart";
+import "package:collect/core/utils/transaltion_utils.dart";
+import "package:collect/core/utils/theme_service.dart";
+import "package:collect/core/widgets/no_internet_widget/check_internet_connection_widget.dart";
 import "package:flutter/material.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:get/get.dart";
