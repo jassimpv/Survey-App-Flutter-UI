@@ -64,4 +64,5 @@ Map<String, String> enUs = <String, String>{
   "dark": "Dark",
   "system": "System",
   "theme": "Theme",
+  "language": "Language",
 };

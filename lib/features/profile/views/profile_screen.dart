@@ -209,7 +209,7 @@ class ProfileScreen extends GetView<ProfileController> {
         12.widthBox,
         Expanded(
           child: Text(
-            "Language".tr,
+            "language".tr,
             style: StyleUtils.kTextStyleSize18Weight500(
               color: ThemeColors.blackWhite,
             ),
