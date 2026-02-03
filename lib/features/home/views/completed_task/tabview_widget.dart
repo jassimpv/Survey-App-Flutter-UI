@@ -45,7 +45,7 @@ class _RideListTabViewState extends State<CompletedListTabView> {
         color: ThemeColors.scaffoldColor,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: ThemeColors.themeColor.withValues(alpha: 0.12),
+          color: ThemeColors.whitePrimary.withValues(alpha: 0.12),
         ),
       ),
       child: SingleChildScrollView(
@@ -100,17 +100,17 @@ class TabItem extends StatelessWidget {
       height: 36,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: isSelected ? Colors.white : Colors.transparent,
+        color: isSelected ? ThemeColors.whitePrimary : Colors.transparent,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
           color: isSelected
-              ? ThemeColors.themeColor.withValues(alpha: 0.4)
-              : ThemeColors.themeColor.withValues(alpha: 0.2),
+              ? ThemeColors.whitePrimary.withValues(alpha: 0.4)
+              : ThemeColors.whitePrimary.withValues(alpha: 0.2),
         ),
         boxShadow: isSelected
             ? <BoxShadow>[
                 BoxShadow(
-                  color: ThemeColors.themeColor.withValues(alpha: 0.18),
+                  color: ThemeColors.primaryWhite.withValues(alpha: 0.18),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -122,8 +122,8 @@ class TabItem extends StatelessWidget {
           title,
           style: StyleUtils.kTextStyleSize14Weight600(
             color: isSelected
-                ? ThemeColors.themeColor
-                : ThemeColors.themeTextColor,
+                ? ThemeColors.primaryWhite
+                : ThemeColors.blackWhite,
           ),
         ),
       ),

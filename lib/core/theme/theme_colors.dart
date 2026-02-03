@@ -98,6 +98,11 @@ class ThemeColors {
   static Color get whitePrimary =>
       ThemeService.isDark() ? whiteColor : _lightPrimary;
 
+  static Color get primaryWhite =>
+      ThemeService.isDark() ? _lightPrimary : whiteColor;
+
+  static Color get refreshIndicatorColor =>
+      ThemeService.isDark() ? _darkSurface : _lightPrimary;
   // SURFACE COLORS
   static Color get surface =>
       ThemeService.isDark() ? _darkSurface : _lightSurface;

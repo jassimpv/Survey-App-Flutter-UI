@@ -1,14 +1,13 @@
 import "package:collect/core/models/task_card_model.dart";
-import "package:collect/core/utils/asset_utils.dart";
-
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/utils/utils_helper.dart";
 import "package:collect/core/widgets/task_dialog.dart";
 import "package:collect/core/widgets/zoom_tap.dart";
+import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "dart:ui" as ui;
 import "package:get/get.dart";
 
 class TaskCard extends StatelessWidget {
@@ -43,31 +42,20 @@ class TaskCard extends StatelessWidget {
         barrierDismissible: false,
       );
     },
-    child: ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: BackdropFilter(
-        filter: ui.ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: ThemeColors.whiteColor.withValues(alpha: 0.72),
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: ThemeColors.whiteColor.withValues(alpha: 0.08),
-            ),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                color: ThemeColors.blackColor.withValues(alpha: 0.04),
-                blurRadius: 10,
-                offset: const Offset(0, 6),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[_buildHeader(), 12.heightBox, _buildBody()],
-          ),
+    child: Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: ThemeColors.whiteColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: ThemeService.isDark()
+              ? ThemeColors.whitePrimary.withValues(alpha: 0.12)
+              : ThemeColors.darkBlue.withValues(alpha: 0.08),
         ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[_buildHeader(), 12.heightBox, _buildBody()],
       ),
     ),
   );
@@ -80,13 +68,13 @@ class TaskCard extends StatelessWidget {
         children: <Widget>[
           _buildActionIcon(
             onTap: () => Utils.openMap(<String?>["25.2048", "55.2708"]),
-            assetName: "ic_location",
+            icon: CupertinoIcons.map,
             iconColor: ThemeColors.backgroundDark,
           ),
           8.widthBox,
           _buildActionIcon(
             onTap: () => Utils.dail("1234567890"),
-            assetName: "ic_call",
+            icon: CupertinoIcons.phone,
             iconColor: ThemeColors.backgroundDark,
           ),
         ],
@@ -158,7 +146,7 @@ class TaskCard extends StatelessWidget {
             Row(
               children: <Widget>[
                 Icon(
-                  Icons.location_on,
+                  CupertinoIcons.map,
                   color: ongoingTrip ? ThemeColors.green : ThemeColors.darkBlue,
                   size: 18,
                 ),
@@ -197,9 +185,9 @@ class TaskCard extends StatelessWidget {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                Image.asset(
-                  AssetUtils.getIcons("ic_ride_list"),
-                  height: 26,
+                Icon(
+                  Icons.directions_car,
+                  size: 26,
                   color: ThemeColors.backgroundDark,
                 ),
                 10.widthBox,
@@ -221,7 +209,7 @@ class TaskCard extends StatelessWidget {
 
   Widget _buildActionIcon({
     required VoidCallback? onTap,
-    required String assetName,
+    required IconData icon,
     Color iconColor = ThemeColors.themeColor,
   }) => ZoomTapAnimation(
     onTap: onTap,
@@ -230,27 +218,17 @@ class TaskCard extends StatelessWidget {
       width: 42,
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: <Color>[ThemeColors.surface, ThemeColors.scaffoldColor],
-        ),
         shape: BoxShape.circle,
-        border: Border.all(
-          color: ThemeColors.themeColor.withValues(alpha: 0.08),
-        ),
+        border: Border.all(color: ThemeColors.whitePrimary),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: ThemeColors.themeColor.withValues(alpha: 0.1),
+            color: ThemeColors.primaryWhite.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 3),
           ),
         ],
       ),
-      child: Image.asset(
-        AssetUtils.getIcons(assetName),
-        color: iconColor,
-        height: 24,
-        width: 24,
-      ),
+      child: Icon(icon, color: iconColor, size: 20),
     ),
   );
 

@@ -21,7 +21,9 @@ class HomeHeader extends GetView<HomeController> {
     tag: "appBar",
     child: Container(
       decoration: BoxDecoration(
-        gradient: ThemeColors.appBarGradient,
+        gradient: ThemeService.isDark()
+            ? ThemeColors.surfaceGradient
+            : ThemeColors.appBarGradient,
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(32),
           bottomRight: Radius.circular(32),

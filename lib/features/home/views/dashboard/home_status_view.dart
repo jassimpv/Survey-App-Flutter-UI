@@ -1,4 +1,5 @@
 import "package:collect/core/theme/theme_colors.dart";
+import "package:collect/core/theme/theme_service.dart";
 import "package:collect/core/utils/sized_box_extension.dart";
 import "package:collect/core/utils/textstyle_input.dart";
 import "package:collect/core/utils/utils_helper.dart";
@@ -77,11 +78,12 @@ class _StatusCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: accentColor.withValues(alpha: 0.16)),
         boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: accentColor.withValues(alpha: 0.18),
-            blurRadius: 18,
-            offset: const Offset(0, 8),
-          ),
+          if (!ThemeService.isDark())
+            BoxShadow(
+              color: accentColor.withValues(alpha: 0.18),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
+            ),
         ],
       ),
       child: Column(
@@ -105,7 +107,7 @@ class _StatusCard extends StatelessWidget {
           Text(
             label,
             style: StyleUtils.kTextStyleSize18Weight600(
-              color: ThemeColors.headingColor,
+              color: ThemeColors.whitePrimary,
             ),
           ),
           Row(
