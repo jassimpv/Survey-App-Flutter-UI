@@ -1,5 +1,5 @@
 import "package:collect/routes.dart";
-import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/app_theme_data.dart";
 import "package:collect/utils/transaltion_utils.dart";
 import "package:collect/utils/theme_service.dart";
 import "package:collect/views/widget/no_internet_widget/check_internet_connection_widget.dart";
@@ -10,6 +10,7 @@ import "package:get/get.dart";
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ThemeService.init();
+  await TranslationService.init();
   runApp(const MyApp());
 }
 
@@ -19,27 +20,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => GetMaterialApp(
     title: "Data Agent App",
-    theme: ThemeData(
-      fontFamily: "Outfit",
-      primaryColor: ColorUtils.themeColor,
-      scaffoldBackgroundColor: ColorUtils.appBgMain,
-      textTheme: Theme.of(context).textTheme.apply(
-        bodyColor: Colors.black,
-        displayColor: Colors.black,
-        fontFamily: "Outfit",
-      ),
-    ),
-    darkTheme: ThemeData(
-      fontFamily: "Outfit",
-      brightness: Brightness.dark,
-      primaryColor: ColorUtils.themeColor,
-      scaffoldBackgroundColor: const Color(0xFF0F1720),
-      textTheme: Theme.of(context).textTheme.apply(
-        bodyColor: Colors.white,
-        displayColor: Colors.white,
-        fontFamily: "Outfit",
-      ),
-    ),
+    theme: AppThemeData.lightTheme(context),
+    darkTheme: AppThemeData.darkTheme(context),
     themeMode: ThemeService.themeMode,
     debugShowCheckedModeBanner: false,
     locale: TranslationService.locale,

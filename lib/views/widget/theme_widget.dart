@@ -1,0 +1,118 @@
+import 'package:collect/controller/theme_controller.dart';
+import 'package:collect/utils/colors_utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+class ThemeWidget extends GetView<ThemeController> {
+  const ThemeWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put<ThemeController>(ThemeController());
+    return GestureDetector(
+      onTap: () => _showThemeMenu(context),
+      child: Obx(
+        () => Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.06),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: ColorUtils.themeColor.withValues(alpha: 0.10),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                controller.getThemeIcon(controller.selectedMode.value),
+                size: 18,
+                color: ColorUtils.themeColor,
+              ),
+              8.widthBox,
+              Text(
+                controller.getThemeName(controller.selectedMode.value),
+                style: TextStyle(
+                  color: ColorUtils.themeColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              8.widthBox,
+              Icon(
+                CupertinoIcons.chevron_down,
+                size: 16,
+                color: ColorUtils.themeColor,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showThemeMenu(BuildContext context) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoActionSheet(
+        title: Text('theme'.tr),
+        actions: <CupertinoActionSheetAction>[
+          CupertinoActionSheetAction(
+            isDefaultAction: controller.selectedMode.value == ThemeMode.light,
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.light_mode_rounded),
+                12.widthBox,
+                Expanded(child: Text('light'.tr)),
+              ],
+            ),
+            onPressed: () {
+              controller.updateTheme(ThemeMode.light);
+              Navigator.pop(context);
+            },
+          ),
+          CupertinoActionSheetAction(
+            isDefaultAction: controller.selectedMode.value == ThemeMode.dark,
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.dark_mode_rounded),
+                12.widthBox,
+                Expanded(child: Text('dark'.tr)),
+              ],
+            ),
+            onPressed: () {
+              controller.updateTheme(ThemeMode.dark);
+              Navigator.pop(context);
+            },
+          ),
+          CupertinoActionSheetAction(
+            isDefaultAction: controller.selectedMode.value == ThemeMode.system,
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.brightness_auto_rounded),
+                12.widthBox,
+                Expanded(child: Text('system'.tr)),
+              ],
+            ),
+            onPressed: () {
+              controller.updateTheme(ThemeMode.system);
+              Navigator.pop(context);
+            },
+          ),
+        ],
+        cancelButton: CupertinoActionSheetAction(
+          isDestructiveAction: true,
+          child: Text('cancel'.tr),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+  }
+}
+
+extension on int {
+  SizedBox get widthBox => SizedBox(width: toDouble());
+}

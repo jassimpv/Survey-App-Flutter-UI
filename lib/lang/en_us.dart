@@ -60,4 +60,8 @@ Map<String, String> enUs = <String, String>{
   "termsandContitions": "Terms and Conditions",
   "selectCountryCode": "Select Country Code",
   "collectionReport": "Collection Report",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "theme": "Theme",
 };

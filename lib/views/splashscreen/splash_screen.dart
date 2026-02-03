@@ -7,8 +7,14 @@ import "package:flutter_svg/svg.dart";
 import "package:get/get.dart";
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-class SplashScreen extends StatelessWidget {
-  SplashScreen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
   final SplashController controller = Get.put(SplashController());
 
   @override
@@ -18,10 +24,10 @@ class SplashScreen extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomCenter,
-          colors: <Color>[
-            const Color(0xFF0FA394),
-            const Color(0xFF0A7A6E),
-            const Color(0xFF0F1720),
+          colors: const <Color>[
+            Color(0xFF0FA394),
+            Color(0xFF0A7A6E),
+            Color(0xFF0F1720),
           ],
           stops: const <double>[0, 0.45, 1],
         ),
@@ -29,17 +35,14 @@ class SplashScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Hero(
-            tag: "register",
-            child: SvgPicture.asset(
-              AssetUtils.getSvg("logo"),
-              colorFilter: const ColorFilter.mode(
-                ColorUtils.whiteColor,
-                BlendMode.srcIn,
-              ),
-              height: 100,
-              width: 100,
+          SvgPicture.asset(
+            AssetUtils.getSvg("logo"),
+            colorFilter: const ColorFilter.mode(
+              ColorUtils.whiteColor,
+              BlendMode.srcIn,
             ),
+            height: 100,
+            width: 100,
           ),
           100.heightBox,
           Center(
@@ -54,4 +57,11 @@ class SplashScreen extends StatelessWidget {
       ),
     ),
   );
+
+  @override
+  void dispose() {
+    // Cancel any pending animations/work when leaving splash
+    controller.dispose();
+    super.dispose();
+  }
 }

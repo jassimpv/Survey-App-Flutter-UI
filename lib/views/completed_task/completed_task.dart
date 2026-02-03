@@ -2,6 +2,7 @@ import "package:collect/controller/home_controller.dart";
 import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
+import "package:collect/utils/theme_service.dart";
 import "package:collect/views/completed_task/filter_bottom_sheet.dart";
 import "package:collect/views/widget/custom_app_bar.dart";
 import "package:collect/views/widget/task_card.dart";
@@ -23,7 +24,9 @@ class CompletedTask extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [ColorUtils.scaffoldColor, Colors.white],
+          colors: ThemeService.isDark()
+              ? [const Color(0xFF0F1720), const Color(0xFF1A2332)]
+              : [ColorUtils.scaffoldColor, Colors.white],
         ),
       ),
       child: Column(

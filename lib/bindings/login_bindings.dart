@@ -4,6 +4,7 @@ import "package:get/get.dart";
 class LoginBindings extends Bindings {
   @override
   void dependencies() {
-    Get.put(LoginController());
+    // Lazy-load controller to prevent blocking animation during navigation
+    Get.lazyPut<LoginController>(() => LoginController(), fenix: true);
   }
 }

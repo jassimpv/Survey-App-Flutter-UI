@@ -5,6 +5,7 @@ import "package:collect/extension/pull_to_refresh/pull_to_refresh_flutter.dart";
 import "package:collect/utils/colors_utils.dart";
 import "package:collect/utils/sized_box_extension.dart";
 import "package:collect/utils/textstyle_input.dart";
+import "package:collect/utils/theme_service.dart";
 import "package:collect/views/dashboard/home_header.dart";
 import "package:collect/views/dashboard/home_status_view.dart";
 import "package:collect/views/widget/task_card.dart";
@@ -21,7 +22,9 @@ class DashboardScreen extends GetView<HomeController> {
       gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [ColorUtils.scaffoldColor, Colors.white],
+        colors: ThemeService.isDark()
+            ? [const Color(0xFF0F1720), const Color(0xFF1A2332)]
+            : [ColorUtils.scaffoldColor, Colors.white],
       ),
     ),
     child: Column(

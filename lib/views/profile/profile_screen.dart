@@ -6,6 +6,7 @@ import "package:collect/utils/textstyle_input.dart";
 import "package:collect/views/widget/custom_app_bar.dart";
 import "package:collect/views/widget/language_widget.dart";
 import "package:collect/views/widget/modern_dialog.dart";
+import "package:collect/views/widget/theme_widget.dart";
 import "package:collect/views/widget/zoom_tap.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
@@ -195,6 +196,43 @@ class ProfileScreen extends GetView<ProfileController> {
                 ),
               ),
               const LanguageWidegt(),
+            ],
+          ),
+        ),
+        _divider(),
+        // Theme row (inline widget)
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      ColorUtils.themeColor.withValues(alpha: 0.15),
+                      Colors.white,
+                    ],
+                  ),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  CupertinoIcons.brightness,
+                  size: 22,
+                  color: ColorUtils.themeColor,
+                ),
+              ),
+              12.widthBox,
+              Expanded(
+                child: Text(
+                  "theme".tr,
+                  style: StyleUtils.kTextStyleSize18Weight500(
+                    color: ColorUtils.headingColor,
+                  ),
+                ),
+              ),
+              const ThemeWidget(),
             ],
           ),
         ),

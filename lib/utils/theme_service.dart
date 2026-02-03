@@ -14,10 +14,29 @@ class ThemeService {
     final String? stored = await PreferenceUtils.getString(_key);
     if (stored == null || stored == 'light') {
       themeMode = ThemeMode.light;
-    } else {
+    } else if (stored == 'dark') {
       themeMode = ThemeMode.dark;
+    } else if (stored == 'system') {
+      themeMode = ThemeMode.system;
     }
     themeModeNotifier.value = themeMode;
+  }
+
+  static Future<void> setThemeMode(ThemeMode mode) async {
+    themeMode = mode;
+    themeModeNotifier.value = themeMode;
+
+    // Apply immediately
+    Get.changeThemeMode(themeMode);
+
+    // Persist
+    String modeString = 'light';
+    if (mode == ThemeMode.dark) {
+      modeString = 'dark';
+    } else if (mode == ThemeMode.system) {
+      modeString = 'system';
+    }
+    await PreferenceUtils.saveString(_key, modeString);
   }
 
   static Future<void> toggleTheme() async {
