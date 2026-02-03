@@ -17,20 +17,27 @@ import "package:get/get.dart";
 class ProfileScreen extends GetView<ProfileController> {
   const ProfileScreen({super.key});
 
+  // Constants
+  static const double _iconSize = 22;
+  static const double _iconContainerSize = 40;
+  static const double _borderRadius = 32;
+  static const double _containerBorderRadius = 24;
+  static const double _horizontalPadding = 20;
+  static const double _rowVerticalPadding = 12;
+
   @override
   Widget build(BuildContext context) => ValueListenableBuilder<ThemeMode>(
     valueListenable: ThemeService.themeModeNotifier,
-    builder: (BuildContext context, ThemeMode themeMode, Widget? child) =>
-        Container(
-          decoration: BoxDecoration(color: ThemeColors.scaffoldColor),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              CustomAppBar(title: "profile".tr),
-              Expanded(child: _buildProfileContent(context)),
-            ],
-          ),
-        ),
+    builder: (_, __, ___) => Container(
+      decoration: BoxDecoration(color: ThemeColors.scaffoldColor),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          CustomAppBar(title: "profile".tr),
+          Expanded(child: _buildProfileContent(context)),
+        ],
+      ),
+    ),
   );
 
   Widget _buildProfileContent(BuildContext context) =>
@@ -41,24 +48,7 @@ class ProfileScreen extends GetView<ProfileController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  color: ThemeColors.surface,
-                  borderRadius: BorderRadius.circular(32),
-                  border: Border.all(color: ThemeColors.border),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      color: ThemeColors.blackWhite.withValues(alpha: 0.05),
-                      blurRadius: 30,
-                      offset: const Offset(0, 12),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: <Widget>[_buildProfileCard(), 16.heightBox],
-                ),
-              ),
+              _buildMainCard(),
               20.heightBox,
               _buildInfoContainer(context),
               20.heightBox,
@@ -68,33 +58,15 @@ class ProfileScreen extends GetView<ProfileController> {
         ),
       );
 
+  Widget _buildMainCard() => Container(
+    padding: const EdgeInsets.all(20),
+    decoration: _cardDecoration(),
+    child: Column(children: <Widget>[_buildProfileCard(), 16.heightBox]),
+  );
+
   Widget _buildProfileCard() => Row(
     children: <Widget>[
-      Container(
-        height: 72,
-        width: 72,
-        padding: const EdgeInsets.all(4),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: <Color>[
-              ThemeColors.themeColor,
-              ThemeColors.themeColor.withValues(alpha: 0.6),
-            ],
-          ),
-          shape: BoxShape.circle,
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-              color: ThemeColors.themeColor.withValues(alpha: 0.35),
-              blurRadius: 18,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        child: CircleAvatar(
-          backgroundColor: ThemeColors.surface,
-          child: Icon(CupertinoIcons.person, color: ThemeColors.whitePrimary),
-        ),
-      ),
+      _buildAvatarContainer(),
       16.widthBox,
       Expanded(
         child: Column(
@@ -126,14 +98,35 @@ class ProfileScreen extends GetView<ProfileController> {
     ],
   );
 
+  Widget _buildAvatarContainer() => Container(
+    height: 72,
+    width: 72,
+    padding: const EdgeInsets.all(4),
+    decoration: BoxDecoration(
+      gradient: ThemeColors.primaryGradient,
+      shape: BoxShape.circle,
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+          color: ThemeColors.primary.withValues(alpha: 0.35),
+          blurRadius: 18,
+          offset: const Offset(0, 8),
+        ),
+      ],
+    ),
+    child: CircleAvatar(
+      backgroundColor: ThemeColors.surface,
+      child: Icon(CupertinoIcons.person, color: ThemeColors.whitePrimary),
+    ),
+  );
+
   Widget _buildInfoContainer(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(vertical: 4),
     decoration: BoxDecoration(
       color: ThemeColors.surface,
-      borderRadius: BorderRadius.circular(24),
+      borderRadius: BorderRadius.circular(_containerBorderRadius),
       boxShadow: <BoxShadow>[
         BoxShadow(
-          color: ThemeColors.themeColor.withValues(alpha: 0.08),
+          color: ThemeColors.primary.withValues(alpha: 0.08),
           blurRadius: 20,
           offset: const Offset(0, 6),
         ),
@@ -141,147 +134,127 @@ class ProfileScreen extends GetView<ProfileController> {
     ),
     child: Column(
       children: <Widget>[
-        ZoomTapAnimation(
+        _buildMenuRow(
+          icon: CupertinoIcons.phone,
+          label: "contact_us".tr,
           onTap: () => Get.toNamed(AppRouter.contactUsScreen),
-          child: _buildInfoRow(CupertinoIcons.phone, "contact_us".tr),
         ),
         _divider(),
-
-        // Terms
-        ZoomTapAnimation(
+        _buildMenuRow(
+          icon: CupertinoIcons.doc_text,
+          label: "terms_and_condition".tr,
           onTap: () => Get.toNamed(AppRouter.termsAndConditionScreen),
-          child: _buildInfoRow(
-            CupertinoIcons.doc_text,
-            "terms_and_condition".tr,
-          ),
         ),
         _divider(),
-
-        // Language row (inline widget)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      ThemeColors.themeColor.withValues(alpha: 0.15),
-                      ThemeColors.surface,
-                    ],
-                  ),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  CupertinoIcons.globe,
-                  size: 22,
-                  color: ThemeColors.whitePrimary,
-                ),
-              ),
-              12.widthBox,
-              Expanded(
-                child: Text(
-                  "Language".tr,
-                  style: StyleUtils.kTextStyleSize18Weight500(
-                    color: ThemeColors.blackWhite,
-                  ),
-                ),
-              ),
-              LanguageWidegt(),
-            ],
-          ),
+        _buildLanguageRow(),
+        _divider(),
+        _buildThemeRow(),
+        _divider(),
+        _buildMenuRow(
+          icon: CupertinoIcons.trash,
+          label: "deleteAccount".tr,
+          onTap: () => _showConfirmationDeleteDialog(context),
         ),
         _divider(),
-        // Theme row (inline widget)
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: <Color>[
-                      ThemeColors.themeColor.withValues(alpha: 0.15),
-                      ThemeColors.surface,
-                    ],
-                  ),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  CupertinoIcons.brightness,
-                  size: 22,
-                  color: ThemeColors.whitePrimary,
-                ),
-              ),
-              12.widthBox,
-              Expanded(
-                child: Text(
-                  "theme".tr,
-                  style: StyleUtils.kTextStyleSize18Weight500(
-                    color: ThemeColors.blackWhite,
-                  ),
-                ),
-              ),
-              const ThemeWidget(),
-            ],
-          ),
-        ),
-        _divider(),
-        ZoomTapAnimation(
-          onTap: () async {
-            await _showConfirmationDeleteDialog(context);
-          },
-          child: _buildInfoRow(CupertinoIcons.trash, "deleteAccount".tr),
-        ),
-        _divider(),
-        ZoomTapAnimation(
-          onTap: () async {
-            await _showConfirmationLogoutDialog(context);
-          },
-          child: _buildInfoRow(CupertinoIcons.square_arrow_right, "logout".tr),
+        _buildMenuRow(
+          icon: CupertinoIcons.square_arrow_right,
+          label: "logout".tr,
+          onTap: () => _showConfirmationLogoutDialog(context),
         ),
       ],
     ),
   );
 
-  Widget _buildInfoRow(IconData icon, String text) => Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+  Widget _buildMenuRow({
+    required IconData icon,
+    required String label,
+    required VoidCallback onTap,
+  }) => ZoomTapAnimation(
+    onTap: onTap,
+    child: Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: _horizontalPadding,
+        vertical: _rowVerticalPadding,
+      ),
+      child: Row(
+        children: <Widget>[
+          _buildIconContainer(icon),
+          12.widthBox,
+          Expanded(
+            child: Text(
+              label,
+              style: StyleUtils.kTextStyleSize18Weight500(
+                color: ThemeColors.blackWhite,
+              ),
+            ),
+          ),
+          Icon(
+            CupertinoIcons.chevron_forward,
+            color: ThemeColors.blackWhite,
+            size: 18,
+          ),
+        ],
+      ),
+    ),
+  );
+
+  Widget _buildLanguageRow() => Padding(
+    padding: const EdgeInsets.symmetric(
+      horizontal: _horizontalPadding,
+      vertical: _rowVerticalPadding,
+    ),
     child: Row(
       children: <Widget>[
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[
-                ThemeColors.themeColor.withValues(alpha: 0.15),
-                ThemeColors.surface,
-              ],
-            ),
-            shape: BoxShape.circle,
-          ),
-          child: Icon(icon, size: 22, color: ThemeColors.whitePrimary),
-        ),
+        _buildIconContainer(CupertinoIcons.globe),
         12.widthBox,
         Expanded(
           child: Text(
-            text,
+            "Language".tr,
             style: StyleUtils.kTextStyleSize18Weight500(
               color: ThemeColors.blackWhite,
             ),
           ),
         ),
-        Icon(
-          CupertinoIcons.chevron_forward,
-          color: ThemeColors.blackWhite,
-          size: 18,
-        ),
+        LanguageWidget(),
       ],
     ),
+  );
+
+  Widget _buildThemeRow() => Padding(
+    padding: const EdgeInsets.symmetric(
+      horizontal: _horizontalPadding,
+      vertical: _rowVerticalPadding,
+    ),
+    child: Row(
+      children: <Widget>[
+        _buildIconContainer(CupertinoIcons.brightness),
+        12.widthBox,
+        Expanded(
+          child: Text(
+            "theme".tr,
+            style: StyleUtils.kTextStyleSize18Weight500(
+              color: ThemeColors.blackWhite,
+            ),
+          ),
+        ),
+        const ThemeWidget(),
+      ],
+    ),
+  );
+
+  Widget _buildIconContainer(IconData icon) => Container(
+    width: _iconContainerSize,
+    height: _iconContainerSize,
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: <Color>[
+          ThemeColors.primary.withValues(alpha: 0.15),
+          ThemeColors.surface,
+        ],
+      ),
+      shape: BoxShape.circle,
+    ),
+    child: Icon(icon, size: _iconSize, color: ThemeColors.whitePrimary),
   );
 
   Widget _buildFooter() => Obx(
@@ -293,6 +266,25 @@ class ProfileScreen extends GetView<ProfileController> {
         ),
       ),
     ),
+  );
+
+  Widget _divider() => Container(
+    height: 1,
+    margin: const EdgeInsets.symmetric(horizontal: _horizontalPadding),
+    color: ThemeColors.primary.withValues(alpha: 0.08),
+  );
+
+  BoxDecoration _cardDecoration() => BoxDecoration(
+    color: ThemeColors.surface,
+    borderRadius: BorderRadius.circular(_borderRadius),
+    border: Border.all(color: ThemeColors.border),
+    boxShadow: <BoxShadow>[
+      BoxShadow(
+        color: ThemeColors.blackWhite.withValues(alpha: 0.05),
+        blurRadius: 30,
+        offset: const Offset(0, 12),
+      ),
+    ],
   );
 
   Future<void> _showConfirmationLogoutDialog(BuildContext context) =>
@@ -319,15 +311,6 @@ class ProfileScreen extends GetView<ProfileController> {
         cancelText: "cancel".tr,
         isDangerous: true,
         icon: CupertinoIcons.trash,
-        onConfirm: () {
-          // controller.logout();
-          Navigator.of(context).pop();
-        },
+        onConfirm: () => Navigator.of(context).pop(),
       );
-
-  Widget _divider() => Container(
-    height: 1,
-    margin: const EdgeInsets.symmetric(horizontal: 20),
-    color: ThemeColors.themeColor.withValues(alpha: 0.08),
-  );
 }

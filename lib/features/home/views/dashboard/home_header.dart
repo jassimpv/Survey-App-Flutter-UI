@@ -90,7 +90,7 @@ class HomeHeader extends GetView<HomeController> {
           ),
           child: Row(
             children: <Widget>[
-              LanguageWidegt(),
+              LanguageWidget(),
               8.widthBox,
               _buildNotificationBadge(),
             ],

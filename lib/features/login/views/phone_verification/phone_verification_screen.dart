@@ -54,7 +54,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.topRight,
-                  child: LanguageWidegt(isHome: true),
+                  child: LanguageWidget(isHome: true),
                 ),
                 Expanded(
                   child: LayoutBuilder(

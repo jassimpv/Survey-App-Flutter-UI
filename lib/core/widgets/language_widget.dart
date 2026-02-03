@@ -36,8 +36,8 @@ class LanguageController extends GetxController {
   }
 }
 
-class LanguageWidegt extends StatelessWidget {
-  LanguageWidegt({super.key, this.isHome = false});
+class LanguageWidget extends StatelessWidget {
+  LanguageWidget({super.key, this.isHome = false});
   final bool isHome;
   final LanguageController _controller = Get.put(LanguageController());
 

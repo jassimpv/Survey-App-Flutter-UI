@@ -73,7 +73,7 @@ class CustomAppBar extends StatelessWidget {
               ),
               Row(
                 children: <Widget>[
-                  if (isLanguageButton) ...<Widget>[LanguageWidegt()],
+                  if (isLanguageButton) ...<Widget>[LanguageWidget()],
                   8.widthBox,
                   if (isNotificationButton) ...<Widget>[
                     _buildNotificationBadge(),

@@ -30,7 +30,7 @@ class LoginScreen extends GetView<LoginController> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.topRight,
-                  child: LanguageWidegt(isHome: true),
+                  child: LanguageWidget(isHome: true),
                 ),
                 Expanded(
                   child: LayoutBuilder(
