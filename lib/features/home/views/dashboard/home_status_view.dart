@@ -73,7 +73,7 @@ class _StatusCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(13),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ThemeColors.whiteColor,
         borderRadius: BorderRadius.circular(22),
         border: Border.all(color: accentColor.withValues(alpha: 0.16)),
         boxShadow: <BoxShadow>[

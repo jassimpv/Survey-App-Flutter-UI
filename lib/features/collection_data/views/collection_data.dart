@@ -58,7 +58,7 @@ class _CollectionDataState extends State<CollectionData> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [ThemeColors.scaffoldColor, Colors.white],
+            colors: [ThemeColors.scaffoldColor, ThemeColors.whiteColor],
           ),
         ),
         child: Column(
@@ -97,11 +97,11 @@ class _CollectionDataState extends State<CollectionData> {
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
       color: ThemeColors.whiteColor,
-      boxShadow: const <BoxShadow>[
+      boxShadow: <BoxShadow>[
         BoxShadow(
-          color: Color.fromRGBO(15, 23, 42, 0.08),
+          color: ThemeColors.shadow,
           blurRadius: 24,
-          offset: Offset(0, 8),
+          offset: const Offset(0, 8),
         ),
       ],
     ),
@@ -183,9 +183,9 @@ class _CollectionDataState extends State<CollectionData> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           gradient: ThemeColors.primaryGradient,
-          boxShadow: const <BoxShadow>[
+          boxShadow: <BoxShadow>[
             BoxShadow(
-              color: Color.fromRGBO(17, 24, 39, 0.18),
+              color: ThemeColors.shadow,
               blurRadius: 18,
               offset: Offset(0, 8),
             ),
@@ -198,11 +198,11 @@ class _CollectionDataState extends State<CollectionData> {
               width: 44,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(14),
-                color: Colors.white.withValues(alpha: 0.15),
+                color: ThemeColors.whiteColor.withValues(alpha: 0.15),
               ),
-              child: const Icon(
+              child: Icon(
                 CupertinoIcons.calendar_today,
-                color: Colors.white,
+                color: ThemeColors.whiteColor,
               ),
             ),
             const SizedBox(width: 14),
@@ -213,13 +213,13 @@ class _CollectionDataState extends State<CollectionData> {
                   Text(
                     "Date range",
                     style: StyleUtils.kTextStyleSize12Weight500(
-                      color: Colors.white.withValues(alpha: 0.8),
+                      color: ThemeColors.whiteColor.withValues(alpha: 0.8),
                     ),
                   ),
                   Text(
                     Utils.replaceFarsiNumber(rangeText),
                     style: StyleUtils.kTextStyleSize18Weight600(
-                      color: Colors.white,
+                      color: ThemeColors.whiteColor,
                     ),
                   ),
                 ],
@@ -232,7 +232,10 @@ class _CollectionDataState extends State<CollectionData> {
               ),
             ),
             10.widthBox,
-            const Icon(CupertinoIcons.chevron_down, color: Colors.white),
+            const Icon(
+              CupertinoIcons.chevron_down,
+              color: ThemeColors.whiteColor,
+            ),
           ],
         ),
       ),

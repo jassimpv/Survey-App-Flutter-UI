@@ -54,7 +54,7 @@ class LoginScreen extends GetView<LoginController> {
                                   child: SvgPicture.asset(
                                     AssetUtils.getSvg("logo"),
                                     colorFilter: const ColorFilter.mode(
-                                      Colors.white,
+                                      ThemeColors.whiteColor,
                                       BlendMode.srcIn,
                                     ),
                                     height: logoSize,
@@ -74,13 +74,12 @@ class LoginScreen extends GetView<LoginController> {
                                     vertical: 30,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: ThemeColors.whiteColor,
                                     borderRadius: BorderRadius.circular(32),
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
-                                        color: Colors.black.withValues(
-                                          alpha: 0.08,
-                                        ),
+                                        color: ThemeColors.blackColor
+                                            .withValues(alpha: 0.08),
                                         blurRadius: 40,
                                         offset: const Offset(0, 12),
                                       ),

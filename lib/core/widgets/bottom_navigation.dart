@@ -86,7 +86,7 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
                 BoxShadow(
                   offset: const Offset(0, 10),
                   color: ThemeService.isDark()
-                      ? Colors.black.withValues(alpha: 0.4)
+                      ? ThemeColors.blackColor.withValues(alpha: 0.4)
                       : ThemeColors.themeColor.withValues(alpha: 0.25),
                   blurRadius: 30,
                 ),
@@ -184,19 +184,21 @@ class _HomeItemView extends StatelessWidget {
           minHeight: 48,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.white : Colors.transparent,
+          color: isSelected ? ThemeColors.whiteColor : Colors.transparent,
           borderRadius: BorderRadius.circular(999),
           boxShadow: isSelected
               ? <BoxShadow>[
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.08),
+                    color: ThemeColors.blackColor.withValues(alpha: 0.08),
                     blurRadius: 12,
                     offset: const Offset(0, 6),
                   ),
                 ]
               : null,
           border: isSelected
-              ? Border.all(color: Colors.white.withValues(alpha: 0.18))
+              ? Border.all(
+                  color: ThemeColors.whiteColor.withValues(alpha: 0.18),
+                )
               : null,
         ),
         child: Row(
@@ -208,7 +210,7 @@ class _HomeItemView extends StatelessWidget {
               size: 20,
               color: isSelected
                   ? ThemeColors.themeColor
-                  : Colors.white.withValues(alpha: 0.9),
+                  : ThemeColors.whiteColor.withValues(alpha: 0.9),
             ),
             if (isSelected) ...[
               10.widthBox,

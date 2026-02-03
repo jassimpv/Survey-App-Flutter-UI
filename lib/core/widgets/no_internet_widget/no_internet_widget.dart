@@ -26,7 +26,7 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
           end: Alignment.bottomCenter,
           colors: <Color>[
             ThemeColors.primary,
-            const Color(0xFF1E8F87),
+            ThemeColors.darkBlue.withValues(alpha: 0.95),
             ThemeColors.scaffoldColor,
           ],
           stops: const <double>[0, 0.45, 1],
@@ -87,13 +87,12 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
                                     vertical: 30,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: Colors.white,
+                                    color: ThemeColors.whiteColor,
                                     borderRadius: BorderRadius.circular(32),
                                     boxShadow: <BoxShadow>[
                                       BoxShadow(
-                                        color: Colors.black.withValues(
-                                          alpha: 0.08,
-                                        ),
+                                        color: ThemeColors.blackColor
+                                            .withValues(alpha: 0.08),
                                         blurRadius: 40,
                                         offset: const Offset(0, 12),
                                       ),
@@ -126,7 +125,7 @@ class _NoInternetConnectionState extends State<NoInternetConnection> {
                                           textAlign: TextAlign.center,
                                           style:
                                               StyleUtils.kTextStyleSize14Weight400(
-                                                color: ThemeColors.black
+                                                color: ThemeColors.blackColor
                                                     .withValues(alpha: 0.5),
                                               ),
                                         ),

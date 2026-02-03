@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/multiple_choice_auto_complete_answer_format.dart';
 import 'package:collect/core/extensions/survet_kit/survey_kit.dart';
@@ -77,7 +78,7 @@ class _MultipleChoiceAutoCompleteAnswerViewState
                   selectedChoices: _selectedChoices,
                 ),
                 SizedBox(height: 32),
-                Divider(color: Colors.grey),
+                Divider(color: ThemeColors.greyTextColor),
                 ..._multipleChoiceAnswer.textChoices
                     .map(
                       (TextChoice tc) => SelectionListTile(
@@ -144,7 +145,7 @@ class _MultipleChoiceAutoCompleteAnswerViewState
                       ),
                     ),
                   ),
-                  Divider(color: Colors.grey),
+                  Divider(color: ThemeColors.greyTextColor),
                 ],
               ],
             ),

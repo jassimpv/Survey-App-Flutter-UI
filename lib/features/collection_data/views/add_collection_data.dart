@@ -35,7 +35,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     _signatureController = SignatureController(
       penStrokeWidth: 4,
       penColor: ThemeColors.themeColor,
-      exportBackgroundColor: Colors.white,
+      exportBackgroundColor: ThemeColors.whiteColor,
     );
   }
 
@@ -89,9 +89,9 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(24),
       color: ThemeColors.whiteColor,
-      boxShadow: const <BoxShadow>[
+      boxShadow: <BoxShadow>[
         BoxShadow(
-          color: Color.fromRGBO(15, 23, 42, 0.08),
+          color: ThemeColors.shadow,
           blurRadius: 24,
           offset: Offset(0, 8),
         ),
@@ -257,9 +257,9 @@ class _AddCollectionDataState extends State<AddCollectionData> {
           borderRadius: BorderRadius.circular(18),
           color: ThemeColors.whiteColor,
           border: Border.all(color: ThemeColors.borderColor),
-          boxShadow: const <BoxShadow>[
+          boxShadow: <BoxShadow>[
             BoxShadow(
-              color: Color.fromRGBO(15, 23, 42, 0.05),
+              color: ThemeColors.shadow,
               blurRadius: 18,
               offset: Offset(0, 8),
             ),
@@ -269,7 +269,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
           borderRadius: BorderRadius.circular(18),
           child: Signature(
             controller: _signatureController,
-            backgroundColor: Colors.white,
+            backgroundColor: ThemeColors.whiteColor,
           ),
         ),
       ),
@@ -306,7 +306,9 @@ class _AddCollectionDataState extends State<AddCollectionData> {
     onPressed: _handleSubmit,
     child: Text(
       "Save collection",
-      style: StyleUtils.kTextStyleSize16Weight600(color: Colors.white),
+      style: StyleUtils.kTextStyleSize16Weight600(
+        color: ThemeColors.whiteColor,
+      ),
     ),
   );
 
@@ -356,7 +358,9 @@ class _AddCollectionDataState extends State<AddCollectionData> {
       SnackBar(
         content: Text(
           message,
-          style: StyleUtils.kTextStyleSize14Weight500(color: Colors.white),
+          style: StyleUtils.kTextStyleSize14Weight500(
+            color: ThemeColors.whiteColor,
+          ),
         ),
       ),
     );

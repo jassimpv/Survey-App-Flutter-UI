@@ -22,7 +22,7 @@ class ProfileScreen extends GetView<ProfileController> {
       gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: [ThemeColors.scaffoldColor, Colors.white],
+        colors: [ThemeColors.scaffoldColor, ThemeColors.whiteColor],
       ),
     ),
     child: Column(
@@ -48,11 +48,14 @@ class ProfileScreen extends GetView<ProfileController> {
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: <Color>[Colors.white, ThemeColors.scaffoldColor],
+                    colors: <Color>[
+                      ThemeColors.whiteColor,
+                      ThemeColors.scaffoldColor,
+                    ],
                   ),
                   borderRadius: BorderRadius.circular(32),
                   border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.3),
+                    color: ThemeColors.whiteColor.withValues(alpha: 0.3),
                   ),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
@@ -98,7 +101,7 @@ class ProfileScreen extends GetView<ProfileController> {
           ],
         ),
         child: const CircleAvatar(
-          backgroundColor: Colors.white,
+          backgroundColor: ThemeColors.whiteColor,
           child: Icon(CupertinoIcons.person, color: ThemeColors.themeColor),
         ),
       ),
@@ -136,7 +139,7 @@ class ProfileScreen extends GetView<ProfileController> {
   Widget _buildInfoContainer(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(vertical: 4),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: ThemeColors.whiteColor,
       borderRadius: BorderRadius.circular(24),
       boxShadow: <BoxShadow>[
         BoxShadow(
@@ -176,7 +179,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   gradient: LinearGradient(
                     colors: <Color>[
                       ThemeColors.themeColor.withValues(alpha: 0.15),
-                      Colors.white,
+                      ThemeColors.whiteColor,
                     ],
                   ),
                   shape: BoxShape.circle,
@@ -213,7 +216,7 @@ class ProfileScreen extends GetView<ProfileController> {
                   gradient: LinearGradient(
                     colors: <Color>[
                       ThemeColors.themeColor.withValues(alpha: 0.15),
-                      Colors.white,
+                      ThemeColors.whiteColor,
                     ],
                   ),
                   shape: BoxShape.circle,
@@ -268,7 +271,10 @@ class ProfileScreen extends GetView<ProfileController> {
           height: 40,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: <Color>[color.withValues(alpha: 0.15), Colors.white],
+              colors: <Color>[
+                color.withValues(alpha: 0.15),
+                ThemeColors.whiteColor,
+              ],
             ),
             shape: BoxShape.circle,
           ),

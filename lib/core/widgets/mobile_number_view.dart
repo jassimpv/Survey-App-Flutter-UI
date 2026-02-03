@@ -49,7 +49,9 @@ class MobileNumberView extends StatelessWidget {
             child: TextFormField(
               controller: controller,
               keyboardType: TextInputType.number,
-              style: StyleUtils.kTextStyleSize17Weight600(color: Colors.black),
+              style: StyleUtils.kTextStyleSize17Weight600(
+                color: ThemeColors.blackColor,
+              ),
               inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly,
               ],

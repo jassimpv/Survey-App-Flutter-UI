@@ -50,12 +50,14 @@ class TaskCard extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.72),
+            color: ThemeColors.whiteColor.withValues(alpha: 0.72),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
+            border: Border.all(
+              color: ThemeColors.whiteColor.withValues(alpha: 0.08),
+            ),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.04),
+                color: ThemeColors.blackColor.withValues(alpha: 0.04),
                 blurRadius: 10,
                 offset: const Offset(0, 6),
               ),
@@ -105,16 +107,18 @@ class TaskCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: <Color>[
-            Colors.white.withValues(alpha: 0.9),
+            ThemeColors.whiteColor.withValues(alpha: 0.9),
             (ongoingTrip ? ThemeColors.darkGreen : ThemeColors.themeColor)
                 .withValues(alpha: 0.06),
           ],
         ),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+        border: Border.all(
+          color: ThemeColors.whiteColor.withValues(alpha: 0.12),
+        ),
         boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.06),
+            color: ThemeColors.blackColor.withValues(alpha: 0.06),
             blurRadius: 12,
             offset: const Offset(0, 6),
           ),
@@ -227,7 +231,7 @@ class TaskCard extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: <Color>[Colors.white, ThemeColors.scaffoldColor],
+          colors: <Color>[ThemeColors.whiteColor, ThemeColors.scaffoldColor],
         ),
         shape: BoxShape.circle,
         border: Border.all(
@@ -279,12 +283,12 @@ class PassengerCount extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
     decoration: BoxDecoration(
-      color: Colors.white.withValues(alpha: 0.9),
+      color: ThemeColors.whiteColor.withValues(alpha: 0.9),
       borderRadius: BorderRadius.circular(12),
       border: Border.all(color: ThemeColors.darkGreen.withValues(alpha: 0.12)),
       boxShadow: <BoxShadow>[
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.04),
+          color: ThemeColors.blackColor.withValues(alpha: 0.04),
           blurRadius: 8,
           offset: const Offset(0, 4),
         ),
@@ -302,7 +306,7 @@ class InfoContainer extends StatelessWidget {
     required this.text,
     required this.style,
     super.key,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor = ThemeColors.whiteColor,
   });
   final String text;
   final TextStyle style;

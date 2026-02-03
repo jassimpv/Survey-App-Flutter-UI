@@ -243,11 +243,11 @@ class StyleUtils {
           )
         : null,
     border: OutlineInputBorder(
-      borderSide: const BorderSide(color: Color(0xffE4E4E7)),
+      borderSide: BorderSide(color: ThemeColors.border),
       borderRadius: BorderRadius.circular(8),
     ),
     enabledBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: Color(0xffE4E4E7)),
+      borderSide: BorderSide(color: ThemeColors.border),
       borderRadius: BorderRadius.circular(8),
     ),
     focusedBorder: OutlineInputBorder(
@@ -255,7 +255,7 @@ class StyleUtils {
       borderRadius: BorderRadius.circular(8),
     ),
     errorBorder: OutlineInputBorder(
-      borderSide: const BorderSide(color: Colors.red),
+      borderSide: BorderSide(color: ThemeColors.error),
       borderRadius: BorderRadius.circular(8),
     ),
     contentPadding: const EdgeInsets.symmetric(horizontal: 12),
@@ -288,14 +288,14 @@ class StyleUtils {
         color: isSelected ? ThemeColors.themeColor : ThemeColors.whiteColor,
         boxShadow: !isSelected
             ? <BoxShadow>[]
-            : const <BoxShadow>[
+            : <BoxShadow>[
                 BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.10),
+                  color: ThemeColors.shadow,
                   blurRadius: 2,
                   offset: Offset(0, 1),
                 ),
                 BoxShadow(
-                  color: Color.fromRGBO(16, 24, 40, 0.10),
+                  color: ThemeColors.shadow,
                   blurRadius: 3,
                   offset: Offset(0, 1),
                 ),
@@ -304,7 +304,7 @@ class StyleUtils {
 
   // OTP & Input Styles
   static TextStyle kTextStyleOtpPasted() => TextStyle(
-    color: Colors.green.shade600,
+    color: ThemeColors.statusGreen,
     fontWeight: FontWeight.bold,
     fontFamily: "Outfit",
   );
@@ -341,8 +341,11 @@ class StyleUtils {
   );
 
   // Date Answer View Style
-  static TextStyle kTextStyleDateDisplay() =>
-      TextStyle(fontSize: 28.0, color: Colors.white, fontFamily: "Outfit");
+  static TextStyle kTextStyleDateDisplay() => TextStyle(
+    fontSize: 28.0,
+    color: ThemeColors.whiteColor,
+    fontFamily: "Outfit",
+  );
 
   // Survey App Bar Style
   static TextStyle kTextStyleSurveyAppBar() =>
@@ -364,7 +367,7 @@ class StyleUtils {
 
   // Pull to Refresh Indicator Style
   static TextStyle kTextStyleRefreshIndicator() =>
-      const TextStyle(color: Colors.grey, fontFamily: "Outfit");
+      const TextStyle(color: ThemeColors.greyTextColor, fontFamily: "Outfit");
 
   // Dialog & Menu Title Style
   static TextStyle kTextStyleDialogTitle() => TextStyle(

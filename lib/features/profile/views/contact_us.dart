@@ -115,7 +115,7 @@ class ContactUsScreen extends StatelessWidget {
                   "Address:",
                   style: StyleUtils.kTextStyleSize18Weight600(
                     color: ThemeService.isDark()
-                        ? Colors.white
+                        ? ThemeColors.whiteColor
                         : ThemeColors.headingColor,
                   ),
                 ),
@@ -123,7 +123,7 @@ class ContactUsScreen extends StatelessWidget {
                   address,
                   style: StyleUtils.kTextStyleSize16Weight400(
                     color: ThemeService.isDark()
-                        ? Colors.white70
+                        ? ThemeColors.whiteColor.withValues(alpha: 0.7)
                         : ThemeColors.headingColor.withValues(alpha: 0.7),
                   ),
                 ),
@@ -179,11 +179,13 @@ class ContactUsScreen extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(icon, color: Colors.white),
+          Icon(icon, color: ThemeColors.whiteColor),
           const SizedBox(width: 8),
           Text(
             label,
-            style: StyleUtils.kTextStyleSize16Weight400(color: Colors.white),
+            style: StyleUtils.kTextStyleSize16Weight400(
+              color: ThemeColors.whiteColor,
+            ),
           ),
         ],
       ),

@@ -25,9 +25,9 @@ class _DayGroup extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         color: ThemeColors.whiteColor,
-        boxShadow: const <BoxShadow>[
+        boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.05),
+            color: ThemeColors.shadow,
             blurRadius: 16,
             offset: Offset(0, 8),
           ),

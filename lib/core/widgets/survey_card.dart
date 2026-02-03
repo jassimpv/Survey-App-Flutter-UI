@@ -31,7 +31,7 @@ class SurveyCard extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: ongoingTrip ? ThemeColors.lightGreen : Colors.white,
+        color: ongoingTrip ? ThemeColors.lightGreen : ThemeColors.whiteColor,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: ongoingTrip
@@ -124,7 +124,7 @@ class SurveyCard extends StatelessWidget {
               Text(
                 "Fruits",
                 style: StyleUtils.kTextStyleSize14Weight500(
-                  color: ThemeColors.black.withValues(alpha: 0.8),
+                  color: ThemeColors.blackColor.withValues(alpha: 0.8),
                 ),
               ),
             ],
@@ -176,7 +176,7 @@ class PassengerCount extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InfoContainer(
     text: weight,
-    style: StyleUtils.kTextStyleSize14Weight600(color: Colors.white),
+    style: StyleUtils.kTextStyleSize14Weight600(color: ThemeColors.whiteColor),
     backgroundColor: ThemeColors.secondaryColor,
   );
 }
@@ -186,7 +186,7 @@ class InfoContainer extends StatelessWidget {
     required this.text,
     required this.style,
     super.key,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor = ThemeColors.whiteColor,
   });
   final String text;
   final TextStyle style;

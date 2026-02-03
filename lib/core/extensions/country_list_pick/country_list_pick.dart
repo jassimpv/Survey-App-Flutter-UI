@@ -116,7 +116,7 @@ class _CountryListPickState extends State<CountryListPick> {
 
                 return Container(
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: ThemeColors.whiteColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
@@ -130,7 +130,7 @@ class _CountryListPickState extends State<CountryListPick> {
                         height: 4,
                         margin: const EdgeInsets.only(bottom: 12),
                         decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
+                          color: ThemeColors.greyTextColor,
                           borderRadius: BorderRadius.circular(999),
                         ),
                       ),
@@ -141,7 +141,9 @@ class _CountryListPickState extends State<CountryListPick> {
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Card(
                             elevation: 0,
-                            color: Colors.grey.shade50,
+                            color: ThemeColors.greyTextColor.withValues(
+                              alpha: 0.2,
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -164,7 +166,7 @@ class _CountryListPickState extends State<CountryListPick> {
                                 child: const Icon(
                                   Icons.check,
                                   size: 16,
-                                  color: Colors.white,
+                                  color: ThemeColors.whiteColor,
                                 ),
                               ),
                             ),
@@ -187,7 +189,8 @@ class _CountryListPickState extends State<CountryListPick> {
                                   prefixIcon: const Icon(Icons.search),
                                   hintText: "search".tr,
                                   filled: true,
-                                  fillColor: Colors.grey.shade100,
+                                  fillColor: ThemeColors.greyTextColor
+                                      .withValues(alpha: 0.1),
                                   contentPadding: const EdgeInsets.symmetric(
                                     vertical: 12,
                                     horizontal: 12,
@@ -232,7 +235,7 @@ class _CountryListPickState extends State<CountryListPick> {
                                       child: const Icon(
                                         Icons.check,
                                         size: 16,
-                                        color: Colors.white,
+                                        color: ThemeColors.whiteColor,
                                       ),
                                     )
                                   : null,
@@ -289,7 +292,7 @@ class _CountryListPickState extends State<CountryListPick> {
                       ? ' ${selectedItem!.dialCode} '
                       : '',
                   style: StyleUtils.kTextStyleSize16Weight500(
-                    color: Colors.black,
+                    color: ThemeColors.blackColor,
                   ),
                 ),
               ],

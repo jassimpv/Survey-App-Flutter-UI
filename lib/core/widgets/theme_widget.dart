@@ -17,7 +17,7 @@ class ThemeWidget extends GetView<ThemeController> {
         () => Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.06),
+            color: ThemeColors.whiteColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: ThemeColors.primary.withValues(alpha: 0.10),

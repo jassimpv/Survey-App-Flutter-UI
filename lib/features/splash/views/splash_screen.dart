@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: RepaintBoundary(
               child: LoadingAnimationWidget.staggeredDotsWave(
                 size: 52,
-                color: Colors.white,
+                color: ThemeColors.whiteColor,
               ),
             ),
           ),

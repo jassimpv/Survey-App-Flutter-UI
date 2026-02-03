@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/multiple_choice_answer_format.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/text_choice.dart';
 import 'package:collect/core/extensions/survet_kit/src/result/question/multiple_choice_question_result.dart';
@@ -72,7 +73,7 @@ class _MultipleChoiceAnswerView extends State<MultipleChoiceAnswerView> {
             ),
             Column(
               children: [
-                Divider(color: Colors.grey),
+                Divider(color: ThemeColors.greyTextColor),
                 ..._multipleChoiceAnswer.textChoices
                     .map(
                       (TextChoice tc) => SelectionListTile(
@@ -137,7 +138,7 @@ class _MultipleChoiceAnswerView extends State<MultipleChoiceAnswerView> {
                       ),
                     ),
                   ),
-                  Divider(color: Colors.grey),
+                  Divider(color: ThemeColors.greyTextColor),
                 ],
               ],
             ),

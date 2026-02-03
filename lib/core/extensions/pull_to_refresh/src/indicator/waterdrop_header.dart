@@ -7,6 +7,7 @@
 import "dart:async";
 
 import "package:collect/core/utils/textstyle_input.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/extensions/pull_to_refresh/pull_to_refresh_flutter.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -21,8 +22,12 @@ class WaterDropHeader extends RefreshIndicator {
     this.complete,
     super.completeDuration = const Duration(milliseconds: 600),
     this.failed,
-    this.waterDropColor = Colors.grey,
-    this.idleIcon = const Icon(Icons.autorenew, size: 15, color: Colors.white),
+    this.waterDropColor = ThemeColors.greyTextColor,
+    this.idleIcon = const Icon(
+      Icons.autorenew,
+      size: 15,
+      color: ThemeColors.whiteColor,
+    ),
   }) : super(height: 60, refreshStyle: RefreshStyle.UnFollow);
 
   /// refreshing content
@@ -108,7 +113,7 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Icon(Icons.done, color: Colors.grey),
+              const Icon(Icons.done, color: ThemeColors.greyTextColor),
               Container(width: 15),
               Text(
                 (RefreshLocalizations.of(context)?.currentLocalization ??
@@ -124,7 +129,7 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              const Icon(Icons.close, color: Colors.grey),
+              const Icon(Icons.close, color: ThemeColors.greyTextColor),
               Container(width: 15),
               Text(
                 (RefreshLocalizations.of(context)?.currentLocalization ??

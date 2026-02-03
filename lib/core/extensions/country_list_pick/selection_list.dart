@@ -1,5 +1,6 @@
 import "package:collect/core/extensions/country_list_pick/country_selection_theme.dart";
 import "package:collect/core/extensions/country_list_pick/support/code_country.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 import "package:flutter/services.dart";
@@ -67,10 +68,10 @@ class SelectionListState extends State<SelectionList> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
+      SystemUiOverlayStyle(
+        statusBarColor: ThemeColors.whiteColor,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: Colors.white,
+        systemNavigationBarColor: ThemeColors.whiteColor,
         systemNavigationBarIconBrightness: Brightness.dark,
         statusBarBrightness: !kIsWeb ? Brightness.dark : Brightness.light,
       ),
@@ -80,7 +81,7 @@ class SelectionListState extends State<SelectionList> {
     final Widget scaffold = Scaffold(
       appBar: widget.appBar,
       body: ColoredBox(
-        color: const Color(0xfff4f4f4),
+        color: ThemeColors.whiteColor.withValues(alpha: 0.96),
         child: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints contrainsts) {
             diff = height - contrainsts.biggest.height;
@@ -97,7 +98,7 @@ class SelectionListState extends State<SelectionList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           ColoredBox(
-                            color: Colors.white,
+                            color: ThemeColors.whiteColor,
                             child: TextField(
                               controller: _controller,
                               decoration: InputDecoration(
@@ -116,7 +117,7 @@ class SelectionListState extends State<SelectionList> {
                             ),
                           ),
                           ColoredBox(
-                            color: Colors.white,
+                            color: ThemeColors.whiteColor,
                             child: Material(
                               color: Colors.transparent,
                               child: ListTile(
@@ -127,7 +128,10 @@ class SelectionListState extends State<SelectionList> {
                                 title: Text(widget.initialSelection!.name!),
                                 trailing: const Padding(
                                   padding: EdgeInsets.only(right: 20),
-                                  child: Icon(Icons.check, color: Colors.green),
+                                  child: Icon(
+                                    Icons.check,
+                                    color: ThemeColors.statusGreen,
+                                  ),
                                 ),
                               ),
                             ),
@@ -184,7 +188,7 @@ class SelectionListState extends State<SelectionList> {
 
   Widget getListCountry(CountryCode e) => Container(
     height: 50,
-    color: Colors.white,
+    color: ThemeColors.whiteColor,
     child: Material(
       color: Colors.transparent,
       child: ListTile(
@@ -223,7 +227,8 @@ class SelectionListState extends State<SelectionList> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: index == posSelected
-              ? widget.theme?.alphabetSelectedBackgroundColor ?? Colors.blue
+              ? widget.theme?.alphabetSelectedBackgroundColor ??
+                    ThemeColors.primary
               : Colors.transparent,
           shape: BoxShape.circle,
         ),

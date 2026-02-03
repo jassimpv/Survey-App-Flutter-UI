@@ -14,7 +14,7 @@ class TermsAndConditionScreen extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [ThemeColors.scaffoldColor, Colors.white],
+          colors: [ThemeColors.scaffoldColor, ThemeColors.whiteColor],
         ),
       ),
       child: Column(
@@ -36,7 +36,7 @@ class TermsAndConditionScreen extends StatelessWidget {
     child: Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: ThemeColors.whiteColor,
         borderRadius: BorderRadius.circular(28),
         boxShadow: <BoxShadow>[
           BoxShadow(

@@ -76,7 +76,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                 child: SvgPicture.asset(
                                   AssetUtils.getSvg("logo"),
                                   colorFilter: const ColorFilter.mode(
-                                    Colors.white,
+                                    ThemeColors.whiteColor,
                                     BlendMode.srcIn,
                                   ),
                                   height: logoSize,
@@ -92,11 +92,13 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                 vertical: 30,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: ThemeColors.whiteColor,
                                 borderRadius: BorderRadius.circular(32),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.08),
+                                    color: ThemeColors.blackColor.withValues(
+                                      alpha: 0.08,
+                                    ),
                                     blurRadius: 40,
                                     offset: const Offset(0, 12),
                                   ),
@@ -145,7 +147,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                           child: const Icon(
                                             Icons.lock_open_rounded,
                                             size: 20,
-                                            color: Colors.white,
+                                            color: ThemeColors.whiteColor,
                                           ),
                                         ),
                                         12.widthBox,
@@ -164,7 +166,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                           child: Container(
                                             padding: const EdgeInsets.all(10),
                                             decoration: BoxDecoration(
-                                              color: Colors.white,
+                                              color: ThemeColors.whiteColor,
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                             ),
@@ -221,7 +223,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                         vertical: 8,
                                                       ),
                                                   decoration: BoxDecoration(
-                                                    color: Colors.white,
+                                                    color:
+                                                        ThemeColors.whiteColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                           16,
@@ -305,15 +308,16 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                                         const Icon(
                                                           Icons.refresh,
                                                           size: 18,
-                                                          color: Colors.white,
+                                                          color: ThemeColors
+                                                              .whiteColor,
                                                         ),
                                                         8.widthBox,
                                                         Text(
                                                           "resendOTP".tr,
                                                           style:
                                                               StyleUtils.kTextStyleSize14Weight600(
-                                                                color: Colors
-                                                                    .white,
+                                                                color: ThemeColors
+                                                                    .whiteColor,
                                                               ),
                                                         ),
                                                       ],

@@ -41,8 +41,8 @@ class ThemeColors {
 
   // SHADOWS (used: 3 times)
   static Color get shadow => ThemeService.isDark()
-      ? Colors.black.withValues(alpha: 0.3)
-      : Colors.black.withValues(alpha: 0.08);
+      ? ThemeColors.blackColor.withValues(alpha: 0.3)
+      : ThemeColors.blackColor.withValues(alpha: 0.08);
 
   // DIALOG & MODAL (merged - same background)
   static Color get surfaceOverlay => ThemeService.isDark()

@@ -113,7 +113,7 @@ class FilterBottomSheet extends StatelessWidget {
                       child: Text(
                         "applyFilter".tr,
                         style: StyleUtils.kTextStyleSize18Weight500(
-                          color: Colors.white,
+                          color: ThemeColors.whiteColor,
                         ),
                       ),
                     ),
@@ -137,7 +137,7 @@ class FilterBottomSheet extends StatelessWidget {
             borderRadius: BorderRadius.circular(18),
             border: Border.all(
               color: ThemeService.isDark()
-                  ? Colors.white.withValues(alpha: 0.08)
+                  ? ThemeColors.whiteColor.withValues(alpha: 0.08)
                   : ThemeColors.themeColor.withValues(alpha: 0.2),
             ),
             color: ThemeService.isDark()
@@ -150,7 +150,7 @@ class FilterBottomSheet extends StatelessWidget {
                 CupertinoIcons.calendar,
                 size: 18,
                 color: ThemeService.isDark()
-                    ? Colors.white.withValues(alpha: 0.8)
+                    ? ThemeColors.whiteColor.withValues(alpha: 0.8)
                     : ThemeColors.headingColor.withValues(alpha: 0.7),
               ),
               10.widthBox,
@@ -168,7 +168,7 @@ class FilterBottomSheet extends StatelessWidget {
                           : "end_date".tr),
                 style: StyleUtils.kTextStyleSize14Weight500(
                   color: ThemeService.isDark()
-                      ? Colors.white
+                      ? ThemeColors.whiteColor
                       : ThemeColors.headingColor,
                 ),
               ),

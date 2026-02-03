@@ -24,7 +24,7 @@ class NotificationScreen extends GetView<NotificationsController> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [ThemeColors.scaffoldColor, Colors.white],
+            colors: [ThemeColors.scaffoldColor, ThemeColors.whiteColor],
           ),
         ),
         child: Column(
@@ -120,13 +120,13 @@ class _NotificationItem extends StatelessWidget {
                       ? "Rejected"
                       : "Approved",
                   style: StyleUtils.kTextStyleSize14Weight500(
-                    color: Colors.black,
+                    color: ThemeColors.blackColor,
                   ),
                 ),
                 Text(
                   notifications?.message ?? "",
                   style: StyleUtils.kTextStyleSize14Weight400(
-                    color: Colors.black.withValues(alpha: 0.5),
+                    color: ThemeColors.blackColor.withValues(alpha: 0.5),
                   ),
                 ),
               ],

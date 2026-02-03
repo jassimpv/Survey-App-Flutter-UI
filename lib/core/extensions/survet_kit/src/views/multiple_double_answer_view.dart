@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/multi_double.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/multiple_double_answer_format.dart';
 import 'package:collect/core/extensions/survet_kit/src/result/question/multiple_double_question_result.dart';
@@ -98,7 +99,7 @@ class _MultipleDoubleAnswerViewState extends State<MultipleDoubleAnswerView> {
             ),
             Column(
               children: [
-                Divider(color: Colors.grey),
+                Divider(color: ThemeColors.greyTextColor),
                 ..._multipleDoubleAnswer.hints.asMap().entries.map((
                   MapEntry<int, String> md,
                 ) {

@@ -165,7 +165,9 @@ class _ModernDialogButton extends StatelessWidget {
             text,
             textAlign: TextAlign.center,
             style: StyleUtils.kTextStyleSize16Weight600(
-              color: isSecondary ? ThemeColors.onSurface : Colors.white,
+              color: isSecondary
+                  ? ThemeColors.onSurface
+                  : ThemeColors.whiteColor,
             ),
           ),
         ),

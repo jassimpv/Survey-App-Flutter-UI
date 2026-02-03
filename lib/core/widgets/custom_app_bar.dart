@@ -51,18 +51,21 @@ class CustomAppBar extends StatelessWidget {
                     width: 42,
                     height: 42,
                     decoration: BoxDecoration(
-                      color: Colors.white.withValues(alpha: 0.20),
+                      color: ThemeColors.whiteColor.withValues(alpha: 0.20),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Center(
-                      child: Icon(CupertinoIcons.back, color: Colors.white),
+                      child: Icon(
+                        CupertinoIcons.back,
+                        color: ThemeColors.whiteColor,
+                      ),
                     ),
                   ),
                 ),
               Text(
                 title,
                 style: StyleUtils.kTextStyleSize20Weight600(
-                  color: Colors.white,
+                  color: ThemeColors.whiteColor,
                 ),
               ),
               Row(

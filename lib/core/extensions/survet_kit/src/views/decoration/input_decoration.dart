@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 
 InputDecoration textFieldInputDecoration({String hint = ''}) => InputDecoration(
   contentPadding: const EdgeInsets.only(
@@ -9,11 +10,15 @@ InputDecoration textFieldInputDecoration({String hint = ''}) => InputDecoration(
   ),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.zero),
-    borderSide: BorderSide(color: Colors.black.withValues(alpha: 0.2)),
+    borderSide: BorderSide(
+      color: ThemeColors.blackColor.withValues(alpha: 0.2),
+    ),
   ),
   enabledBorder: OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.zero),
-    borderSide: BorderSide(color: Colors.black.withValues(alpha: 0.2)),
+    borderSide: BorderSide(
+      color: ThemeColors.blackColor.withValues(alpha: 0.2),
+    ),
   ),
   hintText: hint,
 );

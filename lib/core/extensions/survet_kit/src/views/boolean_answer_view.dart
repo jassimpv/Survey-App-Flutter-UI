@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/boolean_answer_format.dart';
 import 'package:collect/core/extensions/survet_kit/src/result/question/boolean_question_result.dart';
 import 'package:collect/core/extensions/survet_kit/src/steps/predefined_steps/question_step.dart';
@@ -72,7 +73,7 @@ class _BooleanAnswerViewState extends State<BooleanAnswerView> {
           ),
           Column(
             children: [
-              Divider(color: Colors.grey),
+              Divider(color: ThemeColors.greyTextColor),
               SelectionListTile(
                 text: _answerFormat.positiveAnswer,
                 onTap: () {

@@ -83,7 +83,7 @@ class _OTPViewState extends State<OTPView> {
               activeColor: Colors.transparent,
               errorBorderColor: ThemeColors.greyLightTextColor,
               inactiveFillColor: ThemeColors.scaffoldColor,
-              selectedFillColor: Colors.white,
+              selectedFillColor: ThemeColors.whiteColor,
               activeFillColor: ThemeColors.whiteColor,
             ),
             enableActiveFill: true,

@@ -26,8 +26,11 @@ class CompletedTask extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: ThemeService.isDark()
-              ? [const Color(0xFF0F1720), const Color(0xFF1A2332)]
-              : [ThemeColors.scaffoldColor, Colors.white],
+              ? [
+                  ThemeColors.surface,
+                  ThemeColors.blackColor.withValues(alpha: 0.1),
+                ]
+              : [ThemeColors.scaffoldColor, ThemeColors.whiteColor],
         ),
       ),
       child: Column(
@@ -48,7 +51,7 @@ class CompletedTask extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: ThemeColors.whiteColor,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
@@ -108,7 +111,10 @@ class CompletedTask extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.filter_list, color: Colors.white),
+                      child: const Icon(
+                        Icons.filter_list,
+                        color: ThemeColors.whiteColor,
+                      ),
                     ),
                   ),
                 ],

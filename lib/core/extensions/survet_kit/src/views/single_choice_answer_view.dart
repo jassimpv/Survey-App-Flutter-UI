@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collect/core/theme/theme_colors.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/single_choice_answer_format.dart';
 import 'package:collect/core/extensions/survet_kit/src/answer_format/text_choice.dart';
 import 'package:collect/core/extensions/survet_kit/src/result/question/single_choice_question_result.dart';
@@ -68,7 +69,7 @@ class _SingleChoiceAnswerViewState extends State<SingleChoiceAnswerView> {
             ),
             Column(
               children: [
-                Divider(color: Colors.grey),
+                Divider(color: ThemeColors.greyTextColor),
                 ..._singleChoiceAnswerFormat.textChoices.map((TextChoice tc) {
                   return SelectionListTile(
                     text: tc.text,

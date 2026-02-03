@@ -18,9 +18,9 @@ class GradientButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(18),
         gradient: ThemeColors.primaryGradient,
-        boxShadow: const <BoxShadow>[
+        boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Color.fromRGBO(16, 24, 40, 0.20),
+            color: ThemeColors.shadow,
             blurRadius: 25,
             offset: Offset(0, 12),
           ),
@@ -29,7 +29,9 @@ class GradientButton extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: StyleUtils.kTextStyleSize18Weight600(color: Colors.white),
+          style: StyleUtils.kTextStyleSize18Weight600(
+            color: ThemeColors.whiteColor,
+          ),
         ),
       ),
     ),

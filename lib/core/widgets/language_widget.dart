@@ -73,14 +73,14 @@ class _LanguageWidegtState extends State<LanguageWidegt>
           height: height,
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.06),
+            color: ThemeColors.whiteColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(999),
             border: Border.all(
               color: ThemeColors.themeColor.withValues(alpha: 0.10),
             ),
-            boxShadow: const <BoxShadow>[
+            boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Color.fromRGBO(16, 24, 40, 0.04),
+                color: ThemeColors.shadow,
                 blurRadius: 8,
                 offset: Offset(0, 2),
               ),
@@ -125,11 +125,11 @@ class _LanguageWidegtState extends State<LanguageWidegt>
                   height: height - 8,
                   padding: const EdgeInsets.all(2),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: ThemeColors.whiteColor,
                     shape: BoxShape.circle,
-                    boxShadow: const <BoxShadow>[
+                    boxShadow: <BoxShadow>[
                       BoxShadow(
-                        color: Color.fromRGBO(16, 24, 40, 0.08),
+                        color: ThemeColors.shadow,
                         blurRadius: 8,
                         offset: Offset(0, 2),
                       ),

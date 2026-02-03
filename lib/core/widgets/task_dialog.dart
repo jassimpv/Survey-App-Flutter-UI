@@ -27,11 +27,11 @@ class TaskDialog extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: ThemeColors.whiteColor,
                   borderRadius: BorderRadius.circular(32),
                   boxShadow: <BoxShadow>[
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.15),
+                      color: ThemeColors.blackColor.withValues(alpha: 0.15),
                       blurRadius: 45,
                       offset: const Offset(0, 20),
                     ),
@@ -106,15 +106,15 @@ class TaskDialog extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             gradient: ThemeColors.primaryGradient,
-            boxShadow: const <BoxShadow>[
+            boxShadow: <BoxShadow>[
               BoxShadow(
-                color: Color.fromRGBO(17, 24, 39, 0.35),
+                color: ThemeColors.shadow,
                 blurRadius: 20,
                 offset: Offset(0, 10),
               ),
             ],
           ),
-          child: const Icon(Icons.close, color: Colors.white),
+          child: const Icon(Icons.close, color: ThemeColors.whiteColor),
         ),
       ),
     ],
@@ -162,13 +162,13 @@ class TaskDialog extends StatelessWidget {
                       onTap: () =>
                           Utils.openMap(<String?>["25.2048", "55.2708"]),
                       icon: Icons.location_on,
-                      iconColor: Colors.white,
+                      iconColor: ThemeColors.whiteColor,
                     ),
                     12.widthBox,
                     _buildActionIcon(
                       onTap: () => Utils.dail("1234567890"),
                       icon: Icons.call,
-                      iconColor: Colors.white,
+                      iconColor: ThemeColors.whiteColor,
                     ),
                   ],
                 ),
@@ -222,7 +222,7 @@ class TaskDialog extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Colors.white,
+                        color: ThemeColors.whiteColor,
                       ),
                       child: Row(
                         children: <Widget>[
@@ -281,11 +281,11 @@ class TaskDialog extends StatelessWidget {
             height: 56,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
+              color: ThemeColors.whiteColor,
               border: Border.all(color: ThemeColors.themeColor, width: 1.5),
-              boxShadow: const <BoxShadow>[
+              boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Color.fromRGBO(15, 23, 42, 0.08),
+                  color: ThemeColors.shadow,
                   blurRadius: 18,
                   offset: Offset(0, 8),
                 ),
@@ -313,9 +313,9 @@ class TaskDialog extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               gradient: ThemeColors.primaryGradient,
-              boxShadow: const <BoxShadow>[
+              boxShadow: <BoxShadow>[
                 BoxShadow(
-                  color: Color.fromRGBO(15, 23, 42, 0.25),
+                  color: ThemeColors.shadow,
                   blurRadius: 25,
                   offset: Offset(0, 12),
                 ),
@@ -325,7 +325,7 @@ class TaskDialog extends StatelessWidget {
               child: Text(
                 "Record New Collection",
                 style: StyleUtils.kTextStyleSize16Weight600(
-                  color: Colors.white,
+                  color: ThemeColors.whiteColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -349,9 +349,9 @@ class TaskDialog extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         gradient: ThemeColors.primaryGradient,
-        boxShadow: const <BoxShadow>[
+        boxShadow: <BoxShadow>[
           BoxShadow(
-            color: Color.fromRGBO(15, 23, 42, 0.15),
+            color: ThemeColors.shadow,
             blurRadius: 18,
             offset: Offset(0, 8),
           ),

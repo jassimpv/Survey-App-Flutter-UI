@@ -29,7 +29,7 @@ class HomeHeader extends GetView<HomeController> {
         boxShadow: [
           BoxShadow(
             color: ThemeService.isDark()
-                ? Colors.black.withValues(alpha: 0.4)
+                ? ThemeColors.blackColor.withValues(alpha: 0.4)
                 : ThemeColors.themeColor.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 8),
@@ -85,7 +85,7 @@ class HomeHeader extends GetView<HomeController> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.06),
+            color: ThemeColors.whiteColor.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
@@ -105,7 +105,7 @@ class HomeHeader extends GetView<HomeController> {
       shape: BoxShape.circle,
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.15),
+          color: ThemeColors.blackColor.withValues(alpha: 0.15),
           blurRadius: 12,
           offset: const Offset(0, 4),
         ),
@@ -139,7 +139,7 @@ class HomeHeader extends GetView<HomeController> {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: ThemeColors.blackColor.withValues(alpha: 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

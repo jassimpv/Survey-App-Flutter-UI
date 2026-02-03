@@ -5,6 +5,7 @@
  */
 
 import "package:collect/core/utils/textstyle_input.dart";
+import "package:collect/core/theme/theme_colors.dart";
 import "package:collect/core/extensions/pull_to_refresh/pull_to_refresh_flutter.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -31,13 +32,19 @@ class ClassicFooter extends LoadIndicator {
     this.idleText,
     this.failedText,
     this.canLoadingText,
-    this.failedIcon = const Icon(Icons.error, color: Colors.grey),
+    this.failedIcon = const Icon(Icons.error, color: ThemeColors.greyTextColor),
     this.iconPos = IconPosition.left,
     this.spacing = 15.0,
     this.completeDuration = const Duration(milliseconds: 300),
     this.loadingIcon,
-    this.canLoadingIcon = const Icon(Icons.autorenew, color: Colors.grey),
-    this.idleIcon = const Icon(Icons.arrow_upward, color: Colors.grey),
+    this.canLoadingIcon = const Icon(
+      Icons.autorenew,
+      color: ThemeColors.greyTextColor,
+    ),
+    this.idleIcon = const Icon(
+      Icons.arrow_upward,
+      color: ThemeColors.greyTextColor,
+    ),
   });
   final String? idleText;
   final String? loadingText;
