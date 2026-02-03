@@ -1,5 +1,6 @@
 import 'package:collect/controller/theme_controller.dart';
 import 'package:collect/utils/colors_utils.dart';
+import 'package:collect/utils/textstyle_input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,11 +34,7 @@ class ThemeWidget extends GetView<ThemeController> {
               8.widthBox,
               Text(
                 controller.getThemeName(controller.selectedMode.value),
-                style: TextStyle(
-                  color: ColorUtils.themeColor,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: StyleUtils.kTextStyleThemeMode(),
               ),
               8.widthBox,
               Icon(
@@ -56,7 +53,7 @@ class ThemeWidget extends GetView<ThemeController> {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoActionSheet(
-        title: Text('theme'.tr),
+        title: Text('theme'.tr, style: StyleUtils.kTextStyleDialogTitle()),
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
             isDefaultAction: controller.selectedMode.value == ThemeMode.light,
@@ -64,7 +61,12 @@ class ThemeWidget extends GetView<ThemeController> {
               children: <Widget>[
                 Icon(Icons.light_mode_rounded),
                 12.widthBox,
-                Expanded(child: Text('light'.tr)),
+                Expanded(
+                  child: Text(
+                    'light'.tr,
+                    style: StyleUtils.kTextStyleMenuItemLabel(),
+                  ),
+                ),
               ],
             ),
             onPressed: () {
@@ -78,7 +80,12 @@ class ThemeWidget extends GetView<ThemeController> {
               children: <Widget>[
                 Icon(Icons.dark_mode_rounded),
                 12.widthBox,
-                Expanded(child: Text('dark'.tr)),
+                Expanded(
+                  child: Text(
+                    'dark'.tr,
+                    style: StyleUtils.kTextStyleMenuItemLabel(),
+                  ),
+                ),
               ],
             ),
             onPressed: () {
@@ -92,7 +99,12 @@ class ThemeWidget extends GetView<ThemeController> {
               children: <Widget>[
                 Icon(Icons.brightness_auto_rounded),
                 12.widthBox,
-                Expanded(child: Text('system'.tr)),
+                Expanded(
+                  child: Text(
+                    'system'.tr,
+                    style: StyleUtils.kTextStyleMenuItemLabel(),
+                  ),
+                ),
               ],
             ),
             onPressed: () {
@@ -103,7 +115,7 @@ class ThemeWidget extends GetView<ThemeController> {
         ],
         cancelButton: CupertinoActionSheetAction(
           isDestructiveAction: true,
-          child: Text('cancel'.tr),
+          child: Text('cancel'.tr, style: StyleUtils.kTextStyleMenuItemLabel()),
           onPressed: () {
             Navigator.pop(context);
           },

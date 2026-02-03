@@ -173,7 +173,7 @@ class StyleUtils {
       TextStyle(
         color: color,
         fontSize: 18,
-        fontFamily: "Popins",
+        fontFamily: "Outfit",
         fontWeight: FontWeight.w500,
       );
 
@@ -301,4 +301,92 @@ class StyleUtils {
                 ),
               ],
       );
+
+  // OTP & Input Styles
+  static TextStyle kTextStyleOtpPasted() => TextStyle(
+    color: Colors.green.shade600,
+    fontWeight: FontWeight.bold,
+    fontFamily: "Outfit",
+  );
+
+  static TextStyle kTextStyleOtpInput({double fontSize = 16}) => TextStyle(
+    fontSize: fontSize,
+    height: 1.2,
+    fontWeight: FontWeight.w600,
+    fontFamily: "Outfit",
+  );
+
+  // Theme Widget Style
+  static TextStyle kTextStyleThemeMode() => TextStyle(
+    color: ColorUtils.themeColor,
+    fontSize: 13,
+    fontWeight: FontWeight.w500,
+    fontFamily: "Outfit",
+  );
+
+  // Language Widget Style
+  static TextStyle kTextStyleLanguageBadge() => TextStyle(
+    color: ColorUtils.whiteColor.withValues(alpha: 0.9),
+    fontSize: 10,
+    fontWeight: FontWeight.w700,
+    fontFamily: "Outfit",
+  );
+
+  // Terms and Conditions Title
+  static TextStyle kTextStyleTermsTitle() => TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    fontFamily: "Outfit",
+    color: ColorUtils.headingColor,
+  );
+
+  // Date Answer View Style
+  static TextStyle kTextStyleDateDisplay() =>
+      TextStyle(fontSize: 28.0, color: Colors.white, fontFamily: "Outfit");
+
+  // Survey App Bar Style
+  static TextStyle kTextStyleSurveyAppBar() =>
+      TextStyle(color: ColorUtils.whiteColor, fontFamily: "Outfit");
+
+  // Step View Style
+  static TextStyle kTextStyleStepView({
+    Color color = ColorUtils.headingColor,
+  }) => TextStyle(
+    color: color,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    fontFamily: "Outfit",
+  );
+
+  // Scale Answer View Styles
+  static TextStyle kTextStyleScaleAnswer() =>
+      TextStyle(fontSize: 16.0, fontFamily: "Outfit");
+
+  // Pull to Refresh Indicator Style
+  static TextStyle kTextStyleRefreshIndicator() =>
+      const TextStyle(color: Colors.grey, fontFamily: "Outfit");
+
+  // Dialog & Menu Title Style
+  static TextStyle kTextStyleDialogTitle() => TextStyle(
+    color: ColorUtils.headingColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    fontFamily: "Outfit",
+  );
+
+  // Menu Item Style
+  static TextStyle kTextStyleMenuItemLabel() => TextStyle(
+    color: ColorUtils.headingColor,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    fontFamily: "Outfit",
+  );
+
+  // Body Text Style for content/description
+  static TextStyle kTextStyleBodyText() => TextStyle(
+    color: ColorUtils.themeTextColor,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    fontFamily: "Outfit",
+  );
 }

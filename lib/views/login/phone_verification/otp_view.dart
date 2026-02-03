@@ -1,5 +1,6 @@
 import "dart:async";
 import "package:collect/utils/colors_utils.dart";
+import "package:collect/utils/textstyle_input.dart";
 import "package:flutter/gestures.dart";
 import "package:flutter/material.dart";
 import "package:pin_code_fields/pin_code_fields.dart";
@@ -66,10 +67,7 @@ class _OTPViewState extends State<OTPView> {
           width: totalWidgetWidth,
           child: PinCodeTextField(
             appContext: context,
-            pastedTextStyle: TextStyle(
-              color: Colors.green.shade600,
-              fontWeight: FontWeight.bold,
-            ),
+            pastedTextStyle: StyleUtils.kTextStyleOtpPasted(),
             length: 4,
             obscureText: false,
             animationType: AnimationType.fade,
@@ -90,11 +88,7 @@ class _OTPViewState extends State<OTPView> {
             enableActiveFill: true,
             cursorColor: ColorUtils.themeColor,
             animationDuration: const Duration(milliseconds: 300),
-            textStyle: TextStyle(
-              fontSize: fontSize,
-              height: 1.2,
-              fontWeight: FontWeight.w600,
-            ),
+            textStyle: StyleUtils.kTextStyleOtpInput(fontSize: fontSize),
             backgroundColor: Colors.transparent,
             errorAnimationController: errorController,
             controller: _textEditingController,

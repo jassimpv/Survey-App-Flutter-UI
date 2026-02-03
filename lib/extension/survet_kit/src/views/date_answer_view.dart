@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:collect/utils/textstyle_input.dart';
 import 'package:collect/extension/survet_kit/src/answer_format/date_answer_format.dart';
 import 'package:collect/extension/survet_kit/src/result/question/date_question_result.dart';
 import 'package:collect/extension/survet_kit/src/steps/predefined_steps/question_step.dart';
@@ -100,7 +101,7 @@ class _DateAnswerViewState extends State<DateAnswerView> {
                 bottom: 8.0,
                 child: Text(
                   _dateFormat.format(_result!),
-                  style: TextStyle(fontSize: 28.0, color: Colors.white),
+                  style: StyleUtils.kTextStyleDateDisplay(),
                 ),
               ),
             ],

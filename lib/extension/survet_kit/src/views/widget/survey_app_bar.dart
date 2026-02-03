@@ -1,4 +1,5 @@
 import 'package:collect/utils/colors_utils.dart';
+import 'package:collect/utils/textstyle_input.dart';
 import 'package:flutter/material.dart';
 import 'package:collect/extension/survet_kit/src/configuration/app_bar_configuration.dart';
 import 'package:collect/extension/survet_kit/src/controller/survey_controller.dart';
@@ -38,7 +39,7 @@ class SurveyAppBar extends StatelessWidget {
                 appBarConfiguration.trailing ??
                 Text(
                   context.read<Map<String, String>?>()?['cancel'] ?? 'Cancel',
-                  style: TextStyle(color: ColorUtils.whiteColor),
+                  style: StyleUtils.kTextStyleSurveyAppBar(),
                 ),
             onPressed: () => surveyController.closeSurvey(context),
           ),

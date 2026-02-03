@@ -278,7 +278,7 @@ class _AddCollectionDataState extends State<AddCollectionData> {
           TextButton.icon(
             onPressed: _signatureController.clear,
             icon: const Icon(CupertinoIcons.refresh, size: 18),
-            label: const Text("Reset"),
+            label: Text("Reset", style: StyleUtils.kTextStyleSize14Weight600()),
           ),
           const Spacer(),
           Text(

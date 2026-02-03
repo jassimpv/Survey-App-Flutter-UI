@@ -6,6 +6,7 @@
 
 import "dart:async";
 
+import "package:collect/utils/textstyle_input.dart";
 import "package:collect/extension/pull_to_refresh/pull_to_refresh_flutter.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -14,7 +15,6 @@ import "package:flutter/material.dart"
 
 /// QQ ios refresh  header effect
 class WaterDropHeader extends RefreshIndicator {
-
   const WaterDropHeader({
     super.key,
     this.refresh,
@@ -24,6 +24,7 @@ class WaterDropHeader extends RefreshIndicator {
     this.waterDropColor = Colors.grey,
     this.idleIcon = const Icon(Icons.autorenew, size: 15, color: Colors.white),
   }) : super(height: 60, refreshStyle: RefreshStyle.UnFollow);
+
   /// refreshing content
   final Widget? refresh;
 
@@ -113,7 +114,7 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
                 (RefreshLocalizations.of(context)?.currentLocalization ??
                         EnRefreshString())
                     .refreshCompleteText!,
-                style: const TextStyle(color: Colors.grey),
+                style: StyleUtils.kTextStyleRefreshIndicator(),
               ),
             ],
           );
@@ -129,7 +130,7 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
                 (RefreshLocalizations.of(context)?.currentLocalization ??
                         EnRefreshString())
                     .refreshFailedText!,
-                style: const TextStyle(color: Colors.grey),
+                style: StyleUtils.kTextStyleRefreshIndicator(),
               ),
             ],
           );
@@ -186,7 +187,6 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
 }
 
 class _QqPainter extends CustomPainter {
-
   _QqPainter({this.color, this.listener}) : super(repaint: listener);
   final Color? color;
   final Animation<double>? listener;

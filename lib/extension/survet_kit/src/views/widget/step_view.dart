@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collect/utils/textstyle_input.dart';
 import 'package:provider/provider.dart';
 import 'package:collect/extension/survet_kit/src/controller/survey_controller.dart';
 import 'package:collect/extension/survet_kit/src/result/question_result.dart';
@@ -58,7 +59,7 @@ class StepView extends StatelessWidget {
                       context.read<Map<String, String>?>()?['next'] ??
                           step.buttonText ??
                           'Next',
-                      style: TextStyle(
+                      style: StyleUtils.kTextStyleStepView(
                         color: isValid
                             ? Theme.of(context).primaryColor
                             : Colors.grey,

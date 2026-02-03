@@ -4,6 +4,7 @@
  *   createTime:2018-05-14 17:39
  */
 
+import "package:collect/utils/textstyle_input.dart";
 import "package:collect/extension/pull_to_refresh/pull_to_refresh_flutter.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/foundation.dart";
@@ -17,13 +18,13 @@ enum IconPosition { left, right, top, bottom }
 typedef OuterBuilder = Widget Function(Widget child);
 
 class ClassicFooter extends LoadIndicator {
-  const ClassicFooter({
+  ClassicFooter({
     super.key,
     super.onClick,
     super.loadStyle,
     super.height,
     this.outerBuilder,
-    this.textStyle = const TextStyle(color: Colors.grey),
+    this.textStyle,
     this.loadingText,
     this.noDataText,
     this.noMoreIcon,
@@ -70,7 +71,7 @@ class ClassicFooter extends LoadIndicator {
 
   final IconPosition iconPos;
 
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// notice that ,this attrs only works for LoadStyle.ShowWhenLoading
   final Duration completeDuration;
@@ -112,7 +113,7 @@ class _ClassicFooterState extends LoadIndicatorState<ClassicFooter> {
           : LoadStatus.canLoading == mode
           ? widget.canLoadingText ?? strings.canLoadingText!
           : widget.idleText ?? strings.idleLoadingText!,
-      style: widget.textStyle,
+      style: widget.textStyle ?? StyleUtils.kTextStyleRefreshIndicator(),
     );
   }
 

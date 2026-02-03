@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:collect/utils/textstyle_input.dart';
 import 'package:collect/extension/survet_kit/src/answer_format/scale_answer_format.dart';
 import 'package:collect/extension/survet_kit/src/result/question/scale_question_result.dart';
 import 'package:collect/extension/survet_kit/src/steps/predefined_steps/question_step.dart';
@@ -88,7 +89,7 @@ class _ScaleAnswerViewState extends State<ScaleAnswerView> {
                           Expanded(
                             child: Text(
                               _scaleAnswerFormat.minimumValueDescription,
-                              style: TextStyle(fontSize: 16.0),
+                              style: StyleUtils.kTextStyleScaleAnswer(),
                               maxLines: 6,
                               overflow: TextOverflow.ellipsis,
                               textDirection: TextDirection.ltr,
@@ -99,7 +100,7 @@ class _ScaleAnswerViewState extends State<ScaleAnswerView> {
                           Expanded(
                             child: Text(
                               _scaleAnswerFormat.maximumValueDescription,
-                              style: TextStyle(fontSize: 16.0),
+                              style: StyleUtils.kTextStyleScaleAnswer(),
                               maxLines: 6,
                               overflow: TextOverflow.ellipsis,
                               textDirection: TextDirection.ltr,

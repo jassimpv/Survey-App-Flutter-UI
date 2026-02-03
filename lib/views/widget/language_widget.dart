@@ -1,4 +1,5 @@
 import 'package:collect/utils/colors_utils.dart';
+import 'package:collect/utils/textstyle_input.dart';
 import 'package:collect/utils/transaltion_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -102,11 +103,7 @@ class _LanguageWidegtState extends State<LanguageWidegt>
                         curve: Curves.easeInOut,
                         child: Text(
                           _isEnglish ? 'EN' : 'AR',
-                          style: TextStyle(
-                            color: ColorUtils.whiteColor.withValues(alpha: 0.9),
-                            fontSize: 10,
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: StyleUtils.kTextStyleLanguageBadge(),
                         ),
                       ),
                     ),
