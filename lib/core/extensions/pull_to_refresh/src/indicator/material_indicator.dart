@@ -24,6 +24,7 @@ class MaterialClassicHeader extends RefreshIndicator {
     super.offset,
     this.distance = 50.0,
     this.backgroundColor,
+    this.backgroundGradient,
   }) : super(refreshStyle: RefreshStyle.Front);
 
   /// see flutter RefreshIndicator documents,the meaning same with that
@@ -40,6 +41,9 @@ class MaterialClassicHeader extends RefreshIndicator {
 
   /// see flutter RefreshIndicator documents,the meaning same with that
   final Color? backgroundColor;
+
+  /// Gradient background for the refresh indicator
+  final Gradient? backgroundGradient;
 
   @override
   State<StatefulWidget> createState() => _MaterialClassicHeaderState();
@@ -179,6 +183,7 @@ class WaterDropMaterialHeader extends MaterialClassicHeader {
     super.semanticsValue,
     Color super.color = Colors.white,
     super.backgroundColor,
+    super.backgroundGradient,
   }) : super(height: 80);
 
   @override

@@ -8,7 +8,6 @@ import "package:flutter/foundation.dart";
 import "package:flutter/material.dart";
 
 class RefreshLocalizations {
-
   RefreshLocalizations(this.locale);
   final Locale locale;
 
@@ -26,6 +25,7 @@ class RefreshLocalizations {
     "sv": SvRefreshString(),
     "pt": PtRefreshString(),
     "ko": KrRefreshString(),
+    "ar": ArRefreshString(),
   };
 
   RefreshString? get currentLocalization {
@@ -38,7 +38,8 @@ class RefreshLocalizations {
   static const RefreshLocalizationsDelegate delegate =
       RefreshLocalizationsDelegate();
 
-  static RefreshLocalizations? of(BuildContext context) => Localizations.of(context, RefreshLocalizations);
+  static RefreshLocalizations? of(BuildContext context) =>
+      Localizations.of(context, RefreshLocalizations);
 }
 
 class RefreshLocalizationsDelegate
@@ -47,25 +48,25 @@ class RefreshLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) => <String>[
-      "en",
-      "zh",
-      "fr",
-      "ru",
-      "uk",
-      "ja",
-      "it",
-      "de",
-      "ko",
-      "pt",
-      "sv",
-      "nl",
-      "es",
-    ].contains(locale.languageCode);
+    "en",
+    "zh",
+    "fr",
+    "ru",
+    "uk",
+    "ja",
+    "it",
+    "de",
+    "ko",
+    "pt",
+    "sv",
+    "nl",
+    "es",
+    "ar",
+  ].contains(locale.languageCode);
 
   @override
-  Future<RefreshLocalizations> load(Locale locale) => SynchronousFuture<RefreshLocalizations>(
-      RefreshLocalizations(locale),
-    );
+  Future<RefreshLocalizations> load(Locale locale) =>
+      SynchronousFuture<RefreshLocalizations>(RefreshLocalizations(locale));
 
   @override
   bool shouldReload(LocalizationsDelegate<RefreshLocalizations> old) => false;
@@ -573,4 +574,40 @@ class KrRefreshString implements RefreshString {
 
   @override
   String? refreshingText = "새로 고침 중…";
+}
+
+/// Arabic
+class ArRefreshString implements RefreshString {
+  @override
+  String? canLoadingText = "حرر لتحميل المزيد";
+
+  @override
+  String? canRefreshText = "حرر لتحديث البيانات";
+
+  @override
+  String? canTwoLevelText = "حرر للدخول للمستوى الثاني";
+
+  @override
+  String? idleLoadingText = "اسحب لأعلى لتحميل المزيد";
+
+  @override
+  String? idleRefreshText = "اسحب لأسفل لتحديث البيانات";
+
+  @override
+  String? loadFailedText = "فشل التحميل";
+
+  @override
+  String? loadingText = "جاري التحميل…";
+
+  @override
+  String? noMoreText = "لا توجد بيانات أخرى";
+
+  @override
+  String? refreshCompleteText = "تم التحديث بنجاح";
+
+  @override
+  String? refreshFailedText = "فشل التحديث";
+
+  @override
+  String? refreshingText = "جاري التحديث…";
 }

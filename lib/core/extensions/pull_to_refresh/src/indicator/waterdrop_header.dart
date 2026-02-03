@@ -110,34 +110,42 @@ class _WaterDropHeaderState extends RefreshIndicatorState<WaterDropHeader>
     } else if (mode == RefreshStatus.completed) {
       child =
           widget.complete ??
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Icon(Icons.done, color: ThemeColors.greyTextColor),
-              Container(width: 15),
-              Text(
-                (RefreshLocalizations.of(context)?.currentLocalization ??
-                        EnRefreshString())
-                    .refreshCompleteText!,
-                style: StyleUtils.kTextStyleRefreshIndicator(),
-              ),
-            ],
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Icon(Icons.done, color: ThemeColors.greyTextColor),
+                const SizedBox(width: 15),
+                Text(
+                  (RefreshLocalizations.of(context)?.currentLocalization ??
+                          EnRefreshString())
+                      .refreshCompleteText!,
+                  style: StyleUtils.kTextStyleRefreshIndicator(),
+                ),
+              ],
+            ),
           );
     } else if (mode == RefreshStatus.failed) {
       child =
           widget.failed ??
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Icon(Icons.close, color: ThemeColors.greyTextColor),
-              Container(width: 15),
-              Text(
-                (RefreshLocalizations.of(context)?.currentLocalization ??
-                        EnRefreshString())
-                    .refreshFailedText!,
-                style: StyleUtils.kTextStyleRefreshIndicator(),
-              ),
-            ],
+          Directionality(
+            textDirection: TextDirection.ltr,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Icon(Icons.close, color: ThemeColors.greyTextColor),
+                const SizedBox(width: 15),
+                Text(
+                  (RefreshLocalizations.of(context)?.currentLocalization ??
+                          EnRefreshString())
+                      .refreshFailedText!,
+                  style: StyleUtils.kTextStyleRefreshIndicator(),
+                ),
+              ],
+            ),
           );
     } else if (mode == RefreshStatus.idle || mode == RefreshStatus.canRefresh) {
       return FadeTransition(

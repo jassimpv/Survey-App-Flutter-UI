@@ -25,82 +25,88 @@ class DashboardScreen extends GetView<HomeController> {
       children: <Widget>[
         const HomeHeader(),
         Expanded(
-          child: SmartRefresher(
-            header: WaterDropMaterialHeader(
-              backgroundColor: ThemeColors.success,
-              color: ThemeColors.onPrimary,
-            ),
-            controller: refreshController,
-            onRefresh: () {
-              Future.delayed(
-                const Duration(seconds: 1),
-                refreshController.refreshCompleted,
-              );
-            },
-            footer: const WaterDropHeader(),
-            onLoading: () {},
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    20.heightBox,
-                    HomeStatusView(
-                      upcomingCount: Complete(todayCount: 10, totalCount: 20),
-                      completedCount: Complete(todayCount: 10, totalCount: 20),
-                    ),
-                    24.heightBox,
-                    _label("Near By".tr),
-                    12.heightBox,
-                    TaskCard(
-                      bookingData: controller.data[1],
-                      isNext: true,
-                      currentStatus: "next",
-                    ),
-                    // 24.heightBox,
-                    // _label("upcomingTasks".tr),
-                    12.heightBox,
-                    if (controller.data.isNotEmpty) ...<Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: ThemeColors.cardBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              color: ThemeColors.primary.withValues(
-                                alpha: 0.08,
-                              ),
-                              blurRadius: 20,
-                              offset: const Offset(0, 4),
-                              spreadRadius: 0,
-                            ),
-                          ],
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: SmartRefresher(
+              header: WaterDropMaterialHeader(
+                backgroundColor: ThemeColors.success,
+                color: ThemeColors.onPrimary,
+              ),
+              controller: refreshController,
+              onRefresh: () {
+                Future.delayed(
+                  const Duration(seconds: 1),
+                  refreshController.refreshCompleted,
+                );
+              },
+              footer: const WaterDropHeader(),
+              onLoading: () {},
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      20.heightBox,
+                      HomeStatusView(
+                        upcomingCount: Complete(todayCount: 10, totalCount: 20),
+                        completedCount: Complete(
+                          todayCount: 10,
+                          totalCount: 20,
                         ),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.data.length,
-                          padding: const EdgeInsets.all(12),
-                          itemBuilder: (BuildContext context, int index) =>
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 12),
-                                child: TaskCard(
-                                  bookingData: controller.data[index],
-                                  isFromList: true,
-                                  currentStatus: "upcoming",
+                      ),
+                      24.heightBox,
+                      _label("Near By".tr),
+                      12.heightBox,
+                      TaskCard(
+                        bookingData: controller.data[1],
+                        isNext: true,
+                        currentStatus: "next",
+                      ),
+                      // 24.heightBox,
+                      // _label("upcomingTasks".tr),
+                      12.heightBox,
+                      if (controller.data.isNotEmpty) ...<Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: ThemeColors.cardBackground,
+                            boxShadow: [
+                              BoxShadow(
+                                color: ThemeColors.primary.withValues(
+                                  alpha: 0.08,
                                 ),
+                                blurRadius: 20,
+                                offset: const Offset(0, 4),
+                                spreadRadius: 0,
                               ),
+                            ],
+                          ),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: controller.data.length,
+                            padding: const EdgeInsets.all(12),
+                            itemBuilder: (BuildContext context, int index) =>
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 12),
+                                  child: TaskCard(
+                                    bookingData: controller.data[index],
+                                    isFromList: true,
+                                    currentStatus: "upcoming",
+                                  ),
+                                ),
+                          ),
                         ),
-                      ),
-                    ] else
-                      NoData(
-                        text: "noUpcomingTrip".tr,
-                        subText: "noUpcomingTripsPlannedYet".tr,
-                        withImage: true,
-                      ),
-                    24.heightBox,
-                  ],
+                      ] else
+                        NoData(
+                          text: "noUpcomingTrip".tr,
+                          subText: "noUpcomingTripsPlannedYet".tr,
+                          withImage: true,
+                        ),
+                      24.heightBox,
+                    ],
+                  ),
                 ),
               ),
             ),

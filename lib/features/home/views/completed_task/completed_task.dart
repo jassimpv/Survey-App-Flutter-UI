@@ -12,6 +12,8 @@ import "package:flutter/material.dart";
 import "package:get/get.dart";
 import "package:intl/intl.dart";
 
+import "tabview_widget.dart";
+
 class CompletedTask extends StatelessWidget {
   CompletedTask({super.key});
 
@@ -38,12 +40,12 @@ class CompletedTask extends StatelessWidget {
         children: <Widget>[
           CustomAppBar(
             title: "Collection Report".tr,
-            // tabBar: Obx(
-            //   () => CompletedListTabView(
-            //     selectedIndex: controller.selectedTab.value,
-            //     onTabSelect: (int tabIndex) {},
-            //   ),
-            // ),
+            tabBar: Obx(
+              () => CompletedListTabView(
+                selectedIndex: controller.selectedTab.value,
+                onTabSelect: (int tabIndex) {},
+              ),
+            ),
           ),
           16.heightBox,
           Padding(
