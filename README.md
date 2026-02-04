@@ -29,15 +29,128 @@ A new Flutter project.
 
 Uses the [Outfit](https://fonts.google.com/specimen/Outfit) font family with multiple weights.
 
+## Project Structure
+
+```
+lib/
+├── main.dart              # Application entry point
+├── routes.dart            # Route definitions
+├── core/                  # Core functionality shared across features
+│   ├── constants/         # App-wide constants
+│   ├── extensions/        # Dart/Flutter extensions
+│   ├── localization/      # Localization setup
+│   ├── models/            # Shared data models
+│   ├── theme/             # Theme colors and service
+│   ├── utils/             # Utility functions and helpers
+│   └── widgets/           # Reusable UI widgets (BottomNavigationView, etc.)
+├── features/              # Feature modules
+│   ├── initial_bindings.dart  # GetX bindings initialization
+│   ├── home/              # Home feature
+│   ├── login/             # Login feature
+│   ├── profile/           # Profile feature
+│   ├── notifications/     # Notifications feature
+│   ├── collection_data/   # Data collection feature
+│   └── splash/            # Splash screen feature
+└── test/                  # Tests
+```
+
+## State Management with GetX
+
+This project uses **GetX** for state management, dependency injection, and navigation. Key patterns include:
+
+### Controllers
+
+Controllers extend `GetxController` and manage business logic:
+
+```dart
+class MyController extends GetxController {
+  final RxInt count = 0.obs;
+
+  void increment() => count.value++;
+}
+```
+
+### Bindings
+
+Bindings register controllers and dependencies:
+
+```dart
+class MyBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(MyController());
+  }
+}
+```
+
+### Reactive UI
+
+Use `Obx()` or `GetBuilder()` to rebuild only when observables change:
+
+```dart
+Obx(() => Text('Count: ${controller.count}')),
+```
+
+### Navigation
+
+Simple, type-safe navigation:
+
+```dart
+Get.to(() => const HomePage());
+Get.offAll(() => const SplashScreen());
+```
+
+## Components
+
+### BottomNavigationView
+
+A custom bottom navigation bar with GetX-based state management featuring:
+
+- Smooth animations (slide, fade, scale transitions)
+- Reactive selected state
+- Pressure/pointer event handling
+- Gradient styling with theme support
+
+**Usage:**
+
+```dart
+BottomNavigationView(
+  selectedIndex: 0,
+  onItemClick: (index) => handleNavigation(index),
+)
+```
+
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. **Install Flutter**: Ensure Flutter is installed on your system.
 
-A few resources to get you started if this is your first Flutter project:
+2. **Clone the repository**:
+
+   ```bash
+   git clone <repository-url>
+   cd Survey-App-Flutter-UI
+   ```
+
+3. **Install dependencies**:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. **Run the app**:
+
+   ```bash
+   flutter run
+   ```
+
+5. **Run tests**:
+   ```bash
+   flutter test
+   ```
+
+For more information on getting started with Flutter:
 
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter Documentation](https://docs.flutter.dev/)
+- [GetX Documentation](https://github.com/jonataslaw/getx)

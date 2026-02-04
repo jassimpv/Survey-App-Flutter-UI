@@ -142,12 +142,14 @@ class _PressableController extends GetxController {
 }
 
 class _Pressable extends StatelessWidget {
-  const _Pressable({required this.child});
+  _Pressable({required this.child, String? tag})
+    : tag = tag ?? UniqueKey().toString();
   final Widget child;
+  final String tag;
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(_PressableController());
+    final controller = Get.put(_PressableController(), tag: tag);
     return Listener(
       behavior: HitTestBehavior.translucent,
       onPointerDown: controller.onPointerDown,
