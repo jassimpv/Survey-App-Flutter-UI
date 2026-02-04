@@ -21,69 +21,61 @@ class DashboardScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(color: ThemeColors.scaffoldColor),
-    child: Column(
-      children: <Widget>[
-        const HomeHeader(),
-        Expanded(
+    child: CustomScrollView(
+      physics: const BouncingScrollPhysics(),
+      slivers: <Widget>[
+        SliverAppBar(
+          stretch: true,
+          onStretchTrigger: () async {},
+          pinned: true,
+          floating: false,
+          elevation: 0,
+          backgroundColor: ThemeColors.scaffoldColor,
+          flexibleSpace: FlexibleSpaceBar(background: HomeHeader()),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(44),
+            child: SizedBox.shrink(),
+          ),
+        ),
+        SliverToBoxAdapter(
           child: Directionality(
             textDirection: TextDirection.ltr,
-            child: SmartRefresher(
-              header: WaterDropMaterialHeader(
-                backgroundColor: ThemeColors.refreshIndicatorColor,
-                color: ThemeColors.onPrimary,
-              ),
-              controller: refreshController,
-              onRefresh: () {
-                Future.delayed(
-                  const Duration(seconds: 1),
-                  refreshController.refreshCompleted,
-                );
-              },
-              footer: const WaterDropHeader(),
-              onLoading: () {},
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      20.heightBox,
-                      HomeStatusView(
-                        upcomingCount: Complete(todayCount: 10, totalCount: 20),
-                        completedCount: Complete(
-                          todayCount: 10,
-                          totalCount: 20,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  20.heightBox,
+                  HomeStatusView(
+                    upcomingCount: Complete(todayCount: 10, totalCount: 20),
+                    completedCount: Complete(todayCount: 10, totalCount: 20),
+                  ),
+                  24.heightBox,
+                  _label("Near By".tr),
+                  16.heightBox,
+                  if (controller.data.isNotEmpty) ...<Widget>[
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: controller.data.length,
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (BuildContext context, int index) => Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: TaskCard(
+                          bookingData: controller.data[index],
+                          isFromList: true,
+                          currentStatus: "upcoming",
                         ),
                       ),
-                      24.heightBox,
-                      _label("Near By".tr),
-                      16.heightBox,
-                      if (controller.data.isNotEmpty) ...<Widget>[
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.data.length,
-                          padding: EdgeInsets.zero,
-                          itemBuilder: (BuildContext context, int index) =>
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 16),
-                                child: TaskCard(
-                                  bookingData: controller.data[index],
-                                  isFromList: true,
-                                  currentStatus: "upcoming",
-                                ),
-                              ),
-                        ),
-                      ] else
-                        NoData(
-                          text: "noUpcomingTrip".tr,
-                          subText: "noUpcomingTripsPlannedYet".tr,
-                          withImage: true,
-                        ),
-                      100.heightBox,
-                    ],
-                  ),
-                ),
+                    ),
+                  ] else
+                    NoData(
+                      text: "noUpcomingTrip".tr,
+                      subText: "noUpcomingTripsPlannedYet".tr,
+                      withImage: true,
+                    ),
+                  100.heightBox,
+                ],
               ),
             ),
           ),
