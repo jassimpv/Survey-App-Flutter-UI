@@ -18,9 +18,9 @@ class SplashController extends GetxController {
           PreferenceUtils.accessToken,
         );
         if (value != null) {
-          await Get.offNamed(AppRouter.loginRoute);
+          await Get.offAllNamed(AppRouter.homeRoute);
         } else {
-          await Get.offNamed(AppRouter.loginRoute);
+          await Get.offAllNamed(AppRouter.loginRoute);
         }
       });
     });

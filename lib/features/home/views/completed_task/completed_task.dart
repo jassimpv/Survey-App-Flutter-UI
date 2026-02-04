@@ -35,113 +35,134 @@ class CompletedTask extends StatelessWidget {
               : [ThemeColors.scaffoldColor, ThemeColors.surface],
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          CustomAppBar(
-            title: "Collection Report".tr,
-            tabBar: Obx(
-              () => CompletedListTabView(
-                selectedIndex: controller.selectedTab.value,
-                onTabSelect: (int tabIndex) {},
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: <Widget>[
+          SliverAppBar(
+            stretch: true,
+            onStretchTrigger: () async {},
+            expandedHeight: 125.0,
+            pinned: true,
+            floating: false,
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: CustomAppBar(title: 'tasks'.tr),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(60),
+              child: Obx(
+                () => CompletedListTabView(
+                  selectedIndex: controller.selectedTab.value,
+                  onTabSelect: (int tabIndex) {},
+                ),
               ),
             ),
           ),
-          16.heightBox,
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              decoration: BoxDecoration(
-                color: ThemeColors.surface,
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: ThemeColors.themeColor.withValues(alpha: 0.08),
-                    blurRadius: 24,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: TextFormField(
-                      controller: controller.searchController,
-                      decoration: StyleUtils.inputDecoration(
-                        hintText: "search".tr,
-                        labelText: "search".tr,
-                      ),
-                      onChanged: (String value) {},
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                16.heightBox,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 12,
                     ),
-                  ),
-                  12.widthBox,
-                  ZoomTapAnimation(
-                    onTap: () {
-                      FocusScope.of(context).unfocus();
-                      Get.bottomSheet(
-                        FilterBottomSheet(),
-                        isDismissible: false,
-                        useRootNavigator: true,
-                        backgroundColor: Colors.transparent,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(28),
-                            topRight: Radius.circular(28),
-                          ),
+                    decoration: BoxDecoration(
+                      color: ThemeColors.surface,
+                      borderRadius: BorderRadius.circular(24),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          color: ThemeColors.themeColor.withValues(alpha: 0.08),
+                          blurRadius: 24,
+                          offset: const Offset(0, 4),
                         ),
-                      );
-                    },
-                    child: Container(
-                      width: 44,
-                      height: 44,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: <Color>[
-                            ThemeColors.themeColor,
-                            ThemeColors.themeColor.withValues(alpha: 0.8),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(14),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: ThemeColors.themeColor.withValues(
-                              alpha: 0.25,
+                      ],
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: TextFormField(
+                            controller: controller.searchController,
+                            decoration: StyleUtils.inputDecoration(
+                              hintText: "search".tr,
+                              labelText: "search".tr,
                             ),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
+                            onChanged: (String value) {},
                           ),
-                        ],
-                      ),
-                      child: const Icon(
-                        Icons.filter_list,
-                        color: ThemeColors.whiteColor,
-                      ),
+                        ),
+                        12.widthBox,
+                        ZoomTapAnimation(
+                          onTap: () {
+                            FocusScope.of(context).unfocus();
+                            Get.bottomSheet(
+                              FilterBottomSheet(),
+                              isDismissible: false,
+                              useRootNavigator: true,
+                              backgroundColor: Colors.transparent,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(28),
+                                  topRight: Radius.circular(28),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: <Color>[
+                                  ThemeColors.themeColor,
+                                  ThemeColors.themeColor.withValues(alpha: 0.8),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(14),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color: ThemeColors.themeColor.withValues(
+                                    alpha: 0.25,
+                                  ),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.filter_list,
+                              color: ThemeColors.whiteColor,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
+                  child: _searchItem(),
+                ),
+              ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
-            child: _searchItem(),
-          ),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: controller.data.length,
-              padding: const EdgeInsets.symmetric(vertical: 1),
-              itemBuilder: (BuildContext context, int index) => Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 6,
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(vertical: 1),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) => Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 6,
+                  ),
+                  child: TaskCard(
+                    bookingData: controller.data[index],
+                    isFromList: true,
+                    currentStatus: "upcoming",
+                  ),
                 ),
-                child: TaskCard(
-                  bookingData: controller.data[index],
-                  isFromList: true,
-                  currentStatus: "upcoming",
-                ),
+                childCount: controller.data.length,
               ),
             ),
           ),

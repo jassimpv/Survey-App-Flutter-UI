@@ -22,52 +22,53 @@ class HomeScreen extends GetView<HomeController> {
     return true;
   }
 
+  void _handleNavigation(int index) {
+    final NavigatorState? navigator = Get.nestedKey(1)?.currentState;
+    if (navigator == null) return;
+
+    final List<Destination> destinations = Destination.values;
+    if (controller.selectedMenuIndex.value == index) return;
+
+    final int previousIndex = controller.selectedMenuIndex.value;
+    navigator.pushReplacement(
+      _buildTabRoute(destinations[index], previousIndex, index),
+    );
+    controller.selectedMenuIndex.value = index;
+  }
+
   @override
   Widget build(BuildContext context) => ValueListenableBuilder<ThemeMode>(
     valueListenable: ThemeService.themeModeNotifier,
-    builder: (BuildContext context, ThemeMode themeMode, Widget? child) => PopScope(
-      canPop: _onWillPop(),
-      child: Scaffold(
-        backgroundColor: ThemeColors.scaffoldColor,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Obx(
-          () => BottomNavigationView(
-            selectedIndex: controller.selectedMenuIndex.value,
-            onItemClick: (int index) {
-              final List<Destination> destinations = Destination.values;
-
-              // Avoid pushing if already on the selected tab
-              if (controller.selectedMenuIndex.value == index) return;
-
-              final NavigatorState navigator = Get.nestedKey(1)!.currentState!;
-              final int previousIndex = controller.selectedMenuIndex.value;
-              navigator.pushReplacement(
-                _buildTabRoute(destinations[index], previousIndex, index),
-              );
-
-              // Update the selected tab index
-              controller.selectedMenuIndex.value = index;
-            },
-          ),
-        ),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: Navigator(
-                // You MUST pass an unique key to the Navigator
-                key: Get.nestedKey(1),
-                // Initial route (see destination.dart above)
-                initialRoute: Destination.dashboard.route,
-
-                // Generate a route based on Destination (see destination.dart above)
-                onGenerateRoute: Destination.getPage,
-                observers: <NavigatorObserver>[ViewNavigatorObserver()],
+    builder: (BuildContext context, ThemeMode themeMode, Widget? child) =>
+        PopScope(
+          canPop: true,
+          onPopInvokedWithResult: (bool didPop, dynamic result) {
+            if (didPop) _onWillPop();
+          },
+          child: Scaffold(
+            backgroundColor: ThemeColors.scaffoldColor,
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: Obx(
+              () => BottomNavigationView(
+                selectedIndex: controller.selectedMenuIndex.value,
+                onItemClick: _handleNavigation,
               ),
             ),
-          ],
+            body: Column(
+              children: <Widget>[
+                Expanded(
+                  child: Navigator(
+                    key: Get.nestedKey(1),
+                    initialRoute: Destination.dashboard.route,
+                    onGenerateRoute: Destination.getPage,
+                    observers: <NavigatorObserver>[ViewNavigatorObserver()],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
-    ),
   );
 }
 

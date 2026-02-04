@@ -92,7 +92,7 @@ class HomeHeader extends GetView<HomeController> {
           ),
           child: Row(
             children: <Widget>[
-              LanguageWidget(),
+              LanguageWidget(isHome: false),
               8.widthBox,
               _buildNotificationBadge(),
             ],
@@ -139,6 +139,7 @@ class HomeHeader extends GetView<HomeController> {
     child: Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
+        color: ThemeColors.primary,
         boxShadow: [
           BoxShadow(
             color: ThemeColors.blackColor.withValues(alpha: 0.1),
@@ -153,9 +154,9 @@ class HomeHeader extends GetView<HomeController> {
         child: CircleAvatar(
           radius: 22,
           backgroundColor: ThemeColors.inputBackground,
-          child: const Icon(
+          child: Icon(
             CupertinoIcons.bell,
-            color: ThemeColors.whiteColor,
+            color: ThemeColors.whitePrimary,
             size: 26,
           ),
         ),

@@ -19,15 +19,28 @@ class TermsAndConditionScreen extends StatelessWidget {
           colors: [ThemeColors.scaffoldColor, ThemeColors.surface],
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          CustomAppBar(
-            title: "termsandContitions".tr,
-            onBackPressed: Get.back,
-            isNotificationButton: false,
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: <Widget>[
+          SliverAppBar(
+            stretch: true,
+            onStretchTrigger: () async {},
+            expandedHeight: 104.0,
+            pinned: true,
+            floating: false,
+            elevation: 0,
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: CustomAppBar(
+              title: 'termsandContitions'.tr,
+              onBackPressed: () => Get.back(),
+            ),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(24),
+              child: SizedBox.shrink(),
+            ),
           ),
-          Expanded(child: contentWidget()),
+          SliverToBoxAdapter(child: contentWidget()),
         ],
       ),
     ),
