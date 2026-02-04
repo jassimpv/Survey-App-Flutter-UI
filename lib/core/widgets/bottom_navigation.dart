@@ -108,7 +108,9 @@ class BottomNavigationView extends StatelessWidget {
                       onTap: () => onItemClick?.call(index),
                       child: _Pressable(
                         child: _HomeItemView(
-                          title: controller.homeMenus[index]["title"].toString().tr,
+                          title: controller.homeMenus[index]["title"]
+                              .toString()
+                              .tr,
                           icon: controller.homeMenus[index]["icon"]!,
                           isSelected: selectedIndex == index,
                         ),
