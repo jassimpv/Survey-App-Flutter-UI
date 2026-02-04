@@ -40,6 +40,7 @@ class _RideListTabViewState extends State<CompletedListTabView> {
   @override
   Widget build(BuildContext context) => Obx(
     () => Container(
+      width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
       decoration: BoxDecoration(
         color: ThemeColors.scaffoldColor,

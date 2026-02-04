@@ -55,17 +55,11 @@ class HomeScreen extends GetView<HomeController> {
                 onItemClick: _handleNavigation,
               ),
             ),
-            body: Column(
-              children: <Widget>[
-                Expanded(
-                  child: Navigator(
-                    key: Get.nestedKey(1),
-                    initialRoute: Destination.dashboard.route,
-                    onGenerateRoute: Destination.getPage,
-                    observers: <NavigatorObserver>[ViewNavigatorObserver()],
-                  ),
-                ),
-              ],
+            body: Navigator(
+              key: Get.nestedKey(1),
+              initialRoute: Destination.dashboard.route,
+              onGenerateRoute: Destination.getPage,
+              observers: <NavigatorObserver>[ViewNavigatorObserver()],
             ),
           ),
         ),
