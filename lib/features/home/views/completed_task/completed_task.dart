@@ -249,9 +249,11 @@ class CompletedTask extends StatelessWidget {
     padding: const EdgeInsets.symmetric(horizontal: 12),
     margin: const EdgeInsets.only(right: 10),
     decoration: BoxDecoration(
-      color: ThemeColors.themeColor.withValues(alpha: 0.08),
+      color: ThemeColors.whitePrimary.withValues(alpha: 0.08),
       borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: ThemeColors.themeColor.withValues(alpha: 0.2)),
+      border: Border.all(
+        color: ThemeColors.whitePrimary.withValues(alpha: 0.2),
+      ),
     ),
     child: Row(
       mainAxisSize: MainAxisSize.min,
@@ -259,13 +261,13 @@ class CompletedTask extends StatelessWidget {
         Text(
           text.tr,
           style: StyleUtils.kTextStyleSize12Weight500(
-            color: ThemeColors.themeColor,
+            color: ThemeColors.whitePrimary,
           ),
         ),
         8.widthBox,
         ZoomTapAnimation(
           onTap: onClose,
-          child: Icon(Icons.close, size: 16, color: ThemeColors.themeColor),
+          child: Icon(Icons.close, size: 16, color: ThemeColors.whitePrimary),
         ),
       ],
     ),
