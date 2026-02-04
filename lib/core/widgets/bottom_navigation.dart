@@ -6,35 +6,26 @@ import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:get/get.dart";
 
-class BottomNavigationView extends StatefulWidget {
-  const BottomNavigationView({
-    required this.selectedIndex,
-    super.key,
-    this.onItemClick,
-  });
-  final int selectedIndex;
-  final Function(int)? onItemClick;
+class _BottomNavigationController extends GetxController
+    with GetTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<Offset> _offsetAnimation;
+  late final Animation<double> _opacityAnimation;
+  late final Animation<double> _scaleAnimation;
 
-  @override
-  State<BottomNavigationView> createState() => _BottomNavigationViewState();
-}
+  Animation<Offset> get offsetAnimation => _offsetAnimation;
+  Animation<double> get opacityAnimation => _opacityAnimation;
+  Animation<double> get scaleAnimation => _scaleAnimation;
 
-class _BottomNavigationViewState extends State<BottomNavigationView>
-    with SingleTickerProviderStateMixin {
   final List<Map<String, dynamic>> homeMenus = [
     {"title": "home", "icon": CupertinoIcons.home},
     {"title": "tasks", "icon": CupertinoIcons.list_bullet},
     {"title": "settings", "icon": CupertinoIcons.settings},
   ];
 
-  late final AnimationController _controller;
-  late final Animation<Offset> _offsetAnimation;
-  late final Animation<double> _opacityAnimation;
-  late final Animation<double> _scaleAnimation;
-
   @override
-  void initState() {
-    super.initState();
+  void onInit() {
+    super.onInit();
 
     _controller = AnimationController(
       vsync: this,
@@ -63,19 +54,30 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
   }
 
   @override
-  void dispose() {
+  void onClose() {
     _controller.dispose();
-    super.dispose();
+    super.onClose();
   }
+}
+
+class BottomNavigationView extends StatelessWidget {
+  BottomNavigationView({
+    required this.selectedIndex,
+    super.key,
+    this.onItemClick,
+  });
+  final int selectedIndex;
+  final Function(int)? onItemClick;
+  final controller = Get.put(_BottomNavigationController());
 
   @override
   Widget build(BuildContext context) {
     return SlideTransition(
-      position: _offsetAnimation,
+      position: controller.offsetAnimation,
       child: FadeTransition(
-        opacity: _opacityAnimation,
+        opacity: controller.opacityAnimation,
         child: ScaleTransition(
-          scale: _scaleAnimation,
+          scale: controller.scaleAnimation,
           child: Container(
             height: 64,
             margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -98,17 +100,17 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: List.generate(
-                homeMenus.length,
+                controller.homeMenus.length,
                 (int index) => Expanded(
                   child: Center(
                     child: InkWell(
                       borderRadius: BorderRadius.circular(24),
-                      onTap: () => widget.onItemClick?.call(index),
+                      onTap: () => onItemClick?.call(index),
                       child: _Pressable(
                         child: _HomeItemView(
-                          title: homeMenus[index]["title"].toString().tr,
-                          icon: homeMenus[index]["icon"]!,
-                          isSelected: widget.selectedIndex == index,
+                          title: controller.homeMenus[index]["title"].toString().tr,
+                          icon: controller.homeMenus[index]["icon"]!,
+                          isSelected: selectedIndex == index,
                         ),
                       ),
                     ),
@@ -123,41 +125,42 @@ class _BottomNavigationViewState extends State<BottomNavigationView>
   }
 }
 
-class _Pressable extends StatefulWidget {
+class _PressableController extends GetxController {
+  final RxBool pressed = false.obs;
+
+  void onPointerDown(PointerDownEvent e) => pressed.value = true;
+
+  void onPointerUp(PointerUpEvent e) {
+    Future.delayed(const Duration(milliseconds: 80), () {
+      pressed.value = false;
+    });
+  }
+
+  void onPointerCancel(PointerCancelEvent e) => pressed.value = false;
+}
+
+class _Pressable extends StatelessWidget {
   const _Pressable({required this.child});
   final Widget child;
 
   @override
-  State<_Pressable> createState() => _PressableState();
-}
-
-class _PressableState extends State<_Pressable> {
-  bool _pressed = false;
-
-  void _onPointerDown(PointerDownEvent e) => setState(() => _pressed = true);
-
-  void _onPointerUp(PointerUpEvent e) {
-    Future.delayed(const Duration(milliseconds: 80), () {
-      if (mounted) setState(() => _pressed = false);
-    });
+  Widget build(BuildContext context) {
+    final controller = Get.put(_PressableController());
+    return Listener(
+      behavior: HitTestBehavior.translucent,
+      onPointerDown: controller.onPointerDown,
+      onPointerUp: controller.onPointerUp,
+      onPointerCancel: controller.onPointerCancel,
+      child: Obx(
+        () => AnimatedScale(
+          scale: controller.pressed.value ? 0.96 : 1.0,
+          duration: const Duration(milliseconds: 120),
+          curve: Curves.easeOut,
+          child: child,
+        ),
+      ),
+    );
   }
-
-  void _onPointerCancel(PointerCancelEvent e) =>
-      setState(() => _pressed = false);
-
-  @override
-  Widget build(BuildContext context) => Listener(
-    behavior: HitTestBehavior.translucent,
-    onPointerDown: _onPointerDown,
-    onPointerUp: _onPointerUp,
-    onPointerCancel: _onPointerCancel,
-    child: AnimatedScale(
-      scale: _pressed ? 0.96 : 1.0,
-      duration: const Duration(milliseconds: 120),
-      curve: Curves.easeOut,
-      child: widget.child,
-    ),
-  );
 }
 
 class _HomeItemView extends StatelessWidget {

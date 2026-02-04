@@ -91,9 +91,12 @@ class _AgreementAnswerViewState extends State<AgreementAnswerView> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // ignore: deprecated_member_use
                     Radio<BooleanResult>(
+                      // ignore: deprecated_member_use
                       groupValue: _result,
                       value: BooleanResult.POSITIVE,
+                      // ignore: deprecated_member_use
                       onChanged: (v) {
                         setState(() {
                           _result = v;

@@ -1,7 +1,4 @@
-import "dart:async";
-
 import "package:collect/features/home/controller/home_controller.dart";
-import "package:collect/core/extensions/pull_to_refresh/pull_to_refresh_flutter.dart";
 
 import "package:collect/core/theme/theme_colors.dart";
 
@@ -16,7 +13,6 @@ import "package:get/get.dart";
 
 class DashboardScreen extends GetView<HomeController> {
   DashboardScreen({super.key});
-  final RefreshController refreshController = RefreshController();
 
   @override
   Widget build(BuildContext context) => Container(
